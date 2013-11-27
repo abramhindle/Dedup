@@ -145,7 +145,13 @@ public class MachineLearnerTableGenerator extends TableGenerator {
             // Create file
             FileWriter fstream = new FileWriter(outputFileName);
             BufferedWriter out = new BufferedWriter(fstream);
-            out.append("Bug 1,Bug 2,crypto1,general1,java1,networking1,crypto2,general2,java2,networking2,cosine_similarity,class\n");
+            out.append("Bug 1, Bug2,");
+            for (int i = 1; i<=2; i++) {
+                for (char letter = 'a'; letter <= 'z'; letter++) {
+                    out.append(letter + " " + i + ",");
+                }
+            }
+            out.append("cosine_similarity,class\n");
             Document doc1 = new Document("", "");
             Document doc2 = new Document("", "");
             StringBuffer line = new StringBuffer("");
@@ -179,7 +185,7 @@ public class MachineLearnerTableGenerator extends TableGenerator {
                         line.append( ((double)(Math.round(features2[index] * 10000)) / 10000) + separator);
                     }
 
-                    line.append(cosineSimilarity(features1, features2));
+                    line.append(cosineSimilarity(features1, features2) + ",");
                     line.append("dup"+"\n");
                     out.append(line);
                     dupCount++;
@@ -215,7 +221,7 @@ public class MachineLearnerTableGenerator extends TableGenerator {
                     line.append( ((double)(Math.round(features2[index] * 10000)) / 10000) + separator);
                 }
 
-                line.append(cosineSimilarity(features1, features2));
+                line.append(cosineSimilarity(features1, features2) + ",");
                 line.append("non"+"\n");
                 out.append(line);
                 totalCount++;
@@ -523,12 +529,17 @@ public class MachineLearnerTableGenerator extends TableGenerator {
 //        mltg.createBMFandCategoryTable("features/textualCategorical_30_70_excluding_forbidden.csv", 0.3, false);
 //        mltg.createJoinTable("features/textualCategorical_30_70_including_forbidden.csv", "features/domain_context_features.csv", "features/all_features_domain_context_30_70_including_forbidden.csv");
 //        mltg.createJoinTable("features/textualCategorical_30_70_excluding_forbidden.csv", "features/domain_context_features.csv", "features/all_features_domain_context_30_70_excluding_forbidden.csv");
-        mltg.createContextualPairTableFromAllFeatures("features/all_features_domain_context_10_90_excluding_forbidden.csv","features/domain_context_10_90_excluding_forbidden.csv");
-        mltg.createContextualPairTableFromAllFeatures("features/all_features_domain_context_10_90_including_forbidden.csv","features/domain_context_10_90_including_forbidden.csv");
-        mltg.createContextualPairTableFromAllFeatures("features/all_features_domain_context_20_80_excluding_forbidden.csv","features/domain_context_20_80_excluding_forbidden.csv");
-        mltg.createContextualPairTableFromAllFeatures("features/all_features_domain_context_20_80_including_forbidden.csv","features/domain_context_20_80_including_forbidden.csv");
-        mltg.createContextualPairTableFromAllFeatures("features/all_features_domain_context_30_70_excluding_forbidden.csv","features/domain_context_30_70_excluding_forbidden.csv");
-        mltg.createContextualPairTableFromAllFeatures("features/all_features_domain_context_30_70_including_forbidden.csv","features/domain_context_30_70_including_forbidden.csv");
-
+//        mltg.createContextualPairTableFromAllFeatures("features/all_features_domain_context_10_90_excluding_forbidden.csv","features/domain_context_10_90_excluding_forbidden.csv");
+//        mltg.createContextualPairTableFromAllFeatures("features/all_features_domain_context_10_90_including_forbidden.csv","features/domain_context_10_90_including_forbidden.csv");
+//        mltg.createContextualPairTableFromAllFeatures("features/all_features_domain_context_20_80_excluding_forbidden.csv","features/domain_context_20_80_excluding_forbidden.csv");
+//        mltg.createContextualPairTableFromAllFeatures("features/all_features_domain_context_20_80_including_forbidden.csv","features/domain_context_20_80_including_forbidden.csv");
+//        mltg.createContextualPairTableFromAllFeatures("features/all_features_domain_context_30_70_excluding_forbidden.csv","features/domain_context_30_70_excluding_forbidden.csv");
+//        mltg.createContextualPairTableFromAllFeatures("features/all_features_domain_context_30_70_including_forbidden.csv","features/domain_context_30_70_including_forbidden.csv");
+        mltg.createNewContextualPairTable("junkWords","features/junk_context_features_10_90_including_forbidden.csv", 0.1, true);
+        mltg.createNewContextualPairTable("junkWords","features/junk_context_features_10_90_excluding_forbidden.csv", 0.1, false);
+        mltg.createNewContextualPairTable("junkWords","features/junk_context_features_20_80_including_forbidden.csv", 0.2, true);
+        mltg.createNewContextualPairTable("junkWords","features/junk_context_features_20_80_excluding_forbidden.csv", 0.2, false);
+        mltg.createNewContextualPairTable("junkWords","features/junk_context_features_30_70_including_forbidden.csv", 0.3, true);
+        mltg.createNewContextualPairTable("junkWords","features/junk_context_features_30_70_excluding_forbidden.csv", 0.3, false);
     }
 }
