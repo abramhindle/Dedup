@@ -418,3 +418,37 @@
 2013-12-02 16:12:29,340 INFO --- 4. Running (missing output): cleanUp <- 
 2013-12-02 16:12:29,460 INFO --- 4: cleanUp <-  -> done in 0.11s
 2013-12-02 16:12:29,464 INFO Done (5 steps run).
+2013-12-02 16:15:05,384 INFO Running 5 steps with concurrence of 1...
+2013-12-02 16:15:05,447 INFO 
+2013-12-02 16:15:05,453 INFO --- 0. Running (missing output): getWordLists <- 
+2013-12-02 16:15:56,075 INFO --- 0: getWordLists <-  -> done in 50.60s
+2013-12-02 16:15:56,081 INFO 
+2013-12-02 16:15:56,081 INFO --- 1. Running (missing output): getHighFreqWordLists <- 
+2013-12-02 16:16:38,601 INFO --- 1: getHighFreqWordLists <-  -> done in 42.52s
+2013-12-02 16:16:38,643 INFO 
+2013-12-02 16:16:38,646 INFO --- 2. Running (no-input step): wordlist-general.txt <- 
+2013-12-02 16:16:39,054 INFO --- 2: wordlist-general.txt <-  -> done in 0.39s
+2013-12-02 16:16:39,066 INFO 
+2013-12-02 16:16:39,067 INFO --- 3. Running (no-input step): hf-wordlist-general.txt <- 
+2013-12-02 16:16:39,151 INFO --- 3: hf-wordlist-general.txt <-  -> done in 0.08s
+2013-12-02 16:16:39,156 INFO 
+2013-12-02 16:16:39,158 INFO --- 4. Running (missing output): cleanUp <- 
+2013-12-02 16:16:39,302 INFO --- 4: cleanUp <-  -> done in 0.12s
+2013-12-02 16:16:39,323 INFO Done (5 steps run).
+2013-12-02 16:19:36,394 INFO Running 5 steps with concurrence of 1...
+2013-12-02 16:19:36,651 INFO 
+2013-12-02 16:19:36,673 INFO --- 0. Running (missing output): getWordLists <- 
+2013-12-02 16:21:03,496 INFO --- 0: getWordLists <-  -> done in 86.76s
+2013-12-02 16:21:03,522 INFO 
+2013-12-02 16:21:03,523 INFO --- 1. Running (missing output): getHighFreqWordLists <- 
+2013-12-02 16:21:32,871 INFO --- 1: getHighFreqWordLists <-  -> done in 29.28s
+2013-12-02 16:21:32,875 INFO 
+2013-12-02 16:21:32,876 INFO --- 2. Running (no-input step): wordlist-general.txt <- 
+2013-12-02 16:21:33,180 INFO --- 2: wordlist-general.txt <-  -> done in 0.26s
+2013-12-02 16:21:33,187 INFO 
+2013-12-02 16:21:33,187 INFO --- 3. Running (no-input step): hf-wordlist-general.txt <- 
+2013-12-02 16:21:33,265 INFO --- 3: hf-wordlist-general.txt <-  -> done in 0.07s
+2013-12-02 16:21:33,268 INFO 
+2013-12-02 16:21:33,268 INFO --- 4. Running (missing output): cleanUp <- 
+2013-12-02 16:21:33,447 INFO --- 4: cleanUp <-  -> done in 0.16s
+2013-12-02 16:21:33,462 INFO Done (5 steps run).
