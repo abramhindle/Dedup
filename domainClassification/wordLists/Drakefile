@@ -8,10 +8,23 @@ getWordLists <-
           getWordLists patterns.txt > word-list-patterns.txt
           getWordLists pragmatic.txt > word-list-pragmatic.txt
 
+getHighFreqWordLists <- 
+          getWordLists crypto.txt > hf-wordlist-crypto.txt
+          getWordLists designPatterns.txt > hf-word-list-designPatterns.txt
+          getWordLists effectiveJava.txt > hf-wordlist-Java.txt
+          getWordLists networking.txt > hf-wordlist-networking.txt
+          getWordLists patterns.txt > hf-word-list-patterns.txt
+          getWordLists pragmatic.txt > hf-word-list-pragmatic.txt
+
 ;; Combine wordlists into subjects: 
 
 wordlist-general.txt <-
          cat word-list-pragmatic.txt word-list-patterns.txt word-list-designPatterns.txt > $OUTPUT
 
+hf-wordlist-general.txt <-
+         cat hf-word-list-pragmatic.txt hf-word-list-patterns.txt hf-word-list-designPatterns.txt > $OUTPUT
+
+
 cleanUp <- 
           rm word-list*
+          rm hf-word-list*
