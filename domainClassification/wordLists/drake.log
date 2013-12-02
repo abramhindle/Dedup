@@ -366,3 +366,55 @@
 2013-12-02 15:54:58,290 INFO --- 4. Running (missing output): cleanUp <- 
 2013-12-02 15:54:58,467 INFO --- 4: cleanUp <-  -> done in 0.17s
 2013-12-02 15:54:58,483 INFO Done (5 steps run).
+2013-12-02 15:58:06,966 INFO Running 5 steps with concurrence of 1...
+2013-12-02 15:58:07,075 INFO 
+2013-12-02 15:58:07,093 INFO --- 0. Running (missing output): getWordLists <- 
+2013-12-02 15:59:06,355 INFO --- 0: getWordLists <-  -> done in 59.24s
+2013-12-02 15:59:06,382 INFO 
+2013-12-02 15:59:06,382 INFO --- 1. Running (missing output): getHighFreqWordLists <- 
+2013-12-02 15:59:06,952 ERROR caught exception step 1:  throw+: {:msg "shell command failed with exit code 126", :args ("/bin/zsh" ".drake/shell-bb0514cbe44e61eef3ac324c9b532b8a" :env {"OUTPUT" "/Users/fnbr/Dropbox/Academic/2013:14/Fall/Cmput466/Project/Dedup/domainClassification/wordLists/getHighFreqWordLists", "PYTHONPATH" "/usr/local/lib/python:/usr/local/lib/python:", "DISPLAY" "/tmp/launch-QHuQ8o/org.macosforge.xquartz:0", "HOSTTYPE" "x86_64", "OCAML_TOPLEVEL_PATH" "/Users/fnbr/.opam/system/lib/toplevel", "PAGER" "less", "INPUTN" 0, "SSH_AUTH_SOCK" "/tmp/launch-NbhRQW/Listeners", "PATH" "/usr/local/sbin:/Users/fnbr/.opam/system/bin:/Users/fnbr/.rbenv/shims:/usr/local/Cellar/php55/5.5.5/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:/usr/local/opt/php55/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin", "__CHECKFIX1436934" "1", "INPUTS" "", "TERM_PROGRAM_VERSION" "326", "JAVA_MAIN_CLASS_83885" "org.flatland.drip.Main", "INPUT" nil, "Apple_PubSub_Socket_Render" "/tmp/launch-w3D9HY/Render", "TMUX_PANE" "%21", "USER" "fnbr", "OPTIND" "1", "TERM" "screen", "__CF_USER_TEXT_ENCODING" "0x1F5:0:0", "EDITOR" "emacs", "SHLVL" "4", "OUTPUTN" 1, "LANG" "en_GB.UTF-8", "CAML_LD_LIBRARY_PATH" "/Users/fnbr/.opam/system/lib/stublibs:/usr/local/lib/ocaml/stublibs", "OUTPUT0" "/Users/fnbr/Dropbox/Academic/2013:14/Fall/Cmput466/Project/Dedup/domainClassification/wordLists/getHighFreqWordLists", "LOGNAME" "fnbr", "SHELL" "/bin/zsh", "TERM_PROGRAM" "Apple_Terminal", "SECURITYSESSIONID" "186a4", "BASE" "", "MARKPATH" "/Users/fnbr/.marks", "OPTERR" "1", "OUTPUTS" "/Users/fnbr/Dropbox/Academic/2013:14/Fall/Cmput466/Project/Dedup/domainClassification/wordLists/getHighFreqWordLists", "HOSTNAME" "asha", "DRIP_INIT_CLASS" "", "MACHTYPE" "x86_64-apple-darwin13", "LC_CTYPE" "en_GB.UTF-8", "GREP_OPTIONS" "--color=auto", "TMPDIR" "/var/folders/c0/rtng010n6ssdf1yz_197r6480000gn/T/", "TERM_SESSION_ID" "3F0E63AD-49E5-4420-82C2-1AF2A18F81B9", "LSCOLORS" "Gxfxcxdxbxegedabagacad", "LESS" "-R", "com.apple.java.jvmMode" "client", "GREP_COLOR" "1;32", "com.apple.java.jvmTask" "CommandLine_Manual.java", "JAVA_HOME" "/Library/Java/JavaVirtualMachines/1.6.0_65-b14-462.jdk/Contents/Home", "TMUX" "/private/var/folders/c0/rtng010n6ssdf1yz_197r6480000gn/T/tmux-501/default,1199,7", "PWD" "/Users/fnbr/Dropbox/Academic/2013:14/Fall/Cmput466/Project/Dedup/domainClassification/wordLists", "OSTYPE" "darwin13", "_" "/bin/bash", "MANPATH" "/Users/fnbr/.opam/system/man:/usr/share/man:/usr/local/share/man:/Users/fnbr/.opam/system/man", "HOME" "/Users/fnbr"} :die true :no-stdin nil :out [#<PrintStream java.io.PrintStream@7da2467a> #<BufferedWriter java.io.BufferedWriter@28c13406>] :err [#<PrintStream java.io.PrintStream@243e8ad1> #<BufferedWriter java.io.BufferedWriter@60bb1ee>]), :exit 126} nil
+2013-12-02 15:59:06,963 INFO 
+2013-12-02 15:59:06,963 INFO --- 2. Running (no-input step): wordlist-general.txt <- 
+2013-12-02 15:59:07,058 INFO --- 2: wordlist-general.txt <-  -> done in 0.09s
+2013-12-02 15:59:07,062 INFO 
+2013-12-02 15:59:07,062 INFO --- 3. Running (no-input step): hf-wordlist-general.txt <- 
+2013-12-02 15:59:07,097 INFO --- 3: hf-wordlist-general.txt <-  -> done in 0.03s
+2013-12-02 15:59:07,099 INFO 
+2013-12-02 15:59:07,099 INFO --- 4. Running (missing output): cleanUp <- 
+2013-12-02 15:59:07,182 INFO --- 4: cleanUp <-  -> done in 0.08s
+2013-12-02 15:59:07,206 INFO Done (4 steps run).
+2013-12-02 15:59:07,208 ERROR drake: shell command failed with exit code 126
+2013-12-02 16:03:18,742 INFO Running 5 steps with concurrence of 1...
+2013-12-02 16:03:18,809 INFO 
+2013-12-02 16:03:18,840 INFO --- 0. Running (missing output): getWordLists <- 
+2013-12-02 16:05:05,602 INFO --- 0: getWordLists <-  -> done in 106.73s
+2013-12-02 16:05:05,610 INFO 
+2013-12-02 16:05:05,611 INFO --- 1. Running (missing output): getHighFreqWordLists <- 
+2013-12-02 16:05:39,045 INFO --- 1: getHighFreqWordLists <-  -> done in 33.40s
+2013-12-02 16:05:39,076 INFO 
+2013-12-02 16:05:39,077 INFO --- 2. Running (no-input step): wordlist-general.txt <- 
+2013-12-02 16:05:39,364 INFO --- 2: wordlist-general.txt <-  -> done in 0.29s
+2013-12-02 16:05:39,377 INFO 
+2013-12-02 16:05:39,378 INFO --- 3. Running (no-input step): hf-wordlist-general.txt <- 
+2013-12-02 16:05:39,451 INFO --- 3: hf-wordlist-general.txt <-  -> done in 0.07s
+2013-12-02 16:05:39,454 INFO 
+2013-12-02 16:05:39,455 INFO --- 4. Running (missing output): cleanUp <- 
+2013-12-02 16:05:39,630 INFO --- 4: cleanUp <-  -> done in 0.15s
+2013-12-02 16:05:39,647 INFO Done (5 steps run).
+2013-12-02 16:11:18,095 INFO Running 5 steps with concurrence of 1...
+2013-12-02 16:11:18,184 INFO 
+2013-12-02 16:11:18,217 INFO --- 0. Running (missing output): getWordLists <- 
+2013-12-02 16:11:59,269 INFO --- 0: getWordLists <-  -> done in 41.00s
+2013-12-02 16:11:59,296 INFO 
+2013-12-02 16:11:59,296 INFO --- 1. Running (missing output): getHighFreqWordLists <- 
+2013-12-02 16:12:29,155 INFO --- 1: getHighFreqWordLists <-  -> done in 29.86s
+2013-12-02 16:12:29,165 INFO 
+2013-12-02 16:12:29,165 INFO --- 2. Running (no-input step): wordlist-general.txt <- 
+2013-12-02 16:12:29,273 INFO --- 2: wordlist-general.txt <-  -> done in 0.11s
+2013-12-02 16:12:29,287 INFO 
+2013-12-02 16:12:29,288 INFO --- 3. Running (no-input step): hf-wordlist-general.txt <- 
+2013-12-02 16:12:29,337 INFO --- 3: hf-wordlist-general.txt <-  -> done in 0.05s
+2013-12-02 16:12:29,339 INFO 
+2013-12-02 16:12:29,340 INFO --- 4. Running (missing output): cleanUp <- 
+2013-12-02 16:12:29,460 INFO --- 4: cleanUp <-  -> done in 0.11s
+2013-12-02 16:12:29,464 INFO Done (5 steps run).

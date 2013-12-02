@@ -9,12 +9,12 @@ getWordLists <-
           getWordLists pragmatic.txt > word-list-pragmatic.txt
 
 getHighFreqWordLists <- 
-          getWordLists crypto.txt > hf-wordlist-crypto.txt
-          getWordLists designPatterns.txt > hf-word-list-designPatterns.txt
-          getWordLists effectiveJava.txt > hf-wordlist-Java.txt
-          getWordLists networking.txt > hf-wordlist-networking.txt
-          getWordLists patterns.txt > hf-word-list-patterns.txt
-          getWordLists pragmatic.txt > hf-word-list-pragmatic.txt
+          getHighFreqWordLists crypto.txt > hf-wordlist-crypto.txt
+          getHighFreqWordLists designPatterns.txt > hf-word-list-designPatterns.txt
+          getHighFreqWordLists effectiveJava.txt > hf-wordlist-Java.txt
+          getHighFreqWordLists networking.txt > hf-wordlist-networking.txt
+          getHighFreqWordLists patterns.txt > hf-word-list-patterns.txt
+          getHighFreqWordLists pragmatic.txt > hf-word-list-pragmatic.txt
 
 ;; Combine wordlists into subjects: 
 
