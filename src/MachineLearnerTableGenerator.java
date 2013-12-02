@@ -441,7 +441,153 @@ public class MachineLearnerTableGenerator extends TableGenerator {
 			// TODO: handle exception
 		}
 	}
-	
+
+    public void createSuperJoinTable(String inputBmfFileName, String inputContextFileName1, String inputContextFileName2, String outputfilename){
+
+        Map<Integer,Double[]> contextMap1 = new HashMap<Integer,Double[]>();
+        Map<Integer,Double[]> contextMap2 = new HashMap<Integer,Double[]>();
+        String[] contextTitle1 = {};
+        String[] contextTitle2 = {};
+        String[] bmf_title = {};
+
+        try {
+            //csv file containing data
+            String strFile1 = inputContextFileName1;
+            String strFile2 = inputContextFileName2;
+            CSVReader reader1 = new CSVReader(new FileReader(strFile1));
+            CSVReader reader2 = new CSVReader(new FileReader(strFile2));
+            String [] nextLine;
+            int lineNumber = 0;
+
+            contextTitle1 = reader1.readNext();
+            contextTitle2 = reader2.readNext();
+
+            int contextLineConter = 0;
+            while ((nextLine = reader1.readNext()) != null) {
+
+                contextLineConter++;
+
+                Double[] temp = new Double[nextLine.length-1];
+                for(int i=1;i<nextLine.length;i++){
+                    temp[i-1] = Double.parseDouble(nextLine[i]);
+                    temp[i-1] = Math.round(temp[i-1]*100)/100.0d;
+                }
+
+                contextMap1.put(Integer.parseInt(nextLine[0]), temp);
+            }
+            System.out.println("context lines: "+contextLineConter);
+
+            contextLineConter = 0;
+            while ((nextLine = reader2.readNext()) != null) {
+
+                contextLineConter++;
+
+                Double[] temp = new Double[nextLine.length-1];
+                for(int i=1;i<nextLine.length;i++){
+                    temp[i-1] = Double.parseDouble(nextLine[i]);
+                    temp[i-1] = Math.round(temp[i-1]*100)/100.0d;
+                }
+
+                contextMap2.put(Integer.parseInt(nextLine[0]), temp);
+            }
+            System.out.println("context lines: "+contextLineConter);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("kangoro");
+            // TODO: handle exception
+        }
+
+        StringBuffer line = new StringBuffer();
+
+        try {
+
+            //csv file containing data
+            String strFile = inputBmfFileName;
+            CSVReader reader = new CSVReader(new FileReader(strFile));
+            String [] nextLine;
+
+            bmf_title = reader.readNext();
+
+            /////************
+            FileWriter fstream = new FileWriter(outputfilename);
+            BufferedWriter out = new BufferedWriter(fstream);
+
+            for(int i=0;i<bmf_title.length-1;i++)
+                out.append(bmf_title[i]+",");
+
+            for(int i=1;i<contextTitle1.length;i++)
+                out.append(contextTitle1[i]+"1,");
+
+            for(int i=1;i<contextTitle1.length;i++)
+                out.append(contextTitle1[i]+"2,");
+
+            for(int i=1;i<contextTitle2.length;i++)
+                out.append(contextTitle2[i]+"1,");
+
+            for(int i=1;i<contextTitle2.length;i++)
+                out.append(contextTitle2[i]+"2,");
+
+
+            out.append("cosine_similarity,class\n");
+            ///////************
+
+            while ((nextLine = reader.readNext()) != null) {
+
+                double cosineSim = 0;
+
+                int id1 = Integer.parseInt(nextLine[0]);
+                int id2 = Integer.parseInt(nextLine[1]);
+
+                line.append(id1+","+id2+",");
+
+                for(int i=2;i<9;i++){
+                    double value = Double.parseDouble(nextLine[i]);
+                    value = Math.round(value*100)/100.0d;
+                    line.append(value+",");
+                }
+
+                Double[] context1_1 = contextMap1.get(id1);
+                Double[] context2_1 = contextMap1.get(id2);
+
+                Double[] context1_2 = contextMap2.get(id1);
+                Double[] context2_2 = contextMap2.get(id2);
+
+                for(int i=0;i<context1_1.length;i++)
+                    line.append(context1_1[i]+",");
+
+                for(int i=0;i<context2_1.length;i++)
+                    line.append(context2_1[i]+",");
+
+                for(int i=0;i<context1_2.length;i++)
+                    line.append(context1_2[i]+",");
+
+                for(int i=0;i<context2_2.length;i++)
+                    line.append(context2_2[i]+",");
+
+                Double[] bug1_all_context = Arrays.copyOf(context1_1, context1_1.length + context1_2.length);
+                System.arraycopy(context1_2, 0, bug1_all_context, context1_1.length, context1_2.length);
+
+                Double[] bug2_all_context = Arrays.copyOf(context2_1, context2_1.length + context2_2.length);
+                System.arraycopy(context2_2, 0, bug2_all_context, context2_1.length, context2_2.length);
+
+                cosineSim = cosineSimilarity(bug1_all_context, bug2_all_context);
+
+                line.append(cosineSim+",");
+
+                line.append(nextLine[9]+"\n");
+
+                out.append(line);
+
+                line = new StringBuffer();
+            }
+            out.close();
+        }catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error: " + e.getMessage());
+            // TODO: handle exception
+        }
+    }
 	
 	private double reciprocal_function(double d1, double d2){
 
@@ -492,7 +638,7 @@ public class MachineLearnerTableGenerator extends TableGenerator {
 		}*/
 		
 		
-//		MachineLearnerTableGenerator mltg = new MachineLearnerTableGenerator(false, freeVariables, corpus);
+		MachineLearnerTableGenerator mltg = new MachineLearnerTableGenerator(false, freeVariables, corpus);
 //        mltg.createContextualPairTable("domainWords","features/domain_context_pairs_10_90_including_forbidden.csv",0.1,true);
 //        mltg.createContextualPairTable("domainWords","features/domain_context_pairs_10_90_excluding_forbidden.csv",0.1,false);
 //        mltg.createContextualPairTable("domainWords","features/domain_context_pairs_20_80_including_forbidden.csv",0.2,true);
@@ -504,7 +650,7 @@ public class MachineLearnerTableGenerator extends TableGenerator {
 		//mltg.createContextTable("NFR3", "mozilla_NFR_context.csv");
 		//mltg.createContextTable("top100JunkWords", "mozilla_junk_context.csv");
 		//mltg.createContextTable("openoffice_lda_topics", "openoffice_lda_context.csv");
-        //mltg.createContextTable("domainWords", "domain_context_features_2.csv", "crypto,general,java,networking");
+//        mltg.createContextTable("domainWords", "features/domain_context_features.csv", "crypto,general,java,networking");
 //        mltg.createContextTable("AndroidLabeledTopicsContext", "labeled_lda_features.csv", "3G,alarm,android_market,app,audio,battery,bluethooth,bluetooth,browser,calculator,calendar," +
 //                "calling,camera,car,compass,contact,CPU,date,dialing,display,download,email,facebook,flash,font,google_earth," +
 //                "google_latitude,google_map,google_navigation,google_translate,google_voice,GPS,gtalk,image,input,IPV6,keyboard," +
@@ -519,7 +665,7 @@ public class MachineLearnerTableGenerator extends TableGenerator {
 		//mltg.createJoinTable("dataset.csv", "android_labeled_context.csv", "android_labeled_bmf_category.csv");
 
 //        Corpus corpus = new Corpus(prep.process(AXP.getBugs(), false));
-        MachineLearnerTableGenerator mltg = new MachineLearnerTableGenerator(false, freeVariables, corpus);
+//        MachineLearnerTableGenerator mltg = new MachineLearnerTableGenerator(false, freeVariables, corpus);
 //
 //        mltg.createBMFandCategoryTable("features/textualCategorical_10_90_including_forbidden.csv", 0.1, true);
 //        mltg.createBMFandCategoryTable("features/textualCategorical_10_90_excluding_forbidden.csv", 0.1, false);
@@ -529,17 +675,24 @@ public class MachineLearnerTableGenerator extends TableGenerator {
 //        mltg.createBMFandCategoryTable("features/textualCategorical_30_70_excluding_forbidden.csv", 0.3, false);
 //        mltg.createJoinTable("features/textualCategorical_30_70_including_forbidden.csv", "features/domain_context_features.csv", "features/all_features_domain_context_30_70_including_forbidden.csv");
 //        mltg.createJoinTable("features/textualCategorical_30_70_excluding_forbidden.csv", "features/domain_context_features.csv", "features/all_features_domain_context_30_70_excluding_forbidden.csv");
-//        mltg.createContextualPairTableFromAllFeatures("features/all_features_domain_context_10_90_excluding_forbidden.csv","features/domain_context_10_90_excluding_forbidden.csv");
+//        mltg.createJoinTable("features/textualCategorical_excluding_forbidden.csv", "features/labeled_lda_features.csv", "features/all_features_labeled_lda_context_20_80_excluding_forbidden.csv");
+//        mltg.createContextualPairTableFromAllFeatures("features/all_features_labeled_lda_context_20_80_excluding_forbidden.csv","features/labeled_lda_20_80_excluding_forbidden.csv");
+        mltg.createSuperJoinTable("features/textualCategorical_10_90_including_forbidden.csv", "features/labeled_lda_features.csv", "features/domain_context_features.csv", "features/all_features_all_context_10_90_including_forbidden.csv");
+        mltg.createSuperJoinTable("features/textualCategorical_10_90_excluding_forbidden.csv", "features/labeled_lda_features.csv", "features/domain_context_features.csv", "features/all_features_all_context_10_90_excluding_forbidden.csv");
+        mltg.createSuperJoinTable("features/textualCategorical_30_70_including_forbidden.csv", "features/labeled_lda_features.csv", "features/domain_context_features.csv", "features/all_features_all_context_30_70_including_forbidden.csv");
+        mltg.createSuperJoinTable("features/textualCategorical_30_70_excluding_forbidden.csv", "features/labeled_lda_features.csv", "features/domain_context_features.csv", "features/all_features_all_context_30_70_excluding_forbidden.csv");
+        mltg.createSuperJoinTable("features/textualCategorical_including_forbidden.csv", "features/labeled_lda_features.csv", "features/domain_context_features.csv", "features/all_features_all_context_20_80_including_forbidden.csv");
+        mltg.createSuperJoinTable("features/textualCategorical_excluding_forbidden.csv", "features/labeled_lda_features.csv", "features/domain_context_features.csv", "features/all_features_all_context_20_80_excluding_forbidden.csv");
 //        mltg.createContextualPairTableFromAllFeatures("features/all_features_domain_context_10_90_including_forbidden.csv","features/domain_context_10_90_including_forbidden.csv");
 //        mltg.createContextualPairTableFromAllFeatures("features/all_features_domain_context_20_80_excluding_forbidden.csv","features/domain_context_20_80_excluding_forbidden.csv");
 //        mltg.createContextualPairTableFromAllFeatures("features/all_features_domain_context_20_80_including_forbidden.csv","features/domain_context_20_80_including_forbidden.csv");
 //        mltg.createContextualPairTableFromAllFeatures("features/all_features_domain_context_30_70_excluding_forbidden.csv","features/domain_context_30_70_excluding_forbidden.csv");
 //        mltg.createContextualPairTableFromAllFeatures("features/all_features_domain_context_30_70_including_forbidden.csv","features/domain_context_30_70_including_forbidden.csv");
-        mltg.createNewContextualPairTable("junkWords","features/junk_context_features_10_90_including_forbidden.csv", 0.1, true);
-        mltg.createNewContextualPairTable("junkWords","features/junk_context_features_10_90_excluding_forbidden.csv", 0.1, false);
-        mltg.createNewContextualPairTable("junkWords","features/junk_context_features_20_80_including_forbidden.csv", 0.2, true);
-        mltg.createNewContextualPairTable("junkWords","features/junk_context_features_20_80_excluding_forbidden.csv", 0.2, false);
-        mltg.createNewContextualPairTable("junkWords","features/junk_context_features_30_70_including_forbidden.csv", 0.3, true);
-        mltg.createNewContextualPairTable("junkWords","features/junk_context_features_30_70_excluding_forbidden.csv", 0.3, false);
+//        mltg.createNewContextualPairTable("junkWords","features/junk_context_features_10_90_including_forbidden.csv", 0.1, true);
+//        mltg.createNewContextualPairTable("junkWords","features/junk_context_features_10_90_excluding_forbidden.csv", 0.1, false);
+//        mltg.createNewContextualPairTable("junkWords","features/junk_context_features_20_80_including_forbidden.csv", 0.2, true);
+//        mltg.createNewContextualPairTable("junkWords","features/junk_context_features_20_80_excluding_forbidden.csv", 0.2, false);
+//        mltg.createNewContextualPairTable("junkWords","features/junk_context_features_30_70_including_forbidden.csv", 0.3, true);
+//        mltg.createNewContextualPairTable("junkWords","features/junk_context_features_30_70_excluding_forbidden.csv", 0.3, false);
     }
 }
