@@ -1,30 +1,71 @@
 ;; Generate wordlists
 
-getWordLists <- 
-          getWordLists crypto.txt > wordlist-crypto.txt
-          getWordLists designPatterns.txt > word-list-designPatterns.txt
-          getWordLists effectiveJava.txt > wordlist-Java.txt
-          getWordLists networking.txt > wordlist-networking.txt
-          getWordLists patterns.txt > word-list-patterns.txt
-          getWordLists pragmatic.txt > word-list-pragmatic.txt
+;;getWordLists <- 
+;;          getWordLists crypto.txt > wordlist-crypto.txt
+;;          getWordLists designPatterns.txt > word-list-designPatterns.txt
+;;          getWordLists effectiveJava.txt > wordlist-Java.txt
+;;          getWordLists networking.txt > wordlist-networking.txt
+;;          getWordLists patterns.txt > word-list-patterns.txt
+;;         getWordLists pragmatic.txt > word-list-pragmatic.txt
 
-getHighFreqWordLists <- 
-          getHighFreqWordLists crypto.txt > hf-wordlist-crypto.txt
-          getHighFreqWordLists designPatterns.txt > hf-word-list-designPatterns.txt
-          getHighFreqWordLists effectiveJava.txt > hf-wordlist-Java.txt
-          getHighFreqWordLists networking.txt > hf-wordlist-networking.txt
-          getHighFreqWordLists patterns.txt > hf-word-list-patterns.txt
-          getHighFreqWordLists pragmatic.txt > hf-word-list-pragmatic.txt
+;;getHighFreqWordLists <- 
+;;          getHighFreqWordLists crypto.txt > hf-wordlist-crypto.txt
+;;          getHighFreqWordLists designPatterns.txt > hf-word-list-designPatterns.txt
+;;          getHighFreqWordLists effectiveJava.txt > hf-wordlist-Java.txt
+;;          getHighFreqWordLists networking.txt > hf-wordlist-networking.txt
+;;          getHighFreqWordLists patterns.txt > hf-word-list-patterns.txt
+;;          getHighFreqWordLists pragmatic.txt > hf-word-list-pragmatic.txt
 
 ;; Combine wordlists into subjects: 
 
-wordlist-general.txt <-
-         cat word-list-pragmatic.txt word-list-patterns.txt word-list-designPatterns.txt > $OUTPUT
+;;wordlist-general.txt <-
+;;         cat word-list-pragmatic.txt word-list-patterns.txt word-list-designPatterns.txt > $OUTPUT
 
-hf-wordlist-general.txt <-
-         cat hf-word-list-pragmatic.txt hf-word-list-patterns.txt hf-word-list-designPatterns.txt > $OUTPUT
+;;hf-wordlist-general.txt <-
+;;         cat hf-word-list-pragmatic.txt hf-word-list-patterns.txt hf-word-list-designPatterns.txt > $OUTPUT
 
 
-cleanUp <- 
-          rm word-list*
-          rm hf-word-list*
+;;cleanUp <- 
+;;         rm word-list*
+;;          rm hf-word-list*
+
+splitPdf <-
+         ./splitPDF.py ./AdvAndroid-1_0-CC.pdf 39 85 90 105 116 128 139 152 186 196 241
+
+pdf2text <-
+         pdf2txt AdvAndroid-1_0-CC.part1.1_39.pdf > ch0.txt
+         pdf2txt AdvAndroid-1_0-CC.part2.40_85.pdf > ch1-2-3.txt 
+         pdf2txt AdvAndroid-1_0-CC.part3.86_90.pdf > ch4.txt
+         pdf2txt AdvAndroid-1_0-CC.part4.91_105.pdf > ch5.txt
+         pdf2txt AdvAndroid-1_0-CC.part5.106_116.pdf > ch6.txt
+         pdf2txt AdvAndroid-1_0-CC.part6.117_128.pdf > ch7.txt
+         pdf2txt AdvAndroid-1_0-CC.part7.129_139.pdf > ch8.txt
+         pdf2txt AdvAndroid-1_0-CC.part8.140_152.pdf > ch9.txt
+         pdf2txt AdvAndroid-1_0-CC.part9.153_186.pdf  > ch10.txt        
+         pdf2txt AdvAndroid-1_0-CC.part10.187_196.pdf > ch11.txt
+         pdf2txt AdvAndroid-1_0-CC.part11.197_241.pdf > ch12-13-14.txt
+         pdf2txt AdvAndroid-1_0-CC.part12.242_262.pdf > ch15+.txt 
+
+getWordLists <- 
+          getWordLists ch1-2-3.txt > wordlist-ch1-2-3.txt
+          getWordLists ch4.txt > wordlist-ch4.txt
+          getWordLists ch5.txt > wordlist-ch5.txt
+          getWordLists ch6.txt > wordlist-ch6.txt
+          getWordLists ch7.txt > wordlist-ch7.txt
+          getWordLists ch8.txt > wordlist-ch8.txt
+          getWordLists ch9.txt > wordlist-ch9.txt
+          getWordLists ch10.txt > wordlist-ch10.txt
+          getWordLists ch11.txt > wordlist-ch11.txt
+          getWordLists ch12-13-14.txt > wordlist-ch12-13-14.txt
+
+getHighFreqWordLists <- 
+          getHighFreqWordLists ch1-2-3.txt > hf-wordlist-ch1-2-3.txt
+          getHighFreqWordLists ch4.txt > hf-wordlist-ch4.txt
+          getHighFreqWordLists ch5.txt > hf-wordlist-ch5.txt
+          getHighFreqWordLists ch6.txt > hf-wordlist-ch6.txt
+          getHighFreqWordLists ch7.txt > hf-wordlist-ch7.txt
+          getHighFreqWordLists ch8.txt > hf-wordlist-ch8.txt
+          getHighFreqWordLists ch9.txt > hf-wordlist-ch9.txt
+          getHighFreqWordLists ch10.txt > hf-wordlist-ch10.txt
+          getHighFreqWordLists ch11.txt > hf-wordlist-ch11.txt
+          getHighFreqWordLists ch12-13-14.txt > hf-wordlist-ch12-13-14.txt
