@@ -19,13 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
 
 import au.com.bytecode.opencsv.CSVReader;
@@ -134,6 +128,7 @@ public class MachineLearnerTableGenerator extends TableGenerator {
 			System.err.println("Error: " + e.getMessage());
 		}
 	}
+
 
     public void createNewContextualPairTable(String contextFolderName, String outputFileName, double dupRatio, boolean includeForbidden){
 
@@ -246,19 +241,24 @@ public class MachineLearnerTableGenerator extends TableGenerator {
             FileWriter fstream = new FileWriter(outputfilename);
             BufferedWriter out = new BufferedWriter(fstream);
 
-            reader.readNext();
-            String title = "Bug 1,Bug2,crypto1,general1,java1,networking1,crypto2,general2,java2,networking2,cosine_similarity,class\n";
+            nextLine = reader.readNext();
+            String title = "Bug 1,Bug 2,";
+            for (int i = 9; i<nextLine.length-1; i++) {
+                title += nextLine[i] + ",";
+            }
+            title += nextLine[nextLine.length-1] + "\n";
             out.append(title);
+
             int contextLineConter = 0;
             while ((nextLine = reader.readNext()) != null) {
                 contextLineConter++;
                 StringBuffer line = new StringBuffer();
 
                 line.append(nextLine[0] + ",").append(nextLine[1] + ",");
-                for(int i=9;i<18;i++){
+                for(int i=9;i<nextLine.length-1;i++){
                     line.append(nextLine[i] + ",");
                 }
-                line.append(nextLine[18] + "\n");
+                line.append(nextLine[nextLine.length-1] + "\n");
                 out.append(line);
             }
             out.close();
@@ -588,6 +588,111 @@ public class MachineLearnerTableGenerator extends TableGenerator {
             // TODO: handle exception
         }
     }
+
+    public void createNewStackSimilarityTable(String originalFile, String outputFileName, double dupRatio, boolean includeForbidden){
+
+        Vector<Integer> forbidden = new Vector<Integer>(Arrays.asList(36886,36469,36468,36185,33997,33988,25384,25158,24818,24655,24534,24373,24076,23694,23591,22984,22589,22495,22477,22418,22325,22239,22154,21757,21754,21753,21752,21741,21740,21733,21722,21682,21602,21574,21485,21454,21453,21285,21207,21198,21175,21128,21127,21068,21067,20852,20839,20750,20664,20644,20593,20565,20554,20477,20466,20445,20384,20301,20290,20262,20136,20135,20123,19957,19953,19945,19944,19840,19830,19654,19653,19624,19623,19619,19583,19456,19445,19416,19415,19134,19082,19006,18984,18808,18774,18768,18759,18754,18735,18729,18708,18675,18657,18590,18588,18584,18524,18466,18398,18368,18339,18328,18307,18254,18190,18175,18109,18108,18044,18021,17770,17542,17464,17171,17079,17069,17062,16842,16488,16468,16393,16282,16236,16204,16000,14919,14856,14654,14414,13411,13395,13132,13067,13056,12596,12362,12160,12006,11921,11661,11658,11517,11495,11398,11358,11129,11055,10990,10801,10785,10768,10692,10309,10308,9977,9868,9861,9467,9425,9277,9276,9224,9132,9050,8871,8722,8474,8381,8335,8073,8070,8062,7504,7290,6250,6114,5997,5969,5968,5967,5934,5928,5922,5916,5888,5640,5619,5599));
+
+        try{
+            Map<String,Double> stackPairsMap = new HashMap<String,Double>();
+            String record="";
+            BufferedReader fileRead= new BufferedReader(new FileReader(originalFile));
+            fileRead.readLine();    // Discard title
+            while((record=fileRead.readLine())!=null) {
+                String[] values = record.split(";");
+                stackPairsMap.put(values[0]+"-"+values[1], Double.valueOf(values[2]));
+            }
+
+            // Create file
+            FileWriter fstream = new FileWriter(outputFileName);
+            BufferedWriter out = new BufferedWriter(fstream);
+            out.append("Bug 1,Bug 2,Similarity,Class\n");
+
+            Document doc1 = new Document("", "");
+            Document doc2 = new Document("", "");
+            StringBuffer line = new StringBuffer("");
+            String separator = ",";
+            int dupCount = 0;
+
+            for(int i=0;i<corpus.getDocuments().size()-1;i++){
+
+                for(int j=i+1;j<corpus.getDocuments().size();j++){
+
+                    line = new StringBuffer();
+                    doc1 = corpus.getDocuments().get(i);
+                    doc2 = corpus.getDocuments().get(j);
+
+                    if(!includeForbidden && (forbidden.contains(doc1.getBugID()) || forbidden.contains(doc2.getBugID())))
+                        continue;
+
+                    if(!isDuplicate(doc1,doc2))
+                        continue;
+
+                    Integer id1, id2;
+                    if(stackPairsMap.containsKey(doc1.getBugID() + "-" + doc2.getBugID())) {
+                        id1 = doc1.getBugID();
+                        id2 = doc2.getBugID();
+//                    } else if (stackPairsMap.containsKey(doc2.getBugID() + "-" + doc1.getBugID())) {
+//                        id1 = doc2.getBugID();
+//                        id2 = doc1.getBugID();
+                    } else {
+                        continue;
+                    }
+
+                    Double similarity = stackPairsMap.get(id1 + "-" + id2);
+
+                    line.append(id1+separator);
+                    line.append(id2+separator);
+                    line.append(similarity+separator);
+                    line.append("dup\n");
+                    out.append(line);
+                    dupCount++;
+                }
+            }
+
+            Random rand = new Random();
+            int totalCount = dupCount;
+
+            while (totalCount < dupCount/dupRatio) {
+
+                line = new StringBuffer();
+                int random = rand.nextInt(corpus.getDocuments().size()-1);
+                doc1 = corpus.getDocuments().get(random);
+                doc2 = corpus.getDocuments().get(random+1);
+
+                if(!includeForbidden && (forbidden.contains(doc1.getBugID()) || forbidden.contains(doc2.getBugID())))
+                    continue;
+
+                if(isDuplicate(doc1,doc2))
+                    continue;
+
+                Integer id1, id2;
+                if(stackPairsMap.containsKey(doc1.getBugID() + "-" + doc2.getBugID())) {
+                    id1 = doc1.getBugID();
+                    id2 = doc2.getBugID();
+//                } else if (stackPairsMap.containsKey(doc2.getBugID() + "-" + doc1.getBugID())) {
+//                    id1 = doc2.getBugID();
+//                    id2 = doc1.getBugID();
+                } else {
+                    continue;
+                }
+
+                Double similarity = stackPairsMap.get(id1 + "-" + id2);
+
+                line.append(id1+separator);
+                line.append(id2+separator);
+                line.append(similarity+separator);
+                line.append("non\n");
+                out.append(line);
+                totalCount++;
+            }
+
+            //Close the output stream
+            out.close();
+        }catch (Exception e){//Catch exception if any
+            System.err.println("Error: " + e.getMessage());
+        }
+    }
 	
 	private double reciprocal_function(double d1, double d2){
 
@@ -639,6 +744,7 @@ public class MachineLearnerTableGenerator extends TableGenerator {
 		
 		
 		MachineLearnerTableGenerator mltg = new MachineLearnerTableGenerator(false, freeVariables, corpus);
+        mltg.createNewStackSimilarityTable("features/stackTraces/stackSimilarity.csv","features/stackTraces/stackSimilarity_20_80.csv", 0.2, false);
 //        mltg.createContextualPairTable("domainWords","features/domain_context_pairs_10_90_including_forbidden.csv",0.1,true);
 //        mltg.createContextualPairTable("domainWords","features/domain_context_pairs_10_90_excluding_forbidden.csv",0.1,false);
 //        mltg.createContextualPairTable("domainWords","features/domain_context_pairs_20_80_including_forbidden.csv",0.2,true);
@@ -650,7 +756,7 @@ public class MachineLearnerTableGenerator extends TableGenerator {
 		//mltg.createContextTable("NFR3", "mozilla_NFR_context.csv");
 		//mltg.createContextTable("top100JunkWords", "mozilla_junk_context.csv");
 		//mltg.createContextTable("openoffice_lda_topics", "openoffice_lda_context.csv");
-//        mltg.createContextTable("domainWords", "features/domain_context_features.csv", "crypto,general,java,networking");
+//        mltg.createContextTable("androidDevWords", "features/androidDev/android_dev_context_features.csv", "WidgetsAndViews,Database,Events,Services,ActivitiesServices,UI,Animation,MediaPlayer,Camera,Sensors");
 //        mltg.createContextTable("AndroidLabeledTopicsContext", "labeled_lda_features.csv", "3G,alarm,android_market,app,audio,battery,bluethooth,bluetooth,browser,calculator,calendar," +
 //                "calling,camera,car,compass,contact,CPU,date,dialing,display,download,email,facebook,flash,font,google_earth," +
 //                "google_latitude,google_map,google_navigation,google_translate,google_voice,GPS,gtalk,image,input,IPV6,keyboard," +
@@ -669,25 +775,30 @@ public class MachineLearnerTableGenerator extends TableGenerator {
 //
 //        mltg.createBMFandCategoryTable("features/textualCategorical_10_90_including_forbidden.csv", 0.1, true);
 //        mltg.createBMFandCategoryTable("features/textualCategorical_10_90_excluding_forbidden.csv", 0.1, false);
-//        mltg.createJoinTable("features/textualCategorical_10_90_including_forbidden.csv", "features/domain_context_features.csv", "features/all_features_domain_context_10_90_including_forbidden.csv");
+//        mltg.createJoinTable("features/textualCategorical_10_90_including_forbidden.csv", "features/androidDev/android_dev_context_features.csv", "features/androidDev/all_features_android_dev_context_10_90_including_forbidden.csv");
+//        mltg.createJoinTable("features/textualCategorical_10_90_excluding_forbidden.csv", "features/androidDev/android_dev_context_features.csv", "features/androidDev/all_features_android_dev_context_10_90_excluding_forbidden.csv");
+//        mltg.createJoinTable("features/textualCategorical_20_80_including_forbidden.csv", "features/androidDev/android_dev_context_features.csv", "features/androidDev/all_features_android_dev_context_20_80_including_forbidden.csv");
+//        mltg.createJoinTable("features/textualCategorical_20_80_excluding_forbidden.csv", "features/androidDev/android_dev_context_features.csv", "features/androidDev/all_features_android_dev_context_20_80_excluding_forbidden.csv");
+//        mltg.createJoinTable("features/textualCategorical_30_70_including_forbidden.csv", "features/androidDev/android_dev_context_features.csv", "features/androidDev/all_features_android_dev_context_30_70_including_forbidden.csv");
+//        mltg.createJoinTable("features/textualCategorical_30_70_excluding_forbidden.csv", "features/androidDev/android_dev_context_features.csv", "features/androidDev/all_features_android_dev_context_30_70_excluding_forbidden.csv");
 //        mltg.createJoinTable("features/textualCategorical_10_90_excluding_forbidden.csv", "features/domain_context_features.csv", "features/all_features_domain_context_10_90_excluding_forbidden.csv");
 //        mltg.createBMFandCategoryTable("features/textualCategorical_30_70_including_forbidden.csv", 0.3, true);
 //        mltg.createBMFandCategoryTable("features/textualCategorical_30_70_excluding_forbidden.csv", 0.3, false);
 //        mltg.createJoinTable("features/textualCategorical_30_70_including_forbidden.csv", "features/domain_context_features.csv", "features/all_features_domain_context_30_70_including_forbidden.csv");
 //        mltg.createJoinTable("features/textualCategorical_30_70_excluding_forbidden.csv", "features/domain_context_features.csv", "features/all_features_domain_context_30_70_excluding_forbidden.csv");
 //        mltg.createJoinTable("features/textualCategorical_excluding_forbidden.csv", "features/labeled_lda_features.csv", "features/all_features_labeled_lda_context_20_80_excluding_forbidden.csv");
-//        mltg.createContextualPairTableFromAllFeatures("features/all_features_labeled_lda_context_20_80_excluding_forbidden.csv","features/labeled_lda_20_80_excluding_forbidden.csv");
-        mltg.createSuperJoinTable("features/textualCategorical_10_90_including_forbidden.csv", "features/labeled_lda_features.csv", "features/domain_context_features.csv", "features/all_features_all_context_10_90_including_forbidden.csv");
-        mltg.createSuperJoinTable("features/textualCategorical_10_90_excluding_forbidden.csv", "features/labeled_lda_features.csv", "features/domain_context_features.csv", "features/all_features_all_context_10_90_excluding_forbidden.csv");
-        mltg.createSuperJoinTable("features/textualCategorical_30_70_including_forbidden.csv", "features/labeled_lda_features.csv", "features/domain_context_features.csv", "features/all_features_all_context_30_70_including_forbidden.csv");
-        mltg.createSuperJoinTable("features/textualCategorical_30_70_excluding_forbidden.csv", "features/labeled_lda_features.csv", "features/domain_context_features.csv", "features/all_features_all_context_30_70_excluding_forbidden.csv");
-        mltg.createSuperJoinTable("features/textualCategorical_including_forbidden.csv", "features/labeled_lda_features.csv", "features/domain_context_features.csv", "features/all_features_all_context_20_80_including_forbidden.csv");
-        mltg.createSuperJoinTable("features/textualCategorical_excluding_forbidden.csv", "features/labeled_lda_features.csv", "features/domain_context_features.csv", "features/all_features_all_context_20_80_excluding_forbidden.csv");
-//        mltg.createContextualPairTableFromAllFeatures("features/all_features_domain_context_10_90_including_forbidden.csv","features/domain_context_10_90_including_forbidden.csv");
-//        mltg.createContextualPairTableFromAllFeatures("features/all_features_domain_context_20_80_excluding_forbidden.csv","features/domain_context_20_80_excluding_forbidden.csv");
-//        mltg.createContextualPairTableFromAllFeatures("features/all_features_domain_context_20_80_including_forbidden.csv","features/domain_context_20_80_including_forbidden.csv");
-//        mltg.createContextualPairTableFromAllFeatures("features/all_features_domain_context_30_70_excluding_forbidden.csv","features/domain_context_30_70_excluding_forbidden.csv");
-//        mltg.createContextualPairTableFromAllFeatures("features/all_features_domain_context_30_70_including_forbidden.csv","features/domain_context_30_70_including_forbidden.csv");
+//        mltg.createSuperJoinTable("features/textualCategorical_10_90_including_forbidden.csv", "features/labeled_lda_features.csv", "features/androidDev/android_dev_context_features.csv", "features/androidDev/all_features_lda_and_android_dev_context_10_90_including_forbidden.csv");
+//        mltg.createSuperJoinTable("features/textualCategorical_10_90_excluding_forbidden.csv", "features/labeled_lda_features.csv", "features/androidDev/android_dev_context_features.csv", "features/androidDev/all_features_lda_and_android_dev_context_10_90_excluding_forbidden.csv");
+//        mltg.createSuperJoinTable("features/textualCategorical_20_80_including_forbidden.csv", "features/labeled_lda_features.csv", "features/androidDev/android_dev_context_features.csv", "features/androidDev/all_features_lda_and_android_dev_context_20_80_including_forbidden.csv");
+//        mltg.createSuperJoinTable("features/textualCategorical_20_80_excluding_forbidden.csv", "features/labeled_lda_features.csv", "features/androidDev/android_dev_context_features.csv", "features/androidDev/all_features_lda_and_android_dev_context_20_80_excluding_forbidden.csv");
+//        mltg.createSuperJoinTable("features/textualCategorical_30_70_including_forbidden.csv", "features/labeled_lda_features.csv", "features/androidDev/android_dev_context_features.csv", "features/androidDev/all_features_lda_and_android_dev_context_30_70_including_forbidden.csv");
+//        mltg.createSuperJoinTable("features/textualCategorical_30_70_excluding_forbidden.csv", "features/labeled_lda_features.csv", "features/androidDev/android_dev_context_features.csv", "features/androidDev/all_features_lda_and_android_dev_context_30_70_excluding_forbidden.csv");
+//        mltg.createContextualPairTableFromAllFeatures("features/androidDev/all_features_android_dev_context_10_90_excluding_forbidden.csv","features/androidDev/android_dev_context_10_90_excluding_forbidden.csv");
+//        mltg.createContextualPairTableFromAllFeatures("features/androidDev/all_features_android_dev_context_10_90_including_forbidden.csv","features/androidDev/android_dev_context_10_90_including_forbidden.csv");
+//        mltg.createContextualPairTableFromAllFeatures("features/androidDev/all_features_android_dev_context_20_80_excluding_forbidden.csv","features/androidDev/android_dev_context_20_80_excluding_forbidden.csv");
+//        mltg.createContextualPairTableFromAllFeatures("features/androidDev/all_features_android_dev_context_20_80_including_forbidden.csv","features/androidDev/android_dev_context_20_80_including_forbidden.csv");
+//        mltg.createContextualPairTableFromAllFeatures("features/androidDev/all_features_android_dev_context_30_70_excluding_forbidden.csv","features/androidDev/android_dev_context_30_70_excluding_forbidden.csv");
+//        mltg.createContextualPairTableFromAllFeatures("features/androidDev/all_features_android_dev_context_30_70_including_forbidden.csv","features/androidDev/android_dev_context_30_70_including_forbidden.csv");
 //        mltg.createNewContextualPairTable("junkWords","features/junk_context_features_10_90_including_forbidden.csv", 0.1, true);
 //        mltg.createNewContextualPairTable("junkWords","features/junk_context_features_10_90_excluding_forbidden.csv", 0.1, false);
 //        mltg.createNewContextualPairTable("junkWords","features/junk_context_features_20_80_including_forbidden.csv", 0.2, true);
