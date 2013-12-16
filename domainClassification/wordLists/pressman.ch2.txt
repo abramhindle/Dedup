@@ -1,0 +1,3340 @@
+C H A P T E R
+
+1 THE PRODUCT
+
+K E Y
+C O N C E P T S
+application
+categories . . . . . . . 9
+component-based
+assembly. . . . . . . . . 8
+failure curves . . . . . 8
+history . . . . . . . . . . 5
+myths . . . . . . . . . . 12
+reuse . . . . . . . . . . . . 9
+software
+characteristics . . . . 6
+software
+engineering  . . . . . . 4
+wear . . . . . . . . . . . . 7
+
+The warnings began more than a decade before the event, but no one paid
+
+much attention. With less than two years to the deadline, the media
+picked up the story. Then government ofﬁcials voiced their concern, busi-
+ness and industry leaders committed vast sums of money, and ﬁnally, dire warn-
+ings of pending catastrophe penetrated the public’s consciousness. Software,
+in the guise of the now-infamous Y2K bug, would fail and, as a result, stop the
+world as we then knew it.
+
+As we watched and wondered during the waning months of 1999, I couldn’t
+help thinking of an unintentionally prophetic paragraph contained on the ﬁrst
+page of the fourth edition of this book. It stated:
+
+Computer software has become a driving force. It is the engine that drives business
+decision making. It serves as the basis for modern scientiﬁc investigation and engi-
+neering problem solving. It is a key factor that differentiates modern products and
+services. It is embedded in systems of all kinds: transportation, medical, telecom-
+munications, military, industrial processes, entertainment, ofﬁce products, . . . the
+list is almost endless. Software is virtually inescapable in a modern world. And as
+we move into the twenty-ﬁrst century, it will become the driver for new advances in
+everything from elementary education to genetic engineering.
+
+Q U I C K
+L O O K
+
+What is it? Computer software is
+the product that software engi-
+neers design and build. It encom-
+passes programs that execute within a computer
+of any size and architecture, documents that
+encompass hard-copy and virtual forms, and
+data that combine numbers and text but also
+includes representations of pictorial, video, and
+audio information.
+
+Who does it? Software engineers build it, and virtu-
+ally everyone in the industrialized world uses it
+either directly or indirectly.
+
+Why is it important? Because it affects nearly every
+aspect of our lives and has become pervasive in
+our commerce, our culture, and our everyday
+activities.
+
+What are the steps? You build computer software
+like you build any successful product, by apply-
+ing a process that leads to a high-quality result
+that meets the needs of the people who will use
+the product. You apply a software engineering
+approach.
+
+What is the work product? From the point of view of
+a software engineer, the work product is the pro-
+grams, documents, and data that are computer
+software. But from the user’s viewpoint, the work
+product is the resultant information that somehow
+makes the user’s world better.
+
+How do I ensure that I’ve done it right? Read the
+remainder of this book, select those ideas appli-
+cable to the software that you build, and apply
+them to your work.
+
+3
+
+4
+
+PART ONE
+
+THE PRODUCT AND THE PROCESS
+
+In the ﬁve years since the fourth edition of this book was written, the role of soft-
+ware as the “driving force” has become even more obvious. A software-driven Inter-
+net has spawned its own $500 billion economy. In the euphoria created by the promise
+of a new economic paradigm, Wall Street investors gave tiny “dot-com” companies
+billion dollar valuations before these start-ups produced a dollar in sales. New 
+software-driven industries have arisen and old ones that have not adapted to the new
+driving force are now threatened with extinction. The United States government has
+litigated against the software’s industry’s largest company, just as it did in earlier eras
+when it moved to stop monopolistic practices in the oil and steel industries.
+
+Software’s impact on our society and culture continues to be profound. As its
+importance grows, the software community continually attempts to develop tech-
+nologies that will make it easier, faster, and less expensive to build high-quality com-
+puter programs. Some of these technologies are targeted at a specific application
+domain (e.g., Web-site design and implementation); others focus on a technology
+domain (e.g., object-oriented systems); and still others are broad-based (e.g., oper-
+ating systems such as LINUX). However, we have yet to develop a software technol-
+ogy that does it all, and the likelihood of one arising in the future is small. And yet,
+people bet their jobs, their comfort, their safety, their entertainment, their decisions,
+and their very lives on computer software. It better be right. 
+
+This book presents a framework that can be used by those who build computer
+software—people who must get it right. The technology encompasses a process, a
+set of methods, and an array of tools that we call software engineering.
+
+“Ideas and
+technological
+discoveries are the
+driving engines of
+economic growth.”
+The Wall Street
+Journal
+
+1.1 THE EVOLVING ROLE OF SOFTWARE
+
+Software is both a
+product and a vehicle
+for delivering a
+product.
+
+Today, software takes on a dual role. It is a product and, at the same time, the vehi-
+cle for delivering a product. As a product, it delivers the computing potential embod-
+ied by computer hardware or, more broadly, a network of computers that are accessible
+by local hardware. Whether it resides within a cellular phone or operates inside a
+mainframe computer, software is an information transformer—producing, manag-
+ing, acquiring, modifying, displaying, or transmitting information that can be as sim-
+ple as a single bit or as complex as a multimedia presentation. As the vehicle used
+to deliver the product, software acts as the basis for the control of the computer (oper-
+ating systems), the communication of information (networks), and the creation and
+control of other programs (software tools and environments). 
+
+Software delivers the most important product of our time—information. Software
+transforms personal data (e.g., an individual’s ﬁnancial transactions) so that the data
+can be more useful in a local context; it manages business information to enhance
+competitiveness; it provides a gateway to worldwide information networks (e.g., Inter-
+net) and provides the means for acquiring information in all of its forms.
+
+The role of computer software has undergone signiﬁcant change over a time span
+of little more than 50 years. Dramatic improvements in hardware performance, pro-
+
+“For I dipped into the
+future, far as the
+human eye could
+see, Saw the vision
+of the world, and all
+the wonder that
+would be.”  
+Tennyson
+
+“Computers make it
+easy to do a lot of
+things, but most of
+the things that they
+make it easier to do
+don't need to be
+done.”
+Andy Rooney
+
+CHAPTER 1
+
+THE PRODUCT
+
+5
+
+found changes in computing architectures, vast increases in memory and storage
+capacity, and a wide variety of exotic input and output options have all precipitated
+more sophisticated and complex computer-based systems. Sophistication and com-
+plexity can produce dazzling results when a system succeeds, but they can also pose
+huge problems for those who must build complex systems. 
+
+Popular books published during the 1970s and 1980s provide useful historical
+insight into the changing perception of computers and software and their impact on
+our culture. Osborne [OSB79] characterized a "new industrial revolution."  Toffler
+[TOF80] called the advent of microelectronics part of "the third wave of change" in
+human history, and Naisbitt [NAI82] predicted a transformation from an industrial
+society to an "information society."  Feigenbaum and McCorduck [FEI83] suggested
+that information and knowledge (controlled by computers) would be the focal point
+for power in the twenty-ﬁrst century, and Stoll [STO89] argued that the "electronic
+community" created by networks and software was the key to knowledge interchange
+throughout the world. 
+
+As the 1990s began, Tofﬂer [TOF90] described a "power shift" in which old power
+structures (governmental, educational, industrial, economic, and military) disinte-
+grate as computers and software lead to a "democratization of knowledge." Yourdon
+[YOU92] worried that U.S. companies might loose their competitive edge in software-
+related businesses and predicted “the decline and fall of the American programmer.”
+Hammer and Champy [HAM93] argued that information technologies were to play a
+pivotal role in the “reengineering of the corporation.” During the mid-1990s, the per-
+vasiveness of computers and software spawned a rash of books by “neo-Luddites”
+(e.g., Resisting the Virtual Life, edited by James Brook and Iain Boal and The Future
+Does Not Compute by Stephen Talbot). These authors demonized the computer, empha-
+sizing legitimate concerns but ignoring the profound beneﬁts that have already been
+realized. [LEV95] 
+
+During the later 1990s, Yourdon [YOU96] re-evaluated the prospects for the
+software professional and suggested the “the rise and resurrection” of the Ameri-
+can programmer. As the Internet grew in importance, his change of heart proved
+to be correct. As the twentieth century closed, the focus shifted once more, this
+time to the impact of the Y2K “time bomb” (e.g., [YOU98b], [DEJ98], [KAR99]).
+Although the predictions of the Y2K doomsayers were incorrect, their popular
+writings drove home the pervasiveness of software in our lives. Today, “ubiquitous
+computing” [NOR98] has spawned a generation of information appliances that
+have broadband connectivity to the Web to provide “a blanket of connectedness
+over our homes, offices and motorways” [LEV99]. Software’s role continues to
+expand.
+
+The lone programmer of an earlier era has been replaced by a team of software
+specialists, each focusing on one part of the technology required to deliver a com-
+plex application. And yet, the same questions asked of the lone programmer are being
+asked when modern computer-based systems are built:
+
+6
+
+PART ONE
+
+THE PRODUCT AND THE PROCESS
+
+• Why does it take so long to get software ﬁnished?
+• Why are development costs so high?
+• Why can't we ﬁnd all the errors before we give the software to customers?
+• Why do we continue to have difﬁculty in measuring progress as software is
+
+being developed?
+
+These, and many other questions,1 are a manifestation of the concern about soft-
+ware and the manner in which it is developed—a concern that has lead to the adop-
+tion of software engineering practice.
+
+1.2 SOFTWARE 
+
+?
+
+How should
+we deﬁne
+
+software?
+
+Software is
+engineered, not
+manufactured.
+
+In 1970, less than 1 percent of the public could have intelligently described what
+"computer software" meant. Today, most professionals and many members of the
+public at large feel that they understand software. But do they?
+
+A textbook description of software might take the following form: Software is (1)
+instructions (computer programs) that when executed provide desired function and per-
+formance,  (2) data structures that enable the programs to adequately manipulate infor-
+mation, and (3) documents that describe the operation and use of the programs. There
+is no question that other, more complete deﬁnitions could be offered. But we need
+more than a formal deﬁnition.
+
+Software Characteristics
+
+1.2.1
+To gain an understanding of software (and ultimately an understanding of software
+engineering), it is important to examine the characteristics of software that make it
+different from other things that human beings build. When hardware is built, the
+human creative process (analysis, design, construction, testing) is ultimately trans-
+lated into a physical form. If we build a new computer, our initial sketches, formal
+design drawings, and breadboarded prototype evolve into a physical product (chips,
+circuit boards, power supplies, etc.).
+
+Software is a logical rather than a physical system element. Therefore, software
+
+has characteristics that are considerably different than those of hardware:
+
+1. Software is developed or engineered, it is not manufactured in the classical
+
+sense.
+
+Although some similarities exist between software development and hardware man-
+ufacture, the two activities are fundamentally different. In both activities, high qual-
+
+1 In an excellent book of essays on the software business, Tom DeMarco [DEM95] argues the coun-
+
+terpoint. He states: “Instead of asking ‘why does software cost so much?’ we need to begin ask-
+ing ‘What have we done to make it possible for today’s software to cost so little?’ The answer to
+that question will help us continue the extraordinary level of achievement that has always distin-
+guished the software industry.”
+
+CHAPTER 1
+
+THE PRODUCT
+
+7
+
+FIGURE 1.1
+Failure curve
+for hardware
+
+t
+
+e
+a
+r
+ 
+e
+r
+u
+l
+i
+
+a
+F
+
+“Infant
+mortality”
+
+“Wear out”
+
+Software doesn’t wear
+out, but it does
+deteriorate.
+
+Time
+
+ity is achieved through good design, but the manufacturing phase for hardware can
+introduce quality problems that are nonexistent (or easily corrected) for software.
+Both activities are dependent on people, but the relationship between people applied
+and work accomplished is entirely different (see Chapter 7). Both activities require
+the construction of a "product" but the approaches are different.
+
+Software costs are concentrated in engineering. This means that software proj-
+
+ects cannot be managed as if they were manufacturing projects. 
+
+2. Software doesn't "wear out."
+
+Figure 1.1 depicts failure rate as a function of time for hardware. The relationship,
+often called the "bathtub curve," indicates that hardware exhibits relatively high fail-
+ure rates early in its life (these failures are often attributable to design or manufac-
+turing defects); defects  are corrected and the failure rate drops to a steady-state level
+(ideally, quite low) for some period of time. As time passes, however, the failure rate
+rises again as hardware components suffer from the cumulative affects of dust, vibra-
+tion, abuse, temperature extremes, and many other environmental maladies. Stated
+simply, the hardware begins to wear out.
+
+Software is not susceptible to the environmental maladies that cause hardware to
+wear out. In theory, therefore, the failure rate curve for software should take the form of
+the “idealized curve” shown in Figure 1.2. Undiscovered defects will cause high failure
+rates early in the life of a program. However, these are corrected (ideally, without intro-
+ducing other errors) and the curve ﬂattens as shown.The idealized curve is a gross over-
+simpliﬁcation of actual failure models (see Chapter 8 for more information) for software.
+However, the implication is clear—software doesn't wear out. But it does deteriorate!
+This seeming contradiction can best be explained by considering the “actual curve”
+shown in Figure 1.2. During its life, software will undergo change (maintenance). As
+
+8
+
+PART ONE
+
+THE PRODUCT AND THE PROCESS
+
+FIGURE 1.2
+Idealized and
+actual failure
+curves for
+software
+
+Increased failure
+rate due to side
+
+effects
+
+t
+
+e
+a
+r
+ 
+e
+r
+u
+l
+i
+
+a
+F
+
+Change
+
+Software engineering
+methods strive to
+reduce the magnitude
+of the spikes and the
+slope of the actual
+curve in Figure 1.2.
+
+Most software
+continues to be 
+custom built.
+
+Actual curve
+
+Idealized curve
+
+Time
+
+changes are made, it is likely that some new defects will be introduced, causing the
+failure rate curve to spike as shown in Figure 1.2. Before the curve can return to the
+original steady-state failure rate, another change is requested, causing the curve to
+spike again. Slowly, the minimum failure rate level begins to rise—the software is
+deteriorating due to change.
+
+Another aspect of wear illustrates the difference between hardware and software.
+When a hardware component wears out, it is replaced by a spare part. There are no
+software spare parts. Every software failure indicates an error in design or in the
+process through which design was translated into machine executable code. There-
+fore, software maintenance involves considerably more complexity than hardware
+maintenance.
+
+3. Although the industry is moving toward component-based assembly, most
+
+software continues to be custom built.
+
+Consider the manner in which the control hardware for a computer-based product
+is designed and built. The design engineer draws a simple schematic of the digital
+circuitry, does some fundamental analysis to assure that proper function will be
+achieved, and then goes to the shelf where catalogs of digital components exist. Each
+integrated circuit (called an IC or a chip) has a part number, a deﬁned and validated
+function, a well-deﬁned interface, and a standard set of integration guidelines. After
+each component is selected, it can be ordered off the shelf.
+
+As an engineering discipline evolves, a collection of standard design components
+is created. Standard screws and off-the-shelf integrated circuits are only two of thou-
+sands of standard components that are used by mechanical and electrical engineers
+as they design new systems. The reusable components have been created so that the
+engineer can concentrate on the truly innovative elements of a design, that is, the
+
+XRef
+Software reuse is
+discussed in Chapter
+13. Component-based
+software engineering is
+presented in Chapter
+27.
+
+CHAPTER 1
+
+THE PRODUCT
+
+9
+
+parts of the design that represent something new. In the hardware world, component
+reuse is a natural part of the engineering process. In the software world, it is some-
+thing that has only begun to be achieved on a broad scale.
+
+A software component should be designed and implemented so that it can be
+reused in many different programs. In the 1960s, we built scientiﬁc subroutine libraries
+that were reusable in a broad array of engineering and scientiﬁc applications. These
+subroutine libraries reused well-deﬁned algorithms in an effective manner but had a
+limited domain of application. Today, we have extended our view of reuse to encom-
+pass not only algorithms but also data structure. Modern reusable components encap-
+sulate both data and the processing applied to the data, enabling the software engineer
+to create new applications from reusable parts. For example, today's graphical user
+interfaces are built using reusable components that enable the creation of graphics
+windows, pull-down menus, and a wide variety of interaction mechanisms. The data
+structure and processing detail required to build the interface are contained with a
+library of reusable components for interface construction.
+
+Software Applications
+
+1.2.2
+Software may be applied in any situation for which a prespeciﬁed set of procedural
+steps (i.e., an algorithm) has been deﬁned (notable exceptions to this rule are expert
+system software and neural network software). Information content and determinacy
+are important factors in determining the nature of a software application. Content
+refers to the meaning and form of incoming and outgoing information. For example,
+many business applications use highly structured input data (a database) and pro-
+duce formatted “reports.”  Software that controls an automated machine (e.g., a
+numerical control) accepts discrete data items with limited structure and produces
+individual machine commands in rapid succession.
+
+Information determinacy refers to the predictability of the order and timing of infor-
+mation. An engineering analysis program accepts data that have a predeﬁned order,
+executes the analysis algorithm(s) without interruption, and produces resultant data
+in report or graphical format.  Such applications are determinate. A multiuser oper-
+ating system, on the other hand, accepts inputs that have varied content and arbi-
+trary timing, executes algorithms that can be interrupted by external conditions, and
+produces output that varies as a function of environment and time.  Applications with
+these characteristics are indeterminate.
+
+It is somewhat difﬁcult to develop meaningful generic categories for software appli-
+cations.  As software complexity grows, neat compartmentalization disappears.  The
+following software areas indicate the breadth of potential applications:  
+
+System software. System software is a collection of programs written to service
+other programs.  Some system software (e.g., compilers, editors, and ﬁle manage-
+ment utilities) process complex, but determinate, information structures.  Other sys-
+tems applications (e.g., operating system components, drivers, telecommunications
+
+10
+
+PART ONE
+
+THE PRODUCT AND THE PROCESS
+
+One of the most
+comprehensive libraries of
+shareware/freeware can
+be found at 
+www.shareware.com
+
+processors) process largely indeterminate data.  In either case, the system software
+area is characterized by heavy interaction with computer hardware; heavy usage by
+multiple users; concurrent operation that requires scheduling, resource sharing, and
+sophisticated process management; complex data structures; and multiple external
+interfaces.
+Real-time software. Software that monitors/analyzes/controls real-world events
+as they occur is called real time. Elements of real-time software include a data gath-
+ering component that collects and formats information from an external environ-
+ment,  an  analysis  component  that  transforms  information  as  required  by  the
+application, a control/output component that responds to the external environment,
+and a monitoring component that coordinates all other components so that real-time
+response (typically ranging from 1 millisecond to 1 second) can be maintained. 
+Business software.  Business information processing is the largest single software
+application area. Discrete "systems" (e.g., payroll, accounts receivable/payable, inven-
+tory) have evolved into management information system (MIS) software that accesses
+one or more large databases containing business information.  Applications in this
+area restructure existing data in a way that facilitates business operations or man-
+agement decision making. In addition to conventional data processing application,
+business software applications also encompass interactive computing (e.g., point-
+of-sale transaction processing).
+Engineering and scientiﬁc software. Engineering and scientiﬁc software have
+been characterized by "number crunching" algorithms. Applications range from astron-
+omy to volcanology, from automotive stress analysis to space shuttle orbital dynam-
+ics, and from molecular biology to automated manufacturing.  However, modern
+applications within the engineering/scientiﬁc area are moving away from conven-
+tional numerical algorithms.  Computer-aided design, system simulation, and other
+interactive applications have begun to take on real-time and even system software
+characteristics. 
+Embedded software. Intelligent products have become commonplace in nearly
+every consumer and industrial market. Embedded software resides in read-only mem-
+ory and is used to control products and systems for the consumer and industrial mar-
+kets. Embedded software can perform very limited and esoteric functions (e.g., keypad
+control for a microwave oven) or provide signiﬁcant function and control capability
+(e.g., digital functions in an automobile such as fuel control, dashboard displays, and
+braking systems).
+Personal computer software. The personal computer software market has bur-
+geoned over the past two decades. Word processing, spreadsheets, computer graph-
+ics, multimedia, entertainment, database management, personal and business ﬁnancial
+applications, external network, and database access are only a few of hundreds of
+applications.
+Web-based software. The Web pages retrieved by a browser are software that
+incorporates executable instructions (e.g., CGI, HTML, Perl, or Java), and data (e.g.,
+
+CHAPTER 1
+
+THE PRODUCT
+
+11
+
+hypertext and a variety of visual and audio formats). In essence, the network becomes
+a massive computer providing an almost unlimited software resource that can be
+accessed by anyone with a modem.
+Artificial intelligence software.  Artificial intelligence (AI) software makes use
+of nonnumerical algorithms to solve complex problems that are not amenable to
+computation or straightforward analysis. Expert systems, also called knowledge-
+based systems, pattern recognition (image and voice), artificial neural networks,
+theorem proving, and game playing are representative of applications within this
+category.
+
+1.3   SOFTWARE: A CRISIS ON THE HORIZON?
+
+“The most likely way
+for the world to be
+destroyed, most
+experts agree, is by
+accident. That's
+where we come in;
+we're computer
+professionals. We
+cause accidents.” 
+Nathaniel
+Borenstein
+
+Many industry observers (including this author) have characterized the problems
+associated with software development as a "crisis." More than a few books (e.g.,
+[GLA97], [FLO97], [YOU98a]) have recounted the impact of some of the more spec-
+tacular software failures that have occurred over the past decade. Yet, the great suc-
+cesses achieved by the software industry have led many to question whether the term
+software crisis is still appropriate. Robert Glass, the author of a number of books on
+software failures, is representative of those who have had a change of heart. He states
+[GLA98]: “I look at my failure stories and see exception reporting, spectacular fail-
+ures in the midst of many successes, a cup that is [now] nearly full.”
+
+It is true that software people succeed more often than they fail. It also true that
+the software crisis predicted 30 years ago never seemed to materialize. What we
+really have may be something rather different. 
+
+The word crisis is deﬁned in Webster's Dictionary as “a turning point in the course of
+anything; decisive or crucial time, stage or event.” Yet, in terms of overall software qual-
+ity and the speed with which computer-based systems and products are developed,
+there has been no "turning point," no "decisive time," only slow, evolutionary change,
+punctuated by explosive technological changes in disciplines associated with software.  
+The word crisis has another deﬁnition: "the turning point in the course of a disease,
+when it becomes clear whether the patient will live or die." This deﬁnition may give us
+a clue about the real nature of the problems that have plagued software development. 
+What we really have might be better characterized as a chronic affliction.2 The
+word afﬂiction is deﬁned as "anything causing pain or distress." But the deﬁnition of
+the adjective chronic is the key to our argument: "lasting a long time or recurring
+often; continuing indeﬁnitely." It is far more accurate to describe the problems we
+have endured in the software business as a chronic afﬂiction than a crisis.  
+
+Regardless of what we call it, the set of problems that are encountered in the devel-
+opment of computer software is not limited to software that "doesn't function 
+
+2 This terminology was suggested by Professor Daniel Tiechrow of the University of Michigan in a
+
+talk presented in Geneva, Switzerland, April 1989.
+
+12
+
+PART ONE
+
+THE PRODUCT AND THE PROCESS
+
+properly."  Rather, the affliction encompasses problems associated with how we
+develop software, how we support a growing volume of existing software, and how
+we can expect to keep pace with a growing demand for more software. 
+
+We live with this afﬂiction to this day—in fact, the industry prospers in spite of it.
+
+And yet, things would be much better if we could ﬁnd and broadly apply a cure.
+
+1.4   SOFTWARE MYTHS
+
+“In the absence of
+meaningful standards, 
+a new industry like
+software comes to
+depend instead on
+folklore.”
+Tom DeMarco
+
+Many causes of a software afﬂiction can be traced to a mythology that arose during
+the early history of software development. Unlike ancient myths that often provide
+human lessons well worth heeding, software myths propagated misinformation and
+confusion.  Software myths had a number of attributes that made them insidious; for
+instance, they  appeared to be reasonable statements of fact (sometimes containing
+elements of truth), they had an intuitive feel, and they were often promulgated by
+experienced practitioners who "knew the score."
+
+Today, most knowledgeable professionals recognize myths for what they are—
+misleading attitudes that have caused serious problems for managers and technical
+people alike. However, old attitudes and habits are difﬁcult to modify, and remnants
+of software myths are still believed.
+
+Management myths. Managers with software responsibility, like managers in most
+disciplines, are often under pressure to maintain budgets, keep schedules from slip-
+ping, and improve quality. Like a drowning person who grasps at a straw, a software
+manager often grasps at belief in a software myth, if that belief will lessen the pres-
+sure (even temporarily).
+
+Myth:  We already have a book that's full of standards and procedures for building
+software, won't that provide my people with everything they need to know?
+Reality: The book of standards may very well exist, but is it used? Are software
+practitioners aware of its existence? Does it reﬂect modern software engineering prac-
+tice? Is it complete? Is it streamlined to improve time to delivery while still main-
+taining a focus on quality? In many cases, the answer to all of these questions is "no." 
+Myth: My people have state-of-the-art software development tools, after all, we
+buy them the newest computers. 
+Reality:
+It takes much more than the latest model mainframe, workstation, or PC
+to do high-quality software development.  Computer-aided software engineering
+(CASE) tools are more important than hardware for achieving good quality and pro-
+ductivity, yet the majority of software developers still do not use them effectively.
+Myth:
+(sometimes called the Mongolian horde concept). 
+Reality: Software development is not a mechanistic process like manufacturing.
+In the words of Brooks [BRO75]:  "adding people to a late software project makes it
+
+If we get behind schedule, we can add more programmers and catch up
+
+The Software Project
+Managers Network at 
+www.spmn.com can
+help you dispel these and
+other myths.
+
+Work very hard to
+understand what you
+have to do before you
+start. You may not be
+able to develop every
+detail, but the more
+you know, the less risk
+you take.
+
+XRef
+The management and
+control of change is
+considered in detail in
+Chapter 9.
+
+CHAPTER 1
+
+THE PRODUCT
+
+13
+
+later." At ﬁrst, this statement may seem counterintuitive. However, as new people
+are added, people who were working must spend time educating the newcomers,
+thereby reducing the amount of time spent on productive development effort.  Peo-
+ple can be added but only in a planned and well-coordinated manner.
+Myth:
+and let that ﬁrm build it.
+Reality:
+projects internally, it will invariably struggle when it outsources software projects. 
+
+If I decide to outsource3 the software project to a third party, I can just relax
+
+If an organization does not understand how to manage and control software
+
+Customer myths. A customer who requests computer software may be a person
+at the next desk, a technical group down the hall, the marketing/sales department,
+or an outside company that has requested software under contract. In many cases,
+the customer believes myths about software because software managers and prac-
+titioners do little to correct misinformation. Myths lead to false expectations (by the
+customer) and ultimately, dissatisfaction with the developer.
+
+Myth: A general statement of objectives is sufﬁcient to begin writing programs—
+we can ﬁll in the details later. 
+Reality: A poor up-front deﬁnition is the major cause of  failed software efforts.  A
+formal and detailed description of the information domain, function, behavior, per-
+formance, interfaces, design constraints, and validation criteria is essential.  These
+characteristics can be determined only after thorough communication between cus-
+tomer and developer.
+Myth: Project requirements continually change, but change can be easily accom-
+modated because software is ﬂexible.
+Reality:
+It is true that software requirements change, but the impact of change
+varies with the time at which it is introduced.  Figure 1.3 illustrates the impact of
+change. If serious attention is given to up-front deﬁnition, early requests for change
+can be accommodated easily.  The customer can review requirements and recom-
+mend modiﬁcations with relatively little impact on cost.  When changes are requested
+during software design, the cost impact grows rapidly.  Resources have been com-
+mitted and a design framework has been established.  Change can cause upheaval
+that requires additional resources and major design modiﬁcation, that is, additional
+cost.  Changes in function, performance, interface, or other characteristics during
+implementation (code and test) have a severe impact on cost.  Change, when requested
+after software is in production, can be over an order of  magnitude more expensive
+than the same change requested earlier.
+
+3 The term “outsourcing” refers to the widespread practice of contracting software development
+work to a third party—usually a consulting ﬁrm that specializes in building custom software for
+its clients.
+
+14
+
+PART ONE
+
+THE PRODUCT AND THE PROCESS
+
+FIGURE 1.3
+The impact of
+change
+
+e
+g
+n
+a
+h
+c
+ 
+o
+t
+ 
+t
+s
+o
+C
+
+1.5–6×
+
+1×
+
+60–100×
+
+Whenever you think,
+we don’t have time for
+software engineering
+discipline, ask yourself:
+“Will we have time to
+do it over again?”
+
+Definition
+
+Development
+
+After release
+
+Practitioner's myths.  Myths that are still believed by software practitioners have
+been fostered by 50 years of programming culture. During the early days of software,
+programming was viewed as an art form.  Old ways and attitudes die hard.
+
+Myth: Once we write the program and get it to work, our job is done. 
+Reality: Someone once said that "the sooner you begin 'writing code', the longer
+it'll take you to get done." Industry data ([LIE80], [JON91], [PUT97]) indicate that
+between 60 and 80 percent of all effort expended on software will be expended after
+it is delivered to the customer for the ﬁrst time. 
+Myth: Until I get the program "running" I have no way of assessing its quality. 
+Reality: One of the most effective software quality assurance mechanisms can be
+applied from the inception of a project—the formal technical review. Software reviews
+(described in Chapter 8) are a "quality ﬁlter" that have been found to be more effec-
+tive than testing for ﬁnding certain classes of software defects.
+Myth: The only deliverable work product for a successful project is the working
+program. 
+Reality: A working program is only one part of a software conﬁguration that includes
+many elements.  Documentation provides a foundation for successful engineering
+and, more important, guidance for software support.
+Myth: Software engineering will make us create voluminous and unnecessary doc-
+umentation and will invariably slow us down.
+Reality: Software engineering is not about creating documents. It is about creat-
+ing quality. Better quality leads to reduced rework. And reduced rework results in
+faster delivery times.
+
+Many software professionals recognize the fallacy of the myths just described. Regret-
+tably, habitual attitudes and methods foster poor management and technical practices,
+even when reality dictates a better approach.  Recognition of software realities is the
+ﬁrst step toward formulation of practical solutions for software engineering.
+
+CHAPTER 1
+
+THE PRODUCT
+
+15
+
+1.5   SUMMARY
+
+Software has become the key element in the evolution of computer-based systems
+and products.  Over the past 50 years, software has evolved from a specialized prob-
+lem solving and information analysis tool to an industry in itself.  But early “pro-
+gramming” culture and history have created a set of problems that persist today.
+Software has become the limiting factor in the continuing evolution of computer-
+based systems.  Software is composed of programs, data, and documents. Each of
+these items comprises a conﬁguration that is created as part of the software engi-
+neering process.  The intent of software engineering is to provide a framework for
+building software with higher quality. 
+
+REFERENCES
+
+[BRO75] Brooks, F., The Mythical Man-Month, Addison-Wesley, 1975.
+[DEJ98] De Jager, P. et al., Countdown Y2K: Business Survival Planning for the Year
+
+2000, Wiley, 1998. 
+
+[DEM95] DeMarco, T., Why Does Software Cost So Much? Dorset House, 1995, p. 9.
+[FEI83]
+
+Feigenbaum, E.A. and P. McCorduck, The Fifth Generation, Addison-
+
+Wesley, 1983.
+
+[FLO97] Flowers, S., Software Failure, Management Failure—Amazing Stories and
+
+Cautionary Tales, Wiley, 1997.
+
+[GLA97] Glass, R.L., Software Runaways, Prentice-Hall, 1997.
+[GLA98] Glass, R.L., “Is There Really a Software Crisis?” IEEE Software, vol. 15, 
+
+no. 1, January 1998, pp. 104–105.
+
+[HAM93] Hammer, M., and J. Champy, Reengineering the Corporation, HarperCollins
+
+Publishers, 1993.
+
+Jones, C., Applied Software Measurement, McGraw-Hill, 1991.
+
+[JON91]
+[KAR99] Karlson, E. and J. Kolber, A Basic Introduction to Y2K: How the Year 2000
+
+Computer Crisis Affects YOU, Next Era Publications, 1999.
+
+[LEV95] Levy, S., “The Luddites Are Back,” Newsweek, July 12, 1995, p. 55.
+[LEV99] Levy, S., “The New Digital Galaxy,” Newsweek, May 31, 1999, p. 57.
+[LIE80]
+
+Lientz, B. and E. Swanson, Software Maintenance Management, Addison-
+
+Wesley, 1980. 
+
+[NAI82] Naisbitt, J., Megatrends, Warner Books, 1982.
+[NOR98] Norman, D., The Invisible Computer, MIT Press, 1998.
+[OSB79] Osborne, A., Running Wild—The Next Industrial Revolution,
+
+Osborne/McGraw-Hill, 1979.
+
+[PUT97] Putnam, L. and W. Myers, Industrial Strength Software, IEEE Computer
+
+Society Press, 1997.
+
+[STO89] Stoll, C., The Cuckoo's Egg, Doubleday, 1989.
+[TOF80] Tofﬂer, A., The Third Wave, Morrow, 1980.
+
+16
+
+PART ONE
+
+THE PRODUCT AND THE PROCESS
+
+[TOF90] Tofﬂer, A., Powershift, Bantam Publishers, 1990.
+[YOU92] Yourdon, E., The Decline and Fall of the American Programmer, Yourdon
+
+Press, 1992.
+
+[YOU96] Yourdon, E., The Rise and Resurrection of the American Programmer, Your-
+
+don Press, 1996.
+
+[YOU98a] Yourdon, E., Death March Projects, Prentice-Hall, 1998.
+[YOU98b] Yourdon, E. and J. Yourdon, Time Bomb 2000, Prentice-Hall, 1998.
+
+PROBLEMS AND POINTS TO PONDER
+
+1.1. Software is the differentiating characteristic in many computer-based products
+and systems. Provide examples of two or three products and at least one system in
+which software, not hardware, is the differentiating element.
+
+1.2. In the 1950s and 1960s, computer programming was an art form learned in an
+apprenticelike environment. How have the early days affected software development
+practices today? 
+
+1.3. Many authors have discussed the impact of the "information era." Provide a
+number of examples (both positive and negative) that indicate the impact of software
+on our society. Review one of the pre-1990 references in Section 1.1 and indicate
+where the author’s predictions were right and where they were wrong.
+
+1.4. Choose a speciﬁc application and indicate: (a) the software application category
+(Section 1.2.2) into which it ﬁts; (b) the data content associated with the application;
+and (c) the information determinacy of the application.
+
+1.5. As software becomes more pervasive, risks to the public (due to faulty pro-
+grams) become an increasingly significant concern. Develop a realistic doomsday
+scenario (other than Y2K) where the failure of a computer program could do great
+harm (either economic or human).
+
+1.6. Peruse the Internet newsgroup comp.risks and prepare a summary of risks to
+the public that have recently been discussed. An alternate source is Software Engi-
+neering Notes published by the ACM.
+
+1.7. Write a paper summarizing recent advances in one of the leading edge soft-
+ware application areas. Potential choices include: advanced Web-based applications,
+virtual reality, artiﬁcial neural networks, advanced human interfaces, intelligent agents.
+
+1.8. The “myths” noted in Section 1.4 are slowly fading as the years pass, but oth-
+ers are taking their place. Attempt to add one or two “new” myths to each category. 
+
+CHAPTER 1
+
+THE PRODUCT
+
+17
+
+FURTHER READINGS AND INFORMATION SOURCES
+
+Literally thousands of books are written about computer software. The vast major-
+ity discuss programming languages or software applications, but a few discuss soft-
+ware itself. Pressman and Herron (Software Shock, Dorset House, 1991) presented an
+early discussion (directed at the layperson) of software and the way professionals
+build it. 
+
+Negroponte's (Being Digital, Alfred A. Knopf, 1995) best-selling book provides a
+view of computing and its overall impact in the twenty-ﬁrst century. Books by Nor-
+man [NOR98] and Bergman (Information Appliances and Beyond, Academic Press/Mor-
+gan Kaufmann, 2000) suggest that the widespread impact of the PC will decline as
+information appliances and pervasive computing connect everyone in the indus-
+trialized  world  and  almost  every  “appliance”  that  they  own  to  a  new  Internet
+infrastructure.
+
+Minasi (The Software Conspiracy: Why Software Companies Put out Faulty Products,
+How They Can Hurt You, and What You Can Do, McGraw-Hill, 2000) argues that the
+“modern scourge” of software bugs can be eliminated and suggests ways to accom-
+plish this. DeMarco (Why Does Software Cost So Much? Dorset House, 1995) has pro-
+duced a collection of amusing and insightful essays on software and the process
+through which it is developed. 
+
+A wide variety of information sources on software-related topics and manage-
+ment is available on the Internet. An up-to-date list of World Wide Web references
+that are relevant to software can be found at the SEPA Web site:
+http://www.mhhe.com/engcs/compsci/pressman/resources/product.mhtml
+
+C H A P T E R
+
+2 THE PROCESS
+
+K E Y
+C O N C E P T S
+common process
+framework . . . . . . 23
+component-based
+development. . . . . 42
+concurrent
+development. . . . . 40
+evolutionary process
+models. . . . . . . . . . 34
+formal methods . . 43
+4GT . . . . . . . . . . . . 44
+maintenance
+activities  . . . . . . . 21
+process maturity
+levels. . . . . . . . . . . 24
+prototyping . . . . . 30
+RAD. . . . . . . . . . . . 32
+software
+engineering. . . . . . 20
+
+In a fascinating book that provides an economist’s view of software and soft-
+
+ware engineering, Howard Baetjer, Jr. [BAE98], comments on the software
+process:
+
+Because software, like all capital, is embodied knowledge, and because that knowl-
+edge is initially dispersed, tacit, latent, and incomplete in large measure, software
+development is a social learning process. The process is a dialogue in which the
+knowledge that must become the software is brought together and embodied in the
+software. The process provides interaction between users and designers, between
+users and evolving tools, and between designers and evolving tools [technology]. It
+is an iterative process in which the evolving tool itself serves as the medium for com-
+munication, with each new round of the dialogue eliciting more useful knowledge
+from the people involved.
+
+Indeed, building computer software is an iterative learning process, and the
+outcome, something that Baetjer would call “software capital,” is an embodi-
+ment of knowledge collected, distilled, and organized as the process is con-
+ducted.
+
+Q U I C K
+L O O K
+
+What is it? When you build a
+product or system, it’s important
+to  go  through  a  series  of  pre-
+dictable steps—a road map that helps you create
+a timely, high-quality result. The road map that
+you follow is called a ‘software process.’
+
+Who does it? Software engineers and their man-
+agers adapt the process to their needs and then
+follow  it.  In  addition,  the  people  who  have
+requested the software play a role in the software
+process.
+
+Why is it important? Because it provides stability,
+control, and organization to an activity that can,
+if left uncontrolled, become quite chaotic.
+
+What are the steps? At a detailed level, the process
+that you adopt depends on the software you’re
+
+building. One process might be appropriate for
+creating software for an aircraft avionics system,
+while an entirely different process would be indi-
+cated for the creation of a Web site.
+
+What is the work product? From the point of view
+of a software engineer, the work products are the
+programs, documents, and data produced as a
+consequence of the software engineering activi-
+ties deﬁned by the process.
+
+How do I ensure that I’ve done it right? A number of
+software process assessment mechanisms enable
+organizations to determine the “maturity” of a
+software process. However, the quality, timeliness,
+and long-term viability of the product you build
+are the best indicators of the efﬁcacy of the process
+that you use.
+
+19
+
+20
+
+PART ONE
+
+THE PRODUCT AND THE PROCESS
+
+But what exactly is a software process from a technical point of view? Within the
+context of this book, we deﬁne a software process as a framework for the tasks that
+are required to build high-quality software. Is process synonymous with software engi-
+neering? The answer is “yes” and “no.” A software process deﬁnes the approach that
+is taken as software is engineered. But software engineering also encompasses tech-
+nologies that populate the process—technical methods and automated tools.  
+
+More important, software engineering is performed by creative, knowledgeable
+people who should work within a deﬁned and mature software process that is appro-
+priate for the products they build and the demands of their marketplace. The intent
+of this chapter is to provide a survey of the current state of the software process and
+pointers to more detailed discussion of management and technical topics presented
+later in this book.
+
+2.1 SOFTWARE ENGINEERING: A LAYERED TECHNOLOGY
+
+“More than a
+discipline or a body
+of knowledge,
+engineering is a
+verb, an action
+word, a way of
+approaching a
+problem.”
+Scott Whitmire
+
+?
+
+How do we
+deﬁne
+
+software
+engineering?
+
+Although hundreds of authors have developed personal deﬁnitions of software engi-
+neering, a deﬁnition proposed by Fritz Bauer [NAU69] at the seminal conference on
+the subject still serves as a basis for discussion:
+
+[Software engineering is] the establishment and use of sound engineering principles in
+order to obtain economically software that is reliable and works efﬁciently on real machines.
+
+Almost every reader will be tempted to add to this deﬁnition. It says little about the
+technical aspects of software quality; it does not directly address the need for cus-
+tomer satisfaction or timely product delivery; it omits mention of the importance of
+measurement and metrics; it does not state the importance of a mature process. And
+yet, Bauer’s deﬁnition provides us with a baseline. What “sound engineering princi-
+ples” can be applied to computer software development? How do we “economically”
+build software so that it is “reliable”? What is required to create computer programs
+that work “efﬁciently” on not one but many different “real machines”?  These are the
+questions that continue to challenge software engineers.
+
+The IEEE [IEE93] has developed a more comprehensive deﬁnition when it states:
+
+Software Engineering: (1) The application of a systematic, disciplined, quantiﬁable approach
+to the development, operation, and maintenance of software; that is, the application of
+engineering to software. (2) The study of approaches as in (1).
+
+Process, Methods, and Tools
+
+2.1.1
+Software engineering is a layered technology. Referring to Figure 2.1, any engineer-
+ing approach (including software engineering) must rest on an organizational com-
+mitment to quality. Total quality management and similar philosophies foster a
+continuous process improvement culture, and this culture ultimately leads to the
+
+FIGURE 2.1
+Software
+engineering
+layers
+
+Software engineering
+encompasses a
+process, management
+and technical methods,
+and tools.
+
+CHAPTER 2
+
+THE PROCESS
+
+21
+
+Tools
+
+Methods
+
+Process
+
+A quality focus
+
+development of increasingly more mature approaches to software engineering. The
+bedrock that supports software engineering is a quality focus.
+
+The foundation for software engineering is the process layer. Software engineer-
+ing process is the glue that holds the technology layers together and enables rational
+and timely development of computer software. Process deﬁnes a framework for a set
+of key process areas (KPAs) [PAU93] that must be established for effective delivery of
+software engineering technology. The key process areas form the basis for manage-
+ment control of software projects and establish the context in which technical meth-
+ods are applied, work products (models, documents, data, reports, forms, etc.) are
+produced, milestones are established, quality is ensured, and change is properly man-
+aged. 
+
+Software engineering methods provide the technical how-to's for building soft-
+ware. Methods encompass a broad array of tasks that include requirements analy-
+sis, design, program construction, testing, and support. Software engineering methods
+rely on a set of basic principles that govern each area of the technology and include
+modeling activities and other descriptive techniques.
+
+Software engineering tools provide automated or semi-automated support for the
+process and the methods. When tools are integrated so that information created by
+one tool can be used by another, a system for the support of software development,
+called computer-aided software engineering, is established. CASE combines software,
+hardware, and a software engineering database (a repository containing important
+information about analysis, design, program construction, and testing) to create a
+software  engineering  environment  analogous  to  CAD/CAE  (computer-aided
+design/engineering) for hardware.
+
+2.1.2  A Generic View of Software Engineering
+Engineering is the analysis, design, construction, veriﬁcation, and management of
+technical (or social) entities. Regardless of the entity to be engineered, the following
+questions must be asked and answered:
+
+• What is the problem to be solved? 
+• What characteristics of the entity are used to solve the problem?
+
+22
+
+PART ONE
+
+THE PRODUCT AND THE PROCESS
+
+WebRef
+Crosstalk is a journal that
+provides pragmatic
+software engineering
+advice and comment. On-
+line issues are available at
+www.stsc.hill.af.mil
+
+Software is engineered
+by applying three
+distinct phases that
+focus on deﬁnition,
+development, and
+support.
+
+“Einstein argued that
+there must be a
+simpliﬁed
+explanation of
+nature, because God
+is not capricious or
+arbitrary. No such
+faith comforts the
+software engineer.
+Much of the
+complexity that he
+must master is
+arbitrary
+complexity.”
+Fred Brooks 
+
+• How will the entity (and the solution) be realized?
+• How will the entity be constructed?
+• What approach will be used to uncover errors that were made in the design
+
+and construction of the entity?
+
+• How will the entity be supported over the long term, when corrections, adap-
+
+tations, and enhancements are requested by users of the entity.
+
+Throughout this book, we focus on a single entity—computer software.  To engineer
+software adequately, a software engineering process must be deﬁned. In this section,
+the generic characteristics of the software process are considered. Later in this chap-
+ter, speciﬁc process models are addressed.
+
+The work associated with software engineering can be categorized into three
+generic phases, regardless of application area, project size, or complexity. Each phase
+addresses one or more of the questions noted previously.  
+
+The deﬁnition phase focuses on what. That is, during deﬁnition, the software engi-
+neer attempts to identify what information is to be processed, what function and per-
+formance are desired, what system behavior can be expected, what interfaces are to
+be established, what design constraints exist, and what validation criteria are required
+to deﬁne a successful system. The key requirements of the system and the software
+are identified. Although the methods applied during the definition phase will vary
+depending on the software engineering paradigm (or combination of paradigms) that
+is applied, three major tasks will occur in some form: system or information engi-
+neering (Chapter 10), software project planning (Chapters 3, 5, 6, and 7), and require-
+ments analysis (Chapters 11, 12, and 21).
+
+The development phase focuses on how. That is, during development a software
+engineer attempts to deﬁne how data are to be structured, how function is to be imple-
+mented within a software architecture, how procedural details are to be implemented,
+how interfaces are to be characterized, how the design will be translated into a pro-
+gramming language (or nonprocedural language), and how testing will be performed.
+The methods applied during the development phase will vary, but three speciﬁc tech-
+nical tasks should always occur: software design (Chapters 13–16, and 22), code gen-
+eration, and software testing (Chapters 17, 18, and 23).
+
+The support phase focuses on change associated with error correction, adaptations
+required as the software's environment evolves, and changes due to enhancements
+brought about by changing customer requirements. The support phase reapplies the
+steps of the deﬁnition and development phases but does so in the context of existing
+software. Four types of change are encountered during the support phase:
+
+Correction. Even with the best quality assurance activities, it is likely that the
+customer will uncover defects in the software. Corrective maintenance changes
+the software to correct defects. 
+Adaptation. Over time, the original environment (e.g., CPU, operating system,
+business rules, external product characteristics) for which the software was
+
+When you use the
+term maintenance,
+recognize that it’s
+much more than
+simply ﬁxing bugs.
+
+CHAPTER 2
+
+THE PROCESS
+
+23
+
+developed is likely to change.  Adaptive maintenance results in modiﬁcation to
+the software to accommodate changes to its external environment.
+Enhancement. As software is used, the customer/user will recognize addi-
+tional functions that will provide benefit. Perfective maintenance extends the
+software beyond its original functional requirements.
+Prevention. Computer software deteriorates due to change, and because of
+this, preventive maintenance, often called software reengineering, must be con-
+ducted to enable the software to serve the needs of its end users. In essence,
+preventive maintenance makes changes to computer programs so that they can
+be more easily corrected, adapted, and enhanced.
+
+In addition to these support activities, the users of software require continuing sup-
+port. In-house technical assistants, telephone-help desks, and application-specific
+Web sites are often implemented as part of the support phase. 
+
+Today, a growing population of legacy programs1 is forcing many companies to
+pursue software reengineering strategies (Chapter 30). In a global sense, software
+reengineering is often considered as part of business process reengineering.
+
+The phases and related steps described in our generic view of software engineer-
+ing are complemented by a number of umbrella activities. Typical activities in this cat-
+egory include:
+
+Formal technical reviews
+
+• Software project tracking and control
+•
+• Software quality assurance
+• Software conﬁguration management
+• Document preparation and production
+• Reusability management
+• Measurement
+• Risk management
+
+Umbrella activities
+
+Umbrella activities are applied throughout the software process and are discussed in
+Parts Two and Five of this book. 
+
+2.2 THE SOFTWARE PROCESS
+
+A software process can be characterized as shown in Figure 2.2.  A common process
+framework is established by deﬁning a small number of framework activities that are
+applicable to all software projects, regardless of their size or complexity. A number
+of task sets—each a collection of software engineering work tasks, project milestones,
+
+1 The term legacy programs is a euphemism for older, often poorly designed and documented soft-
+
+ware that is business critical and must be supported over many years.
+
+24
+
+PART ONE
+
+THE PRODUCT AND THE PROCESS
+
+FIGURE 2.2
+The software
+process
+
+Select a common
+process framework
+that is tuned to the
+product, the people,
+and the project.
+
+Common process framework
+
+Framework activities
+
+Task sets
+
+Tasks
+
+Milestones, deliverables
+
+SQA points
+
+Umbrella activities
+
+work products, and quality assurance points—enable the framework activities to be
+adapted to the characteristics of the software project and the requirements of the
+project team. Finally, umbrella activities—such as software quality assurance, soft-
+ware configuration management, and measurement2—overlay the process model.
+Umbrella activities are independent of any one framework activity and occur through-
+out the process. 
+
+In recent years, there has been a signiﬁcant emphasis on “process maturity.” The
+Software Engineering Institute (SEI) has developed a comprehensive model predi-
+cated on a set of software engineering capabilities that should be present as organ-
+izations reach different levels of process maturity. To determine an organization’s
+current state of process maturity, the SEI uses an assessment that results in a five
+point grading scheme. The grading scheme determines compliance with a capability
+maturity model (CMM) [PAU93] that deﬁnes key activities required at different levels
+of process maturity. The SEI approach provides a measure of the global effectiveness
+of a company's software engineering practices and establishes ﬁve process maturity
+levels that are deﬁned in the following manner:
+
+Level 1: Initial. The software process is characterized as ad hoc and occa-
+sionally even chaotic. Few processes are deﬁned, and success depends on indi-
+vidual effort. 
+Level 2: Repeatable. Basic project management processes are established
+to track cost, schedule, and functionality. The necessary process discipline is
+in place to repeat earlier successes on projects with similar applications.
+
+2 These topics are discussed in detail in later chapters.
+
+WebRef
+The SEI offers a wide
+array of process-related
+information at
+www.sei.cmu.edu
+
+Every organization
+should strive to
+achieve the intent of
+the SEI CMM.
+However,
+implementing every
+aspect of the model
+may be overkill in your
+situation.
+
+CHAPTER 2
+
+THE PROCESS
+
+25
+
+Level 3: Defined. The software process for both management and engi-
+neering activities is documented, standardized, and integrated into an organi-
+zationwide software process. All projects use a documented and approved
+version of the organization's process for developing and supporting software.
+This level includes all characteristics deﬁned for level 2.
+Level 4: Managed. Detailed measures of the software process and product
+quality are collected. Both the software process and products are quantitatively
+understood and controlled using detailed measures. This level includes all char-
+acteristics deﬁned for level 3.
+Level 5: Optimizing. Continuous process improvement is enabled by quan-
+titative feedback from the process and from testing innovative ideas and tech-
+nologies. This level includes all characteristics deﬁned for level 4.
+
+The five levels defined by the SEI were derived as a consequence of evaluating
+responses to the SEI assessment questionnaire that is based on the CMM. The results
+of the questionnaire are distilled to a single numerical grade that provides an indi-
+cation of an organization's process maturity.  
+
+The SEI has associated key process areas (KPAs) with each of the maturity levels.
+The KPAs describe those software engineering functions (e.g., software project plan-
+ning, requirements management) that must be present to satisfy good practice at a
+particular level. Each KPA is described by identifying the following characteristics:
+
+• Goals—the overall objectives that the KPA must achieve.
+• Commitments—requirements (imposed on the organization) that must be met
+
+to achieve the goals or provide proof of intent to comply with the goals.
+
+• Abilities—those things that must be in place (organizationally and technically)
+
+to enable the organization to meet the commitments.
+
+• Activities—the speciﬁc tasks required to achieve the KPA function.
+• Methods for monitoring implementation—the manner in which the activities
+
+are monitored as they are put into place.
+
+• Methods for verifying implementation—the manner in which proper practice
+
+for the KPA can be veriﬁed.
+
+Eighteen KPAs (each described using these characteristics) are defined across the
+maturity model and mapped into different levels of process maturity. The following
+KPAs should be achieved at each process maturity level:3
+
+Process maturity level 2
+• Software conﬁguration management
+• Software quality assurance
+
+3 Note that the KPAs are additive. For example, process maturity level 4 contains all level 3 KPAs
+
+plus those noted for level 2.
+
+26
+
+PART ONE
+
+THE PRODUCT AND THE PROCESS
+
+WebRef
+A tabular version of the
+complete SEI-CMM,
+including all goals,
+commitments, abilities, and
+activities, is available at
+sepo.nosc.mil/
+CMMmatrices.html
+
+• Software subcontract management
+• Software project tracking and oversight
+• Software project planning
+• Requirements management
+Process maturity level 3
+• Peer reviews
+• Intergroup coordination
+• Software product engineering
+• Integrated software management
+• Training program
+• Organization process deﬁnition
+• Organization process focus
+Process maturity level 4
+• Software quality management
+• Quantitative process management
+Process maturity level 5
+• Process change management
+• Technology change management
+• Defect prevention
+
+Each of the KPAs is deﬁned by a set of key practices that contribute to satisfying its
+goals. The key practices are policies, procedures, and activities that must occur before
+a key process area has been fully instituted. The SEI deﬁnes key indicators as "those
+key practices or components of key practices that offer the greatest insight into whether
+the goals of a key process area have been achieved." Assessment questions are
+designed to probe for the existence (or lack thereof) of a key indicator.
+
+2.3 SOFTWARE PROCESS MODELS
+
+“Too often, software
+work follows the
+ﬁrst law of bicycling:
+No matter where
+you're going, it's
+uphill and against
+the wind.” 
+author unknown
+
+To solve actual problems in an industry setting, a software engineer or a team of engi-
+neers must incorporate a development strategy that encompasses the process, meth-
+ods, and tools layers described in Section 2.1.1 and the generic phases discussed in
+Section 2.1.2. This strategy is often referred to as a process model or a software engi-
+neering paradigm. A process model for software engineering is chosen based on the
+nature of the project and application, the methods and tools to be used, and the con-
+trols and deliverables that are required. In an intriguing paper on the nature of the
+software process, L. B. S. Raccoon [RAC95] uses fractals as the basis for a discussion
+of the true nature of the software process. 
+
+CHAPTER 2
+
+THE PROCESS
+
+27
+
+FIGURE 2.3
+(a) The phases
+of a problem
+solving loop
+[RAC95]
+(b) The phases
+within phases
+of the problem
+solving loop
+[RAC95]
+
+Problem
+definition
+
+Status
+quo
+
+Technical
+
+development
+
+Solution
+integration
+
+(a)
+
+problem
+definition
+
+status
+quo
+
+technical
+
+development
+
+solution
+
+integration
+
+problem
+definition
+
+status
+quo
+
+technical
+
+development
+
+solution
+
+integration
+
+status
+quo
+
+problem
+definition
+
+status
+quo
+
+technical
+
+development
+
+solution
+
+integration
+
+problem
+definiton
+
+Status
+
+quo
+
+technical
+
+development
+
+solution
+
+integration
+
+(b)
+
+Status
+quo
+
+problem
+definiton
+
+status
+quo
+
+technical
+
+development
+
+solution
+
+integration
+
+All software development can be characterized as a problem solving loop (Figure
+2.3a) in which four distinct stages are encountered: status quo, problem deﬁnition,
+technical development, and solution integration. Status quo “represents the current
+state of affairs” [RAC95]; problem deﬁnition identiﬁes the speciﬁc problem to be solved;
+technical development solves the problem through the application of some technol-
+ogy, and solution integration delivers the results (e.g., documents, programs, data,
+new business function, new product) to those who requested the solution in the ﬁrst
+place. The generic software engineering phases and steps deﬁned in Section 2.1.2
+easily map into these stages.
+
+This problem solving loop applies to software engineering work at many different
+levels of resolution. It can be used at the macro level when the entire application is
+considered, at a mid-level when program components are being engineered, and
+
+28
+
+PART ONE
+
+THE PRODUCT AND THE PROCESS
+
+even at the line of code level. Therefore, a fractal4 representation can be used to pro-
+vide an idealized view of process. In Figure 2.3b, each stage in the problem solving
+loop contains an identical problem solving loop, which contains still another prob-
+lem solving loop (this continues to some rational boundary; for software, a line of
+code). 
+
+Realistically, it is difﬁcult to compartmentalize activities as neatly as Figure 2.3b
+implies because cross talk occurs within and across stages. Yet, this simpliﬁed view
+leads to a very important idea: regardless of the process model that is chosen for a
+software project, all of the stages—status quo, problem deﬁnition, technical develop-
+ment, and solution integration—coexist simultaneously at some level of detail. Given
+the recursive nature of Figure 2.3b, the four stages discussed apply equally to the
+analysis of a complete application and to the generation of a small segment of code.
+Raccoon [RAC95] suggests a “Chaos model” that  describes “software develop-
+ment [as] a continuum from the user to the developer to the technology.” As work
+progresses toward a complete system, the stages are applied recursively to user needs
+and the developer’s technical speciﬁcation of the software.
+
+In the sections that follow, a variety of different process models for software engi-
+neering are discussed. Each represents an attempt to bring order to an inherently
+chaotic activity. It is important to remember that each of the models has been char-
+acterized in a way that (ideally) assists in the control and coordination of a real soft-
+ware project. And yet, at their core, all of the models exhibit characteristics of the
+Chaos model.
+
+All stages of a
+software process—
+status quo, problem
+deﬁnition, technical
+development, and
+solution integration—
+coexist simultaneously
+at some level of detail.
+
+2.4 THE LINEAR SEQUENTIAL MODEL
+
+Sometimes called the classic life cycle or the waterfall model, the linear sequential model
+suggests a systematic, sequential approach5 to software development that begins at
+the system level and progresses through analysis, design, coding, testing, and sup-
+port. Figure 2.4 illustrates the linear sequential model for software engineering. Mod-
+eled after a conventional engineering cycle, the linear sequential model encompasses
+the following activities:
+
+System/information engineering and modeling. Because software is always
+part of a larger system (or business), work begins by establishing requirements for
+all system elements and then allocating some subset of these requirements to soft-
+ware. This system view is essential when software must interact with other elements
+such as hardware, people, and databases. System engineering and analysis encom-
+pass requirements gathering at the system level with a small amount of top level
+
+4 Fractals were originally proposed for geometric representations. A pattern is deﬁned and then 
+
+applied recursively at successively smaller scales; patterns fall inside patterns.
+
+5 Although the original waterfall model proposed by Winston Royce [ROY70] made provision for
+“feedback loops,” the vast majority of organizations that apply this process model treat it as if it
+were strictly linear.
+
+CHAPTER 2
+
+THE PROCESS
+
+29
+
+FIGURE 2.4
+The linear
+sequential
+model
+
+System/information
+
+engineering
+
+Analysis
+
+Design
+
+Code
+
+Test
+
+Although the linear
+model is often derided
+as “old fashioned,” it
+remains a reasonable
+approach when
+requirements are well
+understood.
+
+design and analysis. Information engineering encompasses requirements gathering
+at the strategic business level and at the business area level.
+Software requirements analysis. The requirements gathering process is intensi-
+ﬁed and focused speciﬁcally on software. To understand the nature of the program(s)
+to be built, the software engineer ("analyst") must understand the information domain
+(described in Chapter 11) for the software, as well as required function, behavior, per-
+formance, and interface. Requirements for both the system and the software are doc-
+umented and reviewed with the customer.
+Design. Software design is actually a multistep process that focuses on four distinct
+attributes of a program: data structure, software architecture, interface representa-
+tions, and procedural (algorithmic) detail. The design process translates requirements
+into a representation of the software that can be assessed for quality before coding
+begins. Like requirements, the design is documented and becomes part of the soft-
+ware conﬁguration.
+Code generation. The design must be translated into a machine-readable form.
+The code generation step performs this task. If design is performed in a detailed man-
+ner, code generation can be accomplished mechanistically.
+Testing. Once code has been generated, program testing begins. The testing process
+focuses on the logical internals of the software, ensuring that all statements have
+been tested, and on the functional externals; that is, conducting tests to uncover
+errors and ensure that deﬁned input will produce actual results that agree with required
+results.
+Support. Software will undoubtedly undergo change after it is delivered to the cus-
+tomer (a possible exception is embedded software). Change will occur because errors
+have been encountered, because the software must be adapted to accommodate
+changes in its external environment (e.g., a change required because of a new oper-
+ating system or peripheral device), or because the customer requires functional or
+performance enhancements. Software support/maintenance reapplies each of the
+preceding phases to an existing program rather than a new one.
+
+30
+
+PART ONE
+
+THE PRODUCT AND THE PROCESS
+
+?
+
+Why does
+the linear
+
+model sometimes
+fail?
+
+The linear sequential model is the oldest and the most widely used paradigm for
+software engineering. However, criticism of the paradigm has caused even active
+supporters to question its efﬁcacy [HAN95]. Among the problems that are sometimes
+encountered when the  linear sequential model is applied are:
+
+1. Real projects rarely follow the sequential ﬂow that the model proposes.
+
+2.
+
+Although the linear model can accommodate iteration, it does so indirectly.
+As a result, changes can cause confusion as the project team proceeds.
+It is often difﬁcult for the customer to state all requirements explicitly. The
+linear sequential model requires this and has difﬁculty accommodating the
+natural uncertainty that exists at the beginning of many projects.
+
+3. The customer must have patience. A working version of the program(s) will
+not be available until late in the project time-span. A major blunder, if unde-
+tected until the working program is reviewed, can be disastrous. 
+
+In an interesting analysis of actual projects Bradac [BRA94], found that the linear
+nature of the classic life cycle leads to  “blocking states” in which some project team
+members must wait for other members of the team to complete dependent tasks. In
+fact, the time spent waiting can exceed the time spent on productive work! The block-
+ing state tends to be more prevalent at the beginning and end of a linear sequential
+process. 
+
+Each of these problems is real. However, the classic life cycle paradigm has a def-
+inite and important place in software engineering work. It provides a template into
+which methods for analysis, design, coding, testing, and support can be placed. The
+classic life cycle remains a widely used procedural model for software engineering.
+While it does have weaknesses, it is signiﬁcantly better than a haphazard approach
+to software development.
+
+2.5 THE PROTOTYPING MODEL
+
+Often, a customer deﬁnes a set of general objectives for software but does not iden-
+tify detailed input, processing, or output requirements. In other cases, the developer
+may be unsure of the efﬁciency of an algorithm, the adaptability of an operating sys-
+tem, or the form that human/machine interaction should take. In these, and many
+other situations, a prototyping paradigm may offer the best approach.
+
+The prototyping paradigm (Figure 2.5) begins with requirements gathering. Devel-
+oper and customer meet and deﬁne the overall objectives for the software, identify
+whatever requirements are known, and outline areas where further definition is
+mandatory. A "quick design" then occurs. The quick design focuses on a representa-
+tion of those aspects of the software that will be visible to the customer/user (e.g.,
+input approaches and output formats). The quick design leads to the construction of
+
+CHAPTER 2
+
+THE PROCESS
+
+31
+
+FIGURE 2.5
+The prototyping
+paradigm
+
+Listen to
+customer
+
+Build/revise
+
+mock-up
+
+Customer
+test drives
+mock-up
+
+When your customer
+has a legitimate need
+but is clueless about
+the details, develop a
+prototype as a ﬁrst
+step.
+
+a prototype. The prototype is evaluated by the customer/user and used to refine
+requirements for the software to be developed. Iteration occurs as the prototype is
+tuned to satisfy the needs of the customer, while at the same time enabling the devel-
+oper to better understand what needs to be done.
+
+Ideally, the prototype serves as a mechanism for identifying software requirements.
+If a working prototype is built, the developer attempts to use existing program frag-
+ments or applies tools (e.g., report generators, window managers) that enable work-
+ing programs to be generated quickly.
+
+But  what  do  we  do  with  the  prototype  when  it  has  served  the  purpose  just
+
+described? Brooks [BRO75] provides an answer:
+
+In most projects, the ﬁrst system built is barely usable. It may be too slow, too big, awkward
+in use or all three. There is no alternative but to start again, smarting but smarter, and build
+a redesigned version in which these problems are solved . . . When a new system concept
+or new technology is used, one has to build a system to throw away, for even the best plan-
+ning is not so omniscient as to get it right the ﬁrst time. The management question, there-
+fore, is not whether to build a pilot system and throw it away. You will do that. The only
+question is whether to plan in advance to build a throwaway, or to promise to deliver the
+throwaway to customers . . .
+
+The prototype can serve as "the ﬁrst system." The one that Brooks recommends
+we throw away. But this may be an idealized view. It is true that both customers and
+developers like the prototyping paradigm. Users get a feel for the actual system and
+
+32
+
+PART ONE
+
+THE PRODUCT AND THE PROCESS
+
+Resist pressure to
+extend a rough
+prototype into a
+production product.
+Quality almost always
+suffers as a result.
+
+developers get to build something immediately. Yet, prototyping can also be prob-
+lematic for the following reasons:
+
+1. The customer sees what appears to be a working version of the software,
+unaware that the prototype is held together “with chewing gum and baling
+wire,” unaware that in the rush to get it working no one has considered over-
+all software quality or long-term maintainability. When informed that the
+product must be rebuilt so that high levels of quality can be maintained, the
+customer cries foul and demands that "a few ﬁxes" be applied to make the
+prototype a working product. Too often, software development management
+relents.
+
+2. The developer often makes implementation compromises in order to get a
+prototype working quickly. An inappropriate operating system or program-
+ming language may be used simply because it is available and known; an
+inefﬁcient algorithm may be implemented simply to demonstrate capability.
+After a time, the developer may become familiar with these choices and for-
+get all the reasons why they were inappropriate. The less-than-ideal choice
+has now become an integral part of the system.
+
+Although problems can occur, prototyping can be an effective paradigm for soft-
+ware engineering. The key is to deﬁne the rules of the game at the beginning; that is,
+the customer and developer must both agree that the prototype is built to serve as a
+mechanism for deﬁning requirements. It is then discarded (at least in part) and the
+actual software is engineered with an eye toward quality and maintainability.
+
+2.6 THE RAD MODEL
+
+Rapid application development (RAD) is an incremental software development process
+model that emphasizes an extremely short development cycle. The RAD model is a
+“high-speed” adaptation of the linear sequential model in which rapid development
+is achieved by using component-based construction. If requirements are well under-
+stood and project scope is constrained, the RAD process enables a development team
+to create a “fully functional system” within very short time periods (e.g., 60 to 90 days)
+[MAR91]. Used primarily for information systems applications, the RAD approach
+encompasses the following phases [KER94]:
+
+Business modeling. The information ﬂow among business functions is modeled in
+a way that answers the following questions: What information drives the business
+process? What information is generated? Who generates it? Where does the infor-
+mation go? Who processes it? Business modeling is described in more detail in Chap-
+ter 10.
+Data modeling. The information ﬂow deﬁned as part of the business modeling phase
+is reﬁned into a set of data objects that are needed to support the business. The char-
+
+CHAPTER 2
+
+THE PROCESS
+
+33
+
+FIGURE 2.6
+The RAD
+model
+
+Team #2
+
+Business
+modeling
+
+Team #3
+
+Business
+modeling
+
+Data
+
+modeling
+
+Process
+modeling
+
+Data
+
+modeling
+
+Application
+generation
+
+Team #1
+
+Business
+modeling
+
+Data
+
+modeling
+
+Process
+modeling
+
+Application
+generation
+
+Process
+modeling
+
+Application
+generation
+
+Testing
+
+&
+
+turnover
+
+Testing
+
+&
+
+turnover
+
+Testing
+
+&
+
+turnover
+
+60–90 days
+
+acteristics (called attributes) of each object are identiﬁed and the relationships between
+these objects deﬁned. Data modeling is considered in Chapter 12.
+Process modeling. The data objects deﬁned in the data modeling phase are trans-
+formed to achieve the information ﬂow necessary to implement a business function.
+Processing descriptions are created for adding, modifying, deleting, or retrieving a
+data object.
+Application generation. RAD assumes the use of fourth generation techniques
+(Section 2.10). Rather than creating software using conventional third generation
+programming languages the RAD process works to reuse existing program compo-
+nents (when possible) or create reusable components (when necessary). In all cases,
+automated tools are used to facilitate construction of the software.
+Testing and turnover. Since the RAD process emphasizes reuse, many of the pro-
+gram components have already been tested. This reduces overall testing time. How-
+ever, new components must be tested and all interfaces must be fully exercised.
+
+34
+
+PART ONE
+
+THE PRODUCT AND THE PROCESS
+
+XRef
+
+RAD makes heavy use of
+reusable components.
+For further information
+on component-based
+development, see
+Chapter 27.
+
+The RAD process model is illustrated in Figure 2.6. Obviously, the time constraints
+imposed on a RAD project demand “scalable scope” [KER94]. If a business applica-
+tion can be modularized in a way that enables each major function to be completed
+in less than three months (using the approach described previously), it is a candidate
+for RAD. Each major function can be addressed by a separate RAD team and then
+integrated to form a whole. 
+
+Like all process models, the RAD approach has drawbacks [BUT94]:
+
+•
+
+For large but scalable projects, RAD requires sufﬁcient human resources to
+create the right number of RAD teams.
+
+• RAD requires developers and customers who are committed to the rapid-ﬁre
+
+activities necessary to get a system complete in a much abbreviated time
+frame. If commitment is lacking from either constituency, RAD projects will
+fail.
+
+• Not all types of applications are appropriate for RAD. If a system cannot be
+properly modularized, building the components necessary for RAD will be
+problematic. If high performance is an issue and performance is to be
+achieved through tuning the interfaces to system components, the RAD
+approach may not work.
+
+• RAD is not appropriate when technical risks are high. This occurs when a new
+
+application makes heavy use of new technology or when the new software
+requires a high degree of interoperability with existing computer programs.
+
+2.7 EVOLUTIONARY SOFTWARE PROCESS MODELS
+
+There is growing recognition that software, like all complex systems, evolves over a
+period of time [GIL88]. Business and product requirements often change as devel-
+opment proceeds, making a straight path to an end product unrealistic; tight market
+deadlines make completion of a comprehensive software product impossible, but a
+limited version must be introduced to meet competitive or business pressure;  a set
+of core product or system requirements is well understood, but the details of prod-
+uct or system extensions have yet to be deﬁned. In these and similar situations, soft-
+ware  engineers  need  a  process  model  that  has  been  explicitly  designed  to
+accommodate a product that evolves over time.
+
+The linear sequential model (Section 2.4) is designed for straight-line develop-
+ment. In essence, this waterfall approach assumes that a complete system will be
+delivered after the linear sequence is completed. The prototyping model (Section
+2.5) is designed to assist the customer (or developer) in understanding require-
+ments. In general, it is not designed to deliver a production system. The evolu-
+tionary nature of software is not considered in either of these classic software
+engineering paradigms.
+
+CHAPTER 2
+
+THE PROCESS
+
+35
+
+Evolutionary models are iterative. They are characterized in a manner that enables
+software engineers to develop increasingly more complete versions of the software.
+
+The Incremental Model
+
+2.7.1
+The incremental model combines elements of the linear sequential model (applied
+repetitively) with the iterative philosophy of prototyping. Referring to Figure 2.7, the
+incremental model applies linear sequences in a staggered fashion as calendar time
+progresses. Each linear sequence produces a deliverable “increment” of the software
+[MDE93]. For example, word-processing software developed using the incremental
+paradigm might deliver basic file management, editing, and document production
+functions in the ﬁrst increment; more sophisticated editing and document production
+capabilities in the second increment; spelling and grammar checking in the third
+increment; and advanced page layout capability in the fourth increment. It should be
+noted that the process ﬂow for any increment can incorporate the prototyping para-
+digm. 
+
+When an incremental model is used, the first increment is often a core product.
+That is, basic requirements are addressed, but many supplementary features (some
+known, others unknown) remain undelivered. The core product is used by the cus-
+tomer (or undergoes detailed review). As a result of use and/or evaluation, a plan is
+developed for the next increment. The plan addresses the modiﬁcation of the core
+product to better meet the needs of the customer and the delivery of additional 
+features and functionality. This process is repeated following the delivery of each
+increment, until the complete product is produced.
+
+The incremental model
+delivers software in
+small but usable pieces,
+called “increments.” In
+general, each increment
+builds on those that
+have already been
+delivered.
+
+System/information
+
+engineering
+
+Increment 1
+
+Analysis
+
+Design
+
+Code
+
+Test
+
+Delivery of
+1st increment
+
+Increment 2
+
+Analysis
+
+Design
+
+Code
+
+Test
+
+Delivery of
+
+2nd increment
+
+Increment 3
+
+Analysis
+
+Design
+
+Code
+
+Test
+
+Delivery of
+
+3rd increment
+
+Increment 4
+
+Analysis
+
+Design
+
+Code
+
+Test
+
+Delivery of
+4th increment
+
+Calendar time
+
+FIGURE 2.7
+The
+incremental
+model
+
+36
+
+PART ONE
+
+THE PRODUCT AND THE PROCESS
+
+When you encounter a
+difﬁcult deadline that
+cannot be changed,
+the incremental model
+is a good paradigm to
+consider.
+
+Framework activities
+apply to every
+software project you
+undertake, regardless
+of size or complexity.
+
+The incremental process model, like prototyping (Section 2.5) and other evolu-
+tionary approaches, is iterative in nature. But unlike prototyping, the incremental
+model focuses on the delivery of an operational product with each increment. Early
+increments are stripped down versions of the ﬁnal product, but they do provide capa-
+bility that serves the user and also provide a platform for evaluation by the user. 
+
+Incremental development is particularly useful when stafﬁng is unavailable for a
+complete implementation by the business deadline that has been established for the
+project. Early increments can be implemented with fewer people. If the core product
+is well received, then additional staff (if required) can be added to implement the next
+increment. In addition, increments can be planned to manage technical risks. For
+example, a major system might require the availability of new hardware that is under
+development and whose delivery date is uncertain. It might be possible to plan early
+increments in a way that avoids the use of this hardware, thereby enabling partial
+functionality to be delivered to end-users without inordinate delay.
+
+The Spiral Model
+
+2.7.2
+The spiral model, originally proposed by Boehm [BOE88], is an evolutionary software
+process model that couples the iterative nature of prototyping with the controlled and
+systematic aspects of the linear sequential model. It provides the potential for rapid
+development of incremental versions of the software. Using the spiral model, soft-
+ware is developed in a series of incremental releases. During early iterations, the
+incremental release might be a paper model or prototype. During later iterations,
+increasingly more complete versions of the engineered system are produced.
+
+A spiral model is divided into a number of framework activities, also called task
+regions.6 Typically, there are between three and six task regions. Figure 2.8 depicts a
+spiral model that contains six task regions:
+
+• Customer communication—tasks required to establish effective communi-
+
+cation between developer and customer.
+
+• Planning—tasks required to deﬁne resources, timelines, and other project-
+
+related information.
+
+• Risk analysis—tasks required to assess both technical and management
+
+risks.
+
+• Engineering—tasks required to build one or more representations of the
+
+application.
+
+• Construction and release—tasks required to construct, test, install, and
+
+provide user support (e.g., documentation and training).
+
+6 The spiral model discussed in this section is a variation on the model proposed by Boehm. For
+
+further information on the original spiral model, see [BOE88]. More recent discussion of Boehm’s
+spiral model can be found in [BOE98].
+
+CHAPTER 2
+
+THE PROCESS
+
+37
+
+FIGURE 2.8
+A typical spiral
+model
+
+Customer
+
+communication
+
+Project entry
+point axis
+
+Planning
+
+Risk analysis
+
+Engineering
+
+Customer
+evaluation
+
+Construction & release
+
+Product maintenance projects
+
+Product enhancement projects
+
+New product development projects
+
+Concept development projects
+
+?
+
+What is a
+“task set”?
+
+Adaptable process model
+
+• Customer evaluation—tasks required to obtain customer feedback based
+
+on evaluation of the software representations created during the engineering
+stage and implemented during the installation stage.
+
+Each of the regions is populated by a set of work tasks, called a task set, that are
+adapted to the characteristics of the project to be undertaken. For small projects, the
+number of work tasks and their formality is low. For larger, more critical projects,
+each task region contains more work tasks that are deﬁned to achieve a higher level
+of formality. In all cases, the umbrella activities (e.g., software conﬁguration man-
+agement and software quality assurance) noted in Section 2.2 are applied. 
+
+As this evolutionary process begins, the software engineering team moves around
+the spiral in a clockwise direction, beginning at the center. The ﬁrst circuit around
+the spiral might result in the development of a product specification; subsequent
+passes around the spiral might be used to develop a prototype and then progressively
+more sophisticated versions of the software. Each pass through the planning region
+results in adjustments to the project plan. Cost and schedule are adjusted based on
+feedback derived from customer evaluation. In addition, the project manager adjusts
+the planned number of iterations required to complete the software.
+
+Unlike classical process models that end when software is delivered, the spiral
+model can be adapted to apply throughout the life of the computer software. An alter-
+native view of the spiral model can be considered by examining the project entry point
+axis, also shown in Figure 2.8. Each cube placed along the axis can be used to rep-
+resent the starting point for different types of projects. A “concept development 
+
+38
+
+PART ONE
+
+THE PRODUCT AND THE PROCESS
+
+project” starts at the core of the spiral and will continue (multiple iterations occur
+along the spiral path that bounds the central shaded region) until concept develop-
+ment is complete. If the concept is to be developed into an actual product, the process
+proceeds through the next cube (new product development project entry point) and
+a “new development project” is initiated. The new product will evolve through a num-
+ber of iterations around the spiral, following the path that bounds the region that has
+somewhat lighter shading than the core. In essence, the spiral, when characterized
+in this way, remains operative until the software is retired. There are times when the
+process is dormant, but whenever a change is initiated, the process starts at the appro-
+priate entry point (e.g., product enhancement).
+
+The spiral model is a realistic approach to the development of large-scale systems
+and software. Because software evolves as the process progresses, the developer and
+customer better understand and react to risks at each evolutionary level. The spiral model
+uses prototyping as a risk reduction mechanism but, more important, enables the devel-
+oper to apply the prototyping approach at any stage in the evolution of the product. It
+maintains the systematic stepwise approach suggested by the classic life cycle but incor-
+porates it into an iterative framework that more realistically reﬂects the real world. The
+spiral model demands a direct consideration of technical risks at all stages of the proj-
+ect and, if properly applied, should reduce risks before they become problematic.
+
+But like other paradigms, the spiral model is not a panacea. It may be difﬁcult to
+convince customers (particularly in contract situations) that the evolutionary approach
+is controllable. It demands considerable risk assessment expertise and relies on this
+expertise for success. If a major risk is not uncovered and managed, problems will
+undoubtedly occur. Finally, the model has not been used as widely as the linear
+sequential or prototyping paradigms. It will take a number of years before efﬁcacy of
+this important paradigm can be determined with absolute certainty.
+
+The WINWIN Spiral Model
+
+2.7.3
+The spiral model discussed in Section 2.7.2 suggests a framework activity that
+addresses customer communication. The objective of this activity is to elicit project
+requirements from the customer. In an ideal context, the developer simply asks the
+customer what is required and the customer provides sufficient detail to proceed.
+Unfortunately, this rarely happens. In reality, the customer and the developer enter
+into a process of negotiation, where the customer may be asked to balance func-
+tionality, performance, and other product or system characteristics against cost and
+time to market.
+
+The best negotiations strive for a “win-win” result.7 That is, the customer wins by
+getting the system or product that satisﬁes the majority of the customer’s needs and
+the developer wins by working to realistic and achievable budgets and deadlines.
+
+7 Dozens of books have been written on negotiating skills (e.g., [FIS91], [DON96], [FAR97]). It is
+
+one of the more important things that a young (or old) engineer or manager can learn.  Read one.
+
+XRef
+Evolutionary models,
+such as the spiral
+model, are particularly
+well-suited to the
+development of object-
+oriented systems. See
+Part Four for details.
+
+Eliciting software
+requirements demands
+negotiation. Successful
+negotiation occurs
+when both sides
+“win”.
+
+CHAPTER 2
+
+THE PROCESS
+
+39
+
+FIGURE 2.9
+The WINWIN
+spiral model
+[BOE98].
+
+1. Identify
+next-level
+stakeholders  
+
+2. Identify stakeholders'
+win conditions    
+
+3a. Reconcile win conditions   
+
+3b. Establish next-level objectives,
+constraints and alternatives  
+
+Negotiating skills
+
+4. Evaluate process and
+product alternatives and
+resolve risks 
+
+7. Review and comment    
+
+6. Validate product and
+process definitions   
+
+ 
+
+5. Define next level of
+product and process,
+including partitions      
+
+Boehm’s WINWIN spiral model [BOE98] deﬁnes a set of negotiation activities at
+the beginning of each pass around the spiral. Rather than a single customer com-
+munication activity, the following activities are deﬁned:
+
+Identiﬁcation of the system or subsystem’s key “stakeholders.”8
+
+1.
+2. Determination of the stakeholders’ “win conditions.”
+3. Negotiation of the stakeholders’ win conditions to reconcile them into a set of
+
+win-win conditions for all concerned (including the software project team).
+
+Successful completion of these initial steps achieves a win-win result, which becomes
+the key criterion for proceeding to software and system deﬁnition. The WINWIN spi-
+ral model is illustrated in Figure 2.9.
+
+In addition to the emphasis placed on early negotiation, the WINWIN spiral model
+introduces three process milestones, called anchor points [BOE96], that help estab-
+lish the completion of one cycle around the spiral and provide decision milestones
+before the software project proceeds. 
+
+In essence, the anchor points represent three different views of progress as the
+project traverses the spiral. The ﬁrst anchor point, life cycle objectives (LCO), deﬁnes
+a set of objectives for each major software engineering activity. For example, as part
+of LCO, a set of objectives establishes the definition of top-level system/product
+requirements. The second anchor point, life cycle architecture (LCA), establishes objec-
+tives that must be met as the system and software architecture is deﬁned. For exam-
+ple, as part of LCA, the software project team must demonstrate that it has evaluated
+the applicability of off-the-shelf and reusable software components and considered
+their impact on architectural decisions. Initial operational capability (IOC) is the third
+
+8 A stakeholder is anyone in the organization that has a direct business interest in the system or
+product to be built and will be rewarded for a successful outcome or criticized if the effort fails.
+
+40
+
+PART ONE
+
+THE PRODUCT AND THE PROCESS
+
+anchor point and represents a set of objectives associated with the preparation of the
+software for installation/distribution, site preparation prior to installation, and assis-
+tance required by all parties that will use or support the software. 
+
+The Concurrent Development Model
+
+2.7.4
+The concurrent development model, sometimes called concurrent engineering, has
+been described in the following manner by Davis and Sitaram [DAV94]:
+
+Project managers who track project status in terms of the major phases [of the classic life
+cycle] have no idea of the status of their projects.  These are examples of trying to track
+extremely complex sets of activities using overly simple models. Note that although . . . [a
+large] project is in the coding phase, there are personnel on the project involved in activities
+typically  associated  with  many  phases  of  development  simultaneously.  For  example, 
+. . . personnel are writing requirements, designing, coding, testing, and integration  testing
+[all at the same time]. Software engineering process models by Humphrey and Kellner
+[[HUM89], [KEL89]] have shown the concurrency that exists for activities occurring during
+any one phase. Kellner's more recent work [KEL91] uses statecharts [a notation that repre-
+sents the states of a process] to represent the concurrent relationship existent among activ-
+ities associated with a speciﬁc event (e.g., a requirements change during late development),
+but fails to capture the richness of concurrency that exists across all software development
+and management activities in the project. . . . Most software development process models
+are driven by time; the later it is, the later in the development process you are. [A concur-
+rent process model] is driven by user needs, management decisions, and review results.  
+
+The concurrent process model can be represented schematically as a series of  major
+technical activities, tasks, and their associated states. For example, the engineering
+activity deﬁned for the spiral model (Section 2.7.2) is accomplished by invoking the
+following tasks: prototyping and/or analysis modeling, requirements speciﬁcation,
+and design.9
+
+Figure 2.10 provides a schematic representation of one activity with the concur-
+rent process model. The activity—analysis—may be in any one of the states10 noted
+at any given time. Similarly, other activities (e.g., design or customer communica-
+tion) can be represented in an analogous manner. All activities exist concurrently but
+reside in different states. For example, early in a project the customer communication
+activity (not shown in the figure) has completed its first iteration and exists in the
+awaiting changes state. The analysis activity (which existed in the none state while
+initial customer communication was completed) now makes a transition into the
+under development state. If, however, the customer indicates that changes in
+requirements must be made, the analysis activity moves from the under develop-
+ment state into the awaiting changes state.
+
+The concurrent process model deﬁnes a series of events that will trigger transi-
+tions from state to state for each of the software engineering activities. For example,
+
+9 It should be noted that analysis and design are complex tasks that require substantial discussion. 
+
+Parts Three and Four of this book consider these topics in detail.
+
+10 A state is some externally observable mode of behavior.
+
+CHAPTER 2
+
+THE PROCESS
+
+41
+
+FIGURE 2.10
+One element of
+the concurrent
+process model
+
+Analysis activity
+
+None
+
+Under
+
+development
+
+Awaiting
+changes
+
+Under
+revision
+
+Under review
+
+Baselined
+
+Done
+
+Represents a state of a
+software engineered activity
+
+during early stages of design, an inconsistency in the analysis model is uncovered.
+This generates the event analysis model correction which will trigger the analysis activ-
+ity from the done state into the awaiting changes state.
+
+The concurrent process model is often used as the paradigm for the develop-
+ment of client/server11 applications (Chapter 28). A client/server system is com-
+posed  of  a  set  of  functional  components.  When  applied  to  client/server,  the
+concurrent process model defines activities in two dimensions [SHE94]: a system
+dimension and a component dimension. System level issues are addressed using
+three activities: design, assembly, and use. The component dimension is addressed
+with two activities: design and realization. Concurrency is achieved in two ways:
+(1) system and component activities occur simultaneously and can be modeled
+using the state-oriented approach described previously; (2) a typical client/server
+application is implemented with many components, each of which can be designed
+and realized concurrently.   
+
+In reality, the concurrent process model is applicable to all types of software devel-
+opment and provides an accurate picture of the current state of a project. Rather than
+
+11 In a client/server applications, software functionality is divided between clients (normally PCs)
+
+and a server (a more powerful computer) that typically maintains a centralized database.
+
+42
+
+PART ONE
+
+THE PRODUCT AND THE PROCESS
+
+confining software engineering activities to a sequence of events, it defines a net-
+work of activities. Each activity on the network exists simultaneously with other activ-
+ities. Events generated within a given activity or at some other place in the activity
+network trigger transitions among the states of an activity.
+
+2.8 COMPONENT-BASED DEVELOPMENT
+
+Object-oriented technologies (Part Four of this book) provide the technical frame-
+work for a component-based process model for software engineering. The object-
+oriented paradigm emphasizes the creation of classes that encapsulate both data and
+the algorithms used to manipulate the data. If properly designed and implemented,
+object-oriented classes are reusable across different applications and computer-based
+system architectures.
+
+The component-based development (CBD) model (Figure 2.11) incorporates many
+of the characteristics of the spiral model. It is evolutionary in nature [NIE92], demand-
+ing an iterative approach to the creation of software. However, the component-based
+development model composes applications from prepackaged software components
+(called classes).
+
+The engineering activity begins with the identiﬁcation of candidate classes. This
+is accomplished by examining the data to be manipulated by the application and the
+algorithms that will be applied to accomplish the manipulation.12 Corresponding data
+and algorithms are packaged into a class. 
+
+XRef
+The underlying
+technology for CBD is
+discussed in Part Four
+of this book. A more
+detailed discussion of
+the CBD process is
+presented in Chapter
+27.
+
+FIGURE 2.11
+Component-
+based devel-
+opment
+
+Planning
+
+Risk
+
+analysis
+
+Customer
+
+communication
+
+Identify
+candidate
+components
+
+Construct
+nth iteration
+of system
+
+Put new
+
+components
+in library
+
+Look up
+
+components
+in library
+
+Extract
+
+components
+if available
+
+Customer
+evaluation
+
+Engineering
+
+construction & release
+
+Build
+
+components
+if unavailable
+
+12 This is a simpliﬁed description of class deﬁnition. For a more detailed discussion, see Chapter 20.
+
+CHAPTER 2
+
+THE PROCESS
+
+43
+
+Classes created in past software engineering projects are stored in a class
+library or repository (Chapter 31). Once candidate classes are identified, the class
+library is searched to determine if these classes already exist. If they do, they are
+extracted from the library and reused. If a candidate class does not reside in the
+library, it is engineered using object-oriented methods (Chapters 21–23).  The first
+iteration of the application to be built is then composed, using classes extracted
+from the library and any new classes built to meet the unique needs of the appli-
+cation. Process flow then returns to the spiral and will ultimately re-enter the
+component assembly iteration during subsequent passes through the engineer-
+ing activity.
+
+The component-based development model leads to software reuse, and reusabil-
+ity provides software engineers with a number of measurable beneﬁts. Based on stud-
+ies of reusability, QSM Associates, Inc., reports component assembly leads to a 70
+percent reduction in development cycle time; an 84 percent reduction in project cost,
+and a productivity index of 26.2, compared to an industry norm of 16.9. [YOU94]
+Although these results are a function of the robustness of the component library, there
+is little question that the component-based development model provides signiﬁcant
+advantages for software engineers.
+
+The uniﬁed software development process [JAC99] is representative of a number of
+component-based development models that have been proposed in the industry.
+Using the Uniﬁed Modeling Language (UML), the uniﬁed process deﬁnes the compo-
+nents that will be used to build the system and the interfaces that will connect the
+components. Using a combination of iterative and incremental development, the uni-
+ﬁed process deﬁnes the function of the system by applying a scenario-based approach
+(from the user point of view). It then couples function with an architectural frame-
+work that identiﬁes the form the the software will take.
+
+XRef
+UML is discussed in
+some detail in Chapters
+21 and 22.
+
+2.9 THE FORMAL METHODS MODEL
+
+XRef
+Formal methods are
+discussed in Chapters
+25 and 26.
+
+The formal methods model encompasses a set of activities that leads to formal math-
+ematical speciﬁcation of computer software. Formal methods enable a software engi-
+neer to specify, develop, and verify a computer-based system by applying a rigorous,
+mathematical notation. A variation on this approach, called cleanroom software engi-
+neering [MIL87, DYE92], is currently applied by some software development organi-
+zations.
+
+When formal methods (Chapters 25 and 26) are used during development, they
+provide a mechanism for eliminating many of the problems that are difficult to
+overcome using other software engineering paradigms. Ambiguity, incomplete-
+ness, and inconsistency can be discovered and corrected more easily, not through
+ad hoc review but through the application of mathematical analysis. When formal
+methods are used during design, they serve as a basis for program verification and
+
+44
+
+PART ONE
+
+THE PRODUCT AND THE PROCESS
+
+therefore enable the software engineer to discover and correct errors that might
+go undetected.
+
+Although it is not destined to become a mainstream approach, the formal meth-
+ods model offers the promise of defect-free software. Yet, the following concerns
+about its applicability in a business environment have been voiced:
+
+1. The development of formal models is currently quite time consuming and
+
+expensive.
+
+2. Because few software developers have the necessary background to apply
+
+3.
+
+formal methods, extensive training is required.
+It is difﬁcult to use the models as a communication mechanism for techni-
+cally unsophisticated customers.
+
+These concerns notwithstanding, it is likely that the formal methods approach will
+gain adherents among software developers who must build safety-critical software
+(e.g., developers of aircraft avionics and medical devices) and among developers that
+would suffer severe economic hardship should software errors occur.   
+
+2.10   FOURTH GENERATION TECHNIQUES
+
+The term fourth generation techniques (4GT) encompasses a broad array of soft-
+ware tools that have one thing in common: each enables the software engineer
+to specify some characteristic of software at a high level. The tool then automat-
+ically generates source code based on the developer's specification. There is lit-
+tle debate that the higher the level at which software can be specified to a machine,
+the faster a program can be built. The 4GT paradigm for software engineering
+focuses on the ability to specify software using specialized language forms or a
+graphic notation that describes the problem to be solved in terms that the cus-
+tomer can understand. 
+
+Currently, a software development environment that supports the 4GT paradigm
+includes some or all of the following tools: nonprocedural languages for database
+query, report generation, data manipulation, screen interaction and deﬁnition, code
+generation; high-level graphics capability; spreadsheet capability, and automated
+generation of HTML and similar languages used for Web-site creation using advanced
+software tools. Initially, many of the tools noted previously were available only for
+very speciﬁc application domains, but today 4GT environments have been extended
+to address most software application categories.
+
+Like other paradigms, 4GT begins with a requirements gathering step. Ideally, the
+customer would describe requirements and these would be directly translated into
+an operational prototype. But this is unworkable. The customer may be unsure of
+what is required, may be ambiguous in specifying facts that are known, and may be
+unable or unwilling to specify information in a manner that a 4GT tool can consume.
+
+Even though you use a
+4GT, you still have to
+emphasize solid
+software engineering
+by doing analysis,
+design, and testing.
+
+CHAPTER 2
+
+THE PROCESS
+
+45
+
+For this reason, the customer/developer dialog described for other process models
+remains an essential part of the 4GT approach.
+
+For small applications, it may be possible to move directly from the requirements
+gathering step to implementation using a nonprocedural fourth generation language
+(4GL) or a model composed of a network of graphical icons. However, for larger
+efforts, it is necessary to develop a design strategy for the system, even if a 4GL is to
+be used. The use of 4GT without design (for large projects) will cause the same difﬁ-
+culties (poor quality, poor maintainability, poor customer acceptance) that have been
+encountered when developing software using conventional approaches.
+
+Implementation using a 4GL enables the software developer to represent desired
+results in a manner that leads to automatic generation of code to create those results.
+Obviously, a data structure with relevant information must exist and be readily acces-
+sible by the 4GL. 
+
+To transform a 4GT implementation into a product, the developer must conduct
+thorough testing, develop meaningful documentation, and perform all other solution
+integration activities that are required in other software engineering paradigms. In
+addition, the 4GT developed software must be built in a manner that enables main-
+tenance to be performed expeditiously.
+
+Like all software engineering paradigms, the 4GT model has advantages and dis-
+advantages.  Proponents claim dramatic reduction in software development time and
+greatly improved productivity for people who build software. Opponents claim that
+current 4GT tools are not all that much easier to use than programming languages,
+that the resultant source code produced by such tools is "inefficient," and that the
+maintainability of large software systems developed using 4GT is open to question.
+There is some merit in the claims of both sides and it is possible to summarize the
+
+current state of 4GT approaches:
+
+1. The use of 4GT is a viable approach for many different application areas.
+
+Coupled with computer-aided software engineering tools and code genera-
+tors, 4GT offers a credible solution to many software problems.
+
+2. Data collected from companies that use 4GT indicate that the time required
+to produce software is greatly reduced for small and intermediate applica-
+tions and that the amount of design and analysis for small applications is
+also reduced. 
+
+3. However, the use of 4GT for large software development efforts demands 
+as much or more analysis, design, and testing (software engineering activi-
+ties) to achieve substantial time savings that result from the elimination of
+coding. 
+
+To summarize, fourth generation techniques have already become an important
+part of software engineering. When coupled with component-based development
+approaches (Section 2.8), the 4GT paradigm may become the dominant approach to
+software development.
+
+46
+
+PART ONE
+
+THE PRODUCT AND THE PROCESS
+
+2.11 PROCESS TECHNOLOGY
+
+The process models discussed in the preceding sections must be adapted for use by
+a software project team. To accomplish this, process technology tools have been
+developed to help software organizations analyze their current process, organize
+work tasks, control and monitor progress, and manage technical quality [BAN95].
+
+Process technology tools allow a software organization to build an automated
+model of the common process framework, task sets, and umbrella activities discussed
+in Section 2.3. The model, normally represented as a network, can then be analyzed
+to determine typical work ﬂow and examine alternative process structures that might
+lead to reduced development time or cost.
+
+Once an acceptable process has been created, other process technology tools can
+be used to allocate, monitor, and even control all software engineering tasks deﬁned
+as part of the process model. Each member of a software project team can use such
+tools to develop a checklist of work tasks to be performed, work products to be pro-
+duced, and quality assurance activities to be conducted. The process technology tool
+can also be used to coordinate the use of other computer-aided software engineer-
+ing tools (Chapter 31) that are appropriate for a particular work task.
+
+2.12 PRODUCT AND PROCESS
+
+“[If it is developed
+thoughtlessly and
+applied mindlessly,
+process can
+become] the death
+of common sense.”
+Philip K. Howard
+
+If the process is weak, the end product will undoubtedly suffer, but an obsessive over-
+reliance on process is also dangerous. In a brief essay, Margaret Davis [DAV95] com-
+ments on the duality of product and process:
+
+About every ten years, give or take ﬁve, the software community redeﬁnes "the problem"
+by shifting its focus from product issues to process issues. Thus, we have embraced struc-
+tured programming languages (product) followed by structured analysis methods (process)
+followed by data encapsulation (product) followed by the current emphasis on the Soft-
+ware Engineering Institute's Software Development Capability Maturity Model (process).
+While the natural tendency of a pendulum is to come to rest at a point midway between
+two extremes, the software community's focus constantly shifts because new force is
+applied when the last swing fails. These swings are harmful in and of themselves because
+they confuse the average software practitioner by radically changing what it means to per-
+form the job let alone perform it well. The swings also do not solve "the problem" for they
+are doomed to fail as long as product and process are treated as forming a dichotomy
+instead of a duality.
+
+There is precedence in the scientific community to advance notions of duality when
+contradictions in observations cannot be fully explained by one competing theory or
+another. The dual nature of light, which seems to be simultaneously particle and wave,
+has been accepted since the 1920's when Louis de Broglie proposed it. I believe that the
+observations we can make on the artifacts of software and its development demonstrate
+a fundamental duality between product and process. You can never derive or understand
+the full artifact, its context, use, meaning, and worth if you view it as only a process or
+only a product . . .
+
+CHAPTER 2
+
+THE PROCESS
+
+47
+
+All of human activity may be a process, but each of us derives a sense of self worth from
+those activities that result in a representation or instance that can be used or appreciated
+either by more than one person, used over and over, or used in some other context not
+considered. That is, we derive feelings of satisfaction from reuse of our products by our-
+selves or others.
+
+Thus, while the rapid assimilation of reuse goals into software development potentially
+increases the satisfaction software practitioners derive from their work, it also increases
+the urgency for acceptance of the duality of product and process. Thinking of a reusable
+artifact as only product or only process either obscures the context and ways to use it or
+obscures the fact that each use results in product that will, in turn, be used as input to some
+other software development activity. Taking one view over the other dramatically reduces
+the opportunities for reuse and, hence, loses the opportunity for increasing job satisfaction.
+
+"Any activity becomes
+creative when the
+doer cares about
+doing it right, or
+doing it better."
+John Updike
+
+People derive as much (or more) satisfaction from the creative process as they do
+from the end product. An artist enjoys the brush strokes as much the framed result.
+A writer enjoys the search for the proper metaphor as much as the ﬁnished book.  A
+creative software professional should also derive as much satisfaction from the process
+as the end-product.
+
+The work of software people will change in the years ahead. The duality of prod-
+uct and process is one important element in keeping creative people engaged as the
+transition from programming to software engineering is ﬁnalized.  
+
+2.13 SUMMARY
+
+Software engineering is a discipline that integrates process, methods, and tools for
+the development of computer software. A number of different process models for
+software engineering have been proposed, each exhibiting strengths and weaknesses,
+but all having a series of generic phases in common. The principles, concepts, and
+methods that enable us to perform the process that we call software engineering are
+considered throughout the remainder of this book.
+
+REFERENCES
+
+[BAE98] Baetjer, Jr., H., Software as Capital, IEEE Computer Society Press, 1998, 
+
+p. 85.
+
+[BAN95] Bandinelli, S. et al., “Modeling and Improving an Industrial Software
+Process,” IEEE Trans. Software Engineering, vol. SE-21, no. 5, May 1995, pp.
+440–454.
+
+[BOE88] Boehm, B., “A Spiral Model for Software Development and Enhance-
+
+ment,” Computer, vol. 21, no. 5, May 1988, pp. 61–72.
+
+[BOE96] Boehm, B., “Anchoring the Software Process,” IEEE Software, vol. 13, no.
+
+4, July 1996, pp. 73–82.
+
+[BOE98] Boehm, B., “Using the WINWIN Spiral Model: A Case Study,” Computer,
+
+vol. 31, no. 7, July 1998, pp. 33–44.
+
+48
+
+PART ONE
+
+THE PRODUCT AND THE PROCESS
+
+[BRA94] Bradac, M., D. Perry, and L. Votta, “Prototyping a Process Monitoring
+
+Experiment,” IEEE Trans. Software Engineering, vol. SE-20, no. 10, October 1994,
+pp. 774–784.
+
+[BRO75] Brooks, F., The Mythical Man-Month, Addison-Wesley, 1975.
+[BUT94] Butler, J., “Rapid Application Development in Action,” Managing System
+
+Development, Applied Computer Research, vol. 14, no. 5, May 1994, pp. 6–8.
+
+[DAV94] Davis, A. and P. Sitaram, “A Concurrent Process Model for Software
+
+Development,” Software Engineering Notes, ACM Press, vol. 19, no. 2, April 1994,
+pp. 38–51. 
+
+[DAV95] Davis, M.J., “Process and Product: Dichotomy or Duality,” Software Engi-
+
+neering Notes, ACM Press, vol. 20, no. 2, April 1995, pp. 17–18.
+
+[DON96] Donaldson, M.C. and M. Donaldson, Negotiating for Dummies, IDG Books
+
+Worldwide, 1996. 
+
+[DYE92] Dyer, M., The Cleanroom Approach to Quality Software Development, Wiley,
+
+1992.
+
+[FAR97] Farber, D.C., Common Sense Negotiation: The Art of Winning Gracefully,
+
+Bay Press, 1997.
+
+[FIS91]
+
+Fisher, R., W. Ury, and B. Patton, Getting to Yes: Negotiating Agreement
+
+Without Giving In, 2nd edition, Penguin USA, 1991.
+
+[GIL88] Gilb, T., Principles of Software Engineering Management, Addison-Wesley,
+
+1988.
+
+[HAN95] Hanna, M., “Farewell to Waterfalls,”  Software Magazine, May 1995, pp.
+
+38–46. 
+
+[HUM89] Humphrey, W. and M. Kellner, “Software Process Modeling: Principles of
+Entity Process Models,” Proc. 11th Intl. Conference on Software Engineering, IEEE
+Computer Society Press, pp. 331–342.
+
+[IEE93]
+
+IEEE Standards Collection: Software Engineering, IEEE Standard 610.12—
+
+1990, IEEE, 1993.
+
+[JAC99]
+
+Jacobson, I, Booch, G., and J. Rumbaugh, The Uniﬁed Software Develop-
+
+ment Process, Addison-Wesley, 1999.
+
+[KEL89] Kellner, M., Software Process Modeling: Value and Experience, SEI Techni-
+
+cal Review—1989, SEI, 1989.
+
+[KEL91] Kellner, M., “Software Process Modeling Support for Management Plan-
+ning and Control,” Proc. 1st Intl. Conf. on the Software Process, IEEE Computer
+Society Press, 1991, pp. 8–28. 
+
+[KER94] Kerr, J. and R. Hunter, Inside RAD, McGraw-Hill, 1994.
+[MAR91] Martin, J., Rapid Application Development, Prentice-Hall, 1991.
+[MDE93] McDermid, J. and P. Rook, “Software Development Process Models,” in
+
+Software Engineer’s Reference Book, CRC Press, 1993, pp. 15/26–15/28. 
+
+[MIL87] Mills, H.D., M. Dyer, and R. Linger, “Cleanroom Software Engineering,”
+
+IEEE Software, September 1987, pp. 19–25.
+
+CHAPTER 2
+
+THE PROCESS
+
+49
+
+[NAU69] Naur, P. and B. Randall (eds.), Software Engineering: A Report on a Confer-
+
+ence Sponsored by the NATO Science Committee, NATO, 1969.
+
+[NIE92] Nierstrasz, O., S. Gibbs, and D. Tsichritzis, “Component-Oriented Soft-
+
+ware Development,” CACM, vol. 35, no. 9, September 1992, pp. 160–165.
+
+[PAU93] Paulk, M. et al., “Capability Maturity Model for Software,” Software Engi-
+
+neering Institute, Carnegie Mellon University, Pittsburgh, PA, 1993.
+
+[RAC95] Raccoon, L.B.S., “The Chaos Model and the Chaos Life Cycle,” ACM Soft-
+
+ware Engineering Notes, vol. 20., no. 1, January, 1995, pp. 55–66.
+
+[ROY70] Royce, W.W., “Managing the Development of Large Software Systems:
+
+Concepts and Techniques,” Proc. WESCON, August 1970.
+
+[SHE94] Sheleg, W., “Concurrent Engineering: A New Paradign for C/S Develop-
+
+ment,” Application Development Trends, vol. 1, no. 6, June 1994, pp. 28–33.
+
+[YOU94] Yourdon, E., “Software Reuse,” Application Development Strategies, vol. 6,
+
+no. 12, December 1994, pp. 1–16.
+
+PROBLEMS AND POINTS TO PONDER
+
+2.1. Figure 2.1 places the three software engineering layers on top of a layer enti-
+tled a quality focus. This implies an organization quality program such as Total Qual-
+ity Management. Do a bit of research and develop an outline of the key tenets of a
+Total Quality Management program.
+
+2.2. Is there ever a case when the generic phases of the software engineering process
+don't apply? If so, describe it.
+
+2.3. The SEI’s capability maturity model is an evolving document. Do some research
+and determine if any new KPAs have been added since the publication of this book.
+
+2.4. The Chaos model suggests that a problem solving loop can be applied at any
+degree of resolution. Discuss the way in which you would apply the loop to (1) under-
+stand requirements for a word-processing product; (2) develop an advanced spelling/
+grammar checking component for the word processor; (3) generate code for a pro-
+gram module that determines the subject, predicate, and object in an English lan-
+guage sentence.
+
+2.5. Which of the software engineering paradigms presented in this chapter do you
+think would be most effective? Why?
+
+2.6. Provide ﬁve examples of software development projects that would be amenable
+to prototyping. Name two or three applications that would be more difficult to 
+prototype.
+
+2.7. The RAD model is often tied to CASE tools. Research the literature and provide
+a summary of a typical CASE tool that supports RAD.
+
+50
+
+PART ONE
+
+THE PRODUCT AND THE PROCESS
+
+2.8. Propose a speciﬁc software project that would be amenable to the incremental
+model. Present a scenario for applying the model to the software.
+
+2.9. As you move outward along the process ﬂow path of the spiral model, what can
+you say about the software that is being developed or maintained?  
+
+2.10. Many people believe that the only way in which order of magnitude improve-
+ments in software quality and productivity will be achieved is through component-
+based development. Find three or four recent papers on the subject and summarize
+them for the class.
+
+2.11. Describe the concurrent development model in your own words.
+
+2.12. Provide three examples of fourth generation techniques.
+
+2.13. Which is more important—the product or the process?
+
+FURTHER READINGS AND INFORMATION SOURCES
+
+The current state of the art in software engineering can best be determined from
+monthly publications such as IEEE Software, Computer, and the IEEE Transactions on
+Software Engineering. Industry periodicals such as Application Development Trends,
+Cutter IT Journal and Software Development often contain articles on software engi-
+neering topics. The discipline is ‘summarized’ every year in the Proceedings of the Inter-
+national Conference on Software Engineering, sponsored by the IEEE and ACM and is
+discussed in depth in journals such as ACM Transactions on Software Engineering and
+Methodology, ACM Software Engineering Notes, and Annals of Software Engineering.
+
+Many software engineering books have been published in recent years. Some pre-
+sent an overview of the entire process while others delve into a few important top-
+ics to the exclusion of others. Three anthologies that cover a wide range of software
+engineering topics are
+
+Keyes, J., (ed.), Software Engineering Productivity Handbook, McGraw-Hill, 1993.
+
+McDermid, J., (ed.), Software Engineer’s Reference Book, CRC Press, 1993.
+
+Marchiniak, J.J. (ed.), Encyclopedia of Software Engineering, Wiley, 1994.
+
+Gautier (Distributed Engineering of Software, Prentice-Hall, 1996) provides suggestions
+and guidelines for organizations that must develop software across geographically
+dispersed locations. 
+
+On the lighter side, a book by Robert Glass (Software Conﬂict, Yourdon Press, 1991)
+presents amusing and controversial essays on software and the software engineer-
+ing process. Pressman and Herron (Software Shock, Dorset House, 1991) consider
+software and its impact on individuals, businesses, and government. 
+
+The Software Engineering Institute (SEI is located at Carnegie-Mellon University)
+has been chartered with the responsibility of sponsoring a software engineering mono-
+graph series. Practitioners from industry, government, and academia are contribut-
+
+CHAPTER 2
+
+THE PROCESS
+
+51
+
+ing important new work. Additional software engineering research is conducted by
+the Software Productivity Consortium.
+
+A wide variety of software engineering standards and procedures have been pub-
+lished over the past decade. The IEEE Software Engineering Standards contains stan-
+dards  that  cover  almost  every  important  aspect  of  the  technology.  ISO  9000-3
+guidelines provide guidance for software organizations that require registration to
+the ISO 9001 quality standard. Other software engineering standards can be obtained
+from the Department of Defense, the FAA, and other government and nonprofit 
+agencies. Fairclough (Software Engineering Guides, Prentice-Hall, 1996) provides a
+detailed reference to software engineering standards produced by the European Space
+Agency (ESA).
+
+A wide variety of information sources on software engineering and the software
+process is available on the Internet. An up-to-date list of World Wide Web references
+that  are  relevant  to  the  software  process  can  be  found  at  the  SEPA  Web  site:
+http://www.mhhe.com/engcs/compsci/pressman/resources/process.mhtml
+
+P A R T
+
+Two
+
+MANAGING
+SOFTWARE PROJECTS
+
+In this part of Software Engineering: A Practitioner’s Approach, we
+
+consider the management techniques required to plan, organ-
+ize, monitor, and control software projects. In the chapters that
+
+follow, you’ll get answers to the following questions:
+
+• How must the people, process, and problem be managed
+
+during a software project?
+
+• What are software metrics and how can they be used to
+
+manage a software project and the software process?
+
+• How does a software team generate reliable estimates of
+
+effort, cost, and project duration?
+
+• What techniques can be used to formally assess the risks
+
+that can have an impact on project success?
+
+• How does a software project manager select the set of
+
+software engineering work tasks?
+• How is a project schedule created?
+• How is quality deﬁned so that it can be controlled?
+• What is software quality assurance?
+• Why are formal technical reviews so important?
+• How is change managed during the development of 
+
+computer software and after delivery to the customer?
+
+Once these questions are answered, you’ll be better prepared to
+manage software projects in a way that will lead to timely delivery
+of a high-quality product.
+
+53
+
+

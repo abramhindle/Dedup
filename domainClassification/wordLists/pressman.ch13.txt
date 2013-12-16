@@ -1,0 +1,5955 @@
+800
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+Q U I C K
+L O O K
+
+encompasses inventory analysis,
+document restructuring, reverse
+engineering, program and data
+restructuring, and forward engineering. The intent
+of these activities is to create versions of existing
+programs that exhibit higher quality and better
+maintainability. 
+
+What is the work product? A variety of reengi-
+neering work products (e.g., analysis models,
+design models, test procedures) are produced.
+The final output is the reengineered business
+
+process and/or the reengineered software that
+supports it.
+
+How do I ensure that I’ve done it right? Use the
+same SQA practices that are applied in every
+software engineering process—formal technical
+reviews assess the analysis and design models,
+specialized reviews consider business applica-
+bility and compatibility, testing is applied to
+uncover errors in content, functionality, and
+interoperability.
+
+and small. The nexus between business reengineering and software engineering lies
+in a “system view.” 
+
+Software is often the realization of the business rules that Hammer discusses. As
+these rules change, software must also change. Today, major companies have tens
+of thousands of computer programs that support the “old business rules.” As man-
+agers work to modify the rules to achieve greater effectiveness and competitiveness,
+software must keep pace. In some cases, this means the creation of major new com-
+puter-based systems.1 But in many others, it means the modiﬁcation or rebuilding of
+existing applications.
+
+In this chapter, we examine reengineering in a top-down manner, beginning with
+a brief overview of business process reengineering and proceeding to a more detailed
+discussion of the technical activities that occur when software is reengineered.
+
+30.1 BUSINESS PROCESS REENGINEERING
+
+“To face tomorrow
+with the thought of
+using the methods
+of yesterday is to
+envision life at a
+standstill.”
+James Bell 
+
+Business process reengineering (BPR) extends far beyond the scope of information
+technologies and software engineering. Among the many definitions (most some-
+what abstract) that have been suggested for BPR is one published in Fortune maga-
+zine [STE93]: “the search for, and the implementation of, radical change in business
+process to achieve breakthrough results.” But how is the search conducted, and how
+is the implementation achieved? More important, how can we ensure that the “rad-
+ical change” suggested will in fact lead to “breakthrough results” instead of organi-
+zational chaos?
+
+30.1.1 Business Processes
+A business process is “a set of logically related tasks performed to achieve a deﬁned
+business outcome” [DAV90]. Within the business process, people, equipment, mate-
+
+1 The Web-based systems and applications discussed in Chapter 29 are contemporary examples.
+
+CHAPTER 30
+
+REENGINEERING
+
+801
+
+rial resources, and business procedures are combined to produce a speciﬁed result.
+Examples of business processes include designing a new product, purchasing ser-
+vices and supplies, hiring a new employee, and paying suppliers. Each demands a
+set of tasks and each draws on diverse resources within the business.
+
+Every business process has a deﬁned customer—a person or group that receives
+the outcome (e.g., an idea, a report, a design, a product). In addition, business
+processes cross organizational boundaries. They require that different organizational
+groups participate in the “logically related tasks” that deﬁne the process.
+
+In Chapter 10, we noted that every system is actually a hierarchy of subsys-
+tems. A business is no exception. The overall business is segmented in the following
+manner:
+
+The business
+
+business systems
+
+business process
+
+business subprocesses
+
+Each business system (also called business function) is composed of one or more busi-
+ness processes, and each business process is deﬁned by a set of subprocesses.
+
+BPR can be applied at any level of the hierarchy, but as the scope of BPR broad-
+ens (i.e., as we move upward in the hierarchy), the risks associated with BPR grow
+dramatically. For this reason, most BPR efforts focus on individual processes or sub-
+processes.
+
+30.1.2 Principles of Business Process Reengineering
+In many ways, BPR is identical in focus and scope to business process engineering
+(Chapter 10). In an ideal setting, BPR should occur in a top-down manner, beginning
+with the identiﬁcation of major business objectives and goals and culminating with
+a much more detailed speciﬁcation of the tasks that deﬁne a speciﬁc business process.
+Hammer [HAM90] suggests a number of principles that guide BPR activities when
+
+they begin at the top (business) level:
+
+Organize around outcomes, not tasks. Many companies have com-
+partmentalized business activities so that no single person (or organiza-
+tion) has responsibility (or control) of a business outcome. It such cases, it
+is difficult to determine the status of work and even more difficult to debug
+process problems if they do occur. BPR should design processes that avoid
+this problem.
+Have those who use the output of the process perform the process.
+The intent of this recommendation is to allow those who need business out-
+put to control all of the variables that allow them to get the output in a timely
+manner. The fewer separate constituencies involved in a process, the
+smoother is the road to a rapid outcome. 
+
+As a software
+engineer, your
+reengineering work
+occurs at the bottom
+of this hierarchy. Be
+sure, however, that
+someone has given
+serious thought to the
+level above. If this
+hasn’t been done,
+your work is at risk.
+
+WebRef
+Extensive information on
+business process
+reengineering can be
+found at 
+www.brint.com/
+BPR.htm
+
+802
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+“As soon as we are
+shown the existence
+of something old in
+a new thing, we are
+paciﬁed.”
+Friedrich Wilhelm
+Nietzsche 
+
+Incorporate information processing work into the real work that pro-
+duces the raw information. As IT becomes more distributed, it is possible
+to locate most information processing within the organization that produces
+the raw data. This localizes control, reduces communication time, and puts
+computing power in the hands of those that have a vested interest in the
+information that is produced. 
+Treat geographically dispersed resources as though they were cen-
+tralized. Computer-based communications have become so sophisticated
+that geographically diverse groups can be placed in the same “virtual ofﬁce.”
+For example, instead of running three engineering shifts at a single location,
+a global company can run one shift in Europe, a second shift in North Amer-
+ica, and a third shift in Asia. In each case, engineers will work during daylight
+hours and communicate via high-bandwidth networks. 
+Link parallel activities instead of integrating their results. When dif-
+ferent constituencies perform work in parallel, it is essential to design a
+process that demands continuing communication and coordination. Other-
+wise, integration problems are sure to result.
+Put the decision point where the work is performed, and build con-
+trol into the process. Using software design jargon, this principle suggests
+a ﬂatter organizational architecture with reduced factoring. 
+Capture data once, at its source. Data should be stored on-line so that
+once collected it need never be re-entered. 
+
+Each of these principles represents a “big picture” view of BPR. Guided by these
+principles, business planners and process designers must begin process redesign. In
+the next section, we examine the process of BPR in a bit more detail. 
+
+30.1.3 A BPR Model
+Like most engineering activities, business process reengineering is iterative. Busi-
+ness goals and the processes that achieve them must be adapted to a changing busi-
+ness  environment.  For  this  reason,  there  is  no  start  and  end  to  BPR—it  is  an
+evolutionary process. A model for business process reengineering is depicted in Fig-
+ure 30.1. The model deﬁnes six activities:
+
+Business deﬁnition. Business goals are identiﬁed within the context of four
+key drivers: cost reduction, time reduction, quality improvement, and personnel
+development and empowerment. Goals may be deﬁned at the business level or
+for a speciﬁc component of the business.
+Process identiﬁcation. Processes that are critical to achieving the goals
+deﬁned in the business deﬁnition are identiﬁed. They may then be ranked by
+importance, by need for change, or in any other way that is appropriate for
+the reengineering activity.
+
+CHAPTER 30
+
+REENGINEERING
+
+803
+
+FIGURE 30.1
+A BPR model
+
+Business
+definition
+
+Refinement &
+instantiation
+
+Prototyping
+
+Process
+
+identification
+
+Process
+
+specification
+and design
+
+Process
+evaluation
+
+Process evaluation. The existing process is thoroughly analyzed and mea-
+sured. Process tasks are identiﬁed; the costs and time consumed by process
+tasks are noted; and quality/performance problems are isolated.
+Process speciﬁcation and design. Based on information obtained during
+the ﬁrst three BPR activities, use-cases (Chapter 11) are prepared for each
+process that is to be redesigned. Within the context of BPR, use-cases identify
+a scenario that delivers some outcome to a customer. With the use-case as
+the speciﬁcation of the process, a new set of tasks (which conform to the
+principles noted in Section 30.2.1) are designed for the process.
+Prototyping.  A redesigned business process must be prototyped before it is
+fully integrated into the business. This activity “tests” the process so that
+reﬁnements can be made.
+Reﬁnement and instantiation. Based on feedback from the prototype, the
+business process is reﬁned and then instantiated within a business system.
+
+These BPR activities are sometimes used in conjunction with workﬂow analysis
+tools. The intent of these tools is to build a model of existing workﬂow in an effort to
+better analyze existing processes. In addition, the modeling techniques commonly
+associated with business process engineering activities such as information strategy
+planning and business area analysis (Chapter 10) can be used to implement the ﬁrst
+four activities described in the process model.
+
+804
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+30.1.4 Words of Warning
+It is not uncommon that a new business approach—in this case, BPR—is at ﬁrst hyped
+as a panacea, and then criticized so severely that it becomes a pariah. Over the years,
+debate has raged about the efﬁcacy of BPR (e.g., [BLE93], [DIC95]). In an excellent
+discussion of the case for and against BPR, Weisz [WEI95] summarizes the argument
+in the following way:
+
+It is tempting to bash BPR as another silver-bullet fad. From several points of view—sys-
+tems thinking, peopleware, simple history—you’d have to predict high failure rates for the
+concept, rates which seem to be borne out by empirical evidence. For many companies, the
+silver bullet has apparently missed. For others, though, the reengineering effort has evi-
+dently been fruitful.
+
+BPR can work, if it is applied by motivated, trained people who recognize that process
+reengineering is a continuous activity. If BPR is conducted effectively, information
+systems are better integrated into the business process. Reengineering older appli-
+cations can be examined in the context of a broad-based business strategy, and pri-
+orities for software reengineering can be established intelligently.
+
+But even if business reengineering is a strategy that is rejected by a company, soft-
+ware reengineering is something that must be done. Tens of thousands of legacy sys-
+tems—applications that are crucial to the success of businesses large and small—are
+in dire need of refurbishing or rebuilding.
+
+30.2 SOFTWARE REENGINEERING
+
+WebRef
+The SEI offers a variety of
+software reengineering
+resources at 
+www.sei.cmu.edu/
+reengineering/
+
+The scenario is all too common: An application has served the business needs of a
+company for 10 or 15 years. During that time it has been corrected, adapted, and
+enhanced many times. People approached this work with the best intentions, but
+good software engineering practices were always shunted to the side (the press of
+other matters). Now the application is unstable. It still works, but every time a change
+is attempted, unexpected and serious side effects occur. Yet the application must con-
+tinue to evolve. What to do?
+
+Unmaintainable software is not a new problem. In fact, the broadening emphasis
+on software reengineering has been spawned by a software maintenance “iceberg”
+that has been building for more than three decades.
+
+30.2.1 Software Maintenance
+Thirty years ago, software maintenance was characterized [CAN72] as an "iceberg."
+We hope that what was immediately visible is all there is to it, but we know that an
+enormous mass of potential problems and cost lies under the surface. In the early
+1970s, the maintenance iceberg was big enough to sink an aircraft carrier. Today, it
+could easily sink the entire navy!
+
+CHAPTER 30
+
+REENGINEERING
+
+805
+
+The maintenance of existing software can account for over 60 percent of all effort
+expended by a development organization, and the percentage continues to rise as
+more software is produced [HAN93]. Uninitiated readers may ask why so much main-
+tenance is required and why so much effort is expended. Osborne and Chikofsky
+[OSB90] provide a partial answer:
+
+Much of the software we depend on today is on average 10 to 15 years old. Even when
+these programs were created using the best design and coding techniques known at the
+time [and most were not], they were created when program size and storage space were
+principle concerns. They were then migrated to new platforms, adjusted for changes in
+machine and operating system technology and enhanced to meet new user needs—all with-
+out enough regard to overall architecture.
+
+The result is the poorly designed structures, poor coding, poor logic, and poor docu-
+
+mentation of the software systems we are now called on to keep running . . .
+
+The ubiquitous nature of change underlies all software work. Change is inevitable
+when computer-based systems are built; therefore, we must develop mechanisms
+for evaluating, controlling, and making modiﬁcations.
+
+Upon reading the preceding paragraphs, a reader may protest: "but I don't spend
+60 percent of my time ﬁxing mistakes in the programs I develop." Software mainte-
+nance is, of course, far more than "ﬁxing mistakes." We may deﬁne maintenance by
+describing four activities [SWA76] that are undertaken after a program is released for
+use. In Chapter 2, we deﬁned four different maintenance activities: corrective main-
+tenance, adaptive maintenance, perfective maintenance or enhancement, and preven-
+tive maintenance or reengineering. Only about 20 percent of all maintenance work is
+spent “ﬁxing mistakes.” The remaining 80 percent is spent adapting existing systems
+to changes in their external environment, making enhancements requested by users,
+and reengineering an application for future use. When maintenance is considered to
+encompass all of these activities, it is relatively easy to see why it absorbs so much
+effort.
+
+30.2.2 A Software Reengineering Process Model
+Reengineering takes time; it costs significant amounts of money; and it absorbs
+resources that might be otherwise occupied on immediate concerns. For all of these
+reasons, reengineering is not accomplished in a few months or even a few years.
+Reengineering of information systems is an activity that will absorb information tech-
+nology resources for many years.  That’s why every organization needs a pragmatic
+strategy for software reengineering. 
+
+A workable strategy is encompassed in a reengineering process model. We’ll dis-
+
+cuss the model later in this section, but ﬁrst, some basic principles. 
+
+Reengineering is a rebuilding activity, and we can better understand the reengi-
+neering of information systems if we consider an analogous activity: the rebuilding
+of a house. Consider the following situation.
+
+“Program
+maintainability and
+program
+understandability are
+parallel concepts:
+the more difﬁcult a
+program is to
+understand, the
+more difﬁcult it is to
+maintain.”
+Gerald Berns
+
+806
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+The steps noted here
+for a house are
+“obvious.” Be sure
+that your consideration
+of legacy software
+applies steps that are
+just as obvious. Think
+about it. A lot more
+money is at stake.
+
+You have purchased a house in another state. You’ve never actually seen the prop-
+erty, but you acquired it at an amazingly low price, with the warning that it might
+have to be completely rebuilt. How would you proceed? 
+
+• Before you can start rebuilding, it would seem reasonable to inspect the
+house. To determine whether it is in need of rebuilding, you (or a profes-
+sional inspector) would create a list of criteria so that your inspection would
+be systematic. 
+
+• Before you tear down and rebuild the entire house, be sure that the structure
+
+is weak. If the house is structurally sound, it may be possible to “remodel”
+without rebuilding (at much lower cost and in much less time).
+
+•
+
+• Before you start rebuilding be sure you understand how the original was
+built. Take a peek behind the walls. Understand the wiring, the plumbing,
+and the structural internals. Even if you trash them all, the insight you’ll gain
+will serve you well when you start construction.
+If you begin to rebuild, use only the most modern, long-lasting materials.
+This may cost a bit more now, but it will help you to avoid expensive and
+time-consuming maintenance later.
+If you decide to rebuild, be disciplined about it. Use practices that will result
+in high quality—today and in the future.
+
+•
+
+Although these principles focus on the rebuilding of a house, they apply equally
+
+well to the reengineering of computer-based systems and applications.
+
+To implement these principles, we apply a software reengineering process model
+that deﬁnes six activities, shown in Figure 30.2.  In some cases, these activities occur
+in a linear sequence, but this is not always the case. For example, it may be that
+reverse engineering (understanding the internal workings of a program) may have
+to occur before document restructuring can commence. 
+
+The reengineering paradigm shown in the ﬁgure is a cyclical model. This means
+that each of the activities presented as a part of the paradigm may be revisited. For
+any particular cycle, the process can terminate after any one of these activities.
+
+Inventory analysis. Every software organization should have an inventory of all
+applications. The inventory can be nothing more than a spreadsheet model contain-
+ing information that provides a detailed description (e.g., size, age, business critical-
+ity) of every active application. By sorting this information according to business
+criticality, longevity, current maintainability, and other locally important criteria, can-
+didates for reengineering appear. Resources can then be allocated to candidate appli-
+cations for reengineering work.
+
+It is important to note that the inventory should be revisited on a regular cycle.
+The status of applications (e.g., business criticality) can change as a function of time,
+and as a result, priorities for reengineering will shift.
+
+Inventory Analysis
+
+CHAPTER 30
+
+REENGINEERING
+
+807
+
+FIGURE 30.2
+A software
+reengineering
+process model
+
+Forward
+
+engineering
+
+Inventory
+analysis
+
+Data
+
+restructuring
+
+Document
+restructuring
+
+Code
+
+restructuring
+
+Reverse
+
+engineering
+
+Document restructuring. Weak documentation is the trademark of many legacy
+systems. But what do we do about it? What are our options?
+
+1. Creating documentation is far too time consuming. If the system works, we’ll live
+with what we have. In some cases, this is the correct approach. It is not possi-
+ble to re-create documentation for hundreds of computer programs. If a pro-
+gram is relatively static, is coming to the end of its useful life, and is unlikely
+to undergo signiﬁcant change, let it be!
+
+2. Documentation must be updated, but we have limited resources. We’ll use a
+
+“document when touched” approach. It may not be necessary to fully redocu-
+ment an application. Rather, those portions of the system that are currently
+undergoing change are fully documented. Over time, a collection of useful
+and relevant documentation will evolve.
+
+3. The system is business critical and must be fully redocumented. Even in this
+
+case, an intelligent approach is to pare documentation to an essential mini-
+mum.
+
+Each of these options is viable. A software organization must choose the one that is
+most appropriate for each case.
+
+Reverse engineering. The term reverse engineering has its origins in the hardware
+world. A company disassembles a competitive hardware product in an effort to under-
+stand its competitor's design and manufacturing "secrets." These secrets could be
+easily understood if the competitor's design and manufacturing speciﬁcations were
+obtained. But these documents are proprietary and unavailable to the company doing
+
+Create only as much
+documentation as is
+required to enhance
+understanding of the
+software, not one
+page more.
+
+808
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+the reverse engineering. In essence, successful reverse engineering derives one or
+more design and manufacturing speciﬁcations for a product by examining actual spec-
+imens of the product.
+
+Reverse engineering for software is quite similar. In most cases, however, the pro-
+gram to be reverse engineered is not a competitor's. Rather, it is the company's own
+work (often done many years earlier). The "secrets" to be understood are obscure
+because no speciﬁcation was ever developed. Therefore, reverse engineering for soft-
+ware is the process of analyzing a program in an effort to create a representation of
+the program at a higher level of abstraction than source code. Reverse engineering
+is a process of design recovery. Reverse engineering tools extract data, architectural,
+and procedural design information from an existing program.
+
+Code restructuring. The most common type of reengineering (actually, the use of
+the term reengineering is questionable in this case) is code restructuring. Some legacy
+systems have a relatively solid program architecture, but individual modules were
+coded in a way that makes them difﬁcult to understand, test, and maintain. In such
+cases, the code within the suspect modules can be restructured.
+
+To accomplish this activity, the source code is analyzed using a restructuring tool.
+Violations of structured programming constructs are noted and code is then restruc-
+tured (this can be done automatically). The resultant restructured code is reviewed
+and tested to ensure that no anomalies have been introduced. Internal code docu-
+mentation is updated.
+
+Data restructuring. A program with weak data architecture will be difﬁcult to adapt
+and enhance. In fact, for many applications, data architecture has more to do with
+the long-term viability of a program that the source code itself.
+
+Unlike code restructuring, which occurs at a relatively low level of abstraction,
+data structuring is a full-scale reengineering activity. In most cases, data restructur-
+ing begins with a reverse engineering activity. Current data architecture is dissected
+and necessary data models are deﬁned (Chapter 12). Data objects and attributes are
+identiﬁed, and existing data structures are reviewed for quality.
+
+When data structure is weak (e.g., ﬂat ﬁles are currently implemented, when a rela-
+
+tional approach would greatly simplify processing), the data are reengineered.
+
+Because data architecture has a strong inﬂuence on program architecture and the
+algorithms that populate it, changes to the data will invariably result in either archi-
+tectural or code-level changes.
+
+Forward engineering. In an ideal world, applications would be rebuilt using a auto-
+mated “reengineering engine.” The old program would be fed into the engine, ana-
+lyzed, restructured, and then regenerated in a form that exhibited the best aspects of
+software quality. In the short term, it is unlikely that such an “engine” will appear, but
+CASE vendors have introduced tools that provide a limited subset of these capabili-
+
+WebRef
+A vast array of resources
+for the reengineering
+community can be
+obtained at 
+www.comp.lancs.ac.
+uk/projects/
+RenaissanceWeb/
+
+CHAPTER 30
+
+REENGINEERING
+
+809
+
+ties that addresses specific application domains (e.g., applications that are imple-
+mented using a speciﬁc database system). More important, these reengineering tools
+are becoming increasingly more sophisticated.
+
+Forward engineering, also called renovation or reclamation [CHI90], not only recov-
+ers design information from existing software, but uses this information to alter or
+reconstitute the existing system in an effort to improve its overall quality. In most
+cases, reengineered software reimplements the function of the existing system and
+also adds new functions and/or improves overall performance.
+
+30.3 REVERSE ENGINEERING
+
+Reverse engineering conjures an image of the "magic slot." We feed an unstructured,
+undocumented source listing into the slot and out the other end comes full docu-
+mentation for the computer program. Unfortunately, the magic slot doesn't exist.
+Reverse engineering can extract design information from source code, but the abstrac-
+tion level, the completeness of the documentation, the degree to which tools and a
+human analyst work together, and the directionality of the process are highly vari-
+able [CAS88].
+
+The abstraction level of a reverse engineering process and the tools used to effect
+it refers to the sophistication of the design information that can be extracted from
+source code. Ideally, the abstraction level should be as high as possible. That is, the
+reverse engineering process should be capable of deriving procedural design repre-
+sentations (a low-level abstraction), program and data structure information (a some-
+what higher level of abstraction), data and control ﬂow models (a relatively high level
+of abstraction), and entity relationship models (a high level of abstraction). As the
+abstraction level increases, the software engineer is provided with information that
+will allow easier understanding of the program.
+
+The completeness of a reverse engineering process refers to the level of detail that
+is provided at an abstraction level. In most cases, the completeness decreases as the
+abstraction level increases. For example, given a source code listing, it is relatively
+easy to develop a complete procedural design representation. Simple data ﬂow rep-
+resentations may also be derived, but it is far more difﬁcult to develop a complete set
+of data ﬂow diagrams or entity-relationship models.
+
+Completeness improves in direct proportion to the amount of analysis performed
+by the person doing reverse engineering. Interactivity refers to the degree to which
+the human is "integrated" with automated tools to create an effective reverse engi-
+neering process. In most cases, as the abstraction level increases, interactivity must
+increase or completeness will suffer.
+
+If the directionality of the reverse engineering process is one way, all information
+extracted from the source code is provided to the software engineer who can then
+use it during any maintenance activity. If directionality is two way, the information is
+
+XRef
+The notation discussed
+here is explained in
+detail in Chapter 12.
+
+Three reverse
+engineering issues
+must be addressed:
+abstraction level,
+completeness, and
+directionality.
+
+810
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+FIGURE 30.3
+The reverse
+engineering
+process
+
+Dirty source code
+
+Restructure
+
+code
+
+Clean source code
+
+Extract
+
+abstractions
+
+Initial specification
+
+Refine &
+simplify
+
+Final specification
+
+Processing
+
+Interface
+
+Database
+
+WebRef
+The Design Recovery and
+Program Understanding
+page provides useful
+resources for
+reengineering work:
+wwwsel.iit.nrc.ca/
+projects/dr/dr.html
+
+fed  to  a  reengineering  tool  that  attempts  to  restructure  or  regenerate  the  old 
+program.
+
+The reverse engineering process is represented in Figure 30.3. Before reverse engi-
+neering activities can commence, unstructured (“dirty”) source code is restructured
+(Section 30.4.1) so that it contains only the structured programming constructs.2 This
+makes the source code easier to read and provides the basis for all the subsequent
+reverse engineering activities.
+
+The core of reverse engineering is an activity called extract abstractions. The engi-
+neer must evaluate the old program and from the (often undocumented) source code,
+extract a meaningful speciﬁcation of the processing that is performed, the user inter-
+face that is applied, and the program data structures or database that is used.
+
+30.3.1 Reverse Engineering to Understand Processing
+The ﬁrst real reverse engineering activity begins with an attempt to understand and
+then extract procedural abstractions represented by the source code. To understand
+procedural abstractions, the code is analyzed at varying levels of abstraction: sys-
+tem, program, component, pattern, and statement.
+
+2 Code can be restructured automatically using a “restructuring engine”—a CASE tool that restruc-
+
+tures source code.
+
+“There exists a
+passion for
+comprehension, just
+as there exists a
+passion for music.
+That passion is
+rather common in
+children, but gets
+lost in most people
+later on.”
+Albert Einstein 
+
+CHAPTER 30
+
+REENGINEERING
+
+811
+
+The overall functionality of the entire application system must be understood before
+more detailed reverse engineering work occurs. This establishes a context for further
+analysis and provides insight into interoperability issues among applications within
+the system. Each of the programs that make up the application system represents a
+functional abstraction at a high level of detail. A block diagram, representing the
+interaction between these functional abstractions, is created. Each component per-
+forms some subfunction and represents a deﬁned procedural abstraction. A processing
+narrative for each component is created. In some situations, system, program and
+component speciﬁcations already exist. When this is the case, the speciﬁcations are
+reviewed for conformance to existing code.3
+
+Things become more complex when the code inside a component is considered.
+The engineer looks for sections of code that represent generic procedural patterns.
+In almost every component, a section of code prepares data for processing (within
+the module), a different section of code does the processing, and another section of
+code prepares the results of processing for export from the component. Within each
+of these sections, we can encounter smaller patterns; for example, data validation
+and bounds checking often occur within the section of code that prepares data for
+processing.
+
+For large systems, reverse engineering is generally accomplished using a semi-
+automated approach. CASE tools are used to “parse” the semantics of existing code.
+The output of this process is then passed to restructuring and forward engineering
+tools to complete the reengineering process.
+
+30.3.2 Reverse Engineering to Understand Data
+Reverse engineering of data occurs at different levels of abstraction. At the program
+level, internal program data structures must often be reverse engineered as part of
+an overall reengineering effort. At the system level, global data structures (e.g., ﬁles,
+databases) are often reengineered to accommodate new database management par-
+adigms (e.g., the move from ﬂat ﬁle to relational or object-oriented database systems).
+Reverse engineering of the current global data structures sets the stage for the intro-
+duction of a new systemwide database. 
+
+Internal data structures. Reverse engineering techniques for internal program
+data focus on the deﬁnition of classes of objects.4 This is accomplished by examin-
+ing the program code with the intent of grouping related program variables. In many
+cases, the data organization within the code identiﬁes abstract data types. For exam-
+ple, record structures, files, lists, and other data structures often provide an initial
+indicator of classes.
+
+3 Often, speciﬁcations written early in the life history of a program are never updated. As changes
+
+are made, the code no longer conforms to the speciﬁcation.
+
+4 For a complete discussion of these object-oriented concepts, see Part Four of this book.
+
+812
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+Relatively insigniﬁcant
+compromises in data
+structures can lead to
+potentially catastrophic
+problems in future
+years. Consider the
+Y2K problem as an
+example.
+
+?
+
+What steps
+can be
+
+applied to reverse
+engineer an
+existing database
+structure?
+
+Breuer and Lano [BRE91] suggest the following approach for reverse engineering
+
+of classes:
+
+1.
+
+Identify ﬂags and local data structures within the program that record impor-
+tant information about global data structures (e.g., a ﬁle or database).
+2. Deﬁne the relationship between ﬂags and local data structures and the
+
+global data structures. For example, a ﬂag may be set when a ﬁle is empty; a
+local data structure may serve as a buffer that contains the last 100 records
+acquired from a central database.
+
+3. For every variable (within the program) that represents an array or ﬁle, list all
+
+other variables that have a logical connection to it.
+
+These steps enable a software engineer to identify classes within the program that
+interact with the global data structures. 
+
+Database structure. Regardless of its logical organization and physical structure,
+a database allows the deﬁnition of data objects and supports some method for estab-
+lishing relationships among the objects. Therefore, reengineering one database schema
+into another requires an understanding of existing objects and their relationships.
+
+The following steps [PRE94] may be used to deﬁne the existing data model as a
+
+precursor to reengineering a new database model:
+
+1. Build an initial object model. The classes deﬁned as part of the model
+may be acquired by reviewing records in a ﬂat ﬁle database or tables in a
+relational schema. The items contained in records or tables become attrib-
+utes of a class.
+
+2. Determine candidate keys. The attributes are examined to determine
+
+whether they are used to point to another record or table. Those that serve as
+pointers become candidate keys.
+
+3. Reﬁne the tentative classes. Determine whether similar classes can be
+
+combined into a single class.
+
+4. Deﬁne generalizations. Examine classes that have many similar attributes
+to determine whether a class hierarchy should be constructed with a general-
+ization class at its head.
+
+5. Discover associations. Use techniques that are analogous to the CRC
+
+approach (Chapter 21) to establish associations among classes.
+
+Once information deﬁned in the preceding steps is known, a series of transforma-
+tions [PRE94] can be applied to map the old database structure into a new database
+structure.
+
+30.3.3 Reverse Engineering User Interfaces
+Sophisticated GUIs have become de rigueur for computer-based products and sys-
+tems of every type. Therefore, the redevelopment of user interfaces has become one
+
+?
+
+How do I
+understand
+the workings of
+an existing user
+interface?
+
+CHAPTER 30
+
+REENGINEERING
+
+813
+
+of the most common types of reengineering activity. But before a user interface can
+be rebuilt, reverse engineering should occur.
+
+To fully understand an existing user interface (UI), the structure and behavior of
+the interface must be speciﬁed. Merlo and his colleagues [MER93] suggest three basic
+questions that must be answered as reverse engineering of the UI commences:
+
+• What are the basic actions (e.g., keystrokes and mouse clicks) that the inter-
+
+face must process?
+
+• What is a compact description of the behavioral response of the system to
+
+these actions?
+
+• What is meant by a “replacement,” or more precisely, what concept of equiv-
+
+alence of interfaces is relevant here?
+
+Behavioral modeling notation (Chapter 12) can provide a means for developing
+answers to the first two questions. Much of the information necessary to create a
+behavioral model can be obtained by observing the external manifestation of the
+existing interface. But additional information necessary to create the behavioral model
+must extracted from the code.
+
+It is important to note that a replacement GUI may not mirror the old interface
+exactly (in fact, it may be radically different). It is often worthwhile to develop new
+interaction metaphors. For example, an old UI requests that a user provide a scale
+factor (ranging from 1 to 10) to shrink or magnify a graphical image. A reengineered
+GUI might use a slide-bar and mouse to accomplish the same function.
+
+30.4 RESTRUCTURING
+
+Software restructuring modifies source code and/or data in an effort to make it
+amenable to future changes. In general, restructuring does not modify the overall
+program architecture. It tends to focus on the design details of individual modules
+and on local data structures deﬁned within modules. If the restructuring effort extends
+beyond module boundaries and encompasses the software architecture, restructur-
+ing becomes forward engineering (Section 30.5).
+
+Arnold [ARN89] deﬁnes a number of beneﬁts that can be achieved when software
+
+is restructured:
+
+• Programs have higher quality—better documentation, less complexity, and
+
+•
+
+conformance to modern software engineering practices and standards.
+Frustration among software engineers who must work on the program is
+reduced, thereby improving productivity and making learning easier.
+
+• Effort required to perform maintenance activities is reduced.
+• Software is easier to test and debug.
+
+Restructuring occurs when the basic architecture of an application is solid, even
+though  technical  internals  need  work.  It  is  initiated  when  major  parts  of  the 
+
+?
+
+What
+beneﬁts are
+
+derived from
+restructuring?
+
+814
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+Although code
+restructuring can
+alleviate immediate
+problems associated
+with debugging or
+small changes, it is not
+reengineering. Real
+beneﬁt is achieved
+only when data and
+architecture are
+restructured.
+
+software are serviceable and only a subset of all modules and data need extensive
+modification.5
+
+30.4.1 Code Restructuring
+Code restructuring is performed to yield a design that produces the same function
+but with higher quality than the original program. In general, code restructuring
+techniques (e.g., Warnier's logical simplification techniques [WAR74]) model pro-
+gram logic using Boolean algebra and then apply a series of transformation rules
+that yield restructured logic. The objective is to take "spaghetti-bowl" code and
+derive a procedural design that conforms to the structured programming philoso-
+phy (Chapter 16). 
+
+Other restructuring techniques have also been proposed for use with reengineer-
+ing tools. A resource exchange diagram maps each program module and the resources
+(data types, procedures and variables) that are exchanged between it and other mod-
+ules. By creating representations of resource ﬂow, the program architecture can be
+restructured to achieve minimum coupling among modules.
+
+30.4.2 Data Restructuring
+Before data restructuring can begin, a reverse engineering activity called analysis of
+source code must be conducted. All programming language statements that contain
+data deﬁnitions, ﬁle descriptions, I/O, and interface descriptions are evaluated. The
+intent is to extract data items and objects, to get information on data flow, and to
+understand the existing data structures that have been implemented. This activity is
+sometimes called data analysis [RIC89].
+
+Once data analysis has been completed, data redesign commences. In its simplest
+form, a data record standardization step clariﬁes data deﬁnitions to achieve consis-
+tency among data item names or physical record formats within an existing data
+structure or ﬁle format. Another form of redesign, called data name rationalization,
+ensures that all data naming conventions conform to local standards and that aliases
+are eliminated as data ﬂow through the system.
+
+When restructuring moves beyond standardization and rationalization, physical
+modifications to existing data structures are made to make the data design more
+effective. This may mean a translation from one ﬁle format to another, or in some
+cases, translation from one type of database to another.  
+
+30.5 FORWARD ENGINEERING
+
+A program with control ﬂow that is the graphic equivalent of a bowl of spaghetti, with
+"modules" that are 2,000 statements long, with few meaningful comment lines in
+
+5 It is sometimes difﬁcult to make a distinction between extensive restructuring and redevelop-
+
+ment. Both are reengineering. 
+
+?
+
+What
+options exist
+when we’re faced
+with a poorly
+designed and
+implemented
+program?
+
+Reengineering is a lot
+like getting your teeth
+cleaned. You can think
+of a thousand reasons
+to delay it, and you’ll
+get away with
+procrastinating for
+quite a while. But
+eventually, your
+delaying tactics will
+come back to haunt
+you.
+
+CHAPTER 30
+
+REENGINEERING
+
+815
+
+290,000 source statements and no other documentation must be modiﬁed to accom-
+modate changing user requirements. We have the following options:
+
+1. We can struggle through modiﬁcation after modiﬁcation, ﬁghting the implicit
+
+design and source code to implement the necessary changes.
+
+2. We can attempt to understand the broader inner workings of the program in
+
+an effort to make modiﬁcations more effectively.
+
+3. We can redesign, recode, and test those portions of the software that require
+
+modiﬁcation, applying a software engineering approach to all revised seg-
+ments.
+
+4. We can completely redesign, recode, and test the program, using CASE
+(reengineering) tools to assist us in understanding the current design. 
+
+There is no single "correct" option. Circumstances may dictate the ﬁrst option even
+if the others are more desirable.
+
+Rather than waiting until a maintenance request is received, the development or
+support organization uses the results of inventory analysis to select a program that
+(1) will remain in use for a preselected number of years, (2) is currently being used
+successfully, and (3) is likely to undergo major modiﬁcation or enhancement in the
+near future. Then, option 2, 3, or 4 is applied.
+
+This preventative maintenance approach was pioneered by Miller [MIL81] under
+the title structured retroﬁt. This concept is deﬁned as "the application of today's method-
+ologies to yesterday's systems to support tomorrow's requirements."
+
+At ﬁrst glance, the suggestion that we redevelop a large program when a working
+version already exists may seem quite extravagant. Before passing judgment, con-
+sider the following points:
+
+1. The cost to maintain one line of source code may be 20 to 40 times the cost
+
+of initial development of that line.
+
+2. Redesign of the software architecture (program and/or data structure), using
+
+modern design concepts, can greatly facilitate future maintenance.
+
+3. Because a prototype of the software already exists, development productivity
+
+should be much higher than average.
+
+4. The user now has experience with the software. Therefore, new require-
+ments and the direction of change can be ascertained with greater ease.
+
+5. CASE tools for reengineering will automate some parts of the job.
+6. A complete software conﬁguration (documents, programs, and data) will
+
+exist upon completion of preventive maintenance.
+
+When a software development organization sells software as a product, preven-
+tive maintenance is seen in "new releases" of a program. A large in-house software
+developer (e.g., a business systems software development group for a large consumer
+
+816
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+products company) may have 500–2000 production programs within its domain of
+responsibility. These programs can be ranked by importance and then reviewed as
+candidates for preventive maintenance.
+
+The forward engineering process applies software engineering principles, con-
+cepts, and methods to re-create an existing application. In most cases, forward engi-
+neering does not simply create a modern equivalent of an older program. Rather,
+new user and technology requirements are integrated into the reengineering effort.
+The redeveloped program extends the capabilities of the older application.
+
+XRef
+Client/server software
+engineering is
+discussed in  
+Chapter 28.
+
+30.5.1 Forward Engineering for Client/Server Architectures
+Over the past decade many mainframe applications have been reengineered to accom-
+modate client/server architectures. In essence, centralized computing resources
+(including software) are distributed among many client platforms. Although a vari-
+ety of different distributed environments can be designed, the typical mainframe appli-
+cation that is reengineered into a client/server architecture has the following features:
+
+• Application functionality migrates to each client computer.
+• New GUI interfaces are implemented at the client sites.
+• Database functions are allocated to the server.
+• Specialized functionality (e.g., compute-intensive analysis) may remain at the
+
+server site.
+
+• New communications, security, archiving, and control requirements must be
+
+established at both the client and server sites.
+
+It is important to note that the migration from mainframe to c/s computing requires
+both business and software reengineering. In addition, an “enterprise network infra-
+structure” [JAY94] should be established.
+
+Reengineering for c/s applications begins with a thorough analysis of the busi-
+ness environment that encompasses the existing mainframe. Three layers of abstrac-
+tion (Figure 30.4) can be identiﬁed. The database sits at the foundation of a client/server
+architecture and manages transactions and queries from server applications. Yet these
+transactions and queries must be controlled within the context of a set of business
+rules (deﬁned by an existing or reengineered business process). Client applications
+provide targeted functionality to the user community.
+
+The functions of the existing database management system and the data archi-
+tecture of the existing database must be reverse engineered as a precursor to the
+redesign of the database foundation layer. In some cases a new data model (Chap-
+ter 12) is created. In every case, the c/s database is reengineered to ensure that trans-
+actions are executed in a consistent manner, that all updates are performed only by
+authorized users, that core business rules are enforced (e.g., before a vendor record
+is deleted, the server ensures that no related accounts payable, contracts, or com-
+
+In some cases, c/s or
+OO systems designed
+to replace a legacy
+application should be
+approached as a new
+development project.
+Reengineering enters
+the picture only when
+elements of an old
+system are to be
+integrated with the
+new architecture. In
+some cases, you may
+be better off rejecting
+the old and creating
+identical new
+functionality.
+
+CHAPTER 30
+
+REENGINEERING
+
+817
+
+FIGURE 30.4
+Reengineering
+mainframe
+applications to
+client/server
+
+Interface: GUI
+
+Client applications
+
+Interface: process requests
+
+Business rules
+
+Interface: transactions and queries
+
+Database
+
+munications exist for that vendor), that queries can be accommodated efﬁciently, and
+that full archiving capability has been established.
+
+The business rules layer represents software resident at both the client and the
+server. This software performs control and coordination tasks to ensure that trans-
+actions and queries between the client application and the database conform to the
+the established business process.
+
+The client applications layer implements business functions that are required by
+speciﬁc groups of end-users. In many instances, a mainframe application is segmented
+into a number of smaller, reengineered desktop applications. Communication among
+the desktop applications (when necessary) is controlled by the business rules layer. 
+A comprehensive discussion of client/server software design and reengineering
+is best left to books dedicated to the subject. The interested reader should see [VAS93],
+[INM93], and [BER92].
+
+30.5.2 Forward Engineering for Object-Oriented Architectures
+Object-oriented software engineering has become the development paradigm of
+choice for many software organizations. But what about existing applications that
+were developed using conventional methods? In some cases, the answer is to leave
+such applications “as is.” In others, older applications must be reengineered so that
+they can be easily integrated into large, object-oriented systems.
+
+818
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+Reengineering conventional software into an object-oriented implementation uses
+many of the same techniques discussed in Part Four of this book. First, the existing
+software is reverse engineered so that appropriate data, functional, and behavioral
+models can be created. If the reengineered system extends the functionality or behav-
+ior of the original application, use-cases (Chapters 11 and 21) are created. The data
+models created during reverse engineering are then used in conjunction with CRC
+modeling (Chapter 21) to establish the basis for the deﬁnition of classes. Class hier-
+archies, object-relationship models, object-behavior models, and subsystems are
+deﬁned, and object-oriented design commences.
+
+As object-oriented forward engineering progresses from analysis to design, a CBSE
+process model (Chapter 27) can be invoked. If the existing application exists within
+a domain that is already populated by many object-oriented applications, it is likely
+that a robust component library exists and can be used during forward engineering.
+For those classes that must be engineered from scratch, it may be possible to reuse
+algorithms and data structures from the existing conventional application. However,
+these must be redesigned to conform to the object-oriented architecture. 
+
+30.5.3 Forward Engineering User Interfaces
+As applications migrate from the mainframe to the desktop, users are no longer will-
+ing to tolerate arcane, character-based user interfaces. In fact, a signiﬁcant portion
+of all effort expended in the transition from mainframe to client/server computing
+can be spent in the reengineering of client application user interfaces.
+
+Merlo and his colleagues [MER95] suggest the following model for reengineering
+
+user interfaces:
+
+1. Understand the original interface and the data that move between it
+
+and the remainder of the application. The intent is to understand how
+other elements of a program interact with existing code that implements the
+interface. If a new GUI is to be developed, the data that ﬂow between the GUI
+and the remaining program must be consistent with the data that currently
+ﬂow between the character-based interface and the program.
+
+2. Remodel the behavior implied by the existing interface into a series
+of abstractions that have meaning in the context of a GUI. Although
+the mode of interaction may be radically different, the business behavior
+exhibited by users of the old and new interfaces (when considered in terms
+of a usage scenario) must remain the same. A redesigned interface must still
+allow a user to exhibit the appropriate business behavior. For example, when
+a database query is to be made, the old interface may require a long series of
+text-based commands to specify the query. The reengineered GUI may
+streamline the query to a small sequence of mouse picks, but the intent and
+content of the query remain unchanged.
+
+?
+
+What steps
+should we
+
+follow to
+reengineer a user
+interface?
+
+CHAPTER 30
+
+REENGINEERING
+
+819
+
+3.
+
+Introduce improvements that make the mode of interaction more
+efﬁcient. The ergonomic failings of the existing interface are studied and
+corrected in the design of the new GUI.
+
+4. Build and integrate the new GUI. The existence of class libraries and
+
+fourth generation tools can reduce the effort required to build the GUI signiﬁ-
+cantly. However, integration with existing application software can be more
+time consuming. Care must be taken to ensure that the GUI does not propa-
+gate adverse side effects into the remainder of the application.
+
+30.6 THE ECONOMICS OF REENGINEERING
+
+In a perfect world, every unmaintainable program would be retired immediately, to
+be replaced by high-quality, reengineered applications developed using modern soft-
+ware engineering practices. But we live in a world of limited resources. Reengineer-
+ing drains resources that can be used for other business purposes. Therefore, before
+an organization attempts to reengineer an existing application, it should perform a
+cost/beneﬁt analysis.
+
+A cost/benefit analysis model for reengineering has been proposed by Sneed
+
+[SNE95]. Nine parameters are deﬁned:
+
+“You can pay us a
+little now, or pay us
+a lot more later.”
+Sign in auto
+dealership
+suggesting a 
+tune-up 
+
+P1 = current annual maintenance cost for an application.
+P2 = current annual operation cost for an application.
+P3 = current annual business value of an application.
+P4 = predicted annual maintenance cost after reengineering.
+P5 = predicted annual operations cost after reengineering.
+P6 = predicted annual business value after reengineering.
+P7 = estimated reengineering costs.
+P8 = estimated reengineering calendar time.
+P9 = reengineering risk factor (P9 = 1.0 is nominal).
+L =
+
+expected life of the system.
+
+The cost associated with continuing maintenance of a candidate application (i.e.,
+reengineering is not performed) can be deﬁned as
+
+Cmaint = [P3 ⫺ (P1 + P2)] ⫻ L
+
+(30-1)
+
+The costs associated with reengineering are deﬁned using the following relationship:
+
+Creeng = [P6 ⫺ (P4 + P5)⫻ (L ⫺ P8) ⫺ (P7 ⫻ P9)]
+
+`
+
+(30-2)
+
+Using the costs presented in equations (30-1) and (30-2), the overall beneﬁt of reengi-
+neering can be computed as
+
+cost beneﬁt = Creeng ⫺ Cmaint
+
+(30-3)
+
+820
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+The cost/beneﬁt analysis presented in the equations can be performed for all high-
+priority applications identiﬁed during inventory analysis (Section 30.2.2). Those appli-
+cations that show the highest cost/beneﬁt can be targeted for reengineering, while
+work on others can be postponed until resources are available.
+
+30.7 SUMMARY
+
+Reengineering occurs at two different levels of abstraction. At the business level,
+reengineering focuses on the business process with the intent of making changes to
+improve competitiveness in some area of the business. At the software level, reengi-
+neering examines information systems and applications with the intent of restruc-
+turing or reconstructing them so that they exhibit higher quality.
+
+Business process reengineering deﬁnes business goals, identiﬁes and evaluates
+existing business processes (in the context of deﬁned goals), speciﬁes and designs
+revised processes, and prototypes, reﬁnes, and instantiates them within a business.
+BPR has a focus that extends beyond software. The result of BPR is often the deﬁni-
+tion of ways in which information technologies can better support the business.
+
+Software reengineering encompasses a series of activities that include inventory
+analysis, document restructuring, reverse engineering, program and data restruc-
+turing, and forward engineering. The intent of these activities is to create versions of
+existing programs that exhibit higher quality and better maintainability—programs
+that will be viable well into the twenty-ﬁrst century.
+
+Inventory analysis enables an organization to assess each application systemati-
+cally, with the intent of determining which are candidates for reengineering. Docu-
+ment restructuring creates a framework of documentation that is necessary for the
+long-term support of an application. Reverse engineering is the process of analyzing
+a program in an effort to extract data, architectural, and procedural design informa-
+tion. Finally, forward engineering reconstructs a program using modern software
+engineering practices and information learned during reverse engineering.
+
+The cost/beneﬁt of reengineering can be determined quantitatively. The cost of
+the status quo, that is, the cost associated with ongoing support and maintenance of
+an existing application, is compared to the projected costs of reengineering and the
+resultant reduction in maintenance costs. In almost every case in which a program
+has a long life and currently exhibits poor maintainability, reengineering represents
+a cost-effective business strategy.
+
+REFERENCES
+
+[ARN89] Arnold, R.S., “Software Restructuring,” Proc. IEEE, vol. 77, no. 4, April 1989,
+pp. 607–617. 
+[BER92] Berson, A., Client/Server Architecture, McGraw-Hill, 1992.
+
+CHAPTER 30
+
+REENGINEERING
+
+821
+
+[BLE93] Bleakley, F.R., “The Best Laid Plans: Many Companies Try Management Fads,
+Only to See Them Flop,” The Wall Street Journal, July 6, 1993, p. 1.
+[BRE91] Breuer, P.T. and K. Lano, “Creating Speciﬁcation From Code: Reverse-Engi-
+neering Techniques,” Journal of Software Maintenance: Research and Practice, vol. 3,
+1991, pp. 145–162.
+[CAN72]  Canning, R., "The Maintenance 'Iceberg'," EDP Analyzer, vol. 10, no. 10,
+October 1972. 
+[CAS88] "Case Tools for Reverse Engineering," CASE Outlook, CASE Consulting Group,
+vol. 2, no. 2, 1988, pp. 1–15.
+[CHI90] Chikofsky, E.J., and J.H. Cross, II, "Reverse Engineering and Design Recov-
+ery: A Taxonomy," IEEE Software, January 1990, pp. 13–17. 
+[DAV90] Davenport, T.H. and J.E. Young, “The New Industrial Engineering: Informa-
+tion Technology and Business Process Redesign,” Sloan Management Review, Sum-
+mer 1990, pp. 11–27.
+[DEM95] DeMarco, T., “Lean and Mean,” IEEE Software, November 1995, pp. 101–102.
+[DIC95] Dickinson, B., Strategic Business Reengineering, LCI Press, 1995.
+[HAM90] Hammer, M., “Reengineer Work: Don’t Automate, Obliterate,” Harvard Busi-
+ness Review, July–August 1990, pp. 104–112.
+[HAN93] Manna, M., “Maintenance Burden Begging for a Remedy,” Datamation, April
+1993, pp. 53–63.
+Inmon, W.H., Developing Client Server Applications, QED Publishing, 1993.
+[INM93]
+Jaychandra, Y., Re-engineering the Networked Enterprise, McGraw-Hill, 1994.
+[JAY94]
+[MER93] Merlo, E., et al., “Reverse Engineering of User Interfaces,” Proc. Working
+Conference on Reverse Engineering, IEEE, Baltimore, May 1993, pp. 171–178.
+[MER95] Merlo, E., et al., “Reengineering User Interfaces,” IEEE Software, January
+1995, pp. 64–73.
+[MIL81] Miller, J., in Techniques of Program and System Maintenance, (G. Parikh, ed.)
+Winthrop Publishers, 1981.
+[OSB90] Osborne, W.M. and E.J. Chikofsky, "Fitting Pieces to the Maintenance Puz-
+zle," IEEE Software, January 1990, pp. 10–11.
+[PRE94] Premerlani,W.J., and M.R. Blaha, “An Approach for Reverse Engineering of
+Relational Databases,” CACM, vol. 37, no. 5, May 1994, pp. 42–49. 
+[RIC89] Ricketts, J.A., J.C. DelMonaco, and M.W. Weeks, “Data Reengineering for
+Application Systems,” Proc. Conf. Software Maintenance—1989, IEEE, 1989, pp. 174–179.
+[SNE95] Sneed, H., "Planning the Reengineering of Legacy Systems," IEEE Software,
+January 1995, pp. 24–25.
+[STE93] Stewart, T.A., “Reengineering: The Hot New Managing Tool,” Fortune, August
+23, 1993, pp. 41–48.
+[SWA76] Swanson, E.B., "The Dimensions of Maintenance,"Proc. Second Intl. Conf.
+Software Engineering, IEEE, October 1976, pp. 492–497. 
+[VAS93] Vaskevitch, D., Client/Server Strategies, IDG Books, 1993.
+
+822
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+[WAR74] Warnier, J.D., Logical Construction of Programs, Van Nostrand-Reinhold,
+1974.
+[WEI95] Weisz, M., “BPR Is Like Teenage Sex,” American Programmer, vol. 8, no. 6,
+June 1995, pp. 9–15. 
+
+PROBLEMS AND POINTS TO PONDER
+
+30.1. Consider any job that you’ve held in the last ﬁve years. Describe the business
+process in which you played a part. Use the BPR model described in Section 30.1.3
+to recommend changes to the process in an effort to make it more efﬁcient.
+
+30.2. Do some research on the efﬁcacy of business process reengineering. Present
+pro and con arguments for this approach.
+
+30.3. Your instructor will select one of the programs that everyone in the class has
+developed during this course. Exchange your program randomly with someone else
+in the class. Do not explain or walk through the program. Now, implement an enhance-
+ment (speciﬁed by your instructor) in the program you have received.
+
+a. Perform all software engineering tasks including a brief walkthrough (but
+
+not with the author of the program).
+
+b. Keep careful track of all errors encountered during testing.
+c. Discuss your experiences in class.
+
+30.4. Explore the inventory analysis checklist presented at the SEPA Web site and
+attempt to develop a quantitative software rating system that could be applied to
+existing programs in an effort to pick candidate programs for reengineering. Your
+system should extend beyond economic analysis presented in Section 30.6.
+
+30.5. Suggest alternatives to paper and ink or conventional electronic documenta-
+tion that could serve as the basis for document restructuring. (Hint: Think of new
+descriptive technologies that could be used to communicate the intent of the soft-
+ware.)
+
+30.6. Some people believe that artificial intelligence technology will increase the
+abstraction level of the reverse engineering process. Do some research on this sub-
+ject (i.e., the use of AI for reverse engineering) and write a brief paper that takes a
+stand on this point.
+
+30.7. Why is completeness difﬁcult to achieve as abstraction level increases?
+
+30.8. Why must interactivity increase if completeness is to increase?
+
+30.9. Get product literature on three reverse engineering tools and present their
+characteristics in class.
+
+30.10. There is a subtle difference between restructuring and forward engineering.
+What is it?
+
+CHAPTER 30
+
+REENGINEERING
+
+823
+
+30.11. Research the literature to ﬁnd one or more papers that discuss case studies
+of mainframe to client/server reengineering. Present a summary.
+
+30.12. How would you determine P4 through P7 in the cost-beneﬁt model presented
+in Section 30.6?
+
+FURTHER READINGS AND INFORMATION SOURCES
+
+Like many hot topics in the business community, the hype surrounding business
+process reengineering has given way to a more pragmatic view of the subject. Ham-
+mer and Champy (Reengineering the Corporation, HarperCollins, 1993) precipitated
+early interest with their best selling book. Later, Hammer (Beyond Reengineering: How
+the Processed-Centered Organization Is Changing Our Work and Our Lives, Harper-
+Collins 1997) reﬁned his view by focusing on “process-centered” issues.
+
+Books by Andersen (Business Process Improvement Toolbox, American Society for
+Quality, 1999),  Harrington et al. (Business Process Improvement Workbook, McGraw-
+Hill, 1997), Hunt (Process Mapping: How to Reengineer Your Business Processes, Wiley,
+1996), and Carr and Johansson (Best Practices in Reengineering: What Works and What
+Doesn't in the Reengineering Process, McGraw-Hill, 1995) present case studies and
+detailed guidelines for BPR. 
+
+Feldmann (The Practical Guide to Business Process Reengineering Using IDEF0, Dorset
+House, 1998) discusses a modeling notation that assists in BPR. Berztiss (Software Meth-
+ods for Business Reengineering, Springer, 1996) and Spurr et al. (Software Assistance for
+Business Reengineering, Wiley, 1994) discuss tools and techniques that facilitate BPR. 
+Relatively few books have been dedicated to software reengineering. Rada (Reengi-
+neering Software: How to Reuse Programming to Build New, State-of-the-Art Software,
+Fitzroy Dearborn Publishers, 1999) focuses on reengineering at a technical level.
+Miller (Reengineering Legacy Software Systems, Digital Press, 1998) “provides a frame-
+work for keeping application systems synchronized with business strategies and tech-
+nology changes.” Umar (Application (Re)Engineering: Building Web-Based Applications
+and Dealing with Legacies, Prentice-Hall, 1997) provides worthwhile guidance for orga-
+nizations that want to transform legacy systems into a Web-based environment. Cook
+(Building Enterprise Information Architectures: Reengineering Information Systems, Pren-
+tice-Hall, 1996) discusses the bridge between BPR and information technology. Aiken
+(Data Reverse Engineering, McGraw-Hill, 1996) discusses how to reclaim, reorganize,
+and reuse organizational data. Arnold (Software Reengineering, IEEE Computer Soci-
+ety Press, 1993) has put together an excellent anthology of early papers that focus on
+software reengineering technologies. 
+
+A wide variety of information sources on business process reengineering and soft-
+ware reengineering is available on the Internet. An up-to-date list of World Wide Web
+references can be found at the SEPA Web site:
+http://www.mhhe.com/engcs/compsci/pressman/resources/
+reengineering.mhtml
+
+C H A P T E R
+
+31 COMPUTER-AIDED
+
+SOFTWARE ENGINEERING
+
+K E Y
+C O N C E P T S
+CASE building
+blocks   . . . . . . . . 826
+CASE tools . . . . . 828
+I-CASE . . . . . . . . . 833
+IPSE. . . . . . . . . . . 828
+integration
+architecture . . . . 834
+object management
+layer . . . . . . . . . . 835
+repository
+features . . . . . . . 837
+repository
+functions . . . . . . . 836
+tools management
+services. . . . . . . . 835
+tools taxonomy . 828
+
+Everyone has heard the old saying about the shoemaker's children: The
+
+shoemaker is so busy making shoes for others that his children don't have
+shoes of their own. Prior to the 1990s, many software developers were
+the "shoemaker's children." Although these technical professionals built com-
+plex systems and products that automated the work of others, they used very
+little automation themselves. 
+
+Today, software engineers have their ﬁrst new pair of shoes—computer-aided
+software engineering (CASE). The shoes don't come in as many varieties as
+they would like, haven’t lived up to the many exaggerated promises made by
+their manufacturers, are often a bit stiff and sometimes uncomfortable, don't
+provide enough sophistication for those who are stylish, and don't always match
+other garments that software developers use, but they provide an absolutely
+essential piece of apparel for the software engineer's wardrobe and will, over
+time, become more comfortable, more useable, and more adaptable to the needs
+of individual practitioners.
+
+In earlier chapters of this book we have attempted to provide a reasonable
+understanding of the underpinnings of software engineering technology. In this
+chapter, the focus shifts to the tools and environments that will help to auto-
+mate the software process. 
+
+Q U I C K
+L O O K
+
+What is it? Computer-aided soft-
+ware engineering (CASE) tools
+assist software engineering man-
+agers and practitioners in every activity associ-
+ated with the software process. They automate
+project management activities, manage all work
+products produced throughout the process, and
+assist engineers in their analysis, design, coding
+and test work. CASE tools can be integrated within
+a sophisticated environment.
+
+Who does it? Project managers and software engi-
+
+neers use CASE.
+
+Why is it important? Software engineering is difﬁcult.
+Tools that reduce the amount of effort required to
+produce a work product or accomplish some pro-
+
+ject milestone have substantial beneﬁt. But there’s
+something that’s even more important. Tools can
+provide new ways of looking at software engi-
+neering  information—ways  that  improve  the
+insight of the engineer doing the work. This leads
+to better decisions and higher software quality.
+
+What are the steps? CASE is used in conjunction with
+the process model that is chosen. If a full tool set
+is available, CASE will be used during virtually
+every step of the software process.
+
+What is the work product? CASE tools assist a soft-
+ware engineer in producing high-quality work
+products. In addition, the availability of automa-
+tion allows the CASE user to produce additional
+customized  work  products  that  could  not  be 
+
+825
+
+826
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+Q U I C K
+L O O K
+
+easily  or  practically  produced
+without tool support.
+How do I ensure that I’ve done it
+right? Use tools to complement solid software engi-
+neering practices—not to replace them. Before
+
+tools can be used effectively, a software process
+framework must be established, software engi-
+neering concepts and methods must be learned,
+and software quality must be emphasized. Only
+then will CASE provide beneﬁt.
+
+31.1 WHAT IS CASE?
+
+A good workshop for any craftsperson—a mechanic, a carpenter, or a software engi-
+neer—has three primary characteristics: (1) a collection of useful tools that will help
+in every step of building a product, (2) an organized layout that enables tools to be
+found quickly and used efﬁciently, and (3) a skilled artisan who understands how to
+use the tools in an effective manner. Software engineers now recognize that they
+need more and varied tools along with an organized and efﬁcient workshop in which
+to place the tools.
+
+The workshop for software engineering has been called an integrated project sup-
+port environment (discussed later in this chapter) and the tools that ﬁll the workshop
+are collectively called computer-aided software engineering. 
+
+CASE provides the software engineer with the ability to automate manual activi-
+ties and to improve engineering insight. Like computer-aided engineering and design
+tools that are used by engineers in other disciplines, CASE tools help to ensure that
+quality is designed in before the product is built.
+
+31.2 BUILDING BLOCKS FOR CASE
+
+“The most valuable
+CASE tools are those
+that contribute
+information to the
+development
+process.”
+Robert Dixon 
+
+Computer aided software engineering can be as simple as a single tool that supports
+a speciﬁc software engineering activity or as complex as a complete "environment"
+that encompasses tools, a database, people, hardware, a network, operating systems,
+standards, and myriad other components. The building blocks for CASE are illustrated
+in Figure 31.1. Each building block forms a foundation for the next, with tools sitting
+at the top of the heap. It is interesting to note that the foundation for effective CASE
+environments has relatively little to do with software engineering tools themselves.
+Rather, successful environments for software engineering are built on an environ-
+ment architecture that encompasses appropriate hardware and systems software. In
+addition, the environment architecture must consider the human work patterns that
+are applied during the software engineering process.
+
+The environment architecture, composed of the hardware platform and system
+support (including networking software, database management, and object man-
+agement services), lays the ground work for CASE. But the CASE environment itself
+
+CHAPTER 31
+
+COMPUTER-AIDED SOFTWARE ENGINEERING
+
+827
+
+FIGURE 31.1
+CASE building
+blocks
+
+CASE tools
+
+Integration framework
+
+Portability services
+
+Operating system
+
+Hardware platform
+
+Environment architecture
+
+demands other building blocks. A set of portability services provides a bridge between
+CASE tools and their integration framework and the environment architecture. The
+integration framework is a collection of specialized programs that enables individual
+CASE tools to communicate with one another, to create a project database, and to
+exhibit the same look and feel to the end-user (the software engineer). Portability ser-
+vices allow CASE tools and their integration framework to migrate across different
+hardware platforms and operating systems without signiﬁcant adaptive maintenance.
+The building blocks depicted in Figure 31.1 represent a comprehensive founda-
+tion for the integration of CASE tools. However, most CASE tools in use today have
+not been constructed using all these building blocks. In fact, some CASE tools remain
+"point solutions." That is, a tool is used to assist in a particular software engineering
+activity (e.g., analysis modeling) but does not directly communicate with other tools,
+is not tied into a project database, is not part of an integrated CASE environment (I-
+CASE). Although this situation is not ideal, a CASE tool can be used quite effectively,
+even if it is a point solution.
+
+The relative levels of CASE integration are shown in Figure 31.2. At the low end
+of the integration spectrum is the individual (point solution) tool. When individual
+tools provide facilities for data exchange (most do), the integration level is improved
+slightly. Such tools produce output in a standard format that should be compatible
+with other tools that can read the format. In some cases, the builders of comple-
+mentary CASE tools work together to form a bridge between the tools (e.g., an analy-
+sis and design tool that is coupled with a code generator). Using this approach, the
+synergy between the tools can produce end products that would be difﬁcult to cre-
+ate using either tool separately. Single-source integration occurs when a single CASE
+tools vendor integrates a number of different tools and sells them as a package.
+Although this approach is quite effective, the closed architecture of most single-source
+environments precludes easy addition of tools from other vendors. 
+
+Point-solution CASE
+tools can provide
+substantial individual
+beneﬁt, but a software
+team needs tools that
+talk to one another.
+Integrated tools help
+the team develop,
+organize, and control
+work products. Use
+them.
+
+828
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+FIGURE 31.2
+Integration
+options
+
+Individual tool
+(point solution)
+
+Data exchange
+
+Single source
+
+Tool bridges &
+partnerships
+
+IPSE
+
+At the high end of the integration spectrum is the integrated project support envi-
+ronment (IPSE). Standards for each of the building blocks described previously have
+been created. CASE tool vendors use IPSE standards to build tools that will be com-
+patible with the IPSE and therefore compatible with one another.
+
+31.3 A TAXONOMY OF CASE TOOLS
+
+CASE Tools
+
+A number of risks are inherent whenever we attempt to categorize CASE tools. There
+is a subtle implication that to create an effective CASE environment, one must imple-
+ment all categories of tools—this is simply not true. Confusion (or antagonism) can
+be created by placing a speciﬁc tool within one category when others might believe
+it belongs in another category. Some readers may feel that an entire category has
+been omitted—thereby eliminating an entire set of tools for inclusion in the overall
+CASE environment. In addition, simple categorization tends to be ﬂat—that is, we do
+not show the hierarchical interaction of tools or the relationships among them. But
+even with these risks, it is necessary to create a taxonomy of CASE tools—to better
+understand the breadth of CASE and to better appreciate where such tools can be
+applied in the software engineering process.
+
+CASE tools can be classiﬁed by function, by their role as instruments for managers
+or technical people, by their use in the various steps of the software engineering
+process, by the environment architecture (hardware and software) that supports them,
+or even by their origin or cost [QED89]. The taxonomy presented here uses function
+as a primary criterion.
+
+CHAPTER 31
+
+COMPUTER-AIDED SOFTWARE ENGINEERING
+
+829
+
+Business process engineering tools. By modeling the strategic information require-
+ments of an organization, business process engineering tools provide a "meta-model"
+from which specific information systems are derived. Rather than focusing on the
+requirements of a speciﬁc application, business information is modeled as it moves
+between various organizational entities within a company. The primary objective for
+tools in this category is to represent business data objects, their relationships, and
+how these data objects ﬂow between different business areas within a company.
+
+Process modeling and management tools. If an organization works to improve
+a business (or software) process, it must ﬁrst understand it. Process modeling tools
+(also called process technology tools) are used to represent the key elements of a
+process so that it can be better understood. Such tools can also provide links to process
+descriptions that help those involved in the process to understand the work tasks that
+are required to perform it. Process management tools provide links to other tools that
+provide support to deﬁned process activities.  
+
+Project planning tools. Tools in this category focus on two primary areas: soft-
+ware project effort and cost estimation and project scheduling. Estimation tools com-
+pute estimated effort, project duration, and recommended number of people for a
+project. Project scheduling tools enable the manager to deﬁne all project tasks (the
+work breakdown structure), create a task network (usually using graphical input),
+represent task interdependencies, and model the amount of parallelism possible for
+the project. 
+
+Risk analysis tools. Identifying potential risks and developing a plan to mitigate,
+monitor, and manage them is of paramount importance in large projects. Risk analy-
+sis tools enable a project manager to build a risk table by providing detailed guid-
+ance in the identiﬁcation and analysis of risks.
+
+XRef
+Business process
+engineering is
+discussed in Chapter
+10.
+
+XRef
+The elements of the
+software process are
+discussed in Chapter 2.
+
+XRef
+Estimation techniques
+are presented in
+Chapter 5. Scheduling
+methods are discussed
+in Chapter 7.
+
+XRef
+Risk analysis and
+management are
+discussed in Chapter 6.
+
+XRef
+Tracking and
+monitoring are
+discussed in Chapter 7. 
+
+Project management tools. The project schedule and project plan must be tracked
+and monitored on a continuing basis. In addition, a manager should use tools to col-
+lect metrics that will ultimately provide an indication of software product quality.
+Tools in the category are often extensions to project planning tools. 
+
+XRef
+Requirements
+engineering methods
+are discussed in
+Chapter 10.
+
+Requirements tracing tools. When large systems are developed, things "fall into
+the cracks." That is, the delivered system does not fully meet customer specified
+requirements. The objective of requirements tracing tools is to provide a systematic
+approach to the isolation of requirements, beginning with the customer request for
+proposal or specification. The typical requirements tracing tool combines human-
+interactive text evaluation with a database management system that stores and cat-
+egorizes  each  system  requirement  that  is  "parsed"  from  the  original  RFP  or
+speciﬁcation. 
+
+Metrics and management tools. Software metrics improve a manager's ability to
+control and coordinate the software engineering process and a practitioner's ability
+
+830
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+XRef
+Metrics are presented
+in Chapters 4, 19, and
+24.
+
+XRef
+Documentation is
+discussed throughout
+the book. More detail
+is presented at the
+SEPA Web site.
+
+XRef
+See Chapters  27, 28,
+and 29 for limited
+discussion of these
+topics.
+
+XRef
+SQA is presented in
+Chapter 8.
+
+XRef
+The software repository
+is discussed in Chapter
+9.
+
+XRef
+SCM activities,
+including identiﬁcation,
+version control, change
+control, auditing, and
+status accounting, are
+discussed in Chapter 9.
+
+to improve the quality of the software that is produced. Today's metrics or measure-
+ment tools focus on process and product characteristics. Management-oriented tools
+capture project speciﬁc metrics (e.g., LOC/person-month, defects per function point)
+that provide an overall indication of productivity or quality. Technically oriented tools
+determine technical metrics that provide greater insight into the quality of design or
+code. 
+
+Documentation tools. Document production and desktop publishing tools sup-
+port nearly every aspect of software engineering and represent a substantial "lever-
+age" opportunity for all software developers. Most software development organizations
+spend a substantial amount of time developing documents, and in many cases the
+documentation process itself is quite inefﬁcient. It is not unusual for a software devel-
+opment organization to spend as much as 20 or 30 percent of all software develop-
+ment effort on documentation. For this reason, documentation tools provide an
+important opportunity to improve productivity.
+
+System software tools. CASE is a workstation technology. Therefore, the CASE
+environment must accommodate high-quality network system software, object man-
+agement services, distributed component support, electronic mail, bulletin boards,
+and other communication capabilities. 
+
+Quality assurance tools. The majority of CASE tools that claim to focus on qual-
+ity assurance are actually metrics tools that audit source code to determine compli-
+ance with language standards. Other tools extract technical metrics (Chapters 19 and
+24) in an effort to project the quality of the software that is being built.
+
+Database management tools. Database management software serves as a foun-
+dation for the establishment of a CASE database (repository) that we have called the
+project database. Given the emphasis on conﬁguration objects, database management
+tools for CASE are evolving from relational database management systems to object-
+oriented database management systems.
+
+Software configuration management tools. Software configuration manage-
+ment lies at the kernel of every CASE environment. Tools can assist in all ﬁve major
+SCM tasks—identification, version control, change control, auditing, and status
+accounting. The CASE database provides a mechanism for identifying each conﬁg-
+uration item and relating it to other items; the change control process can be imple-
+mented with the aid of specialized tools; easy access to individual configuration
+items facilitates the auditing process; and CASE communication tools can greatly
+improve status accounting (reporting information about changes to all who need to
+know).
+
+Analysis and design tools. Analysis and design tools enable a software engineer
+to create models of the system to be built. The models contain a representation of
+data, function, and behavior (at the analysis level) and characterizations of data, archi-
+
+CHAPTER 31
+
+COMPUTER-AIDED SOFTWARE ENGINEERING
+
+831
+
+XRef
+Analysis and design are
+discussed throughout
+Parts Three and Four of
+this book.
+
+tectural, component-level, and interface design.1 By performing consistency and valid-
+ity checking on the models, analysis and design tools provide a software engineer
+with some degree of insight into the analysis representation and help to eliminate
+errors before they propagate into the design, or worse, into implementation itself.
+
+XRef
+Prototyping and
+simulation are
+discussed brieﬂy in
+Chapter 10.
+
+XRef
+The elements of user
+interface design are
+presented in Chapter
+15.
+
+XRef
+Prototyping is discussed
+in Chapters 2 and 11.
+
+XRef
+WebE is discussed in
+Chapter 29.
+
+XRef
+Software testing is
+discussed in Chapters
+17, 18, and 23 as
+well as 28 and 29.
+
+PRO/SIM tools. PRO/SIM (prototyping and simulation) tools [NIC90] provide the
+software engineer with the ability to predict the behavior of a real-time system prior
+to the time that it is built. In addition, these tools enable the software engineer to
+develop mock-ups of the real-time system, allowing the customer to gain insight into
+the function, operation and response prior to actual implementation. 
+
+Interface design and development tools. Interface design and development tools
+are actually a tool kit of software components (classes) such as menus, buttons, win-
+dow structures, icons, scrolling mechanisms, device drivers, and so forth. However,
+these tool kits are being replaced by interface prototyping tools that enable rapid on-
+screen creation of sophisticated user interfaces that conform to the interfacing stan-
+dard that has been adopted for the software.
+
+Prototyping tools. A variety of different prototyping tools can be used. Screen
+painters enable a software engineer to define screen layout rapidly for interactive
+applications. More sophisticated CASE prototyping tools enable the creation of a data
+design, coupled with both screen and report layouts. Many analysis and design tools
+have extensions that provide a prototyping option. PRO/SIM tools generate skeleton
+Ada and C source code for engineering (real-time) applications. Finally, a variety of
+fourth generation tools have prototyping features.
+
+Programming tools.  The programming tools category encompasses the compil-
+ers, editors, and debuggers that are available to support most conventional pro-
+gramming languages. In addition, object-oriented programming environments, fourth
+generation languages, graphical programming environments, application generators,
+and database query languages also reside within this category. 
+
+Web development tools. The activities associated with Web engineering are sup-
+ported by a variety of tools for WebApp development. These include tools that assist
+in the generation of text, graphics, forms, scripts, applets, and other elements of a
+Web page. 
+
+Integration and testing tools. In their directory of software testing tools, Software
+Quality Engineering [SQE95] deﬁnes the following testing tools categories:
+
+• Data acquisition—tools that acquire data to be used during testing.
+• Static measurement—tools that analyze source code without executing test
+
+cases.
+
+1 Analogous representations are provided by object-oriented analysis and design tools.
+
+832
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+• Dynamic measurement—tools that analyze source code during execution.
+• Simulation—tools that simulate function of hardware or other externals.
+• Test management—tools that assist in the planning, development, and control
+
+of testing.
+
+• Cross-functional tools—tools that cross the bounds of the preceding categories.
+
+It should be noted that many testing tools have features that span two or more of the
+categories.
+
+Static analysis tools. Static testing tools assist the software engineer in deriving
+test cases. Three different types of static testing tools are used in the industry: code-
+based testing tools, specialized testing languages, and requirements-based testing
+tools. Code-based testing tools accept source code (or PDL) as input and perform a
+number of analyses that result in the generation of test cases. Specialized testing lan-
+guages (e.g., ATLAS) enable a software engineer to write detailed test speciﬁcations
+that describe each test case and the logistics for its execution. Requirements-based
+testing tools isolate speciﬁc user requirements and suggest test cases (or classes of
+tests) that will exercise the requirements. 
+
+Dynamic analysis tools. Dynamic testing tools interact with an executing pro-
+gram, checking path coverage, testing assertions about the value of speciﬁc variables,
+and otherwise instrumenting the execution ﬂow of the program. Dynamic tools can
+be either intrusive or nonintrusive. An intrusive tool changes the software to be tested
+by inserting probes (extra instructions) that perform the activities just mentioned.
+Nonintrusive testing tools use a separate hardware processor that runs in parallel with
+the processor containing the program that is being tested. 
+
+Test management tools. Test management tools are used to control and coordi-
+nate software testing for each of the major testing steps. Tools in this category man-
+age and coordinate regression testing, perform comparisons that ascertain differences
+between actual and expected output, and conduct batch testing of programs with
+interactive human/computer interfaces. In addition to the functions noted, many test
+management tools also serve as generic test drivers. A test driver reads one or more
+test cases from a testing ﬁle, formats the test data to conform to the needs of the soft-
+ware under test, and then invokes the software to be tested.
+
+Client/server testing tools. The c/s environment demands specialized testing
+tools that exercise the graphical user interface and the network communications
+requirements for client and server. 
+
+Reengineering tools. Tools for legacy software address a set of maintenance activ-
+ities that currently absorb a signiﬁcant percentage of all software-related effort. The
+reengineering tools category can be subdivided into the following functions:
+
+XRef
+White-box testing
+methods are discussed
+in Chapter 17.
+
+XRef
+Test strategies are
+discussed in Chapter
+18.
+
+XRef
+c/s testing is discussed
+in Chapter 28.
+
+XRef
+Reengineering methods
+are discussed in
+Chapter 30.
+
+CHAPTER 31
+
+COMPUTER-AIDED SOFTWARE ENGINEERING
+
+833
+
+• Reverse engineering to speciﬁcation tools take source code as input and gener-
+
+ate graphical structured analysis and design models, where-used lists, and
+other design information.
+
+• Code restructuring and analysis tools analyze program syntax, generate a con-
+
+trol ﬂow graph, and automatically generate a structured program.
+
+• On-line system reengineering tools are used to modify on-line database sys-
+
+tems (e.g., convert IDMS or DB2 ﬁles into entity-relationship format).
+
+These tools are limited to specific programming languages (although most major 
+languages are addressed) and require some degree of interaction with the software
+engineer.
+
+31.4 INTEGRATED CASE ENVIRONMENTS
+
+?
+
+What are 
+the beneﬁts
+
+of integrated
+CASE?
+
+CASE tools integration
+demands a database
+that contains
+consistent
+representations of
+software engineering
+information.
+
+Although benefits can be derived from individual CASE tools that address sepa-
+rate software engineering activities, the real power of CASE can be achieved only
+through integration. The benefits of integrated CASE (I-CASE) include (1) smooth
+transfer of information (models, programs, documents, data) from one tool to
+another and one software engineering step to the next; (2) a reduction in the effort
+required to perform umbrella activities such as software configuration manage-
+ment, quality assurance, and document production; (3) an increase in project con-
+trol that is achieved through better planning, monitoring, and communication; and
+(4) improved coordination among staff members who are working on a large soft-
+ware project.
+
+But I-CASE also poses signiﬁcant challenges. Integration demands consistent rep-
+resentations of software engineering information, standardized interfaces between
+tools, a homogeneous mechanism for communication between the software engi-
+neer and each tool, and an effective approach that will enable I-CASE to move among
+various hardware platforms and operating systems. Comprehensive I-CASE envi-
+ronments have emerged more slowly than originally expected. However, integrated
+environments do exist and are becoming more powerful as the years pass.
+
+The term integration implies both combination and closure. I-CASE combines a vari-
+ety of different tools and a spectrum of information in a way that enables closure of
+communication among tools, between people, and across the software process. Tools
+are integrated so that software engineering information is available to each tool that
+needs it; usage is integrated so that a common look and feel is provided for all tools;
+a development philosophy is integrated, implying a standardized software engineer-
+ing approach that applies modern practice and proven methods.
+
+To deﬁne integration in the context of the software engineering process, it is nec-
+essary to establish a set of requirements [FOR89a] for I-CASE: An integrated CASE
+environment should
+
+834
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+• Provide a mechanism for sharing software engineering information among
+
+all tools contained in the environment.
+
+• Enable a change to one item of information to be tracked to other related
+
+information items.
+
+• Provide version control and overall conﬁguration management for all soft-
+
+ware engineering information.
+
+XRef
+Process-related issues
+are discussed in
+Chapters 2, 4, and 7.
+SCIs are presented in
+Chapter 9.
+
+• Allow direct, nonsequential access to any tool contained in the environment.
+• Establish automated support for the software process model that has been
+
+chosen, integrating CASE tools and software conﬁguration items (SCIs) into a
+standard work breakdown structure.
+
+• Enable the users of each tool to experience a consistent look and feel at the
+
+human/computer interface.
+
+• Support communication among software engineers.
+• Collect both management and technical metrics that can be used to improve
+
+the process and the product.
+
+To achieve these requirements, each of the building blocks of a CASE architecture
+(Figure 31.1) must ﬁt together in a seamless fashion. The foundation building blocks—
+environment architecture, hardware platform, and operating system—must be "joined"
+through a set of portability services to an integration framework that achieves these
+requirements.
+
+31.5 THE INTEGRATION ARCHITECTURE
+
+A list of all software
+engineering information
+items can be found under 
+
+SCIs
+
+A software engineering team uses CASE tools, corresponding methods, and a process
+framework to create a pool of software engineering information. The integration
+framework facilitates transfer of information into and out of the pool. To accomplish
+this, the following architectural components must exist: a database must be created
+(to store the information); an object management system must be built (to manage
+changes to the information); a tools control mechanism must be constructed (to coor-
+dinate the use of CASE tools); a user interface must provide a consistent pathway
+between actions made by the user and the tools contained in the environment. Most
+models (e.g.,  [FOR90], [SHA95]) of the integration framework represent these com-
+ponents as layers. A simple model of the framework, depicting only the components
+just noted is shown in Figure 31.3. 
+
+The user interface layer (Figure 31.3) incorporates a standardized interface tool kit
+with a common presentation protocol. The interface tool kit contains software for
+human/computer interface management and a library of display objects. Both pro-
+vide a consistent mechanism for communication between the interface and individ-
+ual CASE tools. The presentation protocol is the set of guidelines that gives all CASE
+
+CHAPTER 31
+
+COMPUTER-AIDED SOFTWARE ENGINEERING
+
+835
+
+FIGURE 31.3
+Architectural
+model for the
+integration
+framework
+
+User interface layer
+Interface tool kit
+Presentation protocol
+
+Tools management services
+
+CASE
+tool
+
+Tools layer
+
+Object management layer
+
+Integration services
+Configuration management services
+
+Shared repository layer
+
+CASE database
+Access control functions
+
+WebRef
+Resources for CASE tool
+integration and integrated
+software engineering
+environments can be
+obtained at 
+see.cs.ﬂinders.edu.
+au/seweb/ti/
+
+tools the same look and feel. Screen layout conventions, menu names and organi-
+zation, icons, object names, the use of the keyboard and mouse, and the mechanism
+for tools access are all deﬁned as part of the presentation protocol.
+
+The tools layer incorporates a set of tools management services with the CASE
+tools themselves. Tools management services (TMS) control the behavior of tools within
+the environment. If multitasking is used during the execution of one or more tools,
+TMS performs multitask synchronization and communication, coordinates the ﬂow
+of information from the repository and object management system into the tools,
+accomplishes security and auditing functions, and collects metrics on tool usage.  
+The object management layer (OML) performs the conﬁguration management func-
+tions described in Chapter 9. In essence, software in this layer of the framework archi-
+tecture provides the mechanism for tools integration. Every CASE tool is "plugged
+into" the object management layer. Working in conjunction with the CASE reposi-
+tory, the OML provides integration services—a set of standard modules that couple
+tools with the repository. In addition, the OML provides conﬁguration management
+services by enabling the identiﬁcation of all conﬁguration objects, performing version
+control, and providing support for change control, audits, and status accounting.
+
+The shared repository layer is the CASE database and the access control functions
+that enable the object management layer to interact with the database. Data inte-
+gration is achieved by the object management and shared repository layers and is
+discussed in greater detail later in this chapter.
+
+836
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+31.6 THE CASE REPOSITORY
+
+Webster's Dictionary deﬁnes the word repository as "any thing or person thought of as
+a center of accumulation or storage." During the early history of software develop-
+ment, the repository was indeed a person—the programmer who had to remember
+the location of all information relevant to a software project, who had to recall infor-
+mation that was never written down and reconstruct information that had been lost.
+Sadly, using a person as "the center for accumulation and storage" (although it con-
+forms to Webster's definition), does not work very well. Today, the repository is a
+"thing"—a database that acts as the center for both accumulation and storage of soft-
+ware engineering information. The role of the person (the software engineer) is to
+interact with the repository using CASE tools that are integrated with it.
+
+In this book, a number of different terms have been used to refer to the storage
+place for software engineering information: CASE database, project database, inte-
+grated project support environment (IPSE) database, requirements dictionary (a limited
+database), and repository. Although there are subtle differences between some of
+these terms, all refer to the center for accumulation and storage.
+
+31.6.1 The Role of the Repository in I-CASE
+The repository for an I-CASE environment is the set of mechanisms and data struc-
+tures that achieve data/tool and data/data integration. It provides the obvious func-
+tions of a database management system, but in addition, the repository performs or
+precipitates the following functions [FOR89b]:
+
+• Data integrity includes functions to validate entries to the repository, ensure
+consistency among related objects, and automatically perform "cascading"
+modiﬁcations when a change to one object demands some change to objects
+related to it.
+Information sharing provides a mechanism for sharing information among
+multiple developers and between multiple tools, manages and controls multi-
+user access to data and locks or unlocks objects so that changes are not
+inadvertently overlaid on one another.
+
+•
+
+• Data/tool integration establishes a data model that can be accessed by all
+
+tools in the I-CASE environment, controls access to the data, and performs
+appropriate conﬁguration management functions.
+
+• Data/data integration is the database management system that relates data
+
+objects so that other functions can be achieved.
+
+• Methodology enforcement deﬁnes an entity-relationship model stored in the
+
+repository that implies a speciﬁc paradigm for software engineering; at a
+minimum, the relationships and objects deﬁne a set of steps that must be
+conducted to build the contents of the repository.
+
+?
+
+What
+functions 
+
+are performed by
+the services that
+are coupled with
+the CASE
+repository?
+
+CHAPTER 31
+
+COMPUTER-AIDED SOFTWARE ENGINEERING
+
+837
+
+• Document standardization is the deﬁnition of objects in the database that
+
+leads directly to a standard approach for the creation of software engineering
+documents.
+
+To achieve these functions, the repository is deﬁned in terms of a meta-model. The
+meta-model determines how information is stored in the repository, how data can be
+accessed by tools and viewed by software engineers, how well data security and
+integrity can be maintained, and how easily the existing model can be extended to
+accommodate new needs [WEL89].
+
+The meta-model is the template into which software engineering information is
+placed. A detailed discussion of these models is beyond the scope of this book. For
+further information, the interested reader should see [WEL89], [SHA95], and [GRI95].
+
+31.6.2 Features and Content
+The features and content of the repository are best understood by looking at it from
+two perspectives: what is to be stored in the repository and what speciﬁc services are
+provided by the repository. In general, the types of things to be stored in the reposi-
+tory include
+
+Information about the problem domain.
+
+• The problem to be solved.
+•
+• The system solution as it emerges.
+• Rules and instructions pertaining to the software process (methodology)
+
+being followed.
+
+• The project plan, resources, and history.
+•
+
+Information about the organizational context.
+
+A detailed list of types of representations, documents and deliverables that are
+
+stored in the CASE repository is included in Table 31.1.
+
+A robust CASE repository provides two different classes of services: (1) the same
+types of services that might be expected from any sophisticated database manage-
+ment system and (2) services that are speciﬁc to the CASE environment.
+
+Many repository requirements are the same as those of typical applications built
+on a commercial database management system (DBMS). In fact, most of today's CASE
+repositories employ a DBMS (usually relational or object oriented) as the basic data
+management technology. The DBMS features that support the management of soft-
+ware development information include
+
+• Nonredundant data storage. Each object is stored only once, but is accessible
+
+by all CASE tools that need it.
+
+• High-level access. A common data access mechanism is implemented so data
+
+handling facilities do not have to be duplicated in each CASE tool.
+
+?
+
+What typical
+DBMS
+
+features support
+CASE?
+
+838
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+TABLE 31.1
+
+Case Repository Contents [FOR89B]
+
+Enterprise information
+Organizational structure
+Business area analyses
+Business functions
+Business rules
+Process models (scenarios)
+Information architecture
+
+Application design
+Methodology rules
+Graphical representations
+System diagrams
+Naming standards
+Referential integrity rules
+Data structures
+Process deﬁnitions
+Class deﬁnitions
+Menu trees
+Performance criteria
+Timing constraints
+Screen deﬁnitions
+Report deﬁnitions
+Logic deﬁnitions
+Behavioral logic
+Algorithms
+Transformation rules
+
+Construction
+
+Source code; Object code
+System build instructions
+Binary images
+Conﬁguration dependencies
+Change information
+
+Validation and veriﬁcation
+
+Test plan; Test data cases
+Regression test scripts
+Test results
+Statistical analyses
+Software quality metrics
+
+Project management information
+
+Project plans
+Work breakdown structure
+Estimates; Schedules
+Resource loading; Problem reports
+Change requests; Status reports
+Audit information
+
+System documentation
+Requirements documents
+External/internal designs
+User manuals
+
+• Data independence. CASE tools and the target applications are isolated from
+physical storage so they are not affected when the hardware conﬁguration is
+changed.
+
+• Transaction control. The repository implements record locking, two-stage
+
+commits, transaction logging, and recovery procedures to maintain the
+integrity of the data when there are concurrent users.
+
+• Security. The repository provides mechanisms to control who can view and
+
+modify information contained within it.
+
+• Ad hoc data queries and reports. The repository allows direct access to its
+
+contents through a convenient user interface such as SQL or a forms-
+oriented "browser," enabling user-deﬁned analysis beyond the standard
+reports provided with the CASE tool set.
+
+• Openness.  Repositories usually provide a simple import/export mechanism
+
+to enable bulk loading or transfer.
+
+• Multiuser support. A robust repository must permit multiple developers to
+
+work on an application at the same time. It must manage concurrent access
+to the database by multiple tools and users with access arbitration and lock-
+
+?
+
+What 
+special
+features are
+exhibited by the
+CASE repository?
+
+WebRef
+A detailed tutorial and list
+of resources for OO
+repositories (which can be
+used for CASE
+environments) can be
+found at 
+mini.net/cetus/oo_
+db_systems_1.html
+
+CHAPTER 31
+
+COMPUTER-AIDED SOFTWARE ENGINEERING
+
+839
+
+ing at the ﬁle or record level. For environments based on networking, multi-
+user support also implies that the repository can interface with common net-
+working protocols (object request brokers) and facilities.
+
+The CASE environment also places special demands on the repository that go
+beyond what is directly available in a commercial DBMS. The special features of CASE
+repositories include
+
+• Storage of sophisticated data structures. The repository must accommodate
+
+complex data types such as diagrams, documents, and ﬁles, as well as simple
+data elements.  A repository also includes an information model (or meta-
+model) describing the structure, relationships and semantics of the data
+stored in it. The meta-model must be extensible so that new representations
+and unique organizational information can be accommodated. The reposi-
+tory not only stores models and descriptions of systems under development,
+but also associated meta-data (i.e., additional information describing the
+software engineering data itself, such as when a particular design compo-
+nent was created, what its current status is, and what other components it
+depends upon).
+Integrity enforcement. The repository information model also contains rules,
+or policies, describing valid business rules and other constraints and require-
+ments on information being entered into the repository (directly or via a
+CASE tool). A facility called a trigger may be employed to activate the rules
+associated with an object whenever it is modiﬁed, making it possible to
+check the validity of design models in real time.
+
+•
+
+• Semantics-rich tool interface. The repository information model (meta-model)
+contains semantics that enable a variety of tools to interpret the meaning of
+the data stored in the repository. For example, a data ﬂow diagram created by
+a CASE tool is stored in the repository in a form based on the information
+model and independent of any internal representations used by the tool itself.
+Another CASE tool can then interpret the contents of the repository and use
+the information as needed for its task. Thus, the semantics stored in the
+repository permit data sharing among a variety of tools, as opposed to spe-
+ciﬁc tool-to-tool conversions or "bridges."
+
+• Process/project management. A repository contains information not only
+about the software application itself, but also about the characteristics of
+each particular project and the organization's general process for software
+development (phases, tasks, and deliverables). This opens up possibilities for
+automated coordination of technical development activity with the project
+management activity. For example, updating the status of project tasks could
+be done automatically or as a by-product of using the CASE tools. Status
+updating can be made very easy for developers to perform without having to
+
+840
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+leave the normal development environment. Task assignment and queries
+can also be handled by e-mail. Problem reports, maintenance tasks, change
+authorization, and repair status can be coordinated and monitored via tools
+accessing the repository.
+
+The following repository features are all encompassed by software conﬁguration
+management (Chapter 9). They are re-examined here to emphasize their interrela-
+tionship to I-CASE environments:
+
+Versioning. As a project progresses, many versions of individual work prod-
+ucts will be created. The repository must be able to save all of these versions
+to enable effective management of product releases and to permit developers
+to go back to previous versions during testing and debugging.
+
+The CASE repository must be able to control a wide variety of object
+
+types, including text, graphics, bit maps, complex documents, and unique
+objects like screen and report deﬁnitions, object ﬁles, test data, and results. A
+mature repository tracks versions of objects with arbitrary levels of granular-
+ity, for example, a single data deﬁnition or a cluster of modules can be
+tracked.
+
+To support parallel development, the version control mechanism should
+
+permit multiple derivatives (variants) from a single predecessor. Thus, a
+developer could be working on two possible solutions to a design problem at
+the same time, both generated from the same starting point.
+Dependency tracking and change management. The repository man-
+ages a wide variety of relationships among the data elements stored in it.
+These include relationships between enterprise entities and processes,
+among the parts of an application design, between design components and
+the enterprise information architecture, between design elements and deliv-
+erables, and so on. Some of these relationships are merely associations, and
+some are dependencies or mandatory relationships. Maintaining these rela-
+tionships among development objects is called link management.
+
+The ability to keep track of all of these relationships is crucial to the
+
+integrity of the information stored in the repository and to the generation of
+deliverables based on it, and it is one of the most important contributions of
+the repository concept to the improvement of the software development
+process. Among the many functions that link management supports is the
+ability to identify and assess the effects of change. As designs evolve to meet
+new requirements, the ability to identify all objects that might be affected
+enables more accurate assessment of cost, downtime, and degree of difﬁ-
+culty.  It also helps prevent unexpected side effects that would otherwise lead
+to defects and system failures.
+
+Link management helps the repository mechanism ensure that design
+
+information is correct by keeping the various portions of a design synchro-
+
+?
+
+How does
+the
+
+repository assist
+in SCM?
+
+The repository’s ability
+to track relationships
+among conﬁguration
+objects is one of its
+most important
+features. The impact of
+change can be tracked
+if this feature is
+available.
+
+CHAPTER 31
+
+COMPUTER-AIDED SOFTWARE ENGINEERING
+
+841
+
+nized. For example, if a data ﬂow diagram is modiﬁed, the repository can
+detect whether related data dictionaries, screen deﬁnitions, and code mod-
+ules also require modiﬁcation and can bring affected components to the
+developer's attention.
+Requirements tracing. This special function depends on link management
+and provides the ability to track all the design components and deliverables
+that result from a speciﬁc requirement speciﬁcation (forward tracking). In
+addition, it provides the ability to identify which requirement generated any
+given deliverable (backward tracking). 
+Conﬁguration management. A conﬁguration management facility works
+closely with the link management and versioning facilities to keep track of a
+series of conﬁgurations representing speciﬁc project milestones or production
+releases. Version management provides the needed versions, and link man-
+agement keeps track of interdependencies. 
+Audit trails. An audit trail establishes additional information about when,
+why, and by whom changes are made. Information about the source of
+changes can be entered as attributes of speciﬁc objects in the repository. A
+repository trigger mechanism is helpful for prompting the developer or the
+tool that is being used to initiate entry of audit information (such as the rea-
+son for a change) whenever a design element is modiﬁed.
+
+31.7 SUMMARY
+
+Computer-aided software engineering tools span every activity in the software process
+and those umbrella activities that are applied throughout the process. CASE com-
+bines a set of building blocks that begin at the hardware and operating system soft-
+ware level and end with individual tools.
+
+In this chapter, we consider a taxonomy of CASE tools. Categories encompass both
+management and technical activities that span most software application areas. Each
+category of tool is considered a "point solution." 
+
+The I-CASE environment combines integration mechanisms for data, tools, and
+human/computer interaction. Data integration can be achieved through direct
+exchange of information, through common ﬁle structures, by data sharing or inter-
+operability, or through the use of a full I-CASE repository. Tools integration can be
+custom designed by vendors who work together or achieved through management
+software provided as part of the repository. Human/computer integration is achieved
+through interface standards that have become commonplace throughout the indus-
+try. An integration architecture is designed to facilitate the integration of users with
+tools, tools with tools, tools with data, and data with data.
+
+The  CASE  repository  has  been  referred  to  as  a  "software  bus."  Information 
+moves through it, passing from tool to tool as software engineering progresses. But
+
+842
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+the repository is much more than a "bus." It is also a storage place that combines
+sophisticated mechanisms for integrating CASE tools and thereby improving the
+process through which software is developed. The repository is a relational or object-
+oriented database that is "the center of accumulation and storage" for software engi-
+neering information. 
+
+REFERENCES
+
+[FOR89a] Forte,  G.,  "In  Search  of  the  Integrated  Environment,"  CASE  Outlook,
+March–April 1989, pp. 5–12.
+[FOR89b] Forte, G., "Rally Round the Repository," CASE Outlook, December 1989, pp.
+5–27.
+[FOR90] Forte, G., "Integrated CASE: A Deﬁnition," Proc. 3rd Annual TEAMWORKERS
+Intl. User's Group Conference, Cadre Technologies, Providence, RI, March 1990.
+[GRI95] Griffen, J., “Repositories: Data Dictionary Descendant Can Extend Legacy
+Code Investment,” Application Development Trends, April 1995, pp. 65–71.
+[NIC90] Nichols, K.M., "Performance Tools," IEEE Software, May 1990, pp. 21–23.
+[QED89] CASE: The Potential and the Pitfalls, QED Information Sciences,1989.
+[SQE95] Testing Tools Reference Guide, Software Quality Engineering, 1995.
+[SHA95] Sharon, D. and R. Bell, “Tools That Bind: Creating Integrated Environments,”
+IEEE Software, March 1995, pp. 76–85.
+[WEL89] Welke, R.J., "Meta Systems on Meta Models," CASE Outlook, December 1989,
+pp. 35–45. 
+
+PROBLEMS AND POINTS TO PONDER
+
+31.1. Make a list of all software development tools that you use. Organize them
+according to the taxonomy presented in this chapter.
+
+31.2. Using the ideas introduced in Chapters 13 through 16, how would you sug-
+gest that portability services be built?
+
+31.3. Build a paper prototype for a project management tool that encompasses the
+categories noted in Section 31.3. Use Part Two of this book for additional guidance.
+
+31.4. Do some research on object-oriented database management systems. Discuss
+why OODMS would be ideal for SCM tools.
+
+31.5. Gather product information on at least three CASE tools in a category speci-
+ﬁed by your instructor. Develop a matrix that compares features.
+
+31.6. Are there situations in which dynamic testing tools are "the only way to go"?
+If so, what are they?
+
+CHAPTER 31
+
+COMPUTER-AIDED SOFTWARE ENGINEERING
+
+843
+
+31.7. Discuss other human activities in which the integration of a set of tools has
+provided substantially more beneﬁt than the use of each of the tools individually. Do
+not use examples from computing.
+
+31.8. Describe what is meant by data/tool integration in your own words.
+
+31.9. In a number of places in this chapter, the terms meta-model and meta-data
+are used. Describe what these terms mean in your own words.
+
+31.10. Can you think of additional conﬁguration items that might be included in the
+repository contents shown in Table 31.1? Make a list.
+
+FURTHER READINGS AND INFORMATION SOURCES
+
+A number of books on CASE were published in the 1980s and early 1990s in an effort
+to capitalize on the high degree of interest in the industry at that time. Subsequently,
+few books on the subject have appeared. Among the early offerings that still have
+value are
+
+Bergin, T. et al., Computer-Aided Software Engineering: Issues and Trends for the 1990s and
+
+Beyond, Idea Group Publishing, 1993.
+
+Braithwaite, K.S., Application Development Using CASE Tools, Academic Press, 1990.
+Brown, A.W.,  D.J. Carney, and E.J. Morris, Principles of CASE Tool Integration, Oxford Univer-
+
+sity Press, 1994. 
+
+Clegg, D. and R. Barker, CASE Method Fast-Track: A RAD Approach, Addison-Wesley, 1994. 
+Lewis, T.G., Computer-Aided Software Engineering, Van Nostrand-Reinhold, 1990.
+Mylls, R., Information Engineering: CASE Practices and Techniques, Wiley, 1993. 
+
+An anthology by Chikofsky (Computer-Aided Software Engineering, 2nd ed., IEEE
+Computer Society, 1992) contains a useful collection of early papers on CASE and
+software development environments. Muller and his colleagues (Computer-Aided Soft-
+ware Engineering, Kluwer Academic Publishers, 1996) have edited a collection of that
+describes CASE research in the mid-1990s. The best sources of current information
+on CASE tools are the Internet, technical periodicals, and industry newsletters.
+
+IEEE Standard 1209 (Evaluation and Selection of CASE Tools) presents a set of guide-
+lines for evaluating CASE tools for “project management processes, pre-development
+processes,  development  processes,  post-development  processes,  and  integral
+processes.” A detailed report by Wallnau and Feiler (Tool Integration and Environment
+Architectures, Software Engineering Institute, CMU/SEI-91-TR-11, May 1991), although
+dated, remains one of the best discussions of CASE environments readily available.
+A wide variety of information sources on CASE is available on the Internet. An up-
+
+to-date list of World Wide Web references can be found at the SEPA Web site:
+http://www.mhhe.com/engcs/compsci/pressman/resources/CASE.mhtml 
+
+C H A P T E R
+
+32 THE ROAD AHEAD
+
+K E Y
+C O N C E P T S
+information. . . . . 849
+people . . . . . . . . . 847
+process . . . . . . . . 848
+scope of change . 847
+software revisited
+. . . . . . . . . . . . . . . 846
+technology . . . . . 851
+
+In the 31 chapters that have preceded this one, we explored a process for
+
+software engineering. We presented both management procedures and tech-
+nical methods, basic principles and specialized techniques, people-oriented
+activities and tasks that are amenable to automation, paper and pencil nota-
+tion and CASE tools. We argued that measurement, discipline, and an overrid-
+ing focus on quality will result in software that meets the customer's needs,
+software that is reliable, software that is maintainable, software that is better.
+Yet, we have never promised that software engineering is a panacea.
+
+As we begin our journey through a new century, software and systems tech-
+nologies remain a challenge for every software professional and every com-
+pany that builds computer-based systems. Although he wrote these words more
+than a decade ago, Max Hopper [HOP90] describes the current state of affairs:
+
+Because changes in information technology are becoming so rapid and unforgiving,
+and the consequences of falling behind are so irreversible, companies will either
+master the technology or die . . . Think of it as a technology treadmill. Companies
+will have to run harder and harder just to stay in place.
+
+Changes in software engineering technology are indeed "rapid and unforgiv-
+ing," but at the same time progress is often quite slow. By the time a decision
+
+Q U I C K
+L O O K
+
+What is it? The future is never
+easy to predict—pundits, talking
+heads, and industry experts not-
+withstanding. The road ahead is littered with the
+carcasses of exciting new technologies that never
+really made it (despite the hype) and is often
+shaped by more modest technologies that some-
+how modify the direction and width of the thor-
+oughfare. Therefore, we won’t try to predict the
+future. Rather we’ll discuss some of the issues that
+you’ll need to consider to understand how soft-
+ware and software engineering will change in the
+years ahead. 
+
+Who does it? Everyone!
+Why is it important? Why did ancient kings hire
+
+soothsayers? Why do major multinational corpo-
+rations hire consulting firms and think tanks to 
+prepare  forecasts?  Why  does  a  substantial 
+percentage of the public read horoscopes? We
+want to know what’s coming so we can ready
+ourselves.
+
+What are the steps? There is no formula for predict-
+ing the road ahead. We attempt to do this by col-
+lecting  data,  organizing  it  to  provide  useful
+information,  examining  subtle  associations  to
+extract knowledge, and from this knowledge, sug-
+gest probable occurrences that predict how things
+will be at some future time. 
+
+What is the work product? A view of the near-term
+
+future that may or may not be correct.
+
+845
+
+846
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+Q U I C K
+L O O K
+
+How do I ensure that I’ve done it
+right? Predicting the road ahead
+is an art, not a science. In fact, it’s
+quite rare when a serious prediction about the
+future is absolutely right or unequivocally wrong
+
+(with the exception, thankfully, of predictions of
+the end of the world). We look for trends and try
+to extrapolate them ahead in time. We can assess
+the correctness of the extrapolation only as time
+passes.
+
+is made to adopt a new method (or a new tool), conduct the training necessary to
+understand its application, and introduce the technology into the software develop-
+ment culture, something newer (and even better) has come along, and the process
+begins anew.
+
+In this chapter, we examine the road ahead. Our intent is not to explore every area
+of research the holds promise. Nor is it to gaze into a "crystal ball" and prognosticate
+about the future. Rather, we explore the scope of change and the way in which change
+itself will affect the software engineering process in the years ahead.
+
+32.1 THE IMPORTANCE OF SOFTWARE—REVISITED
+
+The importance of computer software can be stated in many ways. In Chapter 1, soft-
+ware was characterized as a differentiator. The function delivered by software differ-
+entiates products, systems, and services and provides competitive advantage in the
+marketplace. But software is more that a differentiator. The programs, documents,
+and data that are software help to generate the most important commodity that any
+individual, business, or government can acquire—information. Pressman and Her-
+ron [PRE91] describe software in the following way:
+
+Computer software is one of only a few key technologies that will have a significant
+impact on nearly every aspect of modern society . . . It is a mechanism for automating busi-
+ness, industry, and government, a medium for transferring new technology, a method of
+capturing valuable expertise for use by others, a means for differentiating one company's
+products from its competitors, and a window into a corporation's collective knowledge.
+Software is pivotal to nearly every aspect of business. But in many ways, software is also
+a hidden technology. We encounter software (often without realizing it) when we travel to
+work, make any retail purchase, stop at the bank, make a phone call, visit the doctor, or
+perform any of the hundreds of day-to-day activities that reﬂect modern life.
+
+Software is pervasive, and yet, many people in positions of responsibility have little or
+no real understanding of what it really is, how it's built, or what it means to the institutions
+that they (and it) control. More importantly, they have little appreciation of the dangers and
+opportunities that software offers.
+
+The pervasiveness of software leads us to a simple conclusion: Whenever a tech-
+nology has a broad impact—an impact that can save lives or endanger them, build
+
+CHAPTER 32
+
+THE ROAD AHEAD
+
+847
+
+businesses or destroy them, inform government leaders or mislead them—it must be
+"handled with care." 
+
+32.2 THE SCOPE OF CHANGE
+
+“The best thing about
+the future is that it
+comes one day at a
+time.”
+Abraham Lincoln 
+
+The changes in computing over the past 50 years have been driven by advances in
+the "hard sciences"—physics, chemistry, materials science, engineering. During the
+next few decades, revolutionary advances in computing may well be driven by "soft
+sciences"—human psychology, biology, neurophysiology, sociology, philosophy, and
+others. The gestation period for the computing technologies that may be derived from
+these disciplines is very difﬁcult to predict. 
+
+The inﬂuence of the soft sciences may help mold the direction of computing research
+in the hard sciences. For example, the design of "future computers" may be guided
+more by an understanding of brain physiology than an understanding of conventional
+microelectronics.
+
+The changes that will affect software engineering over the next decade will be
+inﬂuenced from four simultaneous sources: (1) the people who do the work, (2) the
+process that they apply, (3) the nature of information, and (4) the underlying com-
+puting technology. In the sections that follow, each of these components—people,
+the process, information, and the technology—is examined in more detail.
+
+32.3 PEOPLE AND THE WAY THEY BUILD SYSTEMS
+
+The software required for high-technology systems becomes more and more com-
+plex with each passing year, and the size of resultant programs increases propor-
+tionally. The rapid growth in the size of the "average" program would present us with
+few problems if it wasn't for one simple fact: As program size increases, the number
+of people who must work on the program must also increase. 
+
+Experience indicates that, as the number of people on a software project team increases,
+the overall productivity of the group may suffer. One way around this problem is to cre-
+ate a number of software engineering teams, thereby compartmentalizing people into
+individual working groups. However, as the number of software engineering teams grows,
+communication between them becomes as difﬁcult and time consuming as communi-
+cation between individuals. Worse, communication (between individuals or teams) tends
+to be inefﬁcient—that is, too much time is spent transferring too little information con-
+tent, and all too often, important information "falls into the cracks."
+
+If the software engineering community is to deal effectively with the communica-
+tion dilemma, the road ahead for software engineers must include radical changes
+in the way individuals and teams communicate with one another. E-mail, bulletin
+boards, and centralized video conferencing are now commonplace as mechanisms
+for connecting a large number of people to an information network. The importance
+
+848
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+“Future shock [is]
+the shattering stress
+and disorientation
+that we induce in
+individuals by
+subjecting them to
+too much change in
+too short a time.”
+Alvin Tofﬂer 
+
+of these tools in the context of software engineering work cannot be overempha-
+sized. With an effective electronic mail or bulletin board system, the problem encoun-
+tered by a software engineer in New York City may be solved with the help of a
+colleague in Tokyo. In a very real sense, bulletin boards and specialized newsgroups
+become knowledge repositories that allow the collective wisdom of a large group of
+technologists to be brought to bear on a technical problem or management issue.
+
+Video personalizes the communication. At its best, it enables colleagues at dif-
+ferent locations (or on different continents) to “meet” on a regular basis. But video
+also provides another beneﬁt. It can be used as a repository for knowledge about the
+software and to train newcomers on a project.
+
+The evolution of intelligent agents will also change the work patterns of a soft-
+ware engineer by dramatically extending the capabilities of software tools. Intelli-
+gent agents will enhance the engineer's ability by cross-checking engineering work
+products using domain-speciﬁc knowledge, performing clerical tasks, doing directed
+research, and coordinating human-to-human communication.
+
+Finally, the acquisition of knowledge is changing in profound ways. On the Inter-
+net, a software engineer can subscribe to newsgroups that focus on technology areas
+of immediate concern. A question posted within a newsgroup precipitates answers
+from other interested parties around the globe. The World Wide Web provides a soft-
+ware engineer with the world’s largest library of research papers and reports, tutori-
+als, commentary, and references in software engineering.1
+
+If past history is any indication, it is fair to say that people themselves will not
+change. However, the ways in which they communicate, the environment in which
+they work, the way in which they acquire knowledge, the methods and tools that they
+use, the discipline that they apply, and therefore, the overall culture for software devel-
+opment will change in signiﬁcant and even profound ways. 
+
+32.4 THE "NEW" SOFTWARE ENGINEERING PROCESS
+
+It is reasonable to characterize the ﬁrst two decades of software engineering prac-
+tice as the era of "linear thinking." Fostered by the classic life cycle model, software
+engineering was approached as a linear activity in which a series of sequential steps
+could be applied in an effort to solve complex problems. Yet, linear approaches to
+software development run counter to the way in which most systems are actually
+built. In reality, complex systems evolve iteratively, even incrementally. It is for this
+reason that a large segment of the software engineering community is moving toward
+evolutionary models for software development.
+
+Evolutionary process models recognize that uncertainty dominates most projects,
+that timelines are often impossibly short, and that iteration provides the ability to
+
+1 The SEPA Web site can provide you with electronic links to most important subjects presented in
+
+this book.
+
+“The best preparation
+for good work
+tomorrow is to do
+good work today.”
+Elbert Hubbard 
+
+CHAPTER 32
+
+THE ROAD AHEAD
+
+849
+
+deliver a partial solution, even when a complete product is not possible within the
+time allotted. Evolutionary models emphasize the need for incremental work prod-
+ucts, risk analysis, planning and then plan revision, and customer feedback.
+
+What activities must populate the evolutionary process? Over the past decade, the
+Capability Maturity Model developed by the Software Engineering Institute [PAU93]
+has had a substantial impact on efforts to improve software engineering practices.
+The CMM has generated much debate (e.g., [BOL91], [GIL96]), and yet, it provides a
+good indicator of the attributes that must exist when solid software engineering is
+practiced.
+
+Object technologies, coupled with component-based software engineering (Chap-
+ter 27), are a natural outgrowth of the trend toward evolutionary process models.
+Both will have a profound impact on software development productivity and prod-
+uct quality. Component reuse provides immediate and compelling benefits. When
+reuse is coupled with CASE tools for application prototyping, program increments
+can be built far more rapidly than through the use of conventional approaches. Pro-
+totyping draws the customer into the process. Therefore, it is likely that customers
+and users will become much more involved in the development of software. This, in
+turn, may lead to higher end-user satisfaction and better software quality overall.
+
+The rapid growth in Web-based applications (WebApps) is changing both the soft-
+ware engineering process and its participants. Again, we encounter an incremental,
+evolutionary paradigm. But in the case of WebApps, immediacy, security, and aes-
+thetics become dominant concerns. A Web engineering team melds technologists
+with content specialists (e.g., artists, musicians, videographers) to build an informa-
+tion source for a community of users that is both large and unpredictable. The soft-
+ware that has grown out of Web engineering work has already resulted in radical
+economic and cultural change. Although the basic concepts and principles discussed
+in this book are applicable, the software engineering process must adapt to accom-
+modate the Web.
+
+32.5 NEW MODES FOR REPRESENTING INFORMATION
+
+Over the past two decades, a subtle transition has occurred in the terminology that
+is used to describe software development work performed for the business commu-
+nity. Thirty years ago, the term data processing was the operative phrase for describ-
+ing the use of computers in a business context. Today, data processing has given way
+to another phrase—information technology—that implies the same thing but presents
+a subtle shift in focus. The emphasis is not merely to process large quantities of data
+but rather to extract meaningful information from this data. Obviously, this was always
+the intent, but the shift in terminology reﬂects a far more important shift in manage-
+ment philosophy.
+
+When software applications are discussed today, the words data and information
+occur repeatedly. We encounter the word knowledge in some artificial intelligence
+
+850
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+FIGURE 32.1
+An 
+“information”
+spectrum
+
+Data:
+no associativity
+
+Information:
+associativity within
+one context
+
+Knowledge:
+associativity within
+multiple contexts
+
+Wisdom:
+creation of generalized
+principles based on
+existing knowledge
+from different sources
+
+applications, but its use is relatively rare. Virtually no one discusses wisdom in the
+context of computer software applications. 
+
+Data is raw information—collections of facts that must be processed to be mean-
+ingful. Information is derived by associating facts within a given context. Knowledge
+associates information obtained in one context with other information obtained in a
+different context. Finally, wisdom occurs when generalized principles are derived
+from disparate knowledge. Each of these four views of "information" is represented
+schematically in Figure 32.1.
+
+To date, the vast majority of all software has been built to process data or infor-
+mation. Software engineers are now equally concerned with systems that process
+knowledge.2 Knowledge is two-dimensional. Information collected on a variety of
+related and unrelated topics is connected to form a body of fact that we call knowl-
+edge. The key is our ability to associate information from a variety of different sources
+that may not have any obvious connection and combine it in a way that provides us
+with some distinct beneﬁt.
+
+To illustrate the progression from data to knowledge, consider census data indi-
+cating that the birthrate in 1996 in the United States was 4.9 million. This number
+represents a data value. Relating this piece of data with birthrates for the preceding
+40 years, we can derive a useful piece of information—aging "baby boomers" of the
+1950s and early 1960s made a last gasp effort to have children prior to the end of
+their child-bearing years. In addition “gen-Xers” have begun their childbearing years.
+The census data can then be connected to other seemingly unrelated pieces of infor-
+mation. For example, the current number of elementary school teachers who will
+retire during the next decade, the number of college students graduating with degrees
+
+2 The rapid growth in data mining and data warehousing technologies reﬂects this growing trend.
+
+“Wisdom is the
+power that enables
+us to use knowledge
+for the beneﬁt of
+ourselves and
+others.”
+Thomas J. Watson 
+
+CHAPTER 32
+
+THE ROAD AHEAD
+
+851
+
+in primary and secondary education, the pressure on politicians to hold down taxes
+and therefore limit pay increases for teachers.  
+
+All of these pieces of information can be combined to formulate a representation
+of knowledge—there will be signiﬁcant pressure on the education system in the United
+States in the ﬁrst decade of the twenty-ﬁrst century and this pressure will continue
+for over a decade. Using this knowledge, a business opportunity may emerge. There
+may be signiﬁcant opportunity to develop new modes of learning that are more effec-
+tive and less costly than current approaches.
+
+The road ahead for software leads toward systems that process knowledge. We
+have been processing data for 50 years and extracting information for almost three
+decades. One of the most significant challenges facing the software engineering
+community is to build systems that take the next step along the spectrum—systems
+that extract knowledge from data and information in a way that is practical and
+beneficial.
+
+32.6 TECHNOLOGY AS A DRIVER
+
+“The new electronic
+independence
+recreates the world
+in the image of a
+global village.”
+Marshall McLuhan 
+
+The people who build and use software, the software engineering process that is
+applied, and the information that is produced are all affected by advances in hard-
+ware and software technology. Historically, hardware has served as the technology
+driver in computing. A new hardware technology provides potential. Software builders
+then react to customer demands in an attempt to tap the potential. 
+
+The road ahead for hardware technology is likely to progress along two parallel
+paths. Along one path, hardware technologies will continue to evolve at a rapid pace.
+With greater capacity provided by traditional hardware architectures, the demands
+on software engineers will continue to grow. 
+
+But the real changes in hardware technology may occur along another path. The
+development of nontraditional hardware architectures (e.g., massively parallel
+machines, optical processors, neural network machines) may cause radical changes
+in the kind of software that we build and fundamental changes in our approach to
+software engineering. Since these nontraditional approaches are not yet mature, it
+is difﬁcult to determine which will survive and even more difﬁcult to predict how the
+world of software will change to accommodate them.
+
+The road ahead for software engineering is driven by software technologies.
+Reuse and component-based software engineering (technologies that are not yet
+mature) offer the best opportunity for order of magnitude improvements in system
+quality and time to market. In fact, as time passes, the software business may begin
+to look very much like the hardware business of today. There may be vendors that
+build discrete devices (reusable software components), other vendors that build
+system components (e.g., a set of tools for human/computer interaction) and sys-
+tem integrators that provide solutions (products and custom-built systems) for the
+end-user.
+
+852
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+Software engineering will change—of that we can be certain. But regardless of
+how radical the changes are, we can be assured that quality will never lose its impor-
+tance and that effective analysis and design and competent testing will always have
+a place in the development of computer-based systems.
+
+32.7 A CONCLUDING COMMENT
+
+It has been 20 years since the ﬁrst edition of this book was written. I can still recall
+sitting at my desk as a young professor, writing the manuscript (by hand) for a book
+on a subject that few people cared about and even fewer really understood. I remem-
+ber the rejection letters from publishers, who argued (politely, but ﬁrmly) that there
+would never be a market for a book on “software engineering.” Luckily, McGraw-Hill
+decided to give it a try,3 and the rest, as they say, is history.
+
+Over the past 20 years, this book has changed dramatically—in scope, in size, in
+style, and in content. Like software engineering, it has grown and (I hope) matured
+over the years. 
+
+An engineering approach to the development of computer software is now con-
+ventional wisdom. Although debate continues on the "right paradigm," the degree of
+automation, and the most effective methods, the underlying principles of software
+engineering are now accepted throughout the industry. Why, then, are we seeing their
+broad adoption only recently?
+
+The answer, I think, lies in the difﬁculty of technology transition and the cultural
+change that accompanies it. Even though most of us appreciate the need for an engi-
+neering discipline for software, we struggle against the inertia of past practice and
+face new application domains (and the developers who work in them) that appear
+ready to repeat the mistakes of the past.
+
+To ease the transition we need many things—an adaptable and sensible software
+process, more effective methods, more powerful tools, better acceptance by practi-
+tioners and support from managers, and no small dose of education and "advertising."
+Software engineering has not had the beneﬁt of massive advertising, but as time passes,
+the concept sells itself. In a way, this book is an "advertisement" for the technology.
+
+You may not agree with every approach described in this book. Some of the tech-
+niques and opinions are controversial; others must be tuned to work well in differ-
+ent software development environments. It is my sincere hope, however, that Software
+Engineering: A Practitioner's Approach has delineated the problems we face, demon-
+strated the strength of software engineering concepts, and provided a framework of
+methods and tools.
+
+As we begin a new millennium, software has become the most important prod-
+uct and the most important industry on the world stage. Its impact and importance
+
+3 Actually, credit should go to Peter Freeman and Eric Munson, who convinced McGraw-Hill it was
+
+worth a shot.
+
+CHAPTER 32
+
+THE ROAD AHEAD
+
+853
+
+have come a long, long way. And yet, a new generation of software developers must
+meet many of the same challenges that faced earlier generations. Let us hope that
+the people who meet the challenge—software engineers—will have the wisdom to
+develop systems that improve the human condition.
+
+REFERENCES
+
+[BOL91] Bollinger, T. and C. McGowen, “A Critical Look at Software Capability Eval-
+uations,” IEEE Software, July 1991, pp. 25–41. 
+[GIL96] Gilb, T., “What Is Level Six?” IEEE Software, January 1996, pp. 97–98, 103.
+[HOP90] Hopper, M.D., "Rattling SABRE, New Ways to Compete on Information,"
+Harvard Business Review, May–June 1990.
+[PAU93] Paulk, M., et al., Capability Maturity Model for Software, Software Engineer-
+ing Institute, Carnegie Mellon University, 1993.
+[PRE91] Pressman, R.S., and S.R. Herron, Software Shock, Dorset House, 1991.
+
+PROBLEMS AND POINTS TO PONDER
+
+32.1. Get a copy of this week's major business and news magazines (e.g., Newsweek,
+Time, Business Week). List every article or news item that can be used to illustrate the
+importance of software.
+
+32.2. One of the hottest software application domains is Web-based systems and
+applications (Chapter 29). Discuss how people, communication, and process has to
+evolve to accommodate the development of “next generation” WebApps.
+
+32.3. Write a brief description of an ideal software engineer’s development envi-
+ronment circa 2010. Describe the elements of the environment (hardware, software,
+and communications technologies) and their impact on quality and time to market.
+
+32.4. Review the discussion of the evolutionary process models in Chapter 2. Do
+some research and collect recent papers on the subject. Summarize the strengths and
+weaknesses of evolutionary paradigms based on experiences outlined in the papers.
+
+32.5. Attempt to develop an example that begins with the collection of raw data and
+leads to acquisition of information, then knowledge, and ﬁnally, wisdom.
+
+32.6. Select a current “hot” technology (it need not be a software technology) that
+is being discussed in the popular media and describe how software enables its evo-
+lution and impact.
+
+FURTHER READINGS AND INFORMATION SOURCES
+
+Books that discuss the road ahead for software and computing span a vast array 
+of technical, scientific, economic, political, and social issues. Robertson (The New
+
+854
+
+PART FIVE ADVANCED TOPICS IN SOFTWARE ENGINEERING
+
+Renaissance: Computers and the Next Level of Civilization, Oxford University Press,
+1998) argues that the computer revolution may be the single most signiﬁcant advance
+in the history of civilization. Dertrouzos and Gates (What Will Be: How the New World
+of Information Will Change Our Lives, HarperBusiness, 1998) provide a thoughtful dis-
+cussion of some of the directions that information technologies may take in the ﬁrst
+few decades of this century. Barnatt (Valueware: Technology, Humanity and Organi-
+zation, Praeger Publishing, 1999) presents an intriguing discussion of an “ideas econ-
+omy”  and  how  economic  value  will  be  created  as  cyber-business  evolves.
+Negroponte's (Being Digital, Alfred A. Knopf, 1995) was a best seller in the mid-1990s
+and continues to provide an interesting view of computing and its overall impact.
+
+Kroker and Kroker (Digital Delirium, New World Perspectives, 1997) have edited a
+controversial collection of essays, poems, and humor that examines the impact of
+digital technologies on people and society. Brin (The Transparent Society: Will Tech-
+nology Force Us to Choose Between Privacy and Freedom? Perseus Books, 1999) revis-
+its the continuing debate associated with the inevitable loss of personal privacy that
+accompanies the growth of information technologies. Shenk (Data Smog: Surviving
+the Information Glut, HarperCollins, 1998) discusses the problems associated with an
+“information-infested society” that is suffocating from the volume of information that
+information technologies produce.
+
+Miller, Michalski, and Stevens (21st Century Technologies: Promises and Perils of a
+Dynamic Future, Brookings Institution Press, 1999) have edited a collection of papers
+and essays on the impact of technology on social, business, and economic structures.
+For those interested in technical issues, Luryi, Xu, and Zaslavsky (Future Trends in
+Microelectronics, Wiley, 1999) have edited a collection of papers on probable direc-
+tions for computer hardware. Hayzelden and Bigham (Software Agents for Future Com-
+munication Systems, Springer-Verlag, 1999) have edited a collection that discusses
+trends in the development of intelligent software agents. 
+
+Kurzweil (The Age of Spiritual Machines, When Computers Exceed Human Intelligence,
+Viking/Penguin Books, 1999) argues that, within 20 years, hardware technology will
+have the capacity to fully model the human brain. Borgmann (Holding on to Reality: The
+Nature of Information at the Turn of the Millennium, University of Chicago Press, 1999)
+has written a intriguing history of information, tracing its role in the transformation of
+culture. Devlin (InfoSense: Turning Information into Knowledge, W. H. Freeman & Co.,
+1999) tries to make sense of the constant ﬂow of information that bombards us on a
+daily basis. Gleick (Faster: The Acceleration of Just About Everything, Pantheon Books,
+2000) discusses the ever-accelerating rate of technological change and its impact on
+every aspect of modern life. Jonscher (The Evolution of Wired Life: From the Alphabet to
+the Soul-Catcher Chip—How Information Technologies Change Our World, Wiley, 2000)
+argues that human thought and interaction transcend the importance of technology.
+A wide variety of information sources on future trends in computing is available
+on the Internet. An up-to-date list of World Wide Web references can be found at the
+SEPA Web site: 
+http://www.mhhe.com/engcs/compsci/pressman/resources/future.mhtml
+
+INDEX
+
+Change management, 840
+Change request, 234
+Chaos model, 28
+Characterization functions,
+
+727
+
+Check in, 234
+Check out, 234
+Chief programmer team, 62
+Chunking, 424
+CK metrics suite, 658
+Class collaboration, 646
+Class connections, 591
+Class diagram, 589
+Class hierarchy, 551, 588
+
+test cases for, 641
+
+Class relationships, 587
+Class-responsibility-
+
+collaborator models, 
+see CRC model
+
+Class size, 661
+Class testing, 636
+Classes, 544, 584, 753
+
+generalization/
+
+specialization, 588
+identiﬁcation of, 554
+key, 563
+metrics for, 658
+representation of, 546
+support, 563
+testing, 636, 644
+Classic life cycle, 28
+Cleanroom, 43, 699–701
+
+certiﬁcation, 714
+design, 706
+design reﬁnement, 707
+design veriﬁcation, 710
+differentiating
+
+characteristics, 703
+
+stepwise reﬁnement, 708
+testing teams, 712
+veriﬁcation, 707
+
+Clear-box speciﬁcation, 706
+Client, 748
+Client/server applications,
+
+41
+
+Client/server software, 748
+analysis modeling, 755
+conﬁgurations, 751
+design, 755, 759
+engineering, 747
+testing, 761, 763, 832
+
+Cluster, 490
+Cluster testing, 637
+Coad and Yourdon method,
+
+574, 690
+
+COCOMO II model, 133
+Code generation, 29, 702
+Code restructuring, 808
+Cohesion, 324, 353, 526,
+
+527, 657, 661
+
+Collaborations, 587
+Collaborator classes, 591
+Collaborators, 583
+
+COM, 733, 753, 773
+Commercial off-the-shelf
+
+(COTS) components, 722
+
+Common process
+
+framework (CPF), 23, 70
+
+for OO, 560
+
+Communication processes,
+
+756
+
+Comparison testing, 465
+Compartmentalization, 169
+Completeness, 809
+Complexity, 657
+Complexity metrics, 529
+Component adaptation,
+
+723, 731
+
+Component-based
+
+assembly, 8
+
+Component-based
+
+development, 42, 730,
+773
+
+Component-based software
+engineering, 121, 721, 723
+
+economics of, 739
+process, 724
+tools, 739
+
+Component-based systems,
+
+722
+
+737
+
+734
+
+Component classiﬁcation,
+
+Component composition,
+
+723, 732
+
+Component engineering,
+
+Component-level design,
+
+Component object model,
+
+337, 423
+
+see COM
+
+Component qualiﬁcation,
+
+723, 730, 731
+
+Component retrieval
+
+system, 739
+
+Component update, 723
+Component wrapping, 731
+Components, 126, 371
+acquisition of, 122
+classiﬁcation of, 735,
+
+737
+
+c/s systems, 750
+description of, 622, 724
+design of, 623
+distributed, 750
+metrics for, 526
+reusable, 9
+
+Composability, 607
+Composite object, 231
+Compositional relation, 229
+Compound condition, 446,
+
+454
+
+Computer-aided software
+
+engineering, see CASE
+
+Concurrency, 613
+Concurrent development
+
+model, 40
+
+855
+
+557, 660
+
+Audit trails, 841
+Availability measures, 212
+Back-to-back testing, 466
+Backtracking, 501
+Bang metric, 520, 532
+Baselines, 227
+Basic objects, 230
+Basis path testing, 445, 449
+Basis set, 448, 450
+Bathtub curve, 7
+Behavior model view, 285,
+
+317, 576
+
+Behavioral testing, 459
+Beta testing, 496
+Black-box, 705
+
+testing, 443, 459
+
+Booch method, 574, 608
+Bottom-up integration, 490
+Boundary value analysis
+
+(BVA), 465
+
+Bounding, 115, 128
+Box diagram, 426
+Box structure, 701, 704
+BPR, 245, 251, 800–802
+
+hierarchy, 254
+tools, 829
+
+Branch testing, 455
+Bubble, 310
+Builds, 490, 492
+Business area analysis, 253
+Business, 802
+
+modeling, 32
+object, 758
+process reengineering,
+
+see BPR
+
+processes, 800
+
+(BSD), 253
+
+Call and return
+
+architecture, 372, 385
+
+Capability maturity model
+
+(CMM), 24
+
+Capture/playback, 491, 764
+Cardinality, 305, 320, 683
+CASE, 12, 825
+
+building blocks, 826
+integrated
+
+environments, 833
+integration, 827, 834
+layers, 834
+tools taxonomy, 828
+
+CASE database, 835
+CASE repository, 836, 837
+
+special features, 839
+Cause elimination, 501
+Certiﬁcation, 702, 714
+Certiﬁcation teams, 712
+Change, 13, 22, 29, 225
+Change control, 234–236
+Change control authority
+
+656
+
+Abstraction level, 809
+Acceptance tests, 496
+Access control, 234
+Action path, 380, 392
+Activity network, 180
+Actors, 280, 581
+Adaptable process model,
+
+174
+
+805
+
+Adaptation, 22, 174
+Adaptive maintenance, 23,
+
+Aggregate objects, 230, 625
+Airlie council, 74
+Alpha testing, 496
+Analysis, 271, 286
+methods, 330
+model, 284, 299, 301, 734
+principles, 282
+for reuse, 734
+tools, 830
+of WebApps, 778
+
+Anchor points, 39
+Antibugging, 486
+Application architecture, 253
+Application categories, 9
+Application generation, 33
+Application object, 760
+Appraisal costs, 197
+Architectural design, 336,
+
+346, 365, 394
+
+c/s systems, 756
+metrics, 523, 532
+model, 367
+quantitative, 376
+spectrum analysis, 377
+WebApps, 780
+
+43
+
+375
+
+Architectural styles, 371,
+
+Architecture, 346, 366, 367,
+
+525, 725
+
+call and return, 372
+complexity of, 378
+data centered, 371
+data-ﬂow, 372
+dependencies, 378
+iteration, 394
+layered, 373
+mapping requirements
+
+into, 378
+
+models, 346
+object-oriented, 373,
+
+613
+
+organization and
+
+reﬁnement, 374, 389
+
+trade-off, 375
+WebApps, 780
+
+Architecture description
+
+language, 347
+
+Abstraction, 342, 367, 406,
+
+Attributes, 304, 544, 547,
+
+Architectural framework,
+
+Business system design
+
+Associative data object, 308
+
+(CCA), 234, 236
+
+856
+
+INDEX
+
+40, 41
+
+Concurrent tasks, 613
+Condition testing, 454
+Condition-transition-
+consequence (CTC)
+format, 156
+
+Conﬁguration audit, 237
+Conﬁguration objects, 229
+
+identiﬁcation, 231
+WebApps, 793
+
+Conﬁguration review, 496
+Conﬁguration status
+
+reporting, 237
+
+Connection matrix, 453
+Connections, 320
+Construction and release,
+
+36
+
+Constructive set
+
+speciﬁcation, 683
+
+Content developer, 788
+Context-free questions,
+
+116, 274
+
+Context model, 311
+Contingency planning, 156
+Continuity, 607
+Control abstraction, 343
+Control chart, 101, 102
+Control couple, 761
+Control ﬂow, 314, 318, 528
+Control ﬂow diagram, 315
+Control ﬂow model, 324
+Control hierarchy, 347
+Control item, 328
+Control modules, 348
+Control objects, 284
+Control process, 314
+Control Speciﬁcation
+
+(CSPEC), 302, 315, 325
+
+Controllability, 441
+CORBA, 733, 753, 773
+Core product, 35
+Correction, 22
+Corrective maintenance,
+
+Correctness, 96, 438, 509,
+
+veriﬁcation of, 702, 712
+
+Cost, 740
+Cost estimation, 74, 123
+Cost performance index,
+
+Cost risk, 150
+Cost variance, 187
+Coupling, 354, 526, 607,
+
+805
+
+707
+
+187
+
+657
+
+metrics for, 528, 661,
+
+663
+
+CRC model, 582, 588, 634
+index cards, 583, 635
+metrics for, 660
+
+Critical modules, 493
+Critical path, 181
+Critical path method (CPM),
+
+Customer, 271
+Customer communication,
+
+181
+
+36, 71
+
+368
+
+371
+
+Data architecture, 252
+Data-centered architecture,
+
+Data condition, 315
+Data couple, 761
+Data design, 336, 367, 369
+Data dictionary, 301, 312,
+
+328, 329, 370
+
+Data exchange model, 732
+Data ﬂow, 379, 528
+Data-ﬂow architecture, 372
+Data ﬂow diagram, 31, 302,
+
+315, 321, 379, 381, 518
+
+Data ﬂow model, 321, 462
+Data ﬂow testing, 456
+Data invariant, 677, 681, 688
+Data items, 310
+Data management
+component, 615
+Data mining, 368
+Data model, 284, 305
+Data modeling, 32, 302, 368
+Data network, 302
+Data object, 284, 303, 308,
+
+310, 328, 342, 623
+
+Data relationships, see
+
+Relationships
+
+Data restructuring, 808
+Data structure, 349, 350,
+
+368, 811
+
+Data structured systems
+
+development (DSSD), 330
+
+Data warehouse, 368, 369
+Database, 247
+Database design, c/s
+
+systems, 758
+
+Database management,
+
+tools, 830
+
+Database object, 760
+Database structure, 812
+Debugging, 499–502
+Decision table, 428
+Decision tree, 137
+Decision tree analysis, 137
+Decomposability, 441, 607
+Decomposition, 67, 119,
+
+124, 127
+
+Defect ampliﬁcation, 204
+Defect removal efﬁciency,
+
+98, 105, 187
+
+209, 445
+
+cost of, 203
+
+Deﬁciency list, 495
+Deﬁnition phase, 22
+Deﬁnition-use chain, 457
+Degree of structural
+
+uncertainty, 114
+
+Dependency tracking, 840
+Depth, structure, 347
+Design, 29, 335–339
+
+component level, 423
+principles of, 340
+for reuse, 734
+test cases, 443
+tools, 830
+
+120
+
+752
+
+807
+
+740
+
+725
+
+graphical, 425
+tabular, 427
+text-based, 429
+
+Design patterns, 371, 375,
+
+605, 624, 625, 779, 783
+
+Design process, 338
+Design review, 395
+Design selection index,
+
+377
+
+Design Speciﬁcation, 228,
+
+Design structure quality
+
+358, 386
+
+index, 525
+
+Detection device, 215, 216
+Development environment,
+
+Development phase, 22
+Directionality, 809
+Distributed subsystems,
+
+Do-while, 425
+Document restructuring,
+
+Documentation, 14, 247, 830
+Domain analysis, 576–578,
+
+process, 726
+
+Domain architecture, 740
+Domain characteristics, 728
+Domain engineering, 579,
+
+Domain language, 726
+Domain objects, 605
+Domain testing, 455
+Driver, 487, 490
+Dynamic analysis, 832
+Earned value analysis, 74,
+
+186
+
+Efﬁciency, 510, 513
+Effort
+
+distribution, for
+
+software projects, 172
+
+estimate, 123, 124
+relationship, 171
+Effort validation, 169
+Elaboration, 67, 343
+Empirical estimation, 124
+Encapsulation, 548, 550,
+
+655
+
+Engineering, 36
+Engineering change order
+
+Enhancement, 23, 805
+Entity relation diagram
+(ERD), 301, 307, 319
+
+Entry point multiplier, 176
+Environment model view,
+
+576
+
+Equivalence class, 464
+Equivalence partitioning,
+
+463, 464
+
+Error detection, 203
+Error index, 210
+Error messages, 414
+Error tracking, 187
+Errors, 98, 187
+Essential view, 288
+Estimates, 114, 115
+accuracy of, 124
+three-point, 125
+
+decomposition
+
+techniques, 126
+
+empirical, 124, 132
+FP-based, 126, 129
+LOC-based, 126, 128
+object-oriented projects,
+
+564
+
+problem based, 126
+process-based, 130
+WebApps, 791
+
+Estimation models, 132
+Estimation risk, 114
+Estimation table, 131
+Estimation tools, 124, 139
+Estimation variables, 127
+Event ﬂow, 314
+Event trace model, 597
+Events, rules for
+
+determining, 325
+
+Evolution graph, 231
+Evolutionary process
+model, 34, 37, 179
+
+Expected cost, 138
+Expected value, 125, 127
+External entity, 263, 310, 554
+External failure costs, 197
+Facilitated application
+
+specification techniques
+(FAST), 117, 275–277,
+289
+
+consensus list, 278
+
+Factoring, 349, 385–386
+Failure, deﬁnition of, 212
+Failure costs, 197
+Failure curves, 8
+Failure intensity, 483
+Failure mode analysis, 197
+Fan-in, 347, 355, 524
+Fan-out, 347, 355, 524
+Fat client, 751
+Fat server, 750
+Fault, 203, 639
+Fault-based testing, 639
+Fault tree analysis, 214
+Feasibility, 117
+Feature points, 91
+Finger-pointing, 497
+Finite state modeling, 462
+First law of system
+engineering, 226
+
+Fishbone diagram, 85
+Flexibility, 510
+Flow boundaries, 383
+Flow graphs, 445, 449
+
+compound conditions,
+
+446
+
+nodes, 446
+notation, 446
+Flow model, 310
+Flowchart, 425
+Formal design, 702
+Formal methods, 673–677
+
+concerns about, 44
+future directions, 694
+mathematical notation,
+
+mathematical
+
+preliminaries, 682
+operations, 678, 681
+state, 678
+ten commandments of,
+
+687
+
+693
+
+Concurrent engineering, 40
+Concurrent process model,
+
+Data, 850
+Data abstraction, 342, 546,
+
+Design model, 340, 357
+Design notation, 432
+
+Defect tracking, 74, 98, 188,
+
+(ECO), 234
+
+Customer evaluation, 37
+Customer voice table, 280
+Cyclomatic complexity, 446,
+
+448, 449, 493, 529
+
+Design concepts, 341
+Design heuristics, 355
+Design iteration, 386
+Design mapping, 385, 386
+
+Estimation, 123, 128, 131
+
+Formal methods model, 43
+
+INDEX
+
+857
+
+Information context, 284
+Information deployment,
+
+Life cycle objectives, 39
+Linear sequential model,
+
+28, 30, 34
+
+Information determinacy, 9
+Information domain, 90,
+
+Lines of code, (LOC), 88
+Linguistic modular units,
+
+127, 283, 321
+
+Information ﬂow, 284, 309,
+
+607
+
+Formal speciﬁcation
+
+language, 689
+
+Formal technical review,
+
+14, 64, 197, 205, 237, 484,
+see also Review
+
+OO models, 635
+user interface, 417
+
+Formulation, 776
+Forward engineering, 808,
+
+814
+
+c/s systems, 816
+object-oriented
+systems, 817
+
+user interfaces, 818
+
+Fourth generation
+
+techniques (4GT), 44–45,
+290
+
+40-20-40 rule, 172
+Framework, 23
+Framework activities, 69
+Function deployment, 279
+Function points, 89
+
+complexity adjustment
+
+values, 91
+
+computation of, 90, 519
+estimation, 562
+extended metrics, 91
+pros and cons, 93
+
+Function speciﬁcation, 703
+Functional decomposition,
+
+Functional independence,
+
+Functional model, 285, 309,
+
+68
+
+352
+
+310
+
+Functionality, 512, 513
+Fundamental system
+
+model, 311, 379, 392
+
+FURPS, 511
+Gantt chart, 182
+Glass-box testing, 444
+Golden rules
+
+interface design, 402
+WebApp design, 779
+Grammatical parse, 322
+Graph matrix, 452
+Graph notation, 461
+Graphs, symmetry of, 463
+GUI, see Interface entries
+Hardware, 247
+Hazard analysis, 159
+Hazards, 213
+Help facility, 413, 414
+Hiding, 351
+Horizontal decomposition,
+
+287
+
+HTML, 774
+Human resources, 60
+I-CASE, 836, see also CASE
+Identiﬁcation, 237
+If-then-else, 425
+Implementation, 618
+model view, 576
+view, 288
+
+Increment planning, 701
+Incremental development,
+
+168
+
+Incremental model, 35
+Independent path, 446
+Independent test group
+
+(ITG), 480
+
+Indexing methods, 736
+Indexing vocabularies, 736
+
+279
+
+311
+
+655
+
+Information hiding, 351,
+
+Information strategy
+planning (ISP), 253
+
+Inheritance, 550, 656, 662
+
+metrics for, 665
+multiple, 551
+Initial operational
+
+capability, 39
+
+Input, 249
+Inspections, 206, see also
+Formal technical review
+
+Instance, 544
+Integrated CASE
+
+environment, 827, see
+also CASE 
+
+Integration testing, 481,
+
+488, 493
+
+documentation, 494
+OO software, 637, 640
+strategies, 489
+
+Integrity, 97, 510
+Interaction modes, 403
+Interdependency, 169
+Interface actions, 408, 411
+Interface constraints, 403
+Interface description
+
+language, 753
+
+Interface design, 337, 401,
+
+408, see also User
+interface design
+activities, 410
+tools, 831
+WebApps, 785
+
+Interface design model, 405
+Interface objects, 401, 410,
+
+760
+
+Interfaces, 621, 530
+Internet standards, 774
+Interoperability, 510
+Intersubsystem
+
+communication, 616
+Inventory analysis, 806
+ISO 9000 standard, 201,
+
+216, 217
+
+Jackson System
+
+Development (JSD), 330
+
+Jacobson method, 574, 609
+Javabean components, 733,
+
+753, 773
+
+Kaizen, 199
+Key classes, 563
+Key indicators, 26
+Key practices, 26
+Key process area (KPA), 21,
+
+Knowledge, 850
+Knowledge discovery, 368
+Lateness, comment on, 167
+Layered architecture, 373
+Layering, 612, 613
+Layout appropriateness, 530
+Legacy programs, 23
+Level of abstraction, 676
+Life cycle architecture, 39
+
+25
+
+Link weight, 452
+Localization, 655
+Logical constructs, 424
+Loop constructs, 425
+Loop testing, 458
+Loops, types of, 458
+Lower natural process
+
+limit, 102
+
+Maintainability, 96, 510,
+
+513
+
+Maintenance, 805
+metrics for, 533
+request, 815
+
+Make/buy decision, 136
+Mean-time-to-change
+
+(MTTC), 97
+
+Mean-time-between-failure
+
+(MTBF), 212
+
+Measurement, 79, 80, 87,
+
+507, 515
+
+Measures, 80, 87
+
+LOC and FP, 94
+Messages, 548–549
+
+protocol description,
+
+619
+
+Meta-questions, 275
+Methods, 21, 545, see also
+
+Operations
+
+metrics for, 660
+
+Metrics, 74, 80, 507, 516
+analysis model, 517
+architectural design,
+
+523
+
+collection of, 100
+complexity, 524, 529
+design model, 523
+encapsulation, 664
+error tracking, 188
+framework for, 514
+function oriented, 89,
+
+518, 532
+GUIs, 530
+inheritance, 665
+integration of, 98
+maintenance, 533
+OO projects, 665
+OO software, 653
+OOD, 658
+OOT, 664
+operations, 664
+productivity, 126
+reconciling, 94
+reuse, 741
+size-oriented, 88, 89
+small organizations,
+
+104
+
+526
+
+Metrics computation, 100
+Metrics evaluation, 100
+Metrics guidelines, 105
+Metrics variation, 100
+Middleware, 753
+Milestones, 57
+
+OO projects, 565
+
+Mini-speciﬁcations, 278
+Modality, 306, 320
+Modularity, 343, 352
+
+effective, 345
+guidelines, 355
+
+Module interconnection
+
+language, 231
+Module size, 345
+Modules, 343
+
+cost of, 344
+complexity of, 344
+subordinate, 348
+superordinate, 348
+
+MOOD metrics suite, 662
+Morphology, 524
+Multiple class testing, 645
+Multiple instances, 313
+Nassi-Shneiderman charts,
+
+426
+
+Navigation design, 783
+Navigation nodes, 784
+Negotiation, 38, 276
+90-90 rule, 72
+Object, 544–545, 703
+
+generic life history, 559
+selection criteria, 556
+
+Object adapter, 754
+Object-behavior model,
+
+594, 613
+
+Object deﬁnition, 559
+Object descriptions, 618
+Object design, 618
+algorithms, 619
+data structures, 619
+Object life history, 581
+Object management layer,
+
+835
+
+Object model, 553, 732
+
+testing of, 636
+
+Object modeling technique,
+
+Object-oriented (OO), 542,
+
+574, 608
+
+544
+
+contract, 565
+estimation, 562, 564
+milestones, 565
+process model, 543
+project management,
+
+560
+
+project metrics, 562
+scheduling, 564
+tracking projects, 565
+
+Object-oriented
+
+architecture, 373
+
+Object-oriented metrics,
+
+Lorenz and Kidd, 661
+MOOD suite, 662
+
+Object-oriented paradigm,
+
+Object-oriented
+
+programming (OOP), 625
+
+Object-oriented projects,
+
+Object-oriented software,
+
+542
+
+560
+
+656
+
+software components,
+
+653–654
+
+software metrics, 79
+software quality, 95, 510
+source code, 531
+speciﬁcation quality,
+
+522
+
+technical, 516
+testing, 532
+tools, 829
+
+Metrics baseline, 100
+
+858
+
+INDEX
+
+Object point, 134
+Object pool, 233
+Object-relationship model,
+
+591, 593
+
+testing of, 634
+
+Object/relationship pairs,
+
+320
+
+Object request broker
+
+(ORB), 753
+
+Observability, 441
+OOA (object-oriented
+analysis), 571, 574
+vs. conventional
+
+approaches, 573
+
+deﬁning classes, 583
+event identiﬁcation, 594
+partitioning, 612
+relationships, 591
+state-based models, 596
+state representations,
+
+595
+
+tasks, 572
+uniﬁed approach to,
+
+575, 610
+
+use-cases, 594
+
+OOA model, 632–634
+dynamic view, 580
+generic components,
+
+579
+
+static view, 580
+
+OOD (object-oriented
+
+design), 603
+
+communication, 616
+components of, 614
+contracts, 616
+vs. conventional
+
+approaches, 605
+
+data management, 611
+design issues, 607
+generic steps, 609
+layers of, 604
+mapping to OOA, 606
+methods, 608
+object design, 618
+pyramid, 604
+system design process,
+
+611
+
+OOD model, 632–634
+OOT (object-oriented
+
+testing), 631, 638
+
+behavior models, 647
+deep structure, 643
+impact of OOP, 640
+interclass, 645
+metrics for, 664
+partition testing, 644
+random testing, 644
+state-based partitioning,
+
+645
+
+strategy, 636
+surface structure, 643
+thread-based, 637
+
+Operability, 441
+Operations, 545, 548, 558,
+
+620, 623, see also
+Methods
+
+metrics for, 660, 664
+testing issues, 636
+Orthogonal array, 466
+Outsourcing, 13, 138
+Outsourcing vendors, 791
+Overloading, 553
+
+Overriding, 551
+Package references, 592
+Packages, 590
+Pareto principle, 209, 440
+Partition testing, 644–645
+Partitioning, 67, 286, 612
+
+horizontal, 287, 348
+vertical, 288, 349
+
+Pathological connection,
+
+357
+
+Pattern of usage, 762
+Patterns, 371, 375, see also
+
+Design patterns 
+
+People, 170, 247
+
+communication issues,
+
+65
+
+roles of, 58
+
+People/work relationships,
+
+171
+
+Perfective maintenance, 23
+Performance, 512
+Performance risk, 150
+Performance testing, 498
+Personal software process
+
+(PSP), 83
+PERT, 181
+Petri net models, 214
+Phase index, 211
+Planning, 36
+Poka-yoke, 214
+Polymorphism, 552
+metrics for, 663
+Portability, 510, 513
+Portability services, 827
+Postcondition, 678, 682
+Postmortem analysis, 73
+Precondition, 678, 682
+Predicate, 683
+Predicate node, 446
+Presentation protocol, 834
+Prevention device, 215, 216
+Preventive maintenance, 23
+Private process data, 83
+PRO/SIM, tools, 831
+Problem decomposition, 67
+Problem solving, 59
+Procedural abstraction, 342
+Procedural design, 423
+Procedures, 247
+Process, 20, 46, 57, 310, see
+
+also Software process
+
+adaptation criteria, 174
+evolutionary model, 179
+generic phases, 68
+object-oriented, 543
+Process activation table,
+
+Process decomposition, 70
+Process evaluation, for
+
+315, 327
+
+BPR, 803
+
+BPR, 802
+
+Process identiﬁcation, for
+
+Process indicators, 82
+Process layer, 21
+Process maturity, 24
+Process metrics, 82, 101
+Process model, 26
+
+CBSE, 725
+interface design, 407
+object-oriented, 543
+selecting, 68
+
+Process modeling, 33, 829
+
+Process speciﬁcation
+(PSPEC), 302, 312,
+327–328
+
+for BPR, 803
+
+Process technology, 46
+Processing narrative, 322,
+
+557, 623
+
+Producer, 206
+Product, 46, 57, 67, see also
+
+Software
+
+Product engineering, 254-
+
+255
+
+126
+
+Productivity, 740
+Productivity metrics, 94,
+
+Program components, 621
+Program design language,
+
+327, 429, 430, 622
+Program graph, 445
+Program structure, 385,
+
+392, 351
+
+terminology, 347
+
+Programming, tools, 831
+Progress, tracking of, 72
+Project, 57, 71
+
+avoiding problems, 72
+constraints, 120
+danger signs, 71
+degree of rigor, 173
+function, 119
+performance, 120
+reasons for failure, 65
+
+Project coordination, 66
+Project complexity, 114
+Project database, 228
+Project entry point, 37
+Project indicators, 82
+Project library, 228
+Project management, 75
+critical practices, 74
+four Ps, 56
+object-oriented, 560
+tools, 829
+WebE, 787, 789
+
+Project metrics, 86–87
+Project planning, 115
+
+tools, 829
+
+Project resources, 120–122
+Project risks, 147, 149
+Project scheduling, 165
+Project size, 114
+Project tables, 182
+Project tracking, 165
+Proof of correctness, 709
+Protection, 607
+Protocol description, 618
+Protocols, 609
+Prototype, 31, 289
+Prototyping
+BPR, 803
+environments, 291
+evolutionary, 289
+problems with, 32
+tools, 290, 831
+throwaway, 289
+
+Prototyping methods, 290
+Prototyping model, 30
+Prototyping paradigm, 30,
+
+289
+
+Pseudocode, 429
+Public metrics, 84
+Quality, 195, 739
+
+conformance, 195
+cost of, 196, 197
+design, 195
+deviations, 202
+quantitative view, 513
+
+Quality assurance, 196, 200
+
+tools, 830
+
+Quality concepts, 194
+Quality control, 194, 196
+Quality costs, 197
+Quality factors, 95, 341
+
+ISO 9126, 513
+McCall, 509
+Quality ﬁlter, 14
+Quality function
+
+development (QFD), 279,
+289
+
+Quality measurement, 96
+Random testing, 644
+Rapid application
+
+development (RAD), 32,
+34
+
+Real time logic, 214
+Recorder, 206
+Recovery testing, 497
+Recursive/parallel model,
+
+560–561
+
+Reengineering, 799
+
+economics of, 819
+process model, 805
+tools, 832
+
+Referent point, 155
+Reﬁnement, 343
+for BPR, 803
+
+Regression testing, 491
+Relationships, derivation
+
+of, 592
+
+Reliability, 509, 512, 513
+
+measures, 212
+Repeat-until, 425
+Repository, 836
+Requirements, types of, 279
+Requirements analysis,
+
+258, 272
+
+Requirements database, 261
+Requirements elicitation,
+
+256, 274, 280
+
+steps, 257
+work products, 257
+
+Requirements engineering,
+
+255, 256
+
+guiding principles, 283
+steps, 256
+
+Requirements gathering, 701
+
+interfaces, 402
+
+Requirements
+
+management, 261
+
+Requirements model, 556
+Requirements negotiation,
+
+Requirements review, 260
+Requirements speciﬁcation,
+
+Requirements tracing,
+
+tools, 829, 841
+
+Requirements validation,
+
+Resource management
+
+component, 616
+
+Responsibilities, 583
+allocation of, 585
+identifying, 584
+
+259
+
+259
+
+260
+
+INDEX
+
+859
+
+Restructuring, 813
+
+code, 814
+data, 814
+
+Reusability, 43, 510
+Reusable components, 722,
+
+736
+
+categorization of, 726
+identiﬁcation of, 727
+
+Reusable software
+components, 290
+
+Reuse, 551, 577, 721, 734
+
+cost, 740
+environment, 738
+leverage, 742
+library, 739
+metrics, 741
+
+Reverse engineering, 807,
+
+809
+
+of data, 811
+of processing, 810
+of user interfaces, 812
+Review, 206–208 see also
+Formal technical review
+
+issues list, 207
+leader, 206
+meeting, 206
+reporting, 207
+summary report, 207
+
+Rework, 197
+Risk analysis, 36, 145
+
+tools, 829
+
+Risk assessment, 154
+Risk components and
+
+drivers, 148
+
+Risk driver, 150
+Risk estimation, 151
+Risk exposure, 153
+Risk identiﬁcation, 148
+Risk impact, 151
+Risk information sheet, 159
+Risk item checklist, 148
+Risk management, 74, 157
+
+strategies, 146
+
+Risk mitigation, 156
+Risk Mitigation, Monitoring,
+
+and Management Plan,
+153, 159
+
+Risk monitoring, 157
+Risk planning, 153
+Risk probability, 151
+Risk projection, 151
+Risk referent level, 154
+Risk reﬁnement, 156
+Risk table, 151
+Risks, 146, 148
+
+business related, 147
+hazards, 158
+management concern,
+
+152
+
+safety, 158
+technical, 147
+
+Round robin reviews, 206
+Rumbaugh method, 574,
+
+608
+
+SafeHome, 277, 281, 286,
+320, 322, 325, 329, 380,
+411, 518, 555, 581, 587,
+594, 614, 619, 622, 713,
+729, 777
+
+Sandwich testing, 493
+Scalability, of WebApps,
+
+793
+
+Scenario-based testing, 641
+Scenario script, 563
+Schedule estimation, 74
+Schedule performance
+
+index, 187
+
+Schedule risk, 150
+Schedule variance, 187
+Scheduling, 168, 181, 792
+
+milestones, 170
+object-oriented projects,
+
+564
+
+outcomes, 170
+responsibilities, 169
+tracking of, 185
+
+Schemas, 690
+SCM, 225, 230, 841
+standards, 238
+tools, 232
+resources, 231
+tools, 830
+WebApps, 792
+Scope, 57, 67, 68
+Scope of control, 356
+Scope of effect, 356
+Screen layout, 411
+Security, 97, 774
+Security testing, 497
+Semantic domain, 689
+Semantic navigation unit
+
+(SMU), 784
+
+Sensitivity testing, 498
+Sequence construct, 425
+Server, 748–749
+Services, 545, see also
+Methods; Operations
+
+Sets, 683
+
+logical operators, 686
+operators, 684
+sequences, 686
+
+SGML, 774
+Shared repository layer,
+
+835
+
+Simplicity, 441
+Size, 656
+Size-oriented metrics, for
+
+OO software, 661
+
+Smoke testing, 492–493
+Software, 6, 9
+
+deterioration of, 8
+history of, 5
+importance of, 846
+impact of, 4
+project characteristics,
+
+65
+
+role of, 4
+scope of change, 847
+
+Software architecture, 346,
+
+366, 725, see also
+Architecture
+
+Software components, 8,
+
+42, 120, 367, see also
+Components
+
+user interface, 415
+
+Software conﬁguation, 14,
+
+226
+
+items, 226, 228, see also
+Conﬁguration objects
+management, see CSM
+
+Software crisis, 11
+Software engineering, 4, 20
+
+c/s systems, 755
+environment, 122
+
+Software risks, 146, see also
+
+Risks
+
+Software safety, 159
+Software science, 531
+Software scope, 67, 115,
+
+118, see also Scope
+Software sizing, 124
+Software team, 60, 170, see
+
+Software testing, 437, see
+
+also Teams
+
+also Testing
+
+Software safety, 213
+Source code, metrics, 531
+Span of control, 347
+Speciﬁcation, 291
+Speciﬁcation language, 689
+Speciﬁcation principles, 291
+Speciﬁcation review, 294
+Spiral model, 36, 38
+Spoilage, 97
+Stability, 442
+Stakeholders, 275
+Standards, 12
+State-based models, 596
+State-box speciﬁcation, 705
+State diagram, 613
+State model, 648
+State transition diagram
+
+(STD), 302, 317, 318, 325
+Statement of scope, 68, 557
+States, types of, 595
+Static analysis, tools, 832
+Statistical modeling, 483
+Statistical process control,
+
+100
+
+Statistical quality
+assurance, 209
+
+712
+
+Status accounting, 237
+Stepwise elaboration, 409
+Stepwise reﬁnement, 343
+Stress testing, 498
+Structural complexity
+
+metric, 524
+
+Structural model view, 576
+Structural modeling, 728
+Structural partitioning, 348
+Structure points, 725, 728,
+
+729
+
+cost analysis, 741
+
+Structured analysis, 299,
+
+300, 310
+
+Hatley and Pirbhai
+extensions, 315
+
+mechanics, 319
+real time extensions, 312
+Ward and Mellor
+extensions, 312
+
+Structured analysis and
+
+design technique (SADT),
+330
+
+Structured constructs, 424,
+
+426
+
+Structured design, 379
+Structured English, 429
+Structured programming,
+
+339, 424, 706
+
+Structured query language
+
+(SQL), 749
+
+Software prototyping, 289,
+
+see also Prototyping
+
+Software quality, 199, 338,
+
+Statistical software process
+
+improvement (SSPI), 84
+
+Statistical use testing, 702,
+
+226
+
+508
+
+generic view, 21
+mathematics, 676
+methods, deﬁciencies,
+
+675
+
+paradigm, 26, 68
+road ahead, 845
+tasks, 177, see also
+
+Tasks
+
+work tasks, 69
+
+Software Engineering
+
+Institute (SEI), 24, 105
+Software equation, 135,
+
+171
+
+Software librarian, 62
+Software maintenance,
+
+804, see also Maintenance
+
+Software maturity index,
+
+99, 533
+
+Software myths, 12
+Software procedure, 351
+Software process, 20, see
+
+also Process
+
+improvement, 82
+
+models, 26, 64, 848
+
+Software project(s)
+estimation, 123
+failure of, 57
+gathering requirements,
+
+11
+
+lateness, 166
+management, 55
+planning, 113, see also
+
+Project planning
+
+scheduling, see
+
+Scheduling
+
+Software Project Plan, 198,
+
+metrics, 95
+
+Software quality assurance,
+
+24, 199, 479, see also
+Quality assurance 
+
+activities, 201
+audits, 202
+formal approaches to,
+
+209
+
+group, 200
+plan, 201
+SQA Plan, 201, 218
+
+Software reengineering,
+
+804, see also
+Reengineering
+
+Software reliability, 212,
+483, see also Reliability
+Software repository, 228
+Software requirements, 13,
+
+292
+
+analysis, 29, 272, see
+also Requirements
+analysis
+
+engineering, 271
+
+Software Requirements
+Speciﬁcation, 293, 226,
+327, 381, 495
+
+Software reuse, 9, 43, see
+
+also Reuse
+
+Software reviews, 202, see
+
+also Formal technical
+review
+
+860
+
+INDEX
+
+Structured retroﬁt, 815
+Structures, 588
+Stubs, 487
+Style, see Architectural style
+Subclass, 547
+Subﬂow, 382
+Subjects, deﬁnition of, 590
+Subproofs, 709
+Subsystem collaboration
+
+table, 617
+
+Subsystems, 563, 590, 612
+
+allocation of, 613
+communication, 612,
+
+616
+
+Superclass, 547, 551
+Support, 29
+Support classes, 563
+Support phase, 22
+Support risk, 150
+Supportability, 513
+Symbol table, 677
+Synchronization control,
+
+234
+
+Syntactic domain, 689
+System, 246
+
+complexity, 524
+component
+
+engineering, 255
+components, 249
+constraints, 250
+domains, 249
+elements, 249
+engineer, 249
+world view, 248
+
+System context diagram
+
+(SCD), 262
+
+System design, activities,
+
+611
+
+System engineer, 264
+System engineering, 245
+
+hierarchy, 248
+
+System ﬂow diagram, 264
+System image, 405
+System information
+
+engineering, 28
+
+System model, 262
+
+restraining factors, 249
+System modeling, 249, 259,
+
+262
+
+System perception, 405
+System response time, 413
+System simulation, 251
+System software, tools, 830
+System Speciﬁcation, 120,
+
+128, 259, 226, 265, 381
+System testing, 481, 496
+Task analysis, 408
+Task deployment, 279
+Task management
+component, 614
+
+Task modeling, steps, 409
+Task network, 180, 181
+Task regions, 36
+Task set, 23, 37, 172
+Task set selector
+
+computation of, 175
+interpretation of, 176
+
+Task template, 614
+Tasks, 57, 614
+major, 177
+reﬁnement of, 178
+
+Team leaders, 59
+
+Team organization, 60, 63
+Teams, 61
+
+Transaction, 380
+Transaction center, 380,
+
+Technology infrastructure,
+
+390, 393
+
+jelled, 63
+organizational
+
+paradigms, 62
+
+toxic, 63
+
+253
+
+Templates, 779
+Test cases, 442, 443, 449
+Test coverage, 467
+Test management, tools, 832
+Test Speciﬁcation, 494
+Testability, 440, 510
+Testing, 29, 197
+
+alpha and beta, 496
+behavioral methods,
+
+392
+
+Transaction ﬂow, 380
+
+modeling, 462
+
+Transaction mapping, 389,
+
+Transform, 310
+Transform center, 379, 383
+Transform ﬂow, 379
+Transform mapping,
+
+Umbrella activities, 23, 37,
+
+380–381
+
+57
+
+UML, 43, 575
+
+notation, 581
+object design, 610
+system design, 610
+views, 576
+
+462
+
+big-bang, 488
+black-box methods, 459
+boundary value
+analysis, 465
+
+c/s architectures, 469
+c/s systems, 762
+completion criteria, 482
+control structure, 454
+data ﬂow, 456
+document and help
+
+facilities, 469
+
+equivalence
+
+partitioning, 463
+fundamentals, 438
+graph-based, 460
+GUIs, 469
+integration, 488
+logical conditions, 454
+loops, 458
+metrics for, 532
+object-oriented, 631,
+
+objective of, 439
+organizational issues,
+
+638
+
+479
+
+orthogonal array, 466
+principles of, 439
+real-time systems, 470
+regression, 491
+schedule, 494
+specialized
+
+environments, 468
+strategic issues, 484
+strategies for, 477
+system-level, 496
+thread based, 637
+tools, 831
+WebApps, 786
+white-box methods, 444
+
+Thin client, 751
+3D function point, 92
+Time allocation, 169
+Time-boxing, 185
+Time-continuous data ﬂow,
+
+313
+
+Timeline charts, 182
+Timing modeling, 462
+Tools, 12, see also CASE
+
+management services,
+
+835
+
+Top-down integration, 488
+Total quality management
+
+(TQM), 199
+
+Traceability tables, 261
+
+see UML
+
+Unit testing, 481
+
+common errors found,
+
+486
+
+considerations, 485
+OO software, 636
+procedures, 487
+
+(UNPL), 102
+
+Usability, 97, 510, 512, 513
+Usage scenarios, 259, 280,
+
+615, 713, 762, see also
+Use-case
+
+Use-case, 54, 280, 289, 375,
+
+581, 615, 636
+
+diagram, 581
+examples of, 281, 642
+
+User interface
+
+component, 615
+consistency of, 405
+design, see User
+
+interface design
+
+development systems,
+
+415
+
+layout of, 404
+prototype, 408, 416
+toolkit, 415
+
+User interface design, 401,
+see also Interface design
+
+evaluation, 416
+golden rules, 402
+issues, 413
+model, 405
+principles of, 403
+process model, 407
+requirements gathering,
+
+402
+
+reviews, 417
+User model, 405
+User model view, 576
+User satisfaction, 196
+Users, 406
+
+memory load, 404
+types of, 406
+Validation, 479
+Validation criteria, 278,
+
+293, 495, 481, 495
+
+Validation testing
+
+criteria, 495
+
+Understandability, 442, 607
+Uniﬁed development
+
+process, 43
+
+Uniﬁed modeling language,
+
+Web engineer, 779, 788
+Web engineering, see WebE
+Web publisher, 788
+WebApps, 771
+
+Upper natural process limit
+
+WebE, 769, 770
+
+OO software, 637
+
+Value analysis, 279
+Variant, 233
+Variation between samples,
+
+194
+
+Variation control, 194
+Veriﬁcation, 479
+Version control, 232
+
+automated approaches,
+
+233
+
+Versioning, 840
+Versions, 232
+Vital few causes, 209
+Walkthroughs, 206
+Waterfall model, 28
+Ways of navigation, 784
+Wear, 7
+Web-based applications,
+
+see WebApps
+
+architecture of, 780
+categories, 772
+characteristics of, 772
+cost estimates, 791
+design patterns, 783
+quality attributes, 773
+structures, 780
+
+activities, 775
+administrator, 789
+analysis, 778
+design, 779
+development schedule,
+
+formulation, 776
+interface design, 785
+management issues,
+
+792
+
+787
+
+navigation design, 783
+outsourcing, 791
+politics of, 793
+project management
+
+guidelines, 790
+SCM issues, 792
+support specialist, 789
+teams, 788
+testing, 786
+tools, 831
+
+WebE process model, 775
+W5HH principle, 73
+Where-used/how used,
+
+White-box testing, 444
+Width, structure, 347
+WINWIN spiral model, 38
+Wirfs-Brock method, 574,
+
+329
+
+609
+
+Work breakdown structure
+
+(WBS), 181
+
+Work products, 57
+Work tasks, 69
+XML, 774
+Z notation, summary of,
+
+691
+
+690, 692
+
+Z speciﬁcation language,
+
+Zero quality control, 215
+Zone rules, 103
+
+

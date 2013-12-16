@@ -1,5 +1,4 @@
 ;; Generate wordlists
-
 ;;getWordLists <- 
 ;;          getWordLists crypto.txt > wordlist-crypto.txt
 ;;          getWordLists designPatterns.txt > word-list-designPatterns.txt
@@ -7,7 +6,6 @@
 ;;          getWordLists networking.txt > wordlist-networking.txt
 ;;          getWordLists patterns.txt > word-list-patterns.txt
 ;;         getWordLists pragmatic.txt > word-list-pragmatic.txt
-
 ;;getHighFreqWordLists <- 
 ;;          getHighFreqWordLists crypto.txt > hf-wordlist-crypto.txt
 ;;          getHighFreqWordLists designPatterns.txt > hf-word-list-designPatterns.txt
@@ -15,15 +13,11 @@
 ;;          getHighFreqWordLists networking.txt > hf-wordlist-networking.txt
 ;;          getHighFreqWordLists patterns.txt > hf-word-list-patterns.txt
 ;;          getHighFreqWordLists pragmatic.txt > hf-word-list-pragmatic.txt
-
 ;; Combine wordlists into subjects: 
-
 ;;wordlist-general.txt <-
 ;;         cat word-list-pragmatic.txt word-list-patterns.txt word-list-designPatterns.txt > $OUTPUT
-
 ;;hf-wordlist-general.txt <-
 ;;         cat hf-word-list-pragmatic.txt hf-word-list-patterns.txt hf-word-list-designPatterns.txt > $OUTPUT
-
 
 ;;cleanUp <- 
 ;;         rm word-list*
@@ -31,41 +25,70 @@
 
 splitPdf <-
          ./splitPDF.py ./AdvAndroid-1_0-CC.pdf 39 85 90 105 116 128 139 152 186 196 241
+         ./splitPDF.py ./pressman.pdf 29 82 272 363 393 429 465 535 567 699 775 827
 
 pdf2text <-
-         pdf2txt AdvAndroid-1_0-CC.part1.1_39.pdf > ch0.txt
-         pdf2txt AdvAndroid-1_0-CC.part2.40_85.pdf > ch1-2-3.txt 
-         pdf2txt AdvAndroid-1_0-CC.part3.86_90.pdf > ch4.txt
-         pdf2txt AdvAndroid-1_0-CC.part4.91_105.pdf > ch5.txt
-         pdf2txt AdvAndroid-1_0-CC.part5.106_116.pdf > ch6.txt
-         pdf2txt AdvAndroid-1_0-CC.part6.117_128.pdf > ch7.txt
-         pdf2txt AdvAndroid-1_0-CC.part7.129_139.pdf > ch8.txt
-         pdf2txt AdvAndroid-1_0-CC.part8.140_152.pdf > ch9.txt
-         pdf2txt AdvAndroid-1_0-CC.part9.153_186.pdf  > ch10.txt        
-         pdf2txt AdvAndroid-1_0-CC.part10.187_196.pdf > ch11.txt
-         pdf2txt AdvAndroid-1_0-CC.part11.197_241.pdf > ch12-13-14.txt
-         pdf2txt AdvAndroid-1_0-CC.part12.242_262.pdf > ch15+.txt 
+         pdf2txt AdvAndroid-1_0-CC.part1.1_39.pdf > AdvAndroid.ch0.txt
+         pdf2txt AdvAndroid-1_0-CC.part2.40_85.pdf > AdvAndroid.ch1-2-3.txt 
+         pdf2txt AdvAndroid-1_0-CC.part3.86_90.pdf > AdvAndroid.ch4.txt
+         pdf2txt AdvAndroid-1_0-CC.part4.91_105.pdf > AdvAndroid.ch5.txt
+         pdf2txt AdvAndroid-1_0-CC.part5.106_116.pdf > AdvAndroid.ch6.txt
+         pdf2txt AdvAndroid-1_0-CC.part6.117_128.pdf > AdvAndroid.ch7.txt
+         pdf2txt AdvAndroid-1_0-CC.part7.129_139.pdf > AdvAndroid.ch8.txt
+         pdf2txt AdvAndroid-1_0-CC.part8.140_152.pdf > AdvAndroid.ch9.txt
+         pdf2txt AdvAndroid-1_0-CC.part9.153_186.pdf  > AdvAndroid.ch10.txt        
+         pdf2txt AdvAndroid-1_0-CC.part10.187_196.pdf > AdvAndroid.ch11.txt
+         pdf2txt AdvAndroid-1_0-CC.part11.197_241.pdf > AdvAndroid.ch12-13-14.txt
+         pdf2txt AdvAndroid-1_0-CC.part12.242_262.pdf > AdvAndroid.ch15+.txt 
+         pdf2txt pressman.part1.1_29.pdf > pressman.ch1.txt
+         pdf2txt pressman.part2.30_82.pdf > pressman.ch2.txt
+         pdf2txt pressman.part3.83_272.pdf > pressman.ch3.txt
+         pdf2txt pressman.part4.273_363.pdf > pressman.ch4.txt
+         pdf2txt pressman.part5.364_393.pdf > pressman.ch5.txt
+         pdf2txt pressman.part6.394_429.pdf > pressman.ch6.txt
+         pdf2txt pressman.part7.430_465.pdf > pressman.ch7.txt
+         pdf2txt pressman.part8.466_535.pdf > pressman.ch8.txt
+         pdf2txt pressman.part9.536_567.pdf > pressman.ch9.txt
+         pdf2txt pressman.part10.568_699.pdf > pressman.ch10.txt
+         pdf2txt pressman.part11.700_775.pdf > pressman.ch11.txt
+         pdf2txt pressman.part12.776_827.pdf > pressman.ch12.txt
+         pdf2txt pressman.part13.828_888.pdf > pressman.ch13.txt
+           
+
 
 getWordLists <- 
-          getWordLists ch1-2-3.txt > wordlist-ch1-2-3.txt
-          getWordLists ch4.txt > wordlist-ch4.txt
-          getWordLists ch5.txt > wordlist-ch5.txt
-          getWordLists ch6.txt > wordlist-ch6.txt
-          getWordLists ch7.txt > wordlist-ch7.txt
-          getWordLists ch8.txt > wordlist-ch8.txt
-          getWordLists ch9.txt > wordlist-ch9.txt
-          getWordLists ch10.txt > wordlist-ch10.txt
-          getWordLists ch11.txt > wordlist-ch11.txt
-          getWordLists ch12-13-14.txt > wordlist-ch12-13-14.txt
+          getWordLists AdvAndroid.ch1-2-3.txt > wordlist-AdvAndroid.ch1-2-3.txt
+          getWordLists AdvAndroid.ch4.txt > wordlist-AdvAndroid.ch4.txt
+          getWordLists AdvAndroid.ch5.txt > wordlist-AdvAndroid.ch5.txt
+          getWordLists AdvAndroid.ch6.txt > wordlist-AdvAndroid.ch6.txt
+          getWordLists AdvAndroid.ch7.txt > wordlist-AdvAndroid.ch7.txt
+          getWordLists AdvAndroid.ch8.txt > wordlist-AdvAndroid.ch8.txt
+          getWordLists AdvAndroid.ch9.txt > wordlist-AdvAndroid.ch9.txt
+          getWordLists AdvAndroid.ch10.txt > wordlist-AdvAndroid.ch10.txt
+          getWordLists AdvAndroid.ch11.txt > wordlist-AdvAndroid.ch11.txt
+          getWordLists AdvAndroid.ch12-13-14.txt > wordlist-AdvAndroid.ch12-13-14.txt
 
 getHighFreqWordLists <- 
-          getHighFreqWordLists ch1-2-3.txt > hf-wordlist-ch1-2-3.txt
-          getHighFreqWordLists ch4.txt > hf-wordlist-ch4.txt
-          getHighFreqWordLists ch5.txt > hf-wordlist-ch5.txt
-          getHighFreqWordLists ch6.txt > hf-wordlist-ch6.txt
-          getHighFreqWordLists ch7.txt > hf-wordlist-ch7.txt
-          getHighFreqWordLists ch8.txt > hf-wordlist-ch8.txt
-          getHighFreqWordLists ch9.txt > hf-wordlist-ch9.txt
-          getHighFreqWordLists ch10.txt > hf-wordlist-ch10.txt
-          getHighFreqWordLists ch11.txt > hf-wordlist-ch11.txt
-          getHighFreqWordLists ch12-13-14.txt > hf-wordlist-ch12-13-14.txt
+          getHighFreqWordLists AdvAndroid.ch1-2-3.txt > hf-wordlist-AdvAndroid.ch1-2-3.txt
+          getHighFreqWordLists AdvAndroid.ch4.txt > hf-wordlist-AdvAndroid.ch4.txt
+          getHighFreqWordLists AdvAndroid.ch5.txt > hf-wordlist-AdvAndroid.ch5.txt
+          getHighFreqWordLists AdvAndroid.ch6.txt > hf-wordlist-AdvAndroid.ch6.txt
+          getHighFreqWordLists AdvAndroid.ch7.txt > hf-wordlist-AdvAndroid.ch7.txt
+          getHighFreqWordLists AdvAndroid.ch8.txt > hf-wordlist-AdvAndroid.ch8.txt
+          getHighFreqWordLists AdvAndroid.ch9.txt > hf-wordlist-AdvAndroid.ch9.txt
+          getHighFreqWordLists AdvAndroid.ch10.txt > hf-wordlist-AdvAndroid.ch10.txt
+          getHighFreqWordLists AdvAndroid.ch11.txt > hf-wordlist-AdvAndroid.ch11.txt
+          getHighFreqWordLists AdvAndroid.ch12-13-14.txt > hf-wordlist-ch12-13-14.txt
+          getHighFreqWordLists pressman.ch1.txt > hf-wordlist-pressman.ch1.txt
+          getHighFreqWordLists pressman.ch2.txt > hf-wordlist-pressman.ch2.txt
+          getHighFreqWordLists pressman.ch3.txt > hf-wordlist-pressman.ch3.txt
+          getHighFreqWordLists pressman.ch4.txt > hf-wordlist-pressman.ch4.txt
+          getHighFreqWordLists pressman.ch5.txt > hf-wordlist-pressman.ch5.txt
+          getHighFreqWordLists pressman.ch6.txt > hf-wordlist-pressman.ch6.txt
+          getHighFreqWordLists pressman.ch7.txt > hf-wordlist-pressman.ch7.txt
+          getHighFreqWordLists pressman.ch8.txt > hf-wordlist-pressman.ch8.txt
+          getHighFreqWordLists pressman.ch9.txt > hf-wordlist-pressman.ch9.txt
+          getHighFreqWordLists pressman.ch10.txt > hf-wordlist-pressman.ch10.txt
+          getHighFreqWordLists pressman.ch11.txt > hf-wordlist-pressman.ch11.txt
+          getHighFreqWordLists pressman.ch12.txt > hf-wordlist-pressman.ch12.txt
+          getHighFreqWordLists pressman.ch12.txt > hf-wordlist-pressman.ch12.txt

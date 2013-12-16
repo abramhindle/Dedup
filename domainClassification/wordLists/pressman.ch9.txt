@@ -1,0 +1,2429 @@
+508
+
+PART THREE
+
+CONVENTIONAL METHODS FOR SOFTWARE ENGINEERING
+
+Q U I C K
+L O O K
+
+guidelines  and  past  data.  The
+results of the analysis are inter-
+preted  to  gain  insight  into  the
+quality of the software, and the results of the inter-
+pretation lead to modification of work products
+arising out of analysis, design, code, or test.
+
+What is the work product? Software metrics that are
+computed from data collected from the analysis
+
+and design models, source code, and test cases.
+How do I ensure that I’ve done it right? You should
+establish the objectives of measurement before
+data collection begins, defining each technical
+metric in an unambiguous manner. Deﬁne only
+a few metrics and then use them to gain insight
+into the quality of a software engineering work
+product. 
+
+But some members of the software community continue to argue that software is
+unmeasurable or that attempts at measurement should be postponed until we bet-
+ter understand software and the attributes that should be used to describe it. This is
+a mistake.
+
+Although technical metrics for computer software are not absolute, they provide
+us with a systematic way to assess quality based on a set of clearly defined rules.
+They also provide the software engineer with on-the-spot, rather than after-the-fact
+insight. This enables the engineer to discover and correct potential problems before
+they become catastrophic defects.
+
+In Chapter 4, we discussed software metrics as they are applied at the process and
+project level. In this chapter, our focus shifts to measures that can be used to assess
+the quality of the product as it is being engineered. These measures of internal prod-
+uct attributes provide the software engineer with a real-time indication of the efﬁ-
+cacy of the analysis, design, and code models; the effectiveness of test cases; and the
+overall quality of the software to be built.
+
+19.1 SOFTWARE QUALITY
+
+“Every program does
+something right, it
+just may not be the
+thing that we want
+it to do.”
+author unknown 
+
+Even the most jaded software developers will agree that high-quality software is an
+important goal. But how do we deﬁne quality? In Chapter 8, we proposed a number
+of different ways to look at software quality and introduced a deﬁnition that stressed
+conformance to explicitly stated functional and performance requirements, explic-
+itly documented development standards, and implicit characteristics that are expected
+of all professionally developed software. 
+
+There is little question that the preceding deﬁnition could be modiﬁed or extended
+and debated endlessly. For the purposes of this book, the deﬁnition serves to empha-
+size three important points:
+
+1. Software requirements are the foundation from which quality is measured.
+
+Lack of conformance to requirements is lack of quality.1
+
+1 It is important to note that quality extends to the technical attributes of the analysis, design, and
+
+code models. Models that exhibit high quality (in the technical sense) will lead to software that
+exhibits high quality from the customer’s point of view.
+
+CHAPTER 19
+
+TECHNICAL METRICS FOR SOFTWARE
+
+509
+
+2. Speciﬁed standards deﬁne a set of development criteria that guide the man-
+ner in which software is engineered. If the criteria are not followed, lack of
+quality will almost surely result.
+
+3. There is a set of implicit requirements that often goes unmentioned (e.g., the
+
+desire for ease of use). If software conforms to its explicit requirements but
+fails to meet implicit requirements, software quality is suspect. 
+
+Software quality is a complex mix of factors that will vary across different applica-
+tions and the customers who request them. In the sections that follow, software qual-
+ity factors are identified and the human activities required to achieve them are
+described.
+
+19.1.1 McCall’s Quality Factors
+The factors that affect software quality can be categorized in two broad groups: 
+(1) factors that can be directly measured (e.g., defects per function-point) and (2) fac-
+tors that can be measured only indirectly (e.g., usability or maintainability). In each
+case measurement must occur. We must compare the software (documents, pro-
+grams, data) to some datum and arrive at an indication of quality.
+
+McCall, Richards, and Walters [MCC77] propose a useful categorization of fac-
+tors  that  affect  software  quality.  These  software  quality  factors,  shown  in 
+Figure 19.1, focus on three important aspects of a software product: its opera-
+tional characteristics, its ability to undergo change, and its adaptability to new
+environments.
+
+Referring to the factors noted in Figure 19.1, McCall and his colleagues provide
+
+the following descriptions: 
+
+Correctness. The extent to which a program satisfies its specification and fulfills the cus-
+tomer's mission objectives. 
+
+Reliability. The extent to which a program can be expected to perform its intended function
+with required precision. [It should be noted that other, more complete deﬁnitions of relia-
+bility have been proposed (see Chapter 8).]
+
+It’s interesting to note
+that McCall’s quality
+factors are as valid
+today as they were
+when they were ﬁrst
+proposed in the
+1970s. Therefore, it’s
+reasonable to assert
+that the factors that
+affect software quality
+do not change.
+
+Maintainability
+Flexibility
+Testability
+
+Portability
+Reusability
+Interoperability
+
+PRODUCT REVISION
+
+PRODUCT TRANSITION
+
+FIGURE 19.1
+McCall’s 
+software 
+quality factors
+
+PRODUCT OPERATION
+
+Correctness                              Usability                              Efficiency
+
+Reliability                              Integrity
+
+510
+
+PART THREE
+
+CONVENTIONAL METHODS FOR SOFTWARE ENGINEERING
+
+Efﬁciency. The amount of computing resources and code required by a program to perform
+its function. 
+
+Integrity. Extent to which access to software or data by unauthorized persons can be 
+controlled. 
+
+Usability. Effort required to learn, operate, prepare input, and interpret output of a program. 
+
+Maintainability. Effort required to locate and ﬁx an error in a program. [This is a very lim-
+ited deﬁnition.] 
+
+Flexibility. Effort required to modify an operational program. 
+
+Testability. Effort required to test a program to ensure that it performs its intended function. 
+
+Portability. Effort required to transfer the program from one hardware and/or software sys-
+tem environment to another. 
+
+Reusability. Extent to which a program [or parts of a program] can be reused in other
+applications—related to the packaging and scope of the functions that the program 
+performs. 
+
+Interoperability. Effort required to couple one system to another.
+
+It is difﬁcult, and in some cases impossible, to develop direct measures of these
+quality factors. Therefore, a set of metrics are deﬁned and used to develop expres-
+sions for each of the factors according to the following relationship: 
+
+Fq = c1 ⫻ m1 + c2 ⫻ m2 + . . . + cn ⫻ mn
+
+where Fq is a software quality factor, cn are regression coefﬁcients, mn are the met-
+rics that affect the quality factor. Unfortunately, many of the metrics deﬁned by McCall
+et al. can be measured only subjectively. The metrics may be in the form of a check-
+list that is used to "grade" specific attributes of the software [CAV78]. The grading
+scheme proposed by McCall et al. is a 0 (low) to 10 (high) scale. The following met-
+rics are used in the grading scheme: 
+
+Auditability. The ease with which conformance to standards can be checked. 
+Accuracy. The precision of computations and control. 
+Communication commonality. The degree to which standard interfaces, proto-
+cols, and bandwidth are used. 
+Completeness. The degree to which full implementation of required function
+has been achieved. 
+Conciseness. The compactness of the program in terms of lines of code. 
+Consistency. The use of uniform design and documentation techniques
+throughout the software development project. 
+Data commonality. The use of standard data structures and types throughout
+the program.
+
+“A product’s quality is
+a function of how
+much it changes the
+world for the
+better.”
+Tom DeMarco 
+
+XRef
+The metrics noted can
+be assessed during
+formal technical
+reviews discussed in
+Chapter 8.
+
+Quality Factors
+
+CHAPTER 19
+
+TECHNICAL METRICS FOR SOFTWARE
+
+511
+
+Error tolerance. The damage that occurs when the program encounters an
+error. 
+Execution efﬁciency. The run-time performance of a program.
+Expandability. The degree to which architectural, data, or procedural design
+can be extended.
+Generality. The breadth of potential application of program components.
+Hardware independence. The degree to which the software is decoupled from
+the hardware on which it operates.
+Instrumentation. The degree to which the program monitors its own opera-
+tion and identiﬁes errors that do occur.
+Modularity. The functional independence (Chapter 13) of program compo-
+nents. 
+Operability. The ease of operation of a program.
+Security. The availability of mechanisms that control or protect programs and
+data. 
+Self-documentation. The degree to which the source code provides meaning-
+ful documentation.
+Simplicity. The degree to which a program can be understood without difﬁ-
+culty. 
+Software system independence. The degree to which the program is indepen-
+dent of nonstandard programming language features, operating system char-
+acteristics, and other environmental constraints.
+Traceability. The ability to trace a design representation or actual program
+component back to requirements. 
+Training. The degree to which the software assists in enabling new users to
+apply the system.
+
+The relationship between software quality factors and these metrics is shown in
+Figure 19.2. It should be noted that the weight given to each metric is dependent on
+local products and concerns.
+
+19.1.2 FURPS
+The quality factors described by McCall and his colleagues [MCC77] represent one 
+of a number of suggested “checklists” for software quality. Hewlett-Packard [GRA87]
+developed a set of software quality factors that has been given the acronym FURPS—
+
+512
+
+PART THREE
+
+CONVENTIONAL METHODS FOR SOFTWARE ENGINEERING
+
+FIGURE 19.2
+Quality factors
+and metrics
+
+Software
+quality
+metric
+
+Quality
+factor
+
+Auditability
+Accuracy
+Communication
+commonality
+Completeness
+Complexity
+Concision
+Consistency
+Data commonality
+Error tolerance
+Execution efficiency
+Expandability
+Generality
+Hardware Indep.
+Instrumentation
+Modularity
+Operability
+Security
+Self-documentation
+Simplicity
+System Indep.
+Traceability
+Training
+
+y
+t
+i
+r
+g
+e
+n
+
+t
+
+I
+
+x
+
+x
+
+x
+
+s
+s
+e
+n
+t
+c
+e
+r
+r
+o
+C
+
+y
+t
+i
+l
+i
+
+b
+a
+
+i
+l
+e
+R
+
+y
+c
+n
+e
+i
+c
+i
+f
+f
+E
+
+x
+
+x
+
+x
+
+x
+
+x
+
+x
+
+x
+
+x
+
+x
+
+x
+
+x
+
+x
+
+y
+t
+i
+l
+i
+
+i
+
+b
+a
+n
+a
+n
+a
+M
+
+t
+
+i
+
+y
+t
+i
+l
+i
+
+b
+i
+x
+e
+F
+
+l
+
+y
+t
+i
+l
+i
+
+b
+a
+t
+s
+e
+T
+
+y
+t
+i
+l
+i
+
+b
+a
+t
+r
+o
+P
+
+y
+t
+i
+l
+i
+
+b
+a
+s
+u
+e
+R
+
+y
+t
+i
+l
+i
+
+b
+a
+r
+e
+p
+o
+r
+e
+n
+
+t
+
+I
+
+y
+t
+i
+l
+i
+
+b
+a
+s
+U
+
+x
+
+x
+
+x
+x
+
+x
+x
+
+x
+x
+x
+
+x
+x
+
+x
+
+x
+x
+
+x
+x
+
+x
+x
+
+x
+x
+
+x
+
+x
+
+x
+
+x
+
+x
+
+x
+
+x
+x
+
+x
+
+x
+
+x
+
+x
+x
+
+x
+
+x
+
+x
+
+(Adapted from Arthur, L. A., Measuring Programmer Productivity and Software Quality, Wiley-
+Interscience, 1985.)
+
+functionality, usability, reliability, performance, and supportability. The FURPS qual-
+ity factors draw liberally from earlier work, deﬁning the following attributes for each
+of the ﬁve major factors:
+
+•
+
+Functionality is assessed by evaluating the feature set and capabilities of the
+program, the generality of the functions that are delivered, and the security of
+the overall system.
+
+• Usability is assessed by considering human factors (Chapter 15), overall aes-
+
+thetics, consistency, and documentation.
+
+• Reliability is evaluated by measuring the frequency and severity of failure, the
+
+accuracy of output results, the mean-time-to-failure (MTTF), the ability to
+recover from failure, and the predictability of the program.
+
+• Performance is measured by processing speed, response time, resource con-
+
+sumption, throughput, and efﬁciency.
+
+CHAPTER 19
+
+TECHNICAL METRICS FOR SOFTWARE
+
+513
+
+• Supportability combines the ability to extend the program (extensibility),
+
+adaptability, serviceability—these three attributes represent a more common
+term, maintainability—in addition, testability, compatibility, conﬁgurability
+(the ability to organize and control elements of the software conﬁguration,
+Chapter 9), the ease with which a system can be installed, and the ease with
+which problems can be localized.
+
+The FURPS quality factors and attributes just described can be used to establish
+
+quality metrics for each step in the software engineering process.
+
+19.1.3 ISO 9126 Quality Factors
+The ISO 9126 standard was developed in an attempt to identify the key quality attrib-
+utes for computer software. The standard identiﬁes six key quality attributes:
+
+Functionality. The degree to which the software satisﬁes stated needs as indi-
+cated by the following subattributes: suitability, accuracy, interoperability,
+compliance, and security. 
+Reliability. The amount of time that the software is available for use as indi-
+cated by the following subattributes: maturity, fault tolerance, recoverability.
+Usability. The degree to which the software is easy to use as indicated by the
+following subattributes: understandability, learnability, operability.
+Efﬁciency. The degree to which the software makes optimal use of system
+resources as indicated by the following subattributes: time behavior, resource
+behavior.
+Maintainability. The ease with which repair may be made to the software as
+indicated by the following subattributes: analyzability, changeability, stability,
+testability.
+Portability. The ease with which the software can be transposed from one
+environment to another as indicated by the following subattributes: adapt-
+ability, installability, conformance, replaceability.
+
+Like other software quality factors discussed in Sections 19.1.1 and 19.1.2, the ISO
+9126 factors do not necessarily lend themselves to direct measurement. However,
+they do provide a worthwhile basis for indirect measures and an excellent checklist
+for assessing the quality of a system.
+
+19.1.4 The Transition to a Quantitative View
+In the preceding sections, a set of qualitative factors for the "measurement" of soft-
+ware quality was discussed. We strive to develop precise measures for software qual-
+ity and are sometimes frustrated by the subjective nature of the activity. Cavano and
+McCall [CAV78] discuss this situation: 
+
+“Any activity becomes
+creative when the
+doer cares about
+doing it right, or
+better.”
+John Updike 
+
+514
+
+PART THREE
+
+CONVENTIONAL METHODS FOR SOFTWARE ENGINEERING
+
+The determination of quality is a key factor in every day events—wine tasting contests,
+sporting events [e.g., gymnastics], talent contests, etc. In these situations, quality is judged
+in the most fundamental and direct manner: side by side comparison of objects under iden-
+tical conditions and with predetermined concepts. The wine may be judged according to
+clarity, color, bouquet, taste, etc. However, this type of judgement is very subjective; to have
+any value at all, it must be made by an expert.
+
+Subjectivity and specialization also apply to determining software quality. To help solve
+this problem, a more precise deﬁnition of software quality is needed as well as a way to
+derive quantitative measurements of software quality for objective analysis . . . Since there
+is no such thing as absolute knowledge, one should not expect to measure software qual-
+ity exactly, for every measurement is partially imperfect. Jacob Bronkowski described this
+paradox of knowledge in this way: "Year by year we devise more precise instruments with
+which to observe nature with more ﬁneness. And when we look at the observations we are
+discomﬁted to see that they are still fuzzy, and we feel that they are as uncertain as ever."
+
+In the sections that follow, we examine a set of software metrics that can be applied
+to the quantitative assessment of software quality. In all cases, the metrics represent
+indirect measures; that is, we never really measure quality but rather some mani-
+festation of quality. The complicating factor is the precise relationship between the
+variable that is measured and the quality of software.
+
+19.2 A FRAMEWORK FOR TECHNICAL SOFTWARE METRICS
+
+“Just as temperature
+measurement began
+with an index ﬁnger
+. . . and grew to
+sophisticated scales,
+tools and
+techniques, so too is
+software
+measurement
+maturing . . .”
+Shari Pﬂeeger 
+
+As we noted in the introduction to this chapter, measurement assigns numbers or
+symbols to attributes of entities in the real word. To accomplish this, a measurement
+model encompassing a consistent set of rules is required. Although the theory of mea-
+surement (e.g., [KYB84]) and its application to computer software (e.g., [DEM81],
+[BRI96], [ZUS97]) are topics that are beyond the scope of this book, it is worthwhile
+to establish a fundamental framework and a set of basic principles for the measure-
+ment of technical metrics for software.
+
+19.2.1 The Challenge of Technical Metrics
+Over the past three decades, many researchers have attempted to develop a single
+metric that provides a comprehensive measure of software complexity. Fenton [FEN94]
+characterizes this research as a search for “the impossible holy grail.” Although dozens
+of complexity measures have been proposed [ZUS90], each takes a somewhat dif-
+ferent view of what complexity is and what attributes of a system lead to complex-
+ity. By analogy, consider a metric for evaluating an attractive car. Some observers
+might emphasize body design, others might consider mechanical characteristics, still
+others might tout cost, or performance, or fuel economy, or the ability to recycle when
+the car is junked. Since any one of these characteristics may be at odds with others,
+it is difﬁcult to derive a single value for “attractiveness.” The same problem occurs
+with computer software.
+
+WebRef
+Voluminous information
+on technical metrics has
+been compiled by Horst
+Zuse:
+irb.cs.tu-berlin.de/
+~zuse/
+
+?
+
+What are 
+the steps of
+
+an effective
+measurement
+process?
+
+CHAPTER 19
+
+TECHNICAL METRICS FOR SOFTWARE
+
+515
+
+Yet there is a need to measure and control software complexity. And if a single
+value of this quality metric is difﬁcult to derive, it should be possible to develop mea-
+sures of different internal program attributes (e.g., effective modularity, functional
+independence, and other attributes discussed in Chapters 13 through 16). These mea-
+sures and the metrics derived from them can be used as independent indicators of
+the quality of analysis and design models. But here again, problems arise. Fenton
+[FEN94] notes this when he states:
+
+The danger of attempting to ﬁnd measures which characterize so many different attributes
+is that inevitably the measures have to satisfy conﬂicting aims. This is counter to the rep-
+resentational theory of measurement. 
+
+Although Fenton’s statement is correct, many people argue that technical measure-
+ment conducted during the early stages of the software process provides software
+engineers with a consistent and objective mechanism for assessing quality.
+
+It is fair to ask, however, just how valid technical metrics are. That is, how closely
+aligned are technical metrics to the long-term reliability and quality of a computer-
+based system? Fenton [FEN91] addresses this question in the following way:
+
+In spite of the intuitive connections between the internal structure of software products
+[technical metrics] and its external product and process attributes, there have actually been
+very few scientiﬁc attempts to establish speciﬁc relationships. There are a number of rea-
+sons why this is so; the most commonly cited is the impracticality of conducting relevant
+experiments.
+
+Each of the “challenges” noted here is a cause for caution, but it is no reason to dis-
+miss technical metrics.2 Measurement is essential if quality is to be achieved.
+
+19.2.2 Measurement Principles
+Before we introduce a series of technical metrics that (1) assist in the evaluation of
+the analysis and design models, (2) provide an indication of the complexity of pro-
+cedural designs and source code, and (3) facilitate the design of more effective test-
+ing, it is important to understand basic measurement principles. Roche [ROC94]
+suggests a measurement process that can be characterized by ﬁve activities:
+
+•
+
+Formulation. The derivation of software measures and metrics that are
+appropriate for the representation of the software that is being considered.
+• Collection. The mechanism used to accumulate data required to derive the
+
+formulated metrics.
+
+• Analysis. The computation of metrics and the application of mathematical tools.
+
+2 A vast literature on software metrics (e.g., see [FEN94], [ROC94], [ZUS97] for extensive bibliogra-
+phies) has been spawned, and criticism of speciﬁc metrics (including some of those presented in
+this chapter) is common.  However, many of the critiques focus on esoteric issues and miss the
+primary objective of measurement in the real world: to help the engineer establish a systematic
+and objective way to gain insight into his or her work and to improve product quality as a result.
+
+516
+
+PART THREE
+
+CONVENTIONAL METHODS FOR SOFTWARE ENGINEERING
+
+?
+
+What rules
+should we
+
+observe when we
+establish technical
+measures?
+
+•
+
+•
+
+Interpretation. The evaluation of metrics results in an effort to gain insight
+into the quality of the representation.
+Feedback. Recommendations derived from the interpretation of technical
+metrics transmitted to the software team.
+
+The principles that can be associated with the formulation of technical metrics are
+[ROC94]
+
+• The objectives of measurement should be established before data collection
+
+begins.
+
+• Each technical metric should be deﬁned in an unambiguous manner.
+• Metrics should be derived based on a theory that is valid for the domain of
+
+application (e.g., metrics for design should draw upon basic design concepts
+and principles and attempt to provide an indication of the presence of an
+attribute that is deemed desirable).
+
+• Metrics should be tailored to best accommodate speciﬁc products and
+
+processes [BAS84].
+
+Although formulation is a critical starting point, collection and analysis are the activ-
+ities that drive the measurement process. Roche [ROC94] suggests the following prin-
+ciples for these activities:
+
+Above all, keep your
+early attempts at
+technical measurement
+simple. Don’t obsess
+over the “perfect”
+metric because it
+doesn’t exist.
+
+• Whenever possible, data collection and analysis should be automated.
+• Valid statistical techniques should be applied to establish relationships
+
+between internal product attributes and external quality characteristics (e.g.,
+is the level of architectural complexity correlated with the number of defects
+reported in production use?).
+Interpretative guidelines and recommendations should be established for
+each metric.
+
+•
+
+In addition to these principles, the success of a metrics activity is tied to management
+support. Funding, training, and promotion must all be considered if a technical mea-
+surement program is to be established and sustained.
+
+19.2.3 The Attributes of Effective Software Metrics
+Hundreds of metrics have been proposed for computer software, but not all provide
+practical support to the software engineer. Some demand measurement that is too
+complex, others are so esoteric that few real world professionals have any hope 
+of understanding them, and others violate the basic intuitive notions of what high-
+quality software really is.
+
+Ejiogu [EJI91] deﬁnes a set of attributes that should be encompassed by effective
+
+software metrics. The derived metric and the measures that lead to it should be
+
+?
+
+How should
+we assess
+the quality of a
+proposed
+software metric?
+
+Experience indicates
+that a technical metric
+will be used only if it is
+intuitive and easy to
+compute. If dozens of
+“counts” have to be
+made and complex
+computations are
+required, it’s unlikely
+that the metric will be
+widely applied.
+
+CHAPTER 19
+
+TECHNICAL METRICS FOR SOFTWARE
+
+517
+
+• Simple and computable. It should be relatively easy to learn how to derive the
+
+metric, and its computation should not demand inordinate effort or time.
+
+• Empirically and intuitively persuasive. The metric should satisfy the engineer’s
+intuitive notions about the product attribute under consideration (e.g., a met-
+ric that measures module cohesion should increase in value as the level of
+cohesion increases).
+
+• Consistent and objective. The metric should always yield results that are
+
+unambiguous. An independent third party should be able to derive the same
+metric value using the same information about the software. 
+
+• Consistent in its use of units and dimensions. The mathematical computation
+of the metric should use measures that do not lead to bizarre combinations
+of units. For example, multiplying people on the project teams by program-
+ming language variables in the program results in a suspicious mix of units
+that are not intuitively persuasive.
+
+• Programming language independent. Metrics should be based on the analysis
+model, the design model, or the structure of the program itself. They should
+not be dependent on the vagaries of programming language syntax or
+semantics.
+
+• An effective mechanism for high-quality feedback. That is, the metric should
+
+provide a software engineer with information that can lead to a higher-
+quality end product.
+
+Although most software metrics satisfy these attributes, some commonly used met-
+rics may fail to satisfy one or two of them. An example is the function point (discussed
+in Chapter 4 and again in this chapter). It can be argued3 that the consistent and
+objective attribute fails because an independent third party may not be able to derive
+the same function point value as a colleague using the same information about the
+software. Should we therefore reject the FP measure? The answer is: “Of course not!”
+FP provides useful insight and therefore provides distinct value, even if it fails to sat-
+isfy one attribute perfectly.
+
+19.3 METRICS FOR THE ANALYSIS MODEL
+
+XRef
+Data, functional, and
+behavioral models are
+discussed in Chapters
+11 and 12.
+
+Technical work in software engineering begins with the creation of the analysis model.
+It is at this stage that requirements are derived and that a foundation for design is
+established. Therefore, technical metrics that provide insight into the quality of the
+analysis model are desirable.
+
+3 Please note that an equally vigorous counterargument can be made. Such is the nature of soft-
+
+ware metrics.
+
+518
+
+PART THREE
+
+CONVENTIONAL METHODS FOR SOFTWARE ENGINEERING
+
+FIGURE 19.3
+Part of the
+analysis model
+for SafeHome
+software
+
+Password
+Zone inquiry
+Sensor inquiry
+Panic button
+Activate/deactivate
+
+User
+
+SafeHome
+
+user
+
+interaction
+function
+
+Test sensor
+
+Sensors
+
+Zone setting
+
+Messages
+
+User
+
+Sensor status
+
+Activate/deactivate
+
+Monitoring
+& response
+subsystem
+
+Password, sensors . . .
+
+Alarm
+alert
+
+System configuration data
+
+Although relatively few analysis and speciﬁcation metrics have appeared in the
+literature, it is possible to adapt metrics derived for project application (Chapter 4)
+for use in this context. These metrics examine the analysis model with the intent of
+predicting the “size” of the resultant system. It is likely that size and design complexity
+will be directly correlated. 
+
+19.3.1 Function-Based Metrics
+The function point metric (Chapter 4) can be used effectively as a means for predict-
+ing the size of a system that will be derived from the analysis model. To illustrate the
+use of the FP metric in this context, we consider a simple analysis model represen-
+tation, illustrated in Figure 19.3. Referring to the ﬁgure, a data ﬂow diagram (Chap-
+ter 12) for a function within the SafeHome software4 is represented. The function
+manages user interaction, accepting a user password to activate or deactivate the
+system, and allows inquiries on the status of security zones and various security sen-
+sors. The function displays a series of prompting messages and sends appropriate
+control signals to various components of the security system.
+
+The data ﬂow diagram is evaluated to determine the key measures required for
+
+computation of the function point metric (Chapter 4):
+
+To be useful for
+technical work,
+measures that will
+assist technical
+decision making (e.g.,
+errors found during
+unit testing) must be
+collected and then
+normalized using the
+FP metric.
+
+• number of user inputs
+• number of user outputs
+• number of user inquiries
+• number of ﬁles
+• number of external interfaces
+
+4 SafeHome is a home security system that has been used as an example application in earlier
+
+chapters.
+
+CHAPTER 19
+
+TECHNICAL METRICS FOR SOFTWARE
+
+519
+
+Measurement parameter
+
+Count
+
+Simple
+
+Average
+
+Complex
+
+Weighting Factor
+
+Number of user inputs
+
+Number of user outputs
+
+Number of user inquiries
+
+Number of files
+
+Number of external interfaces
+
+Count total
+
+3
+
+2
+
+2
+
+1
+
+4
+
+×
+
+×
+
+×
+
+×
+
+×
+
+3
+
+4
+
+3
+
+7
+
+5
+
+4
+
+5
+
+4
+
+10
+
+7
+
+6
+
+7
+
+6
+
+15
+
+10
+
+=
+
+=
+
+=
+
+=
+
+=
+
+9
+
+8
+
+6
+
+7
+
+20
+
+50
+
+FIGURE 19.4 Computing function points for a SafeHome function
+
+WebRef
+A useful introduction on
+FP has been prepared by
+Capers Jones and may be
+obtained at
+www.spr.com/
+library/
+0funcmet.htm
+
+Three user inputs—password, panic button, and activate/deactivate—are shown
+in the ﬁgure along with two inquires—zone inquiry and sensor inquiry. One ﬁle
+(system conﬁguration ﬁle) is shown. Two user outputs (messages and sensor
+status) and four external interfaces (test sensor, zone setting, activate/deacti-
+vate, and alarm alert) are also present. These data, along with the appropriate com-
+plexity, are shown in Figure 19.4.
+
+The count total shown in Figure 19.4 must be adjusted using Equation (4-1):
+
+FP = count total ⫻ [0.65 + 0.01 ⫻ ⌺ (Fi)]
+
+where count total is the sum of all FP entries obtained from Figure 19.3 and Fi (i = 1
+to 14) are "complexity adjustment values." For the purposes of this example, we
+assume that ⌺ (Fi) is 46 (a moderately complex product). Therefore,
+
+FP = 50 ⫻ [0.65 + (0.01 ⫻ 46)] = 56
+
+Based on the projected FP value derived from the analysis model, the project team
+can estimate the overall implemented size of the SafeHome user interaction function.
+Assume that past data indicates that one FP translates into 60 lines of code (an object-
+oriented language is to be used) and that 12 FPs are produced for each person-month
+of effort. These historical data provide the project manager with important planning
+information that is based on the analysis model rather than preliminary estimates.
+Assume further that past projects have found an average of three errors per function
+point during analysis and design reviews and four errors per function point during
+unit and integration testing. These data can help software engineers assess the com-
+pleteness of their review and testing activities.
+
+520
+
+PART THREE
+
+CONVENTIONAL METHODS FOR SOFTWARE ENGINEERING
+
+“Rather than just
+musing on what
+‘new metric’ might
+apply . . . we should
+also be asking
+ourselves the more
+basic question,
+‘What will we do
+with metrics.’”
+Michael Mah and
+Larry Putnam 
+
+19.3.2 The Bang Metric
+Like the function point metric, the bang metric can be used to develop an indication
+of the size of the software to be implemented as a consequence of the analysis model.
+Developed by DeMarco [DEM82], the bang metric is “an implementation indepen-
+dent indication of system size.” To compute the bang metric, the software engineer
+must ﬁrst evaluate a set of primitives—elements of the analysis model that are not
+further subdivided at the analysis level. Primitives [DEM82] are determined by eval-
+uating the analysis model and developing counts for the following forms:5
+
+Functional primitives (FuP). The number of transformations (bubbles) that
+appear at the lowest level of a data ﬂow diagram (Chapter 12).
+Data elements (DE). The number of attributes of a data object, data ele-
+ments are not composite data and appear within the data dictionary.
+Objects (OB). The number of data objects as described in Chapter 12.
+Relationships (RE). The number of connections between data objects as
+described in Chapter 12.
+States (ST). The number of user observable states in the state transition dia-
+gram (Chapter 12).
+Transitions (TR). The number of state transitions in the state transition dia-
+gram (Chapter 12). 
+
+In addition to these six primitives, additional counts are determined for
+
+Modiﬁed manual function primitives (FuPM). Functions that lie outside
+the system boundary but must be modiﬁed to accommodate the new system.
+Input data elements (DEI). Those data elements that are input to the system.
+Output data elements. (DEO). Those data elements that are output from
+the system.
+Retained data elements. (DER). Those data elements that are retained
+(stored) by the system.
+Data tokens (TCi). The data tokens (data items that are not subdivided
+within a functional primitive) that exist at the boundary of the ith functional
+primitive (evaluated for each primitive).
+Relationship connections (REi). The relationships that connect the ith
+object in the data model to other objects.
+
+DeMarco [DEM82] suggests that most software can be allocated to one of two domains:
+function strong or data strong, depending upon the ratio RE/FuP. Function-strong
+
+5 The acronym noted in parentheses following the primitive is used to denote the count of the par-
+
+ticular primitive, e,g., FuP indicates the number of functional primitives present in an analysis
+model.
+
+CHAPTER 19
+
+TECHNICAL METRICS FOR SOFTWARE
+
+521
+
+applications (often encountered in engineering and scientiﬁc applications) empha-
+size the transformation of data and do not generally have complex data structures.
+Data-strong applications (often encountered in information systems applications)
+tend to have complex data models.
+
+RE/FuP < 0.7 implies a function-strong application.
+0.8 < RE/FuP < 1.4 implies a hybrid application.
+RE/FuP > 1.5 implies a data-strong application.
+
+Because different analysis models will partition the model to greater or lessor degrees
+of reﬁnement, DeMarco suggests that an average token count per primitive is
+
+TCavg =  ⌺ TCi /FuP
+
+be used to control uniformity of partitioning across many different models within an
+application domain. 
+
+To compute the bang metric for function-strong applications, the following algo-
+
+rithm is used:
+
+set initial value of bang = 0;
+do while functional primitives remain to be evaluated
+
+Compute token-count around the boundary of primitive i
+Compute corrected FuP increment (CFuPI) 
+Allocate primitive to class
+Assess class and note assessed weight
+Multiply CFuPI  by the assessed weight
+bang = bang + weighted CFuPI
+
+enddo
+
+The token-count is computed by determining how many separate tokens are “visi-
+ble” [DEM82] within the primitive. It is possible that the number of tokens and the
+number of data elements will differ, if data elements can be moved from input to out-
+put without any internal transformation. The corrected CFuPI is determined from a
+table published by DeMarco. A much abbreviated version follows:
+
+TCi
+2
+5
+10
+15
+20
+
+CFuPI
+1.0
+5.8
+16.6
+29.3
+43.2
+
+The assessed weight noted in the algorithm is determined from 16 different classes
+of functional primitives deﬁned by DeMarco. A weight ranging from 0.6 (simple data
+routing) to 2.5 (data management functions) is assigned, depending on the class of
+the primitive.
+
+For data-strong applications, the bang metric is computed using the following
+
+algorithm:
+
+522
+
+PART THREE
+
+CONVENTIONAL METHODS FOR SOFTWARE ENGINEERING
+
+set initial value of bang = 0;
+do while objects remain to be evaluated in the data model
+
+compute count of relationships for object  i
+compute corrected OB increment (COBI)
+bang = bang + COBI
+
+enddo
+
+The COBI is determined from a table published by DeMarco. An abbreviated version
+follows:
+
+REi
+1
+3
+6
+
+COBI
+1.0
+4.0
+9.0
+
+Once the bang metric has been computed, past history can be used to associate it
+with size and effort. DeMarco suggests that an organization build its own versions
+of the CFuPI and COBI tables using calibration information from completed software
+projects. 
+
+19.3.3 Metrics for Speciﬁcation Quality
+Davis and his colleagues [DAV93] propose a list of characteristics that can be used
+to assess the quality of the analysis model and the corresponding requirements spec-
+iﬁcation: speciﬁcity (lack of ambiguity), completeness, correctness, understandability,
+veriﬁability, internal and external consistency, achievability, concision, traceability, mod-
+iﬁability, precision, and reusability. In addition, the authors note that high-quality spec-
+iﬁcations are electronically stored, executable or at least interpretable, annotated by
+relative importance and stable, versioned, organized, cross-referenced, and speci-
+ﬁed at the right level of detail.
+
+Although many of these characteristics appear to be qualitative in nature, Davis
+et al. [DAV93] suggest that each can be represented using one or more metrics.6 For
+example, we assume that there are nr requirements in a speciﬁcation, such that
+
+nr = nf + nnf
+
+where nf is the number of functional requirements and nnf is the number of non-
+functional (e.g., performance) requirements.
+
+To determine the speciﬁcity (lack of ambiguity) of requirements, Davis et al. sug-
+gest a metric that is based on the consistency of the reviewers’ interpretation of each
+requirement:
+
+Q1 = nui/nr
+
+6 A complete discussion of speciﬁcation quality metrics is beyond the scope of this chapter. See
+
+[DAV93] for more details.
+
+By measuring
+characteristics of the
+speciﬁcation, it is
+possible to gain
+quantitative insight
+into speciﬁcity and
+completeness.
+
+CHAPTER 19
+
+TECHNICAL METRICS FOR SOFTWARE
+
+523
+
+where nui is the number of requirements for which all reviewers had identical 
+interpretations. The closer the value of Q to 1, the lower is the ambiguity of the 
+speciﬁcation.
+
+The completeness of functional requirements can be determined by computing the
+
+ratio
+
+Q2 = nu/[ni ⫻ ns]
+
+where nu is the number of unique function requirements, ni is the number of inputs
+(stimuli) deﬁned or implied by the speciﬁcation, and ns is the number of states spec-
+iﬁed. The Q2 ratio measures the percentage of necessary functions that have been
+speciﬁed for a system. However, it does not address nonfunctional requirements. To
+incorporate these into an overall metric for completeness, we must consider the
+degree to which requirements have been validated:
+
+Q3 = nc/[nc + nnv]
+
+where nc is the number of requirements that have been validated as correct and nnv
+is the number of requirements that have not yet been validated.
+
+19.4 METRICS FOR THE DESIGN MODEL
+
+“Measure what is
+measurable, and
+what is not
+measurable, make
+measurable.”
+Galileo
+
+It is inconceivable that the design of a new aircraft, a new computer chip, or a new
+ofﬁce building would be conducted without deﬁning design measures, determining
+metrics for various aspects of design quality, and using them to guide the manner in
+which the design evolves. And yet, the design of complex software-based systems
+often proceeds with virtually no measurement. The irony of this is that design met-
+rics for software are available, but the vast majority of software engineers continue
+to be unaware of their existence.
+
+Design metrics for computer software, like all other software metrics, are not per-
+fect. Debate continues over their efﬁcacy and the manner in which they should be
+applied. Many experts argue that further experimentation is required before design
+measures can be used. And yet, design without measurement is an unacceptable
+alternative.
+
+In the sections that follow, we examine some of the more common design met-
+rics for computer software. Each can provide the designer with improved insight and
+all can help the design to evolve to a higher level of quality.  
+
+19.4.1 Architectural Design Metrics
+Architectural design metrics focus on characteristics of the program architecture
+(Chapter 14) with an emphasis on the architectural structure and the effectiveness of
+modules. These metrics are black box in the sense that they do not require any knowl-
+edge of the inner workings of a particular software component.
+
+524
+
+PART THREE
+
+CONVENTIONAL METHODS FOR SOFTWARE ENGINEERING
+
+Metrics can provide
+insight into structural,
+data and system
+complexity associated
+with the architectural
+design.
+
+?
+
+Is there a
+way to
+assess the
+complexity of
+certain
+architectural
+models?
+
+Card and Glass [CAR90] deﬁne three software design complexity measures: struc-
+
+tural complexity, data complexity, and system complexity.
+
+Structural complexity of a module i is deﬁned in the following manner:
+
+S(i) = f 2
+
+out(i)
+
+where fout(i) is the fan-out7 of module i.
+
+(19-1)
+
+Data complexity provides an indication of the complexity in the internal interface
+
+for a module i and is deﬁned as
+
+D(i) = v(i)/[ fout(i) +1]
+
+(19-2)
+
+where v(i) is the number of input and output variables that are passed to and from
+module i.
+
+Finally, system complexity is deﬁned as the sum of structural and data complexity,
+
+speciﬁed as
+
+C(i) = S(i) + D(i)
+
+(19-3)
+
+As each of these complexity values increases, the overall architectural complexity of
+the system also increases. This leads to a greater likelihood that integration and test-
+ing effort will also increase.
+
+An earlier high-level architectural design metric proposed by Henry and Kafura
+[HEN81] also makes use the fan-in and fan-out. The authors deﬁne a complexity met-
+ric (applicable to call and return architectures) of the form
+
+HKM = length(i) ⫻ [ fin(i) + fout(i)]2
+
+(19-4)  
+
+where length(i) is the number of programming language statements in a module i
+and fin(i) is the fan-in of a module i. Henry and Kafura extend the deﬁnitions of fan-
+in and fan-out presented in this book to include not only the number of module con-
+trol connections (module calls) but also the number of data structures from which a
+module i retrieves (fan-in) or updates (fan-out) data. To compute HKM during design,
+the procedural design may be used to estimate the number of programming language
+statements for module i. Like the Card and Glass metrics noted previously, an increase
+in the Henry-Kafura metric leads to a greater likelihood that integration and testing
+effort will also increase for a module.
+
+Fenton [FEN91] suggests a number of simple morphology (i.e., shape) metrics that
+enable different program architectures to be compared using a set of straightforward
+dimensions. Referring to Figure 19.5, the following metrics can be deﬁned:
+
+size = n + a
+
+7 Recalling the discussion presented in Chapter 13, fan-out indicates the number of modules imme-
+diately subordinate to module i; that is, the number of modules that are directly invoked by mod-
+ule i.
+
+CHAPTER 19
+
+TECHNICAL METRICS FOR SOFTWARE
+
+525
+
+Node
+
+a
+
+Arc
+
+c
+
+d
+
+i
+
+m
+
+n
+
+Width
+
+e
+
+j
+
+p
+
+k
+
+q
+
+l
+
+r
+
+Depth
+
+f
+
+b
+
+h
+
+g
+
+FIGURE 19.5 Morphology metrics
+
+where n is the number of nodes and a is the number of arcs. For the architecture
+shown in Figure 19.5, 
+
+size = 17 + 18 = 35
+
+depth =  the longest path from the root (top) node to a leaf node. For the archi-
+
+tecture shown in Figure 19.5, depth = 4.
+
+width =  maximum number of nodes at any one level of the architecture. For the
+
+architecture shown in Figure 19.5, width = 6.
+
+arc-to-node ratio, r = a/n, 
+
+which measures the connectivity density of the architecture and may provide a sim-
+ple indication of the coupling of the architecture. For the architecture shown in Fig-
+ure 19.5, r = 18/17 = 1.06.
+
+The U.S. Air Force Systems Command [USA87] has developed a number of soft-
+ware quality indicators that are based on measurable design characteristics of a com-
+puter program. Using concepts similar to those proposed in IEEE Std. 982.1-1988
+[IEE94], the Air Force uses information obtained from data and architectural design
+to derive a design structure quality index (DSQI) that ranges from 0 to 1. The follow-
+ing values must be ascertained to compute the DSQI [CHA89]:
+
+S1 = the total number of modules deﬁned in the program architecture.
+S2 = the number of modules whose correct function depends on the source of
+data input or that produce data to be used elsewhere (in general, control
+modules, among others, would not be counted as part of S2).
+
+526
+
+PART THREE
+
+CONVENTIONAL METHODS FOR SOFTWARE ENGINEERING
+
+“Measurement can
+be seen as a detour.
+This detour is
+necessary because
+humans mostly are
+not able to make
+clear and objective
+decisions [without
+quantitative
+support].”
+Horst Zuse 
+
+S3 = the number of modules whose correct function depends on prior processing.
+S4 = the number of database items (includes data objects and all attributes that
+
+deﬁne objects).
+
+S5 = the total number of unique database items.
+S6 = the number of database segments (different records or individual objects).
+S7 = the number of modules with a single entry and exit (exception processing
+
+is not considered to be a multiple exit).
+
+Once values S1 through S7 are determined for a computer program, the following
+intermediate values can be computed:
+
+Program structure: D1, where D1 is deﬁned as follows: If the architectural
+design was developed using a distinct method (e.g., data ﬂow-oriented
+design or object-oriented design), then D1 = 1, otherwise D1 = 0.
+Module independence: D2 = 1 ⫺ (S2/S1)
+Modules not dependent on prior processing: D3 = 1 ⫺ (S3/S1)
+Database size: D4 = 1 ⫺ (S5/S4)
+Database compartmentalization:  D5 = 1 ⫺ (S6/S4)
+Module entrance/exit characteristic:  D6 = 1 ⫺ (S7/S1)
+
+With these intermediate values determined, the DSQI is computed in the following
+manner:
+
+DSQI   =  ⌺ wiDi
+
+(19-5)
+
+where i = 1 to 6, wi is the relative weighting of the importance of each of the inter-
+mediate values, and ⌺ wi = 1 (if all Di are weighted equally, then wi = 0.167).
+
+The value of DSQI for past designs can be determined and compared to a design
+that is currently under development. If the DSQI is significantly lower than aver-
+age, further design work and review are indicated. Similarly, if major changes are
+to be made to an existing design, the effect of those changes on DSQI can be 
+calculated.
+
+19.4.2 Component-Level Design Metrics
+Component-level design metrics focus on internal characteristics of a software com-
+ponent and include measures of the “three Cs”—module cohesion, coupling, and com-
+plexity. These measures can help a software engineer to judge the quality of a
+component-level design. 
+
+The metrics presented in this section are glass box in the sense that they require
+knowledge of the inner working of the module under consideration. Component-level
+
+It is possible to
+compute measures of
+the functional
+independence—
+coupling and
+cohesion—of a
+component and to use
+these to assess the
+quality of the design.
+
+CHAPTER 19
+
+TECHNICAL METRICS FOR SOFTWARE
+
+527
+
+design metrics may be applied once a procedural design has been developed. Alter-
+natively, they may be delayed until source code is available.
+
+Cohesion metrics. Bieman and Ott [BIE94] deﬁne a collection of metrics that pro-
+vide an indication of the cohesiveness (Chapter 13) of a module. The metrics are
+deﬁned in terms of ﬁve concepts and measures:
+
+Data slice. Stated simply, a data slice is a backward walk through a module
+that looks for data values that affect the module location at which the walk
+began. It should be noted that both program slices (which focus on state-
+ments and conditions) and data slices can be deﬁned.
+Data tokens.  The variables deﬁned for a module can be deﬁned as data
+tokens for the module.
+Glue tokens. This set of data tokens lies on one or more data slice.
+Superglue tokens. These data tokens are common to every data slice in a
+module.
+Stickiness. The relative stickiness of a glue token is directly proportional to
+the number of data slices that it binds.
+
+Bieman and Ott develop metrics for strong functional cohesion (SFC), weak functional
+cohesion (WFC), and adhesiveness (the relative degree to which glue tokens bind data
+slices together). These metrics can be interpreted in the following manner [BIE94]:
+
+All of these cohesion metrics range in value between 0 and 1. They have a value of 0 when
+a procedure has more than one output and exhibits none of the cohesion attribute indicated
+by a particular metric. A procedure with no superglue tokens, no tokens that are common
+to all data slices, has zero strong functional cohesion—there are no data tokens that con-
+tribute to all outputs. A procedure with no glue tokens, that is no tokens common to more
+than one data slice (in procedures with more than one data slice), exhibits zero weak func-
+tional cohesion and zero adhesiveness—there are no data tokens that contribute to more
+than one output. 
+
+Strong functional cohesion and adhesiveness are encountered when the Bieman and
+Ott metrics take on a maximum value of 1.
+
+A detailed discussion of the Bieman and Ott metrics is best left to the authors
+[BIE94]. However, to illustrate the character of these metrics, consider the metric for
+strong functional cohesion:
+
+SFC(i) = SG [SA(i))/(tokens(i)]
+
+(19-6)
+
+where SG[SA(i)] denotes superglue tokens—the set of data tokens that lie on all data
+slices for a module i. As the ratio of superglue tokens to the total number of tokens
+in a module i increases toward a maximum value of 1, the functional cohesiveness
+of the module also increases.
+
+528
+
+PART THREE
+
+CONVENTIONAL METHODS FOR SOFTWARE ENGINEERING
+
+Coupling metrics.  Module coupling provides an indication of the “connectedness”
+of a module to other modules, global data, and the outside environment. In Chapter
+13, coupling was discussed in qualitative terms.
+
+Dhama [DHA95] has proposed a metric for module coupling that encompasses
+data and control flow coupling, global coupling, and environmental coupling. The
+measures required to compute module coupling are deﬁned in terms of each of the
+three coupling types noted previously.
+
+WebRef
+A paper, “A Software
+Metric System for Module
+Coupling,” can be
+downloaded from
+www.isse.gmu.edu/
+faculty/ofut/rsrch/
+abstracts/
+mj-coupling.html
+
+For data and control ﬂow coupling,
+
+di = number of input data parameters
+ci = number of input control parameters
+do = number of output data parameters
+co = number of output control parameters
+
+For global coupling,
+
+gd = number of global variables used as data
+gc = number of global variables used as control
+
+For environmental coupling,
+
+w = number of modules called (fan-out)
+r = number of modules calling the module under consideration (fan-in)
+
+Using these measures, a module coupling indicator, mc, is deﬁned in the following way:
+
+mc = k/M
+
+where k = 1, a proportionality constant8 and
+
+M = di + (a ⫻ ci) + do + (b ⫻ co) + gd + (c ⫻ gc) + w + r
+
+where a = b = c = 2.
+
+The higher the value of mc, the lower is the overall module coupling. For exam-
+ple, if a module has single input and output data parameters, accesses no global data,
+and is called by a single module,
+
+mc = 1/(1 + 0 + 1+ 0 + 0 + + 0 + 1 + 0) = 1/3 = 0.33
+
+We would expect that such a module exhibits low coupling. Hence, a value of mc =
+0.33 implies low coupling. Alternatively, if a module has five input and five output
+data parameters, an equal number of control parameters, accesses ten items of global
+data, has a fan-in of 3 and a fan-out of 4,
+
+mc = 1/[5 + (2 ⫻ 5) + 5 + (2 ⫻ 5) + 10 + 0 + 3 + 4] = 0.02
+
+and the implied coupling would be high.
+
+8 The author [DHA95] notes that the values of k and a, b, and c (discussed in the next equation)
+
+may be adjusted as more experimental veriﬁcation occurs.
+
+CHAPTER 19
+
+TECHNICAL METRICS FOR SOFTWARE
+
+529
+
+In order to have the coupling metric move upward as the degree of coupling
+increases (an important attribute discussed in Section 18.2.3), a revised coupling met-
+ric may be deﬁned as
+
+C = 1 ⫺ mc
+
+where the degree of coupling increases nonlinearly between a minimum value in the
+range 0.66 to a maximum value that approaches 1.0. 
+
+Complexity metrics. A variety of software metrics can be computed to determine
+the complexity of program control ﬂow. Many of these are based on the ﬂow graph.
+As we discussed in Chapter 17, a graph is a representation composed of nodes and
+links (also called edges). When the links (edges) are directed, the ﬂow graph is a directed
+graph.
+
+McCabe and Watson [MCC94] identify a number of important uses for complexity
+
+metrics:
+
+Complexity metrics can be used to predict critical information about reliability and
+maintainability of software systems from automatic analysis of source code [or pro-
+cedural design information]. Complexity metrics also provide feedback during the soft-
+ware project to help control the [design activity]. During testing and maintenance, they
+provide detailed information about software modules to help pinpoint areas of poten-
+tial instability.
+
+The most widely used (and debated) complexity metric for computer software is
+cyclomatic complexity, originally developed by Thomas McCabe [MCC76], [MCC89]
+and discussed in detail in Section 17.4.2.
+
+The McCabe metric provides a quantitative measure of testing difficulty and an
+indication of ultimate reliability. Experimental studies indicate distinct relationships
+between the McCabe metric and the number of errors existing in source code, as well
+as time required to ﬁnd and correct such errors.
+
+McCabe also contends that cyclomatic complexity may be used to provide a quan-
+titative indication of maximum module size. Collecting data from a number of actual
+programming projects, he has found that cyclomatic complexity = 10 appears to be
+a practical upper limit for module size. When the cyclomatic complexity of modules
+exceeded this number, it became extremely difﬁcult to adequately test a module. See
+Chapter 17 for a discussion of cyclomatic complexity as a guide for the design of
+white-box test cases.
+
+Zuse ([ZUS90], [ZUS97]) presents an encyclopedic discussion of no fewer that 18
+different categories of software complexity metrics. The author presents the basic
+deﬁnitions for metrics in each category (e.g., there are a number of variations on the
+cyclomatic complexity metric) and then analyzes and critiques each. Zuse’s work is
+the most comprehensive published to date.
+
+Cyclomatic complexity
+is only one of a large
+number of complexity
+metrics.
+
+530
+
+PART THREE
+
+CONVENTIONAL METHODS FOR SOFTWARE ENGINEERING
+
+19.4.3 Interface Design Metrics
+Although there is signiﬁcant literature on the design of human/computer interfaces
+(see Chapter 15), relatively little information has been published on metrics that would
+provide insight into the quality and usability of the interface.
+
+Sears [SEA93] suggests that layout appropriateness (LA) is a worthwhile design
+metric for human/computer interfaces. A typical GUI uses layout entities—graphic
+icons, text, menus, windows, and the like—to assist the user in completing tasks. To
+accomplish a given task using a GUI, the user must move from one layout entity to
+the next. The absolute and relative position of each layout entity, the frequency with
+which it is used, and the “cost” of the transition from one layout entity to the next all
+contribute to the appropriateness of the interface.
+
+For a specific layout (i.e., a specific GUI design), cost can be assigned to each
+
+sequence of actions according to the following relationship:
+
+cost = ⌺ [frequency of transition(k) ⫻ cost of transition(k)]
+
+(19-7)
+
+where k is a speciﬁc transition from one layout entity to the next as a speciﬁc task is
+accomplished. The summation occurs across all transitions for a particular task or
+set of tasks required to accomplish some application function. Cost may be charac-
+terized in terms of time, processing delay, or any other reasonable value, such as the
+distance that a mouse must travel between layout entities. Layout appropriateness
+is deﬁned as
+
+LA = 100 ⫻ [(cost of LA ⫺ optimal layout)/(cost of proposed layout)]
+
+(19-8)
+
+where LA = 100 for an optimal layout. 
+
+To compute the optimal layout for a GUI, interface real estate (the area of the
+screen) is divided into a grid. Each square of the grid represents a possible position
+for a layout entity. For a grid with N possible positions and K different layout entities
+to place, the number of possible layouts is represented in the following manner
+[SEA93]:
+
+number of possible layouts = [N!/(K! ⫻ (N ⫺ K)!] ⫻ K!
+
+(19-9)
+
+As the number of layout positions increases, the number of possible layouts grows
+very large. To find the optimal (lowest cost) layout, Sears [SEA93] proposes a tree
+searching algorithm. 
+
+LA is used to assess different proposed GUI layouts and the sensitivity of a particular
+layout to changes in task descriptions (i.e., changes in the sequence and/or frequency
+of transitions). The interface designer can use the change in layout appropriateness,
+∆LA, as a guide in choosing the best GUI layout for a particular application.
+
+It is important to note that the selection of a GUI design can be guided with met-
+rics such as LA, but the ﬁnal arbiter should be user input based on GUI prototypes.
+Nielsen and Levy [NIE94] report that “one has a reasonably large chance of suc-
+
+“Beauty—the
+adjustment of all
+parts proportionately
+so that one cannot
+add or subtract or
+change without
+impairing the
+harmony of the
+whole.”
+Leon Alberti
+(1404–1472) 
+
+Interface design
+metrics are ﬁne, but
+above all else, be
+absolutely sure that
+your end-users like the
+interface and are
+comfortable with the
+interactions required.
+
+CHAPTER 19
+
+TECHNICAL METRICS FOR SOFTWARE
+
+531
+
+cess if one chooses between interface [designs] based solely on users’ opinions. Users’
+average task performance and their subjective satisfaction with a GUI are highly cor-
+related.”
+
+19.5 METRICS FOR SOURCE CODE
+
+“The Human Brain
+follows a more rigid
+set of rules [in
+developing
+algorithms] than it
+has been aware of.”
+Maurice Halstead 
+
+Operators include all
+ﬂow of control
+constructs,
+conditionals, and math
+operations. Operands
+encompass all program
+variables and
+constants.
+
+Halstead's theory of software science [HAL77] is one of "the best known and most
+thoroughly studied . . . composite measures of (software) complexity" [CUR80]. Soft-
+ware science proposed the ﬁrst analytical "laws" for computer software.9
+
+Software science assigns quantitative laws to the development of computer soft-
+ware, using a set of primitive measures that may be derived after code is generated
+or estimated once design is complete. These follow:
+
+n1 = the number of distinct operators that appear in a program.
+n2 = the number of distinct operands that appear in a program.
+N1 = the total number of operator occurrences.
+N2 = the total number of operand occurrences.
+
+Halstead uses these primitive measures to develop expressions for the overall pro-
+gram length, potential minimum volume for an algorithm, the actual volume (number
+of bits required to specify a program), the program level (a measure of software com-
+plexity), the language level (a constant for a given language), and other features such
+as development effort, development time, and even the projected number of faults
+in the software.
+
+Halstead shows that length N can be estimated
+
+N = n1 log 2 n1 + n2 log 2 n2
+
+and program volume may be deﬁned
+
+V = N log 2 (n1 + n2)
+
+(19-10)
+
+(19-11)
+
+It should be noted that V will vary with programming language and represents the
+volume of information (in bits) required to specify a program.
+
+Theoretically, a minimum volume must exist for a particular algorithm. Halstead
+deﬁnes a volume ratio L as the ratio of volume of the most compact form of a pro-
+gram to the volume of the actual program. In actuality, L must always be less than 1.
+In terms of primitive measures, the volume ratio may be expressed as
+
+L = 2/n1 ⫻ n2/N2
+
+(19-12)
+
+9 It should be noted that Halstead's "laws" have generated substantial controversy and that not
+
+everyone agrees that the underlying theory is correct. However, experimental veriﬁcation of Hal-
+stead's ﬁndings have been made for a number of programming languages (e.g., [FEL89]).
+
+532
+
+PART THREE
+
+CONVENTIONAL METHODS FOR SOFTWARE ENGINEERING
+
+Halstead's work is amenable to experimental verification and a large body of
+research has been conducted to investigate software science. A discussion of this
+work is beyond the scope of this text, but it can be said that good agreement has been
+found between analytically predicted and experimental results. For further informa-
+tion, see [ZUS90], [FEN91], and [ZUS97].
+
+19.6 METRICS FOR TESTING
+
+Testing metrics fall into
+two broad categories:
+(1) metrics that
+attempt to predict the
+likely number of tests
+required at various
+testing levels and 
+(2) metrics that focus
+on test coverage for a
+given component.
+
+Although much has been written on software metrics for testing (e.g., [HET93]), the
+majority of metrics proposed focus on the process of testing, not the technical char-
+acteristics of the tests themselves. In general, testers must rely on analysis, design,
+and code metrics to guide them in the design and execution of test cases.
+
+Function-based metrics (Section 19.3.1) can be used as a predictor for overall test-
+ing effort. Various project-level characteristics (e.g., testing effort and time, errors
+uncovered, number of test cases produced) for past projects can be collected and cor-
+related with the number of FP produced by a project team. The team can then pro-
+ject “expected values” of these characteristics for the current project.
+
+The bang metric can provide an indication of the number of test cases required by
+examining the primitive measures discussed in Section 19.3.2. The number of  func-
+tional primitives (FuP), data elements (DE), objects (OB), relationships (RE), states
+(ST), and transitions (TR) can be used to project the number and types of black-box
+and white-box tests for the software. For example, the number of tests associated
+with the human/computer interface can be estimated by (1) examining the number
+of transitions (TR) contained in the state transition representation of the HCI and eval-
+uating the tests required to exercise each transition; (2) examining the number of
+data objects (OB) that move across the interface, and (3) the number of data elements
+that are input or output. 
+
+Architectural design metrics provide information on the ease or difﬁculty associated
+with integration testing (Chapter 18) and the need for specialized testing software (e.g.,
+stubs and drivers). Cyclomatic complexity (a component-level design metric) lies at
+the core of basis path testing, a test case design method presented in Chapter 17. In
+addition, cyclomatic complexity can be used to target modules as candidates for exten-
+sive unit testing (Chapter 18). Modules with high cyclomatic complexity are more likely
+to be error prone than modules whose cyclomatic complexity is lower. For this rea-
+son, the tester should expend above average effort to uncover errors in such modules
+before they are integrated in a system. Testing effort can also be estimated using met-
+rics derived from Halstead measures (Section 19.5). Using the deﬁnitions for program
+volume, V, and program level, PL, software science effort, e, can be computed as
+
+PL = 1/[(n1/2)•(N2/n2)]
+e = V/PL
+
+(19-13a)
+
+(19-13b)
+
+CHAPTER 19
+
+TECHNICAL METRICS FOR SOFTWARE
+
+533
+
+The percentage of overall testing effort to be allocated to a module k can be esti-
+mated using the following relationship:
+
+percentage of testing effort (k) = e(k)/ ⌺ e(i)
+
+(19-14)
+
+where e(k) is computed for module k using Equations (19-13) and the summation in
+the denominator of Equation (19-14) is the sum of software science effort across all
+modules of the system.
+
+As tests are conducted, three different measures provide an indication of testing
+completeness. A measure of the breath of testing provides an indication of how many
+requirements (of the total number of requirements) have been tested. This provides
+an indication of the completeness of the test plan. Depth of testing is a measure of
+the percentage of independent basis paths covered by testing versus the total num-
+ber of basis paths in the program. A reasonably accurate estimate of the number of
+basis paths can be computed by adding the cyclomatic complexity of all program
+modules. Finally, as tests are conducted and error data are collected, fault proﬁles
+may be used to rank and categorize errors uncovered. Priority indicates the severity
+of the problem. Fault categories provide a description of an error so that statistical
+error analysis can be conducted.
+
+19.7 METRICS FOR MAINTENANCE 
+
+All of the software metrics introduced in this chapter can be used for the develop-
+ment of new software and the maintenance of existing software. However, metrics
+designed explicitly for maintenance activities have been proposed.
+
+IEEE Std. 982.1-1988 [IEE94] suggests a software maturity index (SMI) that provides
+an indication of the stability of a software product (based on changes that occur for
+each release of the product). The following information is determined:
+
+MT = the number of modules in the current release
+Fc = the number of modules in the current release that have been changed
+Fa = the number of modules in the current release that have been added
+Fd = the number of modules from the preceding release that were deleted in
+
+the current release
+
+The software maturity index is computed in the following manner:
+
+SMI = [MT ⫺ (Fa + Fc + Fd)]/MT
+
+(19-15)
+
+As SMI approaches 1.0, the product begins to stabilize. SMI may also be used as met-
+ric for planning software maintenance activities. The mean time to produce a release
+of a software product can be correlated with SMI and empirical models for mainte-
+nance effort can be developed.
+
+534
+
+PART THREE
+
+CONVENTIONAL METHODS FOR SOFTWARE ENGINEERING
+
+19.8 SUMMARY
+
+Software metrics provide a quantitative way to assess the quality of internal product
+attributes, thereby enabling the software engineer to assess quality before the prod-
+uct is built. Metrics provide the insight necessary to create effective analysis and
+design models, solid code, and thorough tests.
+
+To be useful in a real world context, a software metric must be simple and com-
+putable, persuasive, consistent, and objective. It should be programming language
+independent and provide effective feedback to the software engineer.
+
+Metrics for the analysis model focus on function, data, and behavior—the three
+components of the analysis model. The function point and the bang metric each pro-
+vide a quantitative means for evaluating the analysis model. Metrics for design con-
+sider architecture, component-level design, and interface design issues. Architectural
+design metrics consider the structural aspects of the design model. Component-level
+design metrics provide an indication of module quality by establishing indirect mea-
+sures for cohesion, coupling, and complexity. Interface design metrics provide an
+indication of layout appropriateness for a GUI.
+
+Software science provides an intriguing set of metrics at the source code level.
+Using the number of operators and operands present in the code, software science
+provides a variety of metrics that can be used to assess program quality.
+
+Few technical metrics have been proposed for direct use in software testing and
+maintenance. However, many other technical metrics can be used to guide the test-
+ing process and as a mechanism for assessing the maintainability of a computer
+program.
+
+REFERENCES
+
+[BAS84] Basili, V.R. and D.M. Weiss, “A Methodology for Collecting Valid Software
+Engineering Data,” IEEE Trans. Software Engineering, vol. SE-10, 1984, pp. 728–738. 
+[BIE94] Bieman, J.M. and L.M. Ott, “Measuring Functional Cohesion,” IEEE Trans.
+Software Engineering, vol. SE-20, no. 8, August 1994, pp. 308–320. 
+[BRI96] Briand, L.C., S. Morasca, and V.R. Basili, “Property-Based Software Engi-
+neering Measurement,” IEEE Trans. Software Engineering, vol. SE-22, no. 1, January
+1996, pp. 68–85.
+[CAR90] Card, D.N. and R.L. Glass, Measuring Software Design Quality, Prentice-Hall,
+1990.
+[CAV78] Cavano, J.P. and J.A. McCall, "A Framework for the Measurement of  Soft-
+ware Quality," Proc. ACM Software Quality Assurance Workshop, November 1978, pp.
+133–139. 
+[CHA89] Charette, R.N., Software Engineering Risk Analysis and Management, McGraw-
+Hill/Intertext, 1989.
+
+CHAPTER 19
+
+TECHNICAL METRICS FOR SOFTWARE
+
+535
+
+[CUR80] Curtis, W. "Management and Experimentation in Software Engineering,"
+Proc. IEEE, vol. 68, no. 9, September 1980.
+[DAV93] Davis, A., et al., “Identifying and Measuring Quality in a Software Require-
+ments Speciﬁcation, Proc. First Intl. Software Metrics Symposium, IEEE, Baltimore, MD,
+May 1993, pp. 141–152. 
+[DEM81] DeMillo, R.A. and R.J. Lipton, “Software Project Forecasting,” in Software
+Metrics (A.J. Perlis, F.G. Sayward, and M. Shaw, eds.), MIT Press, 1981, pp. 77–89.
+[DEM82] DeMarco, T., Controlling Software Projects, Yourdon Press, 1982.
+[DHA95] Dhama, H., “Quantitative Models of Cohesion and Coupling in Software,”
+Journal of Systems and Software, vol. 29, no. 4, April 1995.
+Ejiogu, L., Software Engineering with Formal Metrics, QED Publishing, 1991.
+[EJI91]
+[FEL89] Felican, L. and G. Zalateu, “Validating Halstead’s Theory for Pascal Pro-
+grams,” IEEE Trans. Software Engineering, vol. SE-15, no. 2, December 1989, pp.
+1630–1632.
+[FEN91] Fenton, N., Software Metrics, Chapman and Hall, 1991.
+[FEN94] Fenton, N., “Software Measurement: A Necessary Scientific Basis,” IEEE
+Trans. Software Engineering, vol. SE-20, no. 3, March 1994, pp. 199–206.
+[GRA87] Grady, R.B. and D.L. Caswell, Software Metrics: Establishing a Company-Wide
+Program, Prentice-Hall, 1987.
+[HAL77] Halstead, M., Elements of Software Science, North-Holland, 1977. 
+[HEN81] Henry, S. and D. Kafura, “Software Structure Metrics Based on Information
+Flow,” IEEE Trans. Software Engineering, vol. SE-7, no. 5, September 1981, pp. 510–518.
+[HET93] Hetzel, B., Making Software Measurement Work, QED Publishing, 1993. 
+[IEE94]
+[KYB84] Kyburg, H.E., Theory and Measurement, Cambridge University Press, 1984.
+[MCC76] McCabe, T.J., "A Software Complexity Measure," IEEE Trans. Software Engi-
+neering, vol. SE-2, December 1976, pp. 308–320. 
+[MCC77] McCall, J., P. Richards, and G. Walters, "Factors in Software Quality," three
+volumes, NTIS AD-A049-014, 015, 055, November 1977. 
+[MCC89] McCabe, T.J. and C.W. Butler, "Design Complexity Measurement and Test-
+ing," CACM, vol. 32, no. 12, December 1989, pp. 1415–1425. 
+[MCC94] McCabe, T.J. and A.H. Watson, “Software Complexity,” Crosstalk, vol. 7, no.
+12, December 1994, pp. 5–9.
+[NIE94] Nielsen, J., and J. Levy, "Measuring Usability: Preference vs. Performance,"
+CACM, vol. 37, no. 4, April 1994, pp. 65–75.
+[ROC94] Roche, J.M., “Software Metrics and Measurement Principles,” Software Engi-
+neering Notes, ACM, vol. 19, no. 1, January 1994, pp. 76–85.
+[SEA93] Sears, A., “Layout Appropriateness: A Metric for Evaluating User Interface
+Widget Layout, IEEE Trans. Software Engineering, vol. SE-19, no. 7, July 1993, pp. 707–719. 
+[USA87] Management Quality Insight, AFCSP 800-14 (U.S. Air Force), January 20, 1987.
+[ZUS90] Zuse, H., Software Complexity: Measures and Methods, DeGruyter, 1990.
+[ZUS97] Zuse, H., A Framework of Software Measurement, DeGruyter, 1997.
+
+Software Engineering Standards, 1994 edition, IEEE, 1994.
+
+536
+
+PART THREE
+
+CONVENTIONAL METHODS FOR SOFTWARE ENGINEERING
+
+PROBLEMS AND POINTS TO PONDER
+
+19.1. Measurement theory is an advanced topic that has a strong bearing on soft-
+ware metrics. Using [ZUS97], [FEN91], [ZUS90], [KYB84] or some other source, write
+a brief paper that outlines the main tenets of measurement theory. Individual project:
+Develop a presentation on the subject and present it to your class.
+
+19.2. McCall’s quality factors were developed during the 1970s. Almost every aspect
+of computing has changed dramatically since the time that they were developed, and
+yet, McCall’s factors continue to apply to modern software. Can you draw any con-
+clusions based on this fact?
+
+19.3. Why is it that a single, all-encompassing metric cannot be developed for pro-
+gram complexity or program quality?
+
+19.4. Review the analysis model you developed as part of Problem 12.13. Using the
+guidelines presented in Section 19.3.1, develop an estimate for the number of func-
+tion points associated with PHTRS.
+
+19.5. Review the analysis model you developed as part of Problem 12.13. Using the
+guidelines presented in Section 19.3.2, develop primitive counts for the bang metric.
+Is the PHTRS system function strong or data strong?
+
+19.6. Compute the value of the bang metric using the measures you developed in
+Problem 19.5.
+
+19.7. Create a complete design model for a system that is proposed by your instruc-
+tor. Compute structural and data complexity using the metrics described in Section
+19.4.1. Also compute the Henry-Kafura and morphology metrics for the design model.
+
+19.8. A major information system has 1140 modules. There are 96 modules that per-
+form control and coordination functions and 490 modules whose function depends
+on prior processing. The system processes approximately 220 data objects that each
+have an average of three attributes. There are 140 unique data base items and 90 dif-
+ferent database segments. Finally, 600 modules have single entry and exit points.
+Compute the DSQI for this system.
+
+19.9. Research Bieman and Ott’s [BIE94] paper and develop a complete example
+that illustrates the computation of their cohesion metric. Be sure to indicate how data
+slices, data tokens, glue, and superglue tokens are determined.
+
+19.10. Select ﬁve modules in an existing computer program. Using Dhama’s met-
+ric described in Section 19.4.2, compute the coupling value for each module.
+
+19.11. Develop a software tool that will compute cyclomatic complexity for a pro-
+gramming language module. You may choose the language.
+
+CHAPTER 19
+
+TECHNICAL METRICS FOR SOFTWARE
+
+537
+
+19.12. Develop a software tool that will compute layout appropriateness for a GUI.
+The tool should enable you to assign the transition cost between layout entities. (Note:
+Recognize that the size of the potential population of layout alternatives grows very
+large as the number of possible grid positions grows.)
+
+19.13. Develop a small software tool that will perform a Halstead analysis on pro-
+gramming language source code of your choosing. 
+
+19.14. Research the literature and write a paper on the relationship of Halstead's
+metric and McCabe's metric on software quality (as measured by error count). Are
+the data compelling? Recommend guidelines for the application of these metrics.
+
+19.15. Research the literature for any recent papers on metrics speciﬁcally devel-
+oped to assist in test case design. Present your ﬁndings to the class.
+
+19.16. A legacy system has 940 modules. The latest release required that 90 of these
+modules be changed. In addition, 40 new modules were added and 12 old modules
+were removed. Compute the software maturity index for the system. 
+
+FURTHER READING AND INFORMATION SOURCES
+
+There are a surprisingly large number of books that are dedicated to software met-
+rics, although the majority focus on process and project metrics to the exclusion of
+technical metrics. Zuse [ZUS97] has written the most thorough treatment of techni-
+cal metrics published to date. 
+
+Books by Card and Glass [CAR90], Zuse [ZUS90], Fenton {FEN91], Ejiogu [EJI91],
+Moeller and Paulish (Software Metrics, Chapman and Hall, 1993), and Hetzel [HET93]
+all address technical metrics in some detail. Oman and Pﬂeeger (Applying Software
+Metrics, IEEE Computer Society Press, 1997) have edited an anthology of important
+papers on software metrics. In addition, the following books are worth examining:
+
+Conte,  S.D.,  H.E.  Dunsmore,  and  V.Y.  Shen.  Software  Engineering  Metrics  and  Models, 
+
+Benjamin/Cummings, 1984.
+
+Fenton, N.E. and S.L. Pﬂeeger, Software Metrics: A Rigorous and Practical Approach, 2nd ed.,
+
+PWS Publishing Co., 1998.
+
+Grady, R.B. Practical Software Metrics for Project Management and Process Improvement, Pren-
+
+tice-Hall, 1992.
+
+Perlis, A., et al., Software Metrics: An Analysis and Evaluation, MIT Press, 1981.
+
+Sheppard, M., Software Engineering Metrics, McGraw-Hill, 1992. 
+
+The theory of software measurement is presented by Denvir, Herman, and Whitty in an
+edited collection of papers  (Proceedings of the International BCS-FACS Workshop: For-
+mal Aspects of Measurement, Springer-Verlag, 1992). Shepperd (Foundations of Software
+Measurement, Prentice-Hall, 1996) also addresses measurement theory in some detail.
+
+538
+
+PART THREE
+
+CONVENTIONAL METHODS FOR SOFTWARE ENGINEERING
+
+A comprehensive summary of dozens of useful software metrics is presented in
+[IEE94]. In general, a discussion of each metric has been distilled to the essential
+“primitives” (measures) required to compute the metric and the appropriate rela-
+tionships to effect the computation. An appendix provides discussion and many ref-
+erences.
+
+A wide variety of information sources on technical metrics and related subjects is
+available on the Internet. An up-to-date list of World Wide Web references that are
+relevant to technical metrics can be found at the SEPA Web site:
+http://www.mhhe.com/engcs/compsci/pressman/resources/
+tech-metrics.mhtml
+
+P A R T
+
+Four
+
+OBJECT-ORIENTED
+SOFTWARE
+ENGINEERING
+
+In this part of Software Engineering: A Practitioner’s Approach, we
+
+consider the technical concepts, methods, and measurements
+that are applicable for the analysis, design, and testing of object-
+oriented software. In the chapters that follow, we address the fol-
+lowing questions:
+
+• What basic concepts and principles are applicable to object-
+
+oriented thinking?
+
+• How do conventional and object-oriented approaches differ?
+• How should object-oriented software projects be planned
+
+and managed?
+
+• What is object-oriented analysis and how do its various
+
+models enable a software engineer to understand classes,
+their relationships, and behaviors?
+
+• What are the elements of an object-oriented design model?
+• What basic concepts and principles are applicable to the
+
+software testing for object-oriented software?
+
+• How do testing strategies and test case design methods
+
+change when object-oriented software is considered?
+
+• What technical metrics are available for assessing the quality
+
+of object-oriented software?
+
+Once these questions are answered, you’ll understand how to ana-
+lyze, design, implement, and test software using the object-oriented
+paradigm.
+
+539
+
+

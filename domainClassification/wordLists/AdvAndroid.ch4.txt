@@ -1,0 +1,59 @@
+Show Up At Home
+
+should be able to reside in an app widget host's UI like any other ordinary 
+widget.
+
+Subscribe to updates at http://commonsware.com
+
+Special Creative Commons BY-SA 3.0 License Edition
+
+67
+
+Subscribe to updates at http://commonsware.com
+
+Special Creative Commons BY-SA 3.0 License Edition
+
+PART II – Advanced Media
+
+Subscribe to updates at http://commonsware.com
+
+Special Creative Commons BY-SA 3.0 License Edition
+
+Subscribe to updates at http://commonsware.com
+
+Special Creative Commons BY-SA 3.0 License Edition
+
+CHAPTER 5
+
+Creating Drawables
+
+Drawable  resources come in all shapes and sizes, and not just in terms of 
+pixel dimensions. While many Drawable resources will be PNG or JPEG files, 
+you can easily create other resources that supply other sorts of  Drawable 
+objects to your application. In this chapter, we will examine a few of these 
+that may prove useful as you try to make your application look its best.
+
+Traversing Along a Gradient
+
+Gradients have long been used to add "something a little extra" to a user 
+interface, whether it is Microsoft adding them to Office's title bars in the 
+late 1990's or the seemingly endless number of gradient buttons adorning 
+"Web 2.0" sites.
+
+And now, you can have gradients in your Android applications as well.
+
+The easiest way to create a gradient is to use an XML file to describe the 
+gradient.   By   placing   the   file   in  res/drawable/,   it  can   be   referenced  as  a 
+Drawable  resource, no different than any other such resource, like a PNG 
+file.
+
+For example, here is a gradient Drawable resource, active_row.xml, from the 
+Drawable/Gradient sample project:
+
+Subscribe to updates at http://commonsware.com
+
+Special Creative Commons BY-SA 3.0 License Edition
+
+71
+
+

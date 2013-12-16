@@ -1,0 +1,2362 @@
+Software Engineering
+
+A   P R A C T I T I O N E R ’ S   A P P R O A C H
+
+McGraw-Hill Series in Computer Science
+
+Senior Consulting Editor
+C. L. Liu, National Tsing Hua
+
+University
+
+Consulting Editor
+Allen B. Tucker, Bowdoin
+
+College
+
+Networks, Parallel and
+
+Distributed Computing
+
+Graphics and Visualization
+The MIT Electrical and
+
+Computer Science Series
+
+Software Engineering and
+
+Databases
+
+Fundamentals of Computing
+
+Atzeni, Ceri, Paraborschi, 
+
+and Programming
+
+Computer Organization and
+
+Architecture
+
+Systems and Languages
+Theoretical Foundations
+Software Engineering and
+
+Databases
+
+Artiﬁcial Intelligence
+
+and Torlone, 
+Database Systems, 1/e
+
+Mitchell, Machine 
+
+Learning, 1/e
+Musa, Iannino, 
+
+and Okumoto, 
+Software Reliability, 1/e
+
+Pressman, Software
+
+Engineering: A Beginner’s
+Guide, 1/e
+
+Pressman, Software
+
+Engineering: A Practioner’s
+Guide, 5/e
+
+Ramakrishnan/Gehrke,
+Database Management
+Systems, 2/e
+
+Schach, Classical and Object-
+
+Oriented Software
+Engineering with UML 
+and C++, 4/e
+
+Schach, Classical and Object-
+
+Oriented Software
+Engineering with UML and
+Java, 1/e
+
+Software Engineering
+
+A   P R A C T I T I O N E R ’ S   A P P R O A C H
+
+FIFTH EDITION
+
+Roger S. Pressman, Ph.D.
+
+Boston   Burr Ridge, IL   Dubuque, IA   Madison, WI
+
+New York   San Francisco   St. Louis
+
+Bangkok   Bogotá   Caracas   Lisbon   London   Madrid   Mexico City
+
+Milan   New Delhi   Seoul   Singapore   Sydney   Taipei   Toronto
+
+McGraw-Hill Higher Education
+A Division of The McGraw-Hill Companies
+
+SOFTWARE ENGINEERING
+Published by McGraw-Hill, an imprint of The McGraw-Hill Companies, Inc. 1221 Avenue of the
+Americas, New York, NY, 10020. Copyright/2001, 1997, 1992, 1987, 1982, by The McGraw-Hill Com-
+panies, Inc. All rights reserved. No part of this publication may be reproduced or distributed in any
+form or by any means, or stored in a database or retrieval system, without the prior written consent
+of The McGraw-Hill Companies, Inc., including, but not limited to, in any network or other electronic
+storage or transmission, or broadcast for distance learning.
+
+This book is printed on acid-free paper.
+
+1 2 3 4 5 6 7 8 9 0 DOC/DOC 0 9 8 7 6 5 4 3 2 1 0
+
+ISBN 0073655783
+
+Publisher: Thomas Casson
+Executive editor: Betsy Jones
+Developmental editor: Emily Gray
+Marketing manager: John Wannemacher
+Project manager: Karen J. Nelson
+Production supervisor: Heather Burbridge
+Coordinator freelance design: Keith McPherson
+Supplement coordinator: Rose Range
+New media: Christopher Styles
+Cover design: Rhiannon Erwin
+Cover illustrator: Joseph Gilians
+Compositor: Carlisle Communications, Ltd.
+Typeface: 8.5/13.5 Leawood
+Printer: R. R. Donnelley & Sons Company
+
+Pressman, Roger S.
+
+Software engineering: a practitioner’s approach / Roger S. Pressman.—5th ed.
+
+Library of Congress Cataloging-in-Publication Data
+
+p.
+
+cm.— (McGraw-Hill series in computer science)
+
+Includes index.
+ISBN 0-07-365578-3
+1. Software engineering.
+
+QA76.758.P75 2001
+005.1—dc21
+
+http://www.mhhe.com
+
+I. Title. II. Series.
+
+00-036133
+
+To my parents
+
+ABOUT THE AUTHOR
+
+R oger S. Pressman is an internationally recognized authority in software process
+
+improvement and software engineering technologies. For over three decades, he has
+worked as a software engineer, a manager, a professor, an author, and a consultant, focus-
+ing on software engineering issues.
+
+As an industry practitioner and manager, Dr. Pressman worked on the development of
+CAD/CAM systems for advanced engineering and manufacturing applications. He has also
+held positions with responsibility for scientiﬁc and systems programming.
+
+After receiving a Ph.D. in engineering from the University of Connecticut, Dr. Pressman
+moved to academia where he became Bullard Associate Professor of Computer Engineering
+at the University of Bridgeport and director of the university's Computer-Aided Design and
+Manufacturing Center. 
+
+Dr. Pressman is currently president of R.S. Pressman & Associates, Inc., a consulting
+ﬁrm specializing in software engineering methods and training. He serves as principle con-
+sultant, helping companies establish effective software engineering practices. He also
+designed and developed the company’s software engineering training and process improve-
+ment products—Essential Software Engineering, a complete video curriculum that is among
+the industry's most comprehensive treatments of the subject, and Process Advisor, a self-
+directed system for software engineering process improvement. Both products are used
+by hundreds of companies worldwide.
+
+Dr. Pressman has written many technical papers, is a regular contributor to industry
+periodicals, and is author of six books. In addition to Software Engineering: A Practitioner's
+Approach, he has written A Manager's Guide to Software Engineering (McGraw-Hill), an
+award-winning book that uses a unique Q&A format to present management guidelines
+for instituting and understanding software engineering technology; Making Software Engi-
+neering Happen (Prentice-Hall), the ﬁrst book to address the critical management problems
+associated with software process improvement; and Software Shock (Dorset House), a treat-
+ment that focuses on software and its impact on business and society. Dr. Pressman is on
+the Editorial Boards of IEEE Software and the Cutter IT Journal, and for many years, was
+editor of the “Manager” column in IEEE Software.
+
+Dr. Pressman is a well-known speaker, keynoting a number of major industry confer-
+ences. He has presented tutorials at the International Conference on Software Engineer-
+ing and at many other industry meetings. He is a member of the ACM, IEEE, and Tau Beta
+Pi, Phi Kappa Phi, Eta Kappa Nu, and Pi Tau Sigma.
+
+vi
+
+CONTENTS AT A GLANCE
+
+Preface
+
+xxv
+
+PART ONE
+
+The Product and the Process
+
+1
+
+CHAPTER 1
+CHAPTER 2
+
+The Product 3
+The Process 19
+
+PART TWO
+
+Managing Software Projects
+
+53
+
+CHAPTER 3
+CHAPTER 4
+CHAPTER 5
+CHAPTER 6
+CHAPTER 7
+CHAPTER 8
+CHAPTER 9
+
+Project Management Concepts 55
+Software Process and Project Metrics 79
+Software Project Planning 113
+Risk Analysis and Management 145
+Project Scheduling and Tracking 165
+Software Quality Assurance 193
+Software Conﬁguration Management 225
+
+PART THREE
+
+Conventional Methods for Software Engineering
+
+243
+
+CHAPTER 10
+CHAPTER 11
+CHAPTER 12
+CHAPTER 13
+CHAPTER 14
+CHAPTER 15
+CHAPTER 16
+CHAPTER 17
+CHAPTER 18
+CHAPTER 19
+
+System Engineering 245
+Analysis Concepts and Principles 271
+Analysis Modeling 299
+Design Concepts and Principles 335
+Architectural Design 365
+User Interface Design 401
+Component-Level Design 423
+Software Testing Techniques 437
+Software Testing Strategies 477
+Technical Metrics for Software 507
+
+PART FOUR
+
+Object-Oriented Software Engineering
+
+539
+
+CHAPTER 20
+CHAPTER 21
+CHAPTER 22
+
+Object-Oriented Concepts and Principles 541
+Object-Oriented Analysis 571
+Object-Oriented Design 603
+
+vii
+
+viii
+
+CONTENTS AT A GLANCE
+
+CHAPTER 23
+CHAPTER 24
+
+Object-Oriented Testing 631
+Technical Metrics for Object-Oriented Systems 653
+
+PART FIVE
+
+Advanced Topics in Software Engineering
+
+671
+
+Formal Methods 673
+Cleanroom Software Engineering 699
+Component-Based Software Engineering 721
+Client/Server Software Engineering 747
+
+CHAPTER 25
+CHAPTER 26
+CHAPTER 27
+CHAPTER 28
+CHAPTER 29 Web Engineering 769
+CHAPTER 30
+CHAPTER 31
+CHAPTER 32
+
+Reengineering 799
+Computer-Aided Software Engineering 825
+The Road Ahead 845
+
+TABLE OF CONTENTS
+
+PART ONE—THE PRODUCT AND THE PROCESS
+
+1
+
+CHAPTER 1
+
+CHAPTER 2
+
+3
+
+THE PRODUCT
+1.1
+1.2
+
+The Evolving Role of Software 4
+Software 6
+1.2.1
+1.2.2
+Software: A Crisis on the Horizon? 11
+Software Myths 12
+Summary 15
+
+Software Characteristics 6
+Software Applications 9
+
+1.3
+1.4
+1.5
+REFERENCES 15
+PROBLEMS AND POINTS TO PONDER 16
+FURTHER READINGS AND INFORMATION SOURCES 17
+
+THE PROCESS
+2.1
+
+19
+
+Process, Methods, and Tools 20
+A Generic View of Software Engineering 21
+
+2.2
+2.3
+2.4
+2.5
+2.6
+2.7
+
+Software Engineering: A Layered Technology 20
+2.1.1
+2.1.2  
+The Software Process 23
+Software Process Models 26
+The Linear Sequential Model 28
+The Prototyping Model 30
+The RAD Model 32
+Evolutionary Software Process Models 34
+2.7.1
+2.7.2
+2.7.3
+2.7.4
+Component-Based Development 42
+The Formal Methods Model 43
+Fourth Generation Techniques 44
+Process Technology 46
+Product and Process 46
+Summary 47
+
+2.8
+2.9
+2.10
+2.11
+2.12
+2.13 
+REFERENCES 47
+PROBLEMS AND POINTS TO PONDER 49
+FURTHER READINGS AND INFORMATION SOURCES 50
+
+The Incremental Model 35
+The Spiral Model 36
+The WINWIN Spiral Model 38
+The Concurrent Development Model 40
+
+ix
+
+CHAPTER 3
+
+CHAPTER 4
+
+3.2
+
+3.3
+
+3.4
+
+4.3
+
+4.4
+4.5
+
+4.6
+
+x
+
+CONTENTS
+
+PART TWO—MANAGING SOFTWARE PROJECTS
+
+53
+
+PROJECT MANAGEMENT CONCEPTS
+3.1
+
+55
+
+The People 56
+The Product 57
+The Process 57
+The Project 57
+
+The Management Spectrum 56
+3.1.1
+3.1.2
+3.1.2
+3.1.3
+People 58
+3.2.1
+3.2.2
+3.2.3
+3.2.4
+The Product 67
+3.3.1
+3.3.2
+The Process 68
+3.4.1
+3.4.2
+The Project 71
+The W5HH Principle 73
+Critical Practices 74
+Summary 74
+
+The Players 58
+Team Leaders 59
+The Software Team 60
+Coordination and Communication Issues 65
+
+Software Scope 67
+Problem Decomposition 67
+
+Melding the Product and the Process 69
+Process Decomposition 70
+
+3.5
+3.6
+3.7
+3.8
+REFERENCES 75
+PROBLEMS AND POINTS TO PONDER 76
+FURTHER READINGS AND INFORMATION SOURCES 77
+
+SOFTWARE PROCESS AND PROJECT METRICS
+4.1
+4.2
+
+79
+
+Process Metrics and Software Process Improvement 82
+Project Metrics 86
+
+Size-Oriented Metrics 88
+Function-Oriented Metrics 89
+Extended Function Point Metrics 91
+
+Measures, Metrics, and Indicators 80
+Metrics in the Process and Project Domains 81
+4.2.1
+4.2.2
+Software Measurement 87
+4.3.1
+4.3.2
+4.3.3
+Reconciling Different Metrics Approaches 94
+Metrics for Software Quality 95
+4.5.1
+4.5.2
+4.5.3
+Integrating Metrics Within the Software Engineering Process 98
+4.6.1
+4.6.2
+4.6.3
+Managing Variation: Statistical Quality Control 100
+Metrics for Small Organizations 104
+Establishing a Software Metrics Program 105
+Summary 107
+
+An Overview of Factors That Affect Quality 95
+Measuring Quality 96
+Defect Removal Efﬁciency 98
+
+Arguments for Software Metrics 99
+Establishing a Baseline 100
+Metrics Collection, Computation, and Evaluation 100
+
+4.7
+4.8
+4.9
+4.10
+REFERENCES 107
+
+CONTENTS
+
+xi
+
+PROBLEMS AND POINTS TO PONDER 109
+FURTHER READINGS AND INFORMATION SOURCES 110
+
+CHAPTER 5
+
+SOFTWARE PROJECT PLANNING 113
+
+Obtaining Information Necessary for Scope 116
+Feasibility 117
+A Scoping Example 118
+
+Human Resources 121
+Reusable Software Resources 121
+Environmental Resources 122
+
+Observations on Estimating 114
+Project Planning Objectives 115
+Software Scope 115
+5.3.1
+5.3.2
+5.3.3
+Resources 120
+5.4.1
+5.4.2
+5.4.3
+Software Project Estimation 123
+Decomposition Techniques 124
+5.6.1
+5.6.2
+5.6.3
+5.6.4
+5.6.4
+5.6.5
+Empirical Estimation Models 132
+5.7.1
+5.7.2
+5.7.3
+The Make/Buy Decision 136
+5.8.1
+5.8.2
+Automated Estimation Tools 139
+
+Software Sizing 124
+Problem-Based Estimation 126
+An Example of LOC-Based Estimation 128
+An Example of FP-Based Estimation 129
+Process-Based Estimation 130
+An Example of Process-Based Estimation 131
+
+The Structure of Estimation Models 132
+The COCOMO Model 133
+The Software Equation 135
+
+Creating a Decision Tree 137
+Outsourcing 138
+
+5.1
+5.2
+5.3
+
+5.4
+
+5.5
+5.6
+
+5.7  
+
+5.8
+
+6.4
+
+CHAPTER 6
+
+5.9
+5.10   Summary 140
+REFERENCES 140
+PROBLEMS AND POINTS TO PONDER 141
+FURTHER READINGS AND INFORMATION SOURCES 142
+
+RISK ANALYSIS AND MANAGEMENT
+6.1
+6.2
+6.3
+
+145
+
+Assessing Overall Project Risk 149
+Risk Components and Drivers 149
+
+Reactive versus Proactive Risk Strategies 146
+Software Risks 146
+Risk Identiﬁcation 148
+6.3.1
+6.3.2
+Risk Projection 151
+6.4.1
+6.4.2
+6.4.3
+Risk Reﬁnement 156
+Risk Mitigation, Monitoring, and Management 156
+Safety Risks and Hazards 158
+The RMMM Plan 159
+Summary 159
+
+Developing a Risk Table 151
+Assessing Risk Impact 153
+Risk Assessment 154
+
+6.5
+6.6
+6.7
+6.8
+6.9
+REFERENCES 160
+
+xii
+
+CONTENTS
+
+CHAPTER 7
+
+CHAPTER 8
+
+PROBLEMS AND POINTS TO PONDER 161
+FURTHER READINGS AND INFORMATION SOURCES 162
+
+PROJECT SCHEDULING AND TRACKING 165
+7.1
+
+7.2
+
+7.3
+
+7.4
+7.5
+7.6
+7.7
+
+Comments on “Lateness” 167
+Basic Principles 168
+
+An Example 170
+An Empirical Relationship 171
+Effort Distribution 172
+
+Basic Concepts 166
+7.1.1
+7.2.1
+The Relationship Between People and Effort 170
+7.2.1 
+7.2.2
+7.2.3
+Deﬁning a Task Set for the Software Project 172
+7.3.1
+7.3.2
+7.3.3
+7.3.4
+Selecting Software Engineering Tasks 177
+Reﬁnement of Major Tasks 178
+Deﬁning a Task Network 180
+Scheduling 181
+7.7.1
+7.7.2
+Earned Value Analysis 186
+Error Tracking 187
+The Project Plan 189
+Summary 189
+
+Timeline Charts 182
+Tracking the Schedule 185
+
+7.8
+7.9
+7.10
+7.11
+REFERENCES 189
+PROBLEMS AND POINTS TO PONDER 190
+FURTHER READINGS AND INFORMATION SOURCES 192
+
+Degree of Rigor 173
+Deﬁning Adaptation Criteria 174
+Computing a Task Set Selector Value 175
+Interpreting the TSS Value and Selecting the Task Set 176
+
+SOFTWARE QUALITY ASSURANCE
+8.1
+
+193
+
+Background Issues 200
+SQA Activities 201
+
+Quality 195
+Quality Control 196
+Quality Assurance 196
+Cost of Quality 196
+
+Quality Concepts 194
+8.1.1
+8.1.2
+8.1.3
+8.1.4
+The Quality Movement 198
+Software Quality Assurance 199
+8.3.1
+8.3.2
+Software Reviews 202
+8.4.1
+8.4.2
+Formal Technical Reviews 205
+8.5.1
+8.5.2
+8.5.3
+Formal Approaches to SQA 209
+Statistical Software Quality Assurance 209
+Software Reliability 212
+8.8.1
+8.8.2
+
+Cost Impact of Software Defects 203
+Defect Ampliﬁcation and Removal 204
+
+The Review Meeting 206
+Review Reporting and Record Keeping 207
+Review Guidelines 207
+
+Measures of Reliability and Availability 212
+Software Safety 213
+
+8.2
+8.3
+
+8.4
+
+8.5
+
+8.6
+8.7 
+8.8  
+
+CONTENTS
+
+xiii
+
+The ISO Approach to Quality Assurance Systems 217
+The ISO 9001 Standard 217
+
+8.9
+8.10 
+
+Mistake-Prooﬁng for Software 214
+The ISO 9000 Quality Standards 216
+8.10.1
+8.10.2
+The SQA Plan 218
+Summary 219
+
+8.11
+8.12
+REFERENCES 220
+PROBLEMS AND POINTS TO PONDER 221
+FURTHER READINGS AND INFORMATION SOURCES 222
+
+CHAPTER 9
+
+225
+
+SOFTWARE CONFIGURATION MANAGEMENT
+9.1
+
+Baselines 227
+Software Conﬁguration Items 228
+
+Software Conﬁguration Management 226
+9.1.1
+9.1.2
+The SCM Process 230
+Identiﬁcation of Objects in the Software Conﬁguration 230
+Version Control 232
+Change Control 234
+Conﬁguration Audit 237
+Status Reporting 237
+SCM Standards 238
+Summary 238
+
+9.2
+9.3 
+9.4
+9.5
+9.6
+9.7
+9.8
+9.9
+REFERENCES 239
+PROBLEMS AND POINTS TO PONDER 239
+FURTHER READINGS AND  INFORMATION SOURCES 240
+
+PART THREE—CONVENTIONAL METHODS FOR SOFTWARE ENGINEERING 243
+
+CHAPTER 10
+
+SYSTEM ENGINEERING 245
+
+10.1
+10.2
+
+10.3
+10.4
+10.5
+
+System Modeling 249
+System Simulation 251
+
+Computer-Based Systems 246
+The System Engineering Hierarchy 248
+10.2.1
+10.2.2
+Business Process Engineering: An Overview 251
+Product Engineering: An Overview 254
+Requirements Engineering 256
+10.5.1
+10.5.2
+10.5.3
+10.5.4
+10.5.5
+10.5.6
+System Modeling 262
+Summary 265
+
+Requirements Elicitation 256
+Requirements Analysis and Negotiation 258
+Requirements Speciﬁcation 259
+System Modeling 259
+Requirements Validation 260
+Requirements Management 261
+
+10.6
+10.7
+REFERENCES 267
+PROBLEMS AND POINTS TO PONDER 267
+FURTHER READINGS AND INFORMATION SOURCES 269
+
+xiv
+
+CONTENTS
+
+CHAPTER 11
+
+11.3
+
+11.4
+
+11.5
+
+ANALYSIS CONCEPTS AND PRINCIPLES
+11.1
+11.2
+
+271
+
+Initiating the Process 274
+Facilitated Application Speciﬁcation Techniques 275
+Quality Function Deployment 279
+Use-Cases 280
+
+Requirements Analysis 272
+Requirements Elicitation for Software 274
+11.2.1
+11.2.2
+11.2.3
+11.2.4
+Analysis Principles 282
+11.3.1
+11.3.2
+11.3.3
+11.3.4
+Software Prototyping 289
+11.4.1
+11.4.2
+Speciﬁcation 291
+11.5.1
+11.5.2
+11.5.3
+Speciﬁcation Review 294
+Summary 294
+
+The Information Domain 283
+Modeling 285
+Partitioning 286
+Essential and Implementation Views 288
+
+Selecting the Prototyping Approach 289
+Prototyping Methods and Tools 290
+
+Speciﬁcation Principles 291
+Representation 292
+The Software Requirements Speciﬁcation 293
+
+11.6
+11.7
+REFERENCES 295
+PROBLEMS AND POINTS TO PONDER 296
+FURTHER READINGS AND INFORMATION SOURCES 297
+
+CHAPTER 12
+
+ANALYSIS MODELING 299
+
+12.1
+12.2
+12.3
+
+12.4
+
+12.5
+12.6  
+
+Data Flow Diagrams 311
+Extensions for Real-Time Systems 312
+
+A Brief History 300
+The Elements of the Analysis Model 301
+Data Modeling 302
+Data Objects, Attributes, and Relationships 302
+12.3.1
+Cardinality and Modality 305
+12.3.2
+12.3.3
+Entity/Relationship Diagrams 307
+Functional Modeling and Information Flow 309
+12.4.1
+12.4.2
+12.4.3 Ward and Mellor Extensions 312
+12.4.4
+Hatley and Pirbhai Extensions 315
+Behavioral Modeling 317
+The Mechanics of Structured Analysis 319
+12.6.1
+12.6.2
+12.6.3
+12.6.4
+12.6.5
+The Data Dictionary 328
+
+Creating an Entity/Relationship Diagram 319
+Creating a Data Flow Model 321
+Creating a Control Flow Model 324
+The Control Speciﬁcation 325
+The Process Speciﬁcation 327
+
+Summary 331
+
+12.7
+12.8 Other Classical Analysis Methods 330
+12.9
+REFERENCES 331
+PROBLEMS AND POINTS TO PONDER 332
+FURTHER READINGS AND INFORMATION SOURCES 334
+
+CONTENTS
+
+CHAPTER 13
+
+CHAPTER 14
+
+xv
+
+13.3
+13.4
+
+13.5
+
+DESIGN CONCEPTS AND PRINCIPLES
+13.1
+13.2
+
+Design and Software Quality 338
+The Evolution of Software Design 339
+
+335
+Software Design and Software Engineering 336
+The Design Process 338
+13.2.1
+13.2.2
+Design Principles 340
+Design Concepts 341
+13.4.1
+13.4.2
+13.4.3
+13.4.4
+13.4.5
+13.4.6
+13.4.7
+13.4.8
+13.4.9
+Effective Modular Design 352
+13.5.1
+13.5.2
+13.5.3
+Design Heuristics for Effective Modularity 355
+The Design Model 357
+Design Documentation 358
+Summary 359
+
+Abstraction 342
+Reﬁnement 343
+Modularity 343
+Software Architecture 346
+Control Hierarchy 347
+Structural Partitioning 348
+Data Structure 349
+Software Procedure 351
+Information Hiding 351
+
+Functional Independence 352
+Cohesion 353
+Coupling 354
+
+13.6
+13.7
+13.8
+13.9
+REFERENCES 359
+PROBLEMS AND POINTS TO PONDER 361
+FURTHER READINGS AND INFORMATION SOURCES 362
+
+ARCHITECTURAL DESIGN 365
+14.1
+
+Software Architecture 366
+14.1.1 What Is Architecture? 366
+14.1.2 Why Is Architecture Important? 367
+Data Design 368
+14.2.1
+
+14.2
+
+14.3
+
+14.4
+
+368
+
+14.2.2
+
+Data Modeling, Data Structures, Databases, and the Data
+Warehouse
+Data Design at the Component Level 369
+Architectural Styles 371
+A Brief Taxonomy of Styles and Patterns 371
+14.3.1
+14.3.2
+Organization and Reﬁnement 374
+Analyzing Alternative Architectural Designs 375
+14.4.1
+14.4.2
+14.4.3
+
+An Architecture Trade-off Analysis Method 375
+Quantitative Guidance for Architectural Design 376
+Architectural Complexity 378
+
+14.5 Mapping Requirements into a Software Architecture 378
+
+14.6
+
+Transform Flow 379
+Transaction Flow 380
+
+14.5.1
+14.5.2
+Transform Mapping 380
+14.6.1
+14.6.2
+
+An Example 380
+Design Steps 381
+
+14.7  Transaction Mapping 389
+
+14.7.1
+14.7.2
+
+An Example 390
+Design Steps 390
+
+Reﬁning the Architectural Design 394
+Summary 395
+
+14.8
+14.9
+REFERENCES 396
+PROBLEMS AND POINTS TO PONDER 397
+FURTHER READINGS AND INFORMATION SOURCES 399
+
+USER INTERFACE DESIGN 401
+15.1
+
+15.2
+
+15.3
+15.4
+
+xvi
+
+CONTENTS
+
+CHAPTER 15
+
+CHAPTER 16
+
+CHAPTER 17
+
+Place the User in Control 402
+Reduce the User’s Memory Load 404
+Make the Interface Consistent 404
+
+Interface Design Models 405
+The User Interface Design Process 407
+
+The Golden Rules 402
+15.1.1
+15.1.2
+15.1.3
+User Interface Design 405
+15.2.1
+15.2.2
+Task Analysis and Modeling 408
+Interface Design Activities 410
+15.4.1
+15.4.2
+Implementation Tools 415
+Design Evaluation 416
+Summary 418
+
+Deﬁning Interface Objects and Actions 410
+Design Issues 413
+
+15.5 
+15.6
+15.7
+REFERENCES 418
+PROBLEMS AND POINTS TO PONDER 419
+FURTHER READINGS AND INFORMATION SOURCES 420
+
+COMPONENT-LEVEL DESIGN 423
+16.1
+
+Structured Programming 424
+16.1.1
+16.1.2
+16.1.3
+16.1.4
+Comparison of Design Notation 432
+Summary 433
+
+Graphical Design Notation 425
+Tabular Design Notation 427
+Program Design Language 429
+A PDL Example 430
+
+16.2
+16.3
+REFERENCES 433
+PROBLEMS AND POINTS TO PONDER 434
+FURTHER READINGS AND INFORMATION SOURCES 435
+
+437
+
+SOFTWARE TESTING TECHNIQUES
+Software Testing Fundamentals 438
+17.1
+Testing Objectives 439
+17.1.1
+17.1.2
+Testing Principles 439
+17.1.3
+Testability 440
+17.2
+Test Case Design 443
+17.3 White-Box Testing 444
+17.4
+Basis Path Testing 445
+17.4.1
+17.4.2
+17.4.3
+17.4.4
+Control Structure Testing 454
+17.5.1
+
+Flow Graph Notation 445
+Cyclomatic Complexity 446
+Deriving Test Cases 449
+Graph Matrices 452
+
+Condition Testing 454
+
+17.5
+
+CONTENTS
+
+xvii
+
+Data Flow Testing 456
+Loop Testing 458
+
+Graph-Based Testing Methods 460
+Equivalence Partitioning 463
+Boundary Value Analysis 465
+Comparison Testing 465
+Orthogonal Array Testing 466
+
+17.5.2
+17.5.3
+Black-Box Testing 459
+17.6.1
+17.6.2
+17.6.3
+17.6.4
+17.6.5
+Testing for Specialized Environments, Architectures, and Applications 468
+17.7.1
+17.7.2
+17.7.3
+17.7.4
+Summary 472
+
+Testing GUIs 469
+Testing of Client/Server Architectures 469
+Testing Documentation and Help Facilities 469
+Testing for Real-Time Systems 470
+
+17.8
+REFERENCES 473
+PROBLEMS AND POINTS TO PONDER 474
+FURTHER READINGS AND INFORMATION SOURCES 475
+
+CHAPTER 18
+
+SOFTWARE TESTING STRATEGIES
+18.1
+
+477
+
+17.6
+
+17.7
+
+18.2
+18.3
+
+18.4
+
+18.5
+
+18.6
+
+Unit Test Considerations 485
+Unit Test Procedures 487
+
+Veriﬁcation and Validation 479
+Organizing for Software Testing 479
+A Software Testing Strategy 480
+Criteria for Completion of Testing 482
+
+A Strategic Approach to Software Testing 478
+18.1.1
+18.1.2
+18.1.3
+18.1.4
+Strategic Issues 484
+Unit Testing 485
+18.3.1
+18.3.2
+Integration Testing 488
+18.4.1
+18.4.2
+18.4.3
+18.4.4
+18.4.5
+18.4.6
+Validation Testing 495
+18.5.1
+18.5.2
+18.5.3
+System Testing 496
+18.6.1
+18.6.2
+18.6.3
+18.6.4
+
+Top-down Integration 488
+Bottom-up Integration 490
+Regression Testing 491
+Smoke Testing 492
+Comments on Integration Testing 493
+Integration Test Documentation 494
+
+Recovery Testing 497
+Security Testing 497
+Stress Testing 498
+Performance Testing 498
+
+Validation Test Criteria 495
+Conﬁguration Review 496
+Alpha and Beta Testing 496
+
+18.7  The Art of Debugging 499
+
+18.7.1
+18.7.2
+18.7.3
+Summary 502
+
+The Debugging Process 499
+Psychological Considerations 500
+Debugging Approaches 501
+
+18.8
+REFERENCES 503
+PROBLEMS AND POINTS TO PONDER 504
+FURTHER READINGS AND INFORMATION SOURCES 505
+
+xviii
+
+CONTENTS
+
+CHAPTER 19
+
+TECHNICAL METRICS FOR SOFTWARE
+19.1
+
+507
+
+Software Quality 508
+19.1.1
+19.1.2
+19.1.3
+19.1.4
+
+McCall’s Quality Factors 509
+FURPS 511
+ISO 9126 Quality Factors 513
+The Transition to a Quantitative View 513
+
+19.2  A Framework for Technical Software Metrics 514
+
+19.2.1
+19.2.2
+19.2.3
+
+The Challenge of Technical Metrics 514
+Measurement Principles 515
+The Attributes of Effective Software Metrics 516
+
+19.3  Metrics for the Analysis Model 517
+
+19.3.1
+19.3.2
+19.3.3
+
+Function-Based Metrics 518
+The Bang Metric 520
+Metrics for Speciﬁcation Quality 522
+
+19.4   Metrics for the Design Model 523
+
+19.4.1
+19.4.2
+19.4.3
+
+Architectural Design Metrics 523
+Component-Level Design Metrics 526
+Interface Design Metrics 530
+
+19.5 Metrics for Source Code 531
+19.6 Metrics for Testing 532
+19.7 Metrics for Maintenance 533
+19.8
+REFERENCES 534
+PROBLEMS AND POINTS TO PONDER 536
+FURTHER READING AND OTHER INFORMATION SOURCES 537
+
+Summary 534
+
+PART FOUR—OBJECT-ORIENTED SOFTWARE ENGINEERING 539
+
+CHAPTER 20
+
+OBJECT-ORIENTED CONCEPTS AND PRINCIPLES
+20.1
+20.2 Object-Oriented Concepts 544
+
+The Object-Oriented Paradigm 542
+
+541
+
+Classes and Objects 546
+Attributes 547
+Operations, Methods, and Services 548
+Messages 548
+Encapsulation, Inheritance, and Polymorphism 550
+
+20.2.1
+20.2.2
+20.2.3
+20.2.4
+20.2.5
+Identifying the Elements of an Object Model 553
+Identifying Classes and Objects 553
+20.3.1
+20.3.2
+Specifying Attributes 557
+Deﬁning Operations 558
+20.3.3
+20.3.4
+Finalizing the Object Deﬁnition 559
+
+20.3
+
+20.4 Management of Object-Oriented Software Projects 560
+
+20.4.1
+20.4.2
+20.4.3
+20.4.4
+Summary 566
+
+The Common Process Framework for OO 560
+OO Project Metrics and Estimation 562
+An OO Estimating and Scheduling Approach 564
+Tracking Progress for an OO Project 565
+
+20.5
+REFERENCES 566
+PROBLEMS AND POINTS TO PONDER 567
+FURTHER READINGS AND INFORMATION SOURCES 568
+
+CONTENTS
+
+CHAPTER 21
+
+OBJECT-ORIENTED ANALYSIS
+21.1 Object-Oriented Analysis 572
+
+571
+
+xix
+
+21.1.1
+21.1.2
+21.1.3
+Domain Analysis 576
+21.2.1
+21.2.2
+
+Conventional vs. OO Approaches 572
+The OOA Landscape 573
+A Uniﬁed Approach to OOA 575
+
+Reuse and Domain Analysis 577
+The Domain Analysis Process 577
+
+21.3 Generic Components of the OO Analysis Model 579
+21.4
+
+Use-Cases 581
+Class-Responsibility-Collaborator Modeling 582
+Deﬁning Structures and Hierarchies 588
+Deﬁning Subjects and Subsystems 590
+
+The OOA Process 581
+21.4.1
+21.4.2
+21.4.3
+21.4.4
+The Object-Relationship Model 591
+The Object-Behavior Model 594
+21.6.1
+21.6.2
+Summary 598
+
+Event Identiﬁcation with Use-Cases 594
+State Representations 595
+
+21.7
+REFERENCES 599
+PROBLEMS AND POINTS TO PONDER 600
+FURTHER READINGS AND INFORMATION SOURCES 601
+
+21.2
+
+21.5
+21.6
+
+22.2
+
+22.3
+
+22.4
+
+CHAPTER 22
+
+OBJECT-ORIENTED DESIGN 603
+22.1
+
+Conventional vs. OO Approaches 605
+Design Issues 607
+The OOD Landscape 608
+A Uniﬁed Approach to OOD 610
+
+Design for Object-Oriented Systems 604
+22.1.1
+22.1.2
+22.1.3
+22.1.4
+The System Design Process 611
+22.2.1
+22.2.2
+22.2.3
+22.2.4
+22.2.5
+22.2.6
+22.2.7
+The Object Design Process 618
+22.3.1
+22.3.2
+22.3.3
+Design Patterns 624
+22.4.1
+22.4.2
+
+Partitioning the Analysis Model 612
+Concurrency and Subsystem Allocation 613
+The Task Management Component 614
+The User Interface Component 615
+The Data Management Component 615
+The Resource Management Component 616
+Intersubsystem Communication 616
+
+Object Descriptions 618
+Designing Algorithms and Data Structures 619
+Program Components and Interfaces 621
+
+Describing a Design Pattern 624
+Using Patterns in Design 625
+
+Summary 626
+
+22.5 Object-Oriented Programming 625
+22.6
+REFERENCES 627
+PROBLEMS AND POINTS TO PONDER 628
+FURTHER READINGS AND INFORMATION SOURCES 629
+
+xx
+
+CONTENTS
+
+CHAPTER 23
+
+OBJECT-ORIENTED TESTING 631
+Broadening the View of Testing 632
+23.1
+Testing OOA and OOD Models 633
+23.2
+23.2.1
+23.2.2
+
+Correctness of OOA and OOD Models 633
+Consistency of OOA and OOD Models 634
+
+23.3 Object-Oriented Testing Strategies 636
+
+23.4 
+
+23.5
+
+23.6
+
+Unit Testing in the OO Context 636
+Integration Testing in the OO Context 637
+Validation Testing in an OO Context 637
+
+23.3.1
+23.3.2
+23.3.3
+Test Case Design for OO Software 637
+23.4.1
+23.4.2
+
+The Test Case Design Implications of OO Concepts 638
+Applicability of Conventional Test Case Design 
+Methods 638
+Fault-Based Testing 639
+The Impact of OO Programming on Testing 640
+Test Cases and the Class Hierarchy 641
+Scenario-Based Test Design 641
+Testing Surface Structure and Deep Structure 643
+
+23.4.3
+23.4.4
+23.4.5
+23.4.6
+23.4.7
+Testing Methods Applicable at the Class Level 644
+Random Testing for OO Classes 644
+23.5.1
+23.5.2
+Partition Testing at the Class Level 644
+Interclass Test Case Design 645
+23.6.1
+23.6.2
+Summary 648
+
+Multiple Class Testing 645
+Tests Derived from Behavior Models 647
+
+23.7
+REFERENCES 649
+PROBLEMS AND POINTS TO PONDER 649
+FURTHER READINGS AND INFORMATION SOURCES 650
+
+CHAPTER 24
+
+653
+
+TECHNICAL METRICS FOR OBJECT-ORIENTED 
+SYSTEMS
+24.1
+24.2
+
+The Intent of Object-Oriented Metrics 654
+The Distinguishing Characteristics of Object-Oriented Metrics 654
+24.2.1
+24.2.2
+24.2.3
+24.2.4
+24.2.5
+
+Localization 655
+Encapsulation 655
+Information Hiding 655
+Inheritance 656
+Abstraction 656
+
+24.3 Metrics for the OO Design Model 656
+24.4
+
+Class-Oriented Metrics 658
+24.4.1 
+24.4.2
+24.4.3
+
+The CK Metrics Suite 658
+Metrics Proposed by Lorenz and Kidd 661
+The MOOD Metrics Suite 662
+
+24.5 Operation-Oriented Metrics 664
+24.6 Metrics for Object-Oriented Testing 664
+24.7 Metrics for Object-Oriented Projects 665
+24.8
+REFERENCES 667
+PROBLEMS AND POINTS TO PONDER 668
+FURTHER READINGS AND INFORMATION SOURCES 669
+
+Summary 666
+
+CONTENTS
+
+xxi
+
+PART FIVE—ADVANCED TOPICS IN SOFTWARE ENGINEERING 671
+
+CHAPTER 25
+
+CHAPTER 26
+
+CHAPTER 27
+
+FORMAL METHODS
+25.1
+
+673
+
+Basic Concepts 674
+25.1.1
+25.1.2
+25.1.3
+
+Deﬁciencies of Less Formal Approaches 675
+Mathematics in Software Development 676
+Formal Methods Concepts 677
+
+25.2 Mathematical Preliminaries 682
+
+Sets and Constructive Speciﬁcation 683
+Set Operators 684
+Logic Operators 686
+Sequences 686
+
+25.2.1
+25.2.2
+25.2.3
+25.2.4
+Applying Mathematical Notation for Formal Speciﬁcation 687
+Formal Speciﬁcation Languages 689
+Using Z to Represent an Example Software Component 690
+The Ten Commandments of Formal Methods 693
+Formal Methods—The Road Ahead 694
+Summary 695
+
+25.3
+25.4
+25.5
+25.6
+25.7 
+25.8
+REFERENCES 695
+PROBLEMS AND POINTS TO PONDER 696
+FURTHER READINGS AND INFORMATION SOURCES 697
+
+CLEANROOM SOFTWARE ENGINEERING 699
+26.1
+
+The Cleanroom Strategy 701
+
+Black-Box Speciﬁcation 705
+State-Box Speciﬁcation 705
+Clear-Box Speciﬁcation 706
+
+The Cleanroom Approach 700
+26.1.1
+26.1.2 What Makes Cleanroom Different? 703
+Functional Speciﬁcation 703
+26.2.1
+26.2.2
+26.2.3
+Cleanroom Design 706
+26.3.1
+26.3.2
+Cleanroom Testing 712
+26.4.1
+26.4.2
+Summary 714
+
+Design Reﬁnement and Veriﬁcation 707
+Advantages of Design Veriﬁcation 710
+
+Statistical Use Testing 712
+Certiﬁcation 714
+
+26.2
+
+26.3
+
+26.4
+
+26.5
+REFERENCES 715
+PROBLEMS AND POINTS TO PONDER 716
+FURTHER READINGS AND INFORMATION SOURCES 717
+
+COMPONENT-BASED SOFTWARE ENGINEERING 721
+27.1
+27.2
+27.3
+
+Engineering of Component-Based Systems 722
+The CBSE Process 724
+Domain Engineering 725
+27.3.1
+27.3.2
+27.3.3
+Component-Based Development 730
+27.4.1
+
+The Domain Analysis Process 726
+Characterization Functions 727
+Structural Modeling and Structure Points 728
+
+Component Qualiﬁcation, Adaptation, and 
+Composition 730
+
+27.4
+
+xxii
+
+CONTENTS
+
+27.5
+
+27.6
+
+Describing Reusable Components 736
+The Reuse Environment 738
+
+Component Engineering 734
+Analysis and Design for Reuse 734
+
+27.4 2
+27.4.3
+Classifying and Retrieving Components 735
+27.5.1
+27.5.2
+Economics of CBSE 739
+27.6.1
+27.6.2
+27.6.3
+Summary 742
+
+Impact on Quality, Productivity, and Cost 739
+Cost Analysis Using Structure Points 741
+Reuse Metrics 741
+
+27.7
+REFERENCES 743
+PROBLEMS AND POINTS TO PONDER 744
+FURTHER READINGS AND INFORMATION SOURCES 745
+
+CHAPTER 28
+
+CLIENT/SERVER SOFTWARE ENGINEERING 747
+28.1
+
+Software Components for c/s Systems 750
+The Distribution of Software Components 750
+Guidelines for Distributing Application Subsystems 752
+Linking c/s Software Subsystems 753
+Middleware and Object Request Broker Architectures 753
+
+The Structure of Client/Server Systems 748
+28.1.1
+28.1.2
+28.1.3
+28.1.4
+28.1.5
+Software Engineering for c/s Systems 755
+Analysis Modeling Issues 755
+Design for c/s Systems 755
+28.4.1
+28.4.2
+
+Architectural Design for Client/Server Systems 756
+Conventional Design Approaches for Application 
+Software 757
+Database Design 758
+An Overview of a Design Approach 759
+Process Design Iteration 761
+
+28.2
+28.3
+28.4
+
+28.5
+
+28.4.3
+28.4.4
+28.4.5
+Testing Issues 761
+28.5.1
+28.5.2
+Summary 764
+
+Overall c/s Testing Strategy 762
+c/s Testing Tactics 763
+
+28.6
+REFERENCES 764
+PROBLEMS AND POINTS TO PONDER 765
+FURTHER READINGS AND INFORMATION SOURCES 766
+
+CHAPTER 29 WEB ENGINEERING 769
+
+29.1
+
+29.2
+29.3
+29.4
+
+29.5
+
+Quality Attributes 773
+The Technologies 773
+
+The Attributes of Web-Based Applications 771
+29.1.1
+29.1.2
+The WebE Process 774
+A Framework for WebE 775
+Formulating/Analyzing Web-Based Systems 776
+29.4.1
+29.4.2
+Design for Web-Based Applications 779
+29.5.1
+29.5.2
+29.5.3
+
+Architectural Design 780
+Navigation Design 783
+Interface Design 785
+
+Formulation 776
+Analysis 778
+
+CONTENTS
+
+xxiii
+
+Testing Web-Based Applications 786
+
+29.6
+29.7 Management Issues 787
+
+29.7.1
+29.7.2
+29.7.3
+Summary 794
+
+The WebE Team 788
+Project Management 789
+SCM Issues for WebE 792
+
+29.8
+REFERENCES 795
+PROBLEMS AND POINTS TO PONDER 796
+FURTHER READINGS AND INFORMATION SOURCES 797
+
+REENGINEERING 799
+30.1
+
+CHAPTER 30
+
+CHAPTER 31
+
+30.2
+
+30.3
+
+30.4 
+
+30.5 
+
+Software Maintenance 804
+A Software Reengineering Process Model 805
+
+Business Process Reengineering 800
+Business Processes 800
+30.1.1 
+30.1.2
+Principles of Business Process Reengineering 801
+30.1.3
+A BPR Model 802
+30.1.4 Words of Warning 804
+Software Reengineering 804
+30.2.1
+30.2.2
+Reverse Engineering 809
+30.3.1
+30.3.2
+30.3.3
+Restructuring 813
+30.4.1
+30.4.2
+Forward Engineering 814
+30.5.1
+30.5.2
+30.5.3
+The Economics of Reengineering 819
+Summary 820
+
+Reverse Engineering to Understand Processing 810
+Reverse Engineering to Understand Data 811
+Reverse Engineering User Interfaces 812
+
+Code Restructuring 814
+Data Restructuring 814
+
+Forward Engineering for Client/Server Architectures 816
+Forward Engineering for Object-Oriented Architectures 817
+Forward Engineering User Interfaces 818
+
+30.6 
+30.7
+REFERENCES 820
+PROBLEMS AND POINTS TO PONDER 822
+FURTHER READINGS AND INFORMATION SOURCES 823
+
+COMPUTER-AIDED SOFTWARE ENGINEERING 825
+31.1 What is CASE? 826
+31.2
+31.3
+31.4 
+31.5
+31.6 
+
+Building Blocks for CASE 826
+A Taxonomy of CASE Tools 828
+Integrated CASE Environments 833
+The Integration Architecture 834
+The CASE Repository 836
+31.6.1
+31.6.2
+Summary 841
+
+The Role of the Repository in I-CASE 836
+Features and Content 837
+
+31.7
+REFERENCES 842
+PROBLEMS AND POINTS TO PONDER 842
+FURTHER READINGS AND INFORMATION SOURCES 843
+
+xxiv
+
+CONTENTS
+
+CHAPTER 32
+
+845
+
+THE ROAD AHEAD
+The Importance of Software—Revisited 846
+32.1
+The Scope of Change 847
+32.2
+People and the Way They Build Systems 847
+32.3
+32.4
+The "New" Software Engineering Process 848
+32.5 New Modes for Representing Information 849
+32.6
+32.7
+REFERENCES 853
+PROBLEMS AND POINTS TO PONDER 853
+FURTHER READINGS AND INFORMATION SOURCES 853
+
+Technology as a Driver 851
+A Concluding Comment 852
+
+PREFACE
+
+When a computer software succeeds—when it meets the needs of the people
+
+who use it, when it performs ﬂawlessly over a long period of time, when it is
+easy to modify and even easier to use—it can and does change things for the better.
+But when software fails—when its users are dissatisﬁed, when it is error prone, when
+it is difﬁcult to change and even harder to use—bad things can and do happen. We
+all want to build software that makes things better, avoiding the bad things that lurk
+in the shadow of failed efforts. To succeed, we need discipline when software is
+designed and built. We need an engineering approach.
+
+In the 20 years since the ﬁrst edition of this book was written, software engineer-
+ing has evolved from an obscure idea practiced by a relatively small number of zealots
+to a legitimate engineering discipline. Today, it is recognized as a subject worthy of
+serious research, conscientious study, and tumultuous debate. Throughout the indus-
+try, software engineer has replaced programmer as the job title of preference. Software
+process models, software engineering methods, and software tools have been adopted
+successfully across a broad spectrum of industry applications. 
+
+Although managers and practitioners alike recognize the need for a more disci-
+plined approach to software, they continue to debate the manner in which discipline
+is to be applied. Many individuals and companies still develop software haphazardly,
+even as they build systems to service the most advanced technologies of the day.
+Many professionals and students are unaware of modern methods. And as a result,
+the quality of the software that we produce suffers and bad things happen. In addi-
+tion, debate and controversy about the true nature of the software engineering
+approach continue. The status of software engineering is a study in contrasts. Atti-
+tudes have changed, progress has been made, but much remains to be done before
+the discipline reaches full maturity.
+
+The ﬁfth edition of Software Engineering: A Practitioner's Approach is intended to
+serve as a guide to a maturing engineering discipline. The ﬁfth edition, like the four
+editions that preceded it, is intended for both students and practitioners, retaining its
+appeal as a guide to the industry professional and a comprehensive introduction to
+the student at the upper level undergraduate or ﬁrst year graduate level. The format
+and style of the ﬁfth edition have undergone signiﬁcant change, making the presen-
+tation more reader-friendly and the content more easily accessible.
+
+The ﬁfth edition is considerably more than a simple update. The book has been
+revised to accommodate the dramatic growth in the ﬁeld and to emphasize new and
+important software engineering practices. In addition, a comprehensive Web site has
+been developed to complement the content of the book. The Web site, which I call
+
+xxv
+
+xxvi
+
+PREFACE
+
+SepaWeb, can be found at http://www.mhhe.com/pressman. Designed to be used
+in conjunction with the ﬁfth edition of Software Engineering: A Practitioner's Approach,
+SepaWeb provides a broad array of software engineering resources that will beneﬁt
+instructors, students, and industry professionals.
+
+Like all Web sites, SepaWeb will evolve over time, but the following major con-
+tent areas will always be present: (1) a broad array of instructor resources including
+a comprehensive on-line Instructor’s Guide and supplementary teaching materials
+(e.g., slide presentations to supplement lectures, video-based instructional aids); (2)
+a wide variety of student resources including an extensive on-line learning center
+(encompassing study guides, Web-based resources, and self-tests), an evolving col-
+lection of “tiny tools,” a case study, and additional supplementary content; and (3) a
+detailed collection of professional resources including outlines (and samples of) soft-
+ware engineering documents and other work products, a useful set of software engi-
+neering checklists, a catalog of software engineering (CASE) tools, a comprehensive
+collection of Web-based resources, and an “adaptable process model” that provides
+a detailed task breakdown of the software engineering process. In addition, Sepa-
+Web will contain other goodies that are currently in development.
+
+The 32 chapters of the ﬁfth edition have been organized into ﬁve parts. This has
+been done to compartmentalize topics and assist instructors who may not have the
+time to complete the entire book in one term. Part One, The Product and the Process,
+presents an introduction to the software engineering milieu. It is intended to intro-
+duce the subject matter, and more important, to present concepts that will be nec-
+essary for later chapters. Part Two, Managing Software Projects, presents topics that
+are relevant to those who plan, manage, and control a software development proj-
+ect. Part Three, Conventional Methods for Software Engineering, presents the clas-
+sical analysis, design, and testing methods that some view as the “conventional”
+school of software engineering. Part Four, Object-Oriented Software Engineering,
+presents object-oriented methods across the entire software engineering process,
+including analysis, design, and testing. Part Five, Advanced Software Engineering
+Topics, presents dedicated chapters that address formal methods, cleanroom soft-
+ware engineering, component-based software engineering, client/server software
+engineering, Web engineering, reengineering, and CASE.
+
+The ﬁve-part organization of the ﬁfth edition enables an instructor to "cluster" top-
+ics based on available time and student need. An entire one-term course can be built
+around one or more of the ﬁve parts. For example, a "design course" might empha-
+size only Part Three or Part Four; a "methods course" might present selected chap-
+ters in Parts Three, Four, and Five. A "management course" would stress Parts One
+and Two. By organizing the ﬁfth edition in this way, I attempted to provide an instruc-
+tor with a number of teaching options. SepaWeb can and should be used to supple-
+ment the content that is chosen from the book.
+
+An Instructor's Guide for Software Engineering: A Practitioner's Approach is avail-
+able from SepaWeb. The Instructor's Guide presents suggestions for conducting var-
+
+PREFACE
+
+xxvii
+
+ious types of software engineering courses, recommendations for a variety of soft-
+ware projects to be conducted in conjunction with a course, solutions to selected
+problems, and a number of teaching aids. 
+
+A comprehensive video curriculum, Essential Software Engineering, is available to
+complement this book. The video curriculum has been designed for industry train-
+ing and has been modularized to enable individual software engineering topics to be
+presented on an as-needed, when-needed basis. Further information on the video
+can be obtained by mailing the request card at the back of this book.1
+
+My work on the ﬁve editions of Software Engineering: A Practitioner’s Approach has
+been the longest continuing technical project of my life. Even when the writing stops,
+information extracted from the technical literature continues to be assimilated and
+organized. For this reason, my thanks to the many authors of books, papers, and arti-
+cles as well as a new generation of contributors to electronic media (newsgroups, e-
+newsletters, and the World Wide Web) who have provided me with additional insight,
+ideas, and commentary over the past 20 years. Many have been referenced within
+the pages of each chapter. All deserve credit for their contribution to this rapidly evolv-
+ing field. I also wish to thank the reviewers of the fifth edition: Donald H. Kraft,
+Louisiana State University; Panos E. Livadas, University of Florida; Joseph Lambert,
+Pennsylvania State University; Kenneth L. Modesitt, University of Michigan—Dear-
+born; and, James Purtilo, University of Maryland. Their comments and criticism have
+been invaluable. Special thanks and acknowledgement also go to Bruce Maxim of
+the University of Michigan—Dearborn, who assisted me in developing the Web site
+that accompanies this book. Bruce is responsible for much of its design and peda-
+gogical content.
+
+The content of the ﬁfth edition of Software Engineering: A Practitioner's Approach
+has been shaped by industry professionals, university professors, and students who
+have used earlier editions of the book and have taken the time to communicate their
+suggestions, criticisms, and ideas. My thanks to each of you. In addition, my personal
+thanks go to our many industry clients worldwide, who certainly teach me as much
+or more than I can teach them. 
+
+As the editions of this book have evolved, my sons, Mathew and Michael, have
+grown from boys to men. Their maturity, character, and success in the real world
+have been an inspiration to me. Nothing has ﬁlled me with more pride. And ﬁnally,
+to Barbara, my love and thanks for encouraging still another edition of "the book." 
+
+Roger S. Pressman 
+
+1 If the request card is missing, please visit the R. S. Pressman & Associates, Inc. Web site at
+
+http://www.rspa.com/ese or e-mail a request for information to info@rspa.com.
+
+USING THIS BOOK
+
+The fifth edition of Software Engineering: A Practitioner’s Approach (SEPA) has been
+
+redesigned to enhance your reading experience and to provide integrated links to the
+SEPA Web site, http://www.mhhe.com/pressman/. SepaWeb contains a wealth of useful
+supplementary information for readers of the book and a broad array of resources (e.g.,
+an Instructor’s Guide, classroom slides, and video supplements) for instructors who have
+adopted SEPA for classroom use. 
+
+A comprehensive video curriculum, Essential Software Engineering, is available to com-
+plement this book. The video curriculum has been designed for industry training and has
+been modularized to enable individual software engineering topics to be presented on an
+as-needed, when-needed basis. Further information on the video can be obtained by mail-
+ing the request card at the back of this book.1
+
+Throughout the book, you will encounter marginal icons that should be interpreted in
+
+the following manner:
+
+Used to emphasize an
+important point in the
+body of the text.
+
+Practical advice from
+the real world of
+software engineering.
+
+?
+
+Where can I
+ﬁnd the
+
+answer?
+
+The keypoint icon will help you
+to ﬁnd important points quickly.
+
+The advice icon provides prag-
+matic guidance that can help
+you make the right decision or
+avoid common problems while
+building software.
+
+The question mark icon asks
+common questions that are
+answered in the body of the
+text.
+
+XRef
+Provides an important
+cross reference within
+the book.
+
+The xref icon will point you to
+another part of the book where
+information relevant to the cur-
+rent discussion can be found.
+
+“Important words”
+
+The quote icon presents inter-
+esting quotes that have rele-
+vance to the topic at hand.
+
+WebRef
+For pointers that will take
+you directly to Web
+resources
+
+The WebRef icon provides
+direct pointers to important
+software engineering related
+Web sites.
+
+A selected topic
+
+The SepaWeb pointer indicates
+that further information about
+the noted topic is available at
+the SEPA Web site.
+
+The SepaWeb.checklists icon
+points you to detailed checklists
+that will help you to assess the
+software engineering work
+you’re doing and the work
+products you produce.
+
+The SepaWeb.documents
+icon points you to detailed doc-
+ument outlines, descriptions
+and examples contained within
+the SEPA Web site.
+
+xxviii
+
+1 If the card is missing, please visit the R.S. Pressman & Associates, Inc. Web site at
+
+http://www.rspa.com/ese, or e-mail to info@rspa.com. 
+
+P A R T
+
+One
+
+THE PRODUCT AND
+THE PROCESS
+
+In this part of Software Engineering: A Practitioner’s Approach, you’ll
+
+learn about the product that is to be engineered and the process
+that provides a framework for the engineering technology. The
+following  questions  are  addressed  in  the  chapters  that  follow:
+
+• What is computer software . . . really?
+• Why do we struggle to build high-quality computer-based
+
+systems?
+
+• How can we categorize application domains for computer
+
+software?
+
+• What myths about software still exist?
+• What is a “software process”?
+• Is there a generic way to assess the quality of a process?
+• What process models can be applied to software develop-
+
+ment?
+
+• How do linear and iterative process models differ?
+• What are their strengths and weaknesses?
+• What advanced process models have been proposed for soft-
+
+ware engineering work?
+
+Once these questions are answered, you’ll be better prepared to
+understand the management and technical aspects of the engi-
+neering discipline to which the remainder of this book is dedicated.
+
+1
+
+

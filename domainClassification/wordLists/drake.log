@@ -502,3 +502,30 @@
 2013-12-04 16:27:06,770 INFO --- 3. Running (missing output): getHighFreqWordLists <- 
 2013-12-04 16:27:16,579 INFO --- 3: getHighFreqWordLists <-  -> done in 9.79s
 2013-12-04 16:27:16,581 INFO Done (4 steps run).
+2013-12-16 12:14:49,497 ERROR drake: illegal syntax starting with "EOF" for workflow
+2013-12-16 12:15:33,892 INFO Running 4 steps with concurrence of 1...
+2013-12-16 12:15:33,955 INFO 
+2013-12-16 12:15:33,956 INFO --- 0. Running (missing output): splitPdf <- 
+2013-12-16 12:15:45,496 ERROR caught exception step 0:  throw+: {:msg "shell command failed with exit code 4", :args ("/bin/zsh" ".drake/shell-0c8530bb1fbf4a2383a24c358fb1f88c" :env {"OUTPUT" "/Users/fnbr/Dropbox/Academic/2013:14/Fall/Cmput466/Project/Dedup/domainClassification/wordLists/splitPdf", "PYTHONPATH" "/usr/local/lib/python:/usr/local/lib/python:", "DISPLAY" "/tmp/launch-bZI1Mb/org.macosforge.xquartz:0", "HOSTTYPE" "x86_64", "OCAML_TOPLEVEL_PATH" "/Users/fnbr/.opam/system/lib/toplevel", "PAGER" "less", "INPUTN" 0, "SSH_AUTH_SOCK" "/tmp/launch-TA7Qbb/Listeners", "PATH" "/usr/local/sbin:/Users/fnbr/.opam/system/bin:/Users/fnbr/.rbenv/shims:/usr/local/Cellar/php55/5.5.5/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:/usr/local/opt/php55/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin", "JAVA_MAIN_CLASS_68668" "org.flatland.drip.Main", "__CHECKFIX1436934" "1", "INPUTS" "", "COLORFGBG" "7;0", "INPUT" nil, "Apple_PubSub_Socket_Render" "/tmp/launch-WEvgcK/Render", "TMUX_PANE" "%0", "USER" "fnbr", "OPTIND" "1", "TERM" "screen", "__CF_USER_TEXT_ENCODING" "0x1F5:0:0", "EDITOR" "emacs", "SHLVL" "4", "OUTPUTN" 1, "ITERM_SESSION_ID" "w0t2p0", "LANG" "en_GB.UTF-8", "CAML_LD_LIBRARY_PATH" "/Users/fnbr/.opam/system/lib/stublibs:/usr/local/lib/ocaml/stublibs", "OUTPUT0" "/Users/fnbr/Dropbox/Academic/2013:14/Fall/Cmput466/Project/Dedup/domainClassification/wordLists/splitPdf", "LOGNAME" "fnbr", "SHELL" "/bin/zsh", "TERM_PROGRAM" "iTerm.app", "SECURITYSESSIONID" "186a4", "BASE" "", "MARKPATH" "/Users/fnbr/.marks", "OPTERR" "1", "OUTPUTS" "/Users/fnbr/Dropbox/Academic/2013:14/Fall/Cmput466/Project/Dedup/domainClassification/wordLists/splitPdf", "HOSTNAME" "asha", "DRIP_INIT_CLASS" "", "MACHTYPE" "x86_64-apple-darwin13", "LC_CTYPE" "en_GB.UTF-8", "GREP_OPTIONS" "--color=auto", "TMPDIR" "/var/folders/c0/rtng010n6ssdf1yz_197r6480000gn/T/", "LSCOLORS" "Gxfxcxdxbxegedabagacad", "LESS" "-R", "com.apple.java.jvmMode" "client", "GREP_COLOR" "1;32", "com.apple.java.jvmTask" "CommandLine_Manual.java", "JAVA_HOME" "/Library/Java/JavaVirtualMachines/1.6.0_65-b14-462.jdk/Contents/Home", "TMUX" "/private/var/folders/c0/rtng010n6ssdf1yz_197r6480000gn/T/tmux-501/default,65997,0", "PWD" "/Users/fnbr/Dropbox/Academic/2013:14/Fall/Cmput466/Project/Dedup/domainClassification/wordLists", "OSTYPE" "darwin13", "_" "/bin/bash", "MANPATH" "/Users/fnbr/.opam/system/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Users/fnbr/.opam/system/man", "HOME" "/Users/fnbr", "ITERM_PROFILE" "Default"} :die true :no-stdin nil :out [#<PrintStream java.io.PrintStream@77d433c1> #<BufferedWriter java.io.BufferedWriter@c92015d>] :err [#<PrintStream java.io.PrintStream@4597871d> #<BufferedWriter java.io.BufferedWriter@5f27a49c>]), :exit 4} nil
+2013-12-16 12:15:45,505 INFO 
+2013-12-16 12:15:45,505 INFO --- 1. Running (missing output): pdf2text <- 
+2013-12-16 12:16:27,492 INFO Running 4 steps with concurrence of 1...
+2013-12-16 12:16:27,533 INFO 
+2013-12-16 12:16:27,534 INFO --- 0. Running (missing output): splitPdf <- 
+2013-12-16 12:16:44,955 INFO --- 0: splitPdf <-  -> done in 17.39s
+2013-12-16 12:16:44,960 INFO 
+2013-12-16 12:16:44,961 INFO --- 1. Running (missing output): pdf2text <- 
+2013-12-16 12:35:19,337 INFO Running 4 steps with concurrence of 1...
+2013-12-16 12:35:19,661 INFO 
+2013-12-16 12:35:19,662 INFO --- 0. Running (missing output): splitPdf <- 
+2013-12-16 12:35:41,309 INFO --- 0: splitPdf <-  -> done in 21.60s
+2013-12-16 12:35:41,315 INFO 
+2013-12-16 12:35:41,315 INFO --- 1. Running (missing output): pdf2text <- 
+2013-12-16 12:40:51,438 INFO --- 1: pdf2text <-  -> done in 310.09s
+2013-12-16 12:40:51,523 INFO 
+2013-12-16 12:40:51,523 INFO --- 2. Running (missing output): getWordLists <- 
+2013-12-16 12:41:17,519 INFO --- 2: getWordLists <-  -> done in 25.98s
+2013-12-16 12:41:17,548 INFO 
+2013-12-16 12:41:17,550 INFO --- 3. Running (missing output): getHighFreqWordLists <- 
+2013-12-16 12:41:55,992 INFO --- 3: getHighFreqWordLists <-  -> done in 38.42s
+2013-12-16 12:41:56,017 INFO Done (4 steps run).
